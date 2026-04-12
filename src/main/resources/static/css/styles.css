@@ -77,6 +77,11 @@ img {
   transition: margin-left 0.3s ease;
 }
 
+.sidebar.collapsed ~ .content,
+.content.sidebar-collapsed {
+  margin-left: 64px;
+}
+
 @media (max-width: 768px) {
   .content {
     margin-left: 0;
