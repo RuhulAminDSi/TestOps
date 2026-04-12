@@ -16,6 +16,7 @@
     <div th:replace="~{fragments/header :: header}"></div>
     <div class="app-body">
       <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+      <div class="sidebar-overlay" data-sidebar-overlay></div>
       <main class="content" role="main">
         <div id="page-dashboard" class="page-section">
           <div th:replace="~{pages/dashboard/dashboard :: content}"></div>
