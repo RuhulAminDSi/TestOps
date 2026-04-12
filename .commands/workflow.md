@@ -29,7 +29,7 @@ Task(description="review and push", prompt="Run mvn compile and mvn test, review
 
 ---
 
-## Command 2: Merge to master
+## Command 2: Merge to master (with Release Plan)
 
 **When:** You want your code in the main/master branch on GitHub
 
@@ -40,8 +40,36 @@ Task(description="review and push", prompt="Run mvn compile and mvn test, review
 1. I switch to master branch
 2. Pull latest from GitHub
 3. Merge your `dev` code
-4. Push to master
-5. Switch back to dev
+4. **Create release version** (v1.0.0, v1.0.1, etc.)
+5. **Generate release notes** from CHANGELOG
+6. **Create git tag** (e.g., v1.0.0)
+7. Push to master with tag
+8. Switch back to dev
+
+**Release Plan includes:**
+- Semantic version bump (major.minor.patch)
+- Release notes from CHANGELOG
+- Git tag creation
+
+---
+
+## Release Notes Format
+
+```markdown
+# Release v1.0.0
+
+## Features
+- New workflow guide added
+
+## Bug Fixes
+- None
+
+## Changes
+- Simplified command structure
+
+---
+Generated from CHANGELOG.md
+```
 
 ---
 
@@ -79,7 +107,7 @@ Each commit updates CHANGELOG.md:
 | Your Action | Agent/I Do |
 |-------------|-------------|
 | "Push my code" | Agent reviews → creates CHANGELOG.md → pushes to dev |
-| "Commit in master" | I merge dev → master |
+| "Commit in master" | I merge dev → master + create release tag + generate release notes |
 | Manual commands | Use table above |
 
 ---
