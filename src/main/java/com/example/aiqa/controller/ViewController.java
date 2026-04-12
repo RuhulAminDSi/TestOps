@@ -41,7 +41,6 @@ public class ViewController {
 
     // Explicit routes to mirror SPA paths and always serve index.html
     @GetMapping({
-            "/projects",
             "/scripts",
             "/scripts/**",
             "/execution",
