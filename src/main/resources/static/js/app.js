@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initChat();
   initKeyboardNav();
   initPageRouter();
+  initModal();
   highlightSidebarActive();
   
   window.addEventListener('popstate', () => {
@@ -672,4 +673,79 @@ function appendMessage(container, { role, name, time, text }) {
 
 function scrollToEnd(container) {
   container.scrollTop = container.scrollHeight;
+}
+
+function initModal() {
+  const modalToggles = document.querySelectorAll('[data-modal-toggle]');
+  
+  modalToggles.forEach(toggle => {
+    const modalId = toggle.getAttribute('data-modal-toggle');
+    const modal = document.getElementById(modalId);
+    
+    if (!modal) return;
+    
+    toggle.addEventListener('click', () => {
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+    
+    const closeButtons = modal.querySelectorAll('[data-modal-close]');
+    closeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+    
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal || e.target.classList.contains('modal-backdrop')) {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+  
+  const projectForm = document.getElementById('new-project-form');
+  if (projectForm) {
+    projectForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(projectForm);
+      const projectData = {
+        name: formData.get('name'),
+        description: formData.get('description'),
+        projectType: formData.get('projectType')
+      };
+      
+      try {
+        const response = await fetch('/api/projects', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(projectData)
+        });
+        
+        if (response.ok) {
+          const modal = document.getElementById('new-project-modal');
+          modal.classList.remove('open');
+          document.body.style.overflow = '';
+          projectForm.reset();
+          window.location.reload();
+        } else {
+          alert('Failed to create project');
+        }
+      } catch (error) {
+        console.error('Error creating project:', error);
+        alert('Error creating project');
+      }
+    });
+  }
 }

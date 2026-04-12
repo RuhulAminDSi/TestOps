@@ -7,10 +7,45 @@
       <h1>Projects</h1>
       <p>Manage your test automation projects</p>
     </div>
-    <button class="btn btn-primary">
+    <button class="btn btn-primary" data-modal-toggle="new-project-modal">
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
       New Project
     </button>
+  </div>
+
+  <div id="new-project-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+    <div class="modal-backdrop" data-modal-close></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title">Create New Project</h2>
+        <button class="modal-close" type="button" aria-label="Close" data-modal-close>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <form class="modal-body" id="new-project-form">
+        <div class="form-group">
+          <label class="label" for="project-name">Project Name</label>
+          <input type="text" id="project-name" name="name" class="input" placeholder="Enter project name" required>
+        </div>
+        <div class="form-group">
+          <label class="label" for="project-desc">Description</label>
+          <textarea id="project-desc" name="description" class="input" rows="3" placeholder="Enter project description"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="label" for="project-type">Project Type</label>
+          <select id="project-type" name="projectType" class="input">
+            <option value="UI Automation">UI Automation</option>
+            <option value="API Testing">API Testing</option>
+            <option value="Load Testing">Load Testing</option>
+            <option value="Database Testing">Database Testing</option>
+          </select>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" data-modal-close>Cancel</button>
+        <button type="submit" form="new-project-form" class="btn btn-primary">Create Project</button>
+      </div>
+    </div>
   </div>
 
   <div class="stat-grid" style="margin-bottom: 24px;">
