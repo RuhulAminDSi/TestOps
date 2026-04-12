@@ -12,9 +12,7 @@
       <span class="sr-only">Project</span>
       <select aria-label="Select project">
         <option>All Projects</option>
-        <option>Demo Project</option>
-        <option>API Tests</option>
-        <option>UI Regression</option>
+        <option th:each="project : ${projects}" th:value="${project.id}" th:text="${project.name}">Project Name</option>
       </select>
     </label>
   </div>
