@@ -372,10 +372,15 @@ function initSidebar() {
 
   const nav = sidebar.querySelector('.sidebar-nav');
   const footer = sidebar.querySelector('.sidebar-footer');
+  const content = document.querySelector('.content');
 
   toggle.addEventListener('click', (e) => {
     e.stopPropagation();
     const isCollapsed = sidebar.classList.toggle('collapsed');
+    
+    if (content) {
+      content.classList.toggle('sidebar-collapsed', isCollapsed);
+    }
     
     toggle.setAttribute('aria-expanded', !isCollapsed);
     
