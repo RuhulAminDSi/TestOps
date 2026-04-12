@@ -1,7 +1,13 @@
 package com.example.aiqa.controller;
 
+import com.example.aiqa.domain.TestSuite;
 import com.example.aiqa.dto.ProjectDto;
+import com.example.aiqa.dto.ScriptDto;
+import com.example.aiqa.dto.TestCaseDto;
 import com.example.aiqa.service.ProjectService;
+import com.example.aiqa.service.ScriptService;
+import com.example.aiqa.service.TestCaseService;
+import com.example.aiqa.service.TestSuiteService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,15 +22,39 @@ import java.util.List;
 public class ViewController {
 
     private final ProjectService projectService;
+    private final TestCaseService testCaseService;
+    private final TestSuiteService testSuiteService;
+    private final ScriptService scriptService;
 
-    public ViewController(ProjectService projectService) {
+    public ViewController(ProjectService projectService, TestCaseService testCaseService, TestSuiteService testSuiteService, ScriptService scriptService) {
         this.projectService = projectService;
+        this.testCaseService = testCaseService;
+        this.testSuiteService = testSuiteService;
+        this.scriptService = scriptService;
     }
 
     @ModelAttribute
     public void addProjectsToModel(Model model) {
         List<ProjectDto> projects = projectService.getAllProjects();
         model.addAttribute("projects", projects);
+    }
+
+    @ModelAttribute
+    public void addTestCasesToModel(Model model) {
+        List<TestCaseDto> testCases = testCaseService.getAllTestCases();
+        model.addAttribute("testCases", testCases);
+    }
+
+    @ModelAttribute
+    public void addTestSuitesToModel(Model model) {
+        List<TestSuite> testSuites = testSuiteService.getAllTestSuites();
+        model.addAttribute("testSuites", testSuites);
+    }
+
+    @ModelAttribute
+    public void addScriptsToModel(Model model) {
+        List<ScriptDto> scripts = scriptService.getAllScripts();
+        model.addAttribute("scripts", scripts);
     }
 
     @GetMapping({"/", "/index"})

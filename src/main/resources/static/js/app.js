@@ -703,6 +703,58 @@ function initModal() {
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
   };
+
+  // Open edit test case modal function
+  window.openEditTestCaseModal = function(button) {
+    const testCaseId = button.getAttribute('data-id');
+    const testCaseName = button.getAttribute('data-name');
+    const testCaseDesc = button.getAttribute('data-description');
+    const testCaseModule = button.getAttribute('data-module');
+    const testCasePriority = button.getAttribute('data-priority');
+    const testCaseStatus = button.getAttribute('data-status');
+    
+    document.getElementById('edit-test-case-id').value = testCaseId;
+    document.getElementById('edit-test-case-name').value = testCaseName;
+    document.getElementById('edit-test-case-desc').value = testCaseDesc || '';
+    document.getElementById('edit-test-case-module').value = testCaseModule;
+    document.getElementById('edit-test-case-priority').value = testCasePriority;
+    document.getElementById('edit-test-case-status').value = testCaseStatus || 'Not Run';
+    
+    const modal = document.getElementById('edit-test-case-modal');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  // Open delete test case modal function
+  window.openDeleteTestCaseModal = function(button) {
+    const testCaseId = button.getAttribute('data-id');
+    const testCaseName = button.getAttribute('data-name');
+    
+    document.getElementById('delete-test-case-name').textContent = testCaseName;
+    document.getElementById('confirm-delete-btn').onclick = async () => {
+      try {
+        const response = await fetch('/api/test-cases/' + testCaseId, {
+          method: 'DELETE'
+        });
+        
+        if (response.ok) {
+          const modal = document.getElementById('delete-test-case-modal');
+          modal.classList.remove('open');
+          document.body.style.overflow = '';
+          window.location.reload();
+        } else {
+          alert('Failed to delete test case');
+        }
+      } catch (error) {
+        console.error('Error deleting test case:', error);
+        alert('Error deleting test case');
+      }
+    };
+    
+    const modal = document.getElementById('delete-test-case-modal');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
   
   const modalToggles = document.querySelectorAll('[data-modal-toggle]');
   
@@ -814,6 +866,525 @@ function initModal() {
         console.error('Error updating project:', error);
         alert('Error updating project');
       }
+    });
+  }
+
+  // Test Case CRUD handlers
+  const testCaseForm = document.getElementById('new-test-case-form');
+  if (testCaseForm) {
+    testCaseForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(testCaseForm);
+      const testCaseData = {
+        name: formData.get('name'),
+        description: formData.get('description'),
+        module: formData.get('module'),
+        priority: formData.get('priority')
+      };
+      
+      try {
+        const response = await fetch('/api/test-cases', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(testCaseData)
+        });
+        
+        if (response.ok) {
+          const modal = document.getElementById('new-test-case-modal');
+          modal.classList.remove('open');
+          document.body.style.overflow = '';
+          testCaseForm.reset();
+          window.location.reload();
+        } else {
+          alert('Failed to create test case');
+        }
+      } catch (error) {
+        console.error('Error creating test case:', error);
+        alert('Error creating test case');
+      }
+    });
+  }
+
+  const editTestCaseForm = document.getElementById('edit-test-case-form');
+  if (editTestCaseForm) {
+    editTestCaseForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const testCaseId = document.getElementById('edit-test-case-id').value;
+      const formData = new FormData(editTestCaseForm);
+      const testCaseData = {
+        name: formData.get('name'),
+        description: formData.get('description'),
+        module: formData.get('module'),
+        priority: formData.get('priority'),
+        status: formData.get('status')
+      };
+      
+      try {
+        const response = await fetch('/api/test-cases/' + testCaseId, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(testCaseData)
+        });
+        
+        if (response.ok) {
+          const modal = document.getElementById('edit-test-case-modal');
+          modal.classList.remove('open');
+          document.body.style.overflow = '';
+          editTestCaseForm.reset();
+          window.location.reload();
+        } else {
+          alert('Failed to update test case');
+        }
+      } catch (error) {
+        console.error('Error updating test case:', error);
+        alert('Error updating test case');
+      }
+    });
+  }
+
+  // Script CRUD handlers
+  const scriptForm = document.getElementById('new-script-form');
+  if (scriptForm) {
+    scriptForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(scriptForm);
+      const scriptData = {
+        name: formData.get('name'),
+        language: formData.get('language'),
+        projectId: formData.get('projectId')
+      };
+      
+      try {
+        const response = await fetch('/api/scripts', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(scriptData)
+        });
+        
+        if (response.ok) {
+          const modal = document.getElementById('new-script-modal');
+          modal.classList.remove('open');
+          document.body.style.overflow = '';
+          scriptForm.reset();
+          window.location.reload();
+        } else {
+          alert('Failed to create script');
+        }
+      } catch (error) {
+        console.error('Error creating script:', error);
+        alert('Error creating script');
+      }
+    });
+  }
+
+  const editScriptForm = document.getElementById('edit-script-form');
+  if (editScriptForm) {
+    editScriptForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const scriptId = document.getElementById('edit-script-id').value;
+      const formData = new FormData(editScriptForm);
+      const scriptData = {
+        name: formData.get('name')
+      };
+      
+      try {
+        const response = await fetch('/api/scripts/' + scriptId, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(scriptData)
+        });
+        
+        if (response.ok) {
+          const modal = document.getElementById('edit-script-modal');
+          modal.classList.remove('open');
+          document.body.style.overflow = '';
+          editScriptForm.reset();
+          window.location.reload();
+        } else {
+          alert('Failed to update script');
+        }
+      } catch (error) {
+        console.error('Error updating script:', error);
+        alert('Error updating script');
+      }
+    });
+  }
+
+  // Script editor functionality
+  window.selectScript = function(element) {
+    const scriptId = element.getAttribute('data-script-id');
+    const scriptName = element.querySelector('.script-name').textContent;
+    const scriptContent = element.getAttribute('data-content') || '';
+    const scriptLanguage = element.getAttribute('data-language') || 'javascript';
+    
+    document.querySelectorAll('.script-item').forEach(item => item.classList.remove('active'));
+    element.classList.add('active');
+    
+    const lineNumbers = document.getElementById('line-numbers');
+    const editorTextarea = document.getElementById('editor-textarea');
+    
+    document.getElementById('current-script-name').textContent = scriptName;
+    editorTextarea.value = scriptContent;
+    editorTextarea.dataset.scriptId = scriptId;
+    updateLineNumbers(scriptContent);
+    lineNumbers.scrollTop = 0;
+    editorTextarea.scrollTop = 0;
+    document.getElementById('run-btn').disabled = false;
+    document.getElementById('save-btn').disabled = false;
+    
+    updateEditorHeight();
+  };
+
+  const editorTextarea = document.getElementById('editor-textarea');
+  const lineNumbers = document.getElementById('line-numbers');
+  if (editorTextarea) {
+    editorTextarea.addEventListener('input', function() {
+      updateLineNumbers(this.value);
+      document.getElementById('unsaved-indicator').style.display = 'inline';
+    });
+
+    editorTextarea.addEventListener('paste', function() {
+      setTimeout(() => {
+        updateLineNumbers(this.value);
+      }, 0);
+    });
+
+    editorTextarea.addEventListener('scroll', function() {
+      if (lineNumbers) {
+        lineNumbers.scrollTop = this.scrollTop;
+      }
+    });
+
+    editorTextarea.addEventListener('keydown', function(e) {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const start = this.selectionStart;
+        const end = this.selectionEnd;
+        this.value = this.value.substring(0, start) + '  ' + this.value.substring(end);
+        this.selectionStart = this.selectionEnd = start + 2;
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        document.getElementById('save-btn').click();
+      }
+    });
+  }
+
+  // Save button handler
+  const saveBtn = document.getElementById('save-btn');
+  if (saveBtn) {
+    saveBtn.addEventListener('click', async () => {
+      const scriptId = editorTextarea.dataset.scriptId;
+      const scriptContent = editorTextarea.value;
+      
+      if (!scriptId) {
+        alert('No script selected');
+        return;
+      }
+      
+      try {
+        const response = await fetch('/api/scripts/' + scriptId, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ content: scriptContent })
+        });
+        
+        if (response.ok) {
+          document.getElementById('unsaved-indicator').style.display = 'none';
+          alert('Script saved successfully');
+        } else {
+          alert('Failed to save script');
+        }
+      } catch (error) {
+        console.error('Error saving script:', error);
+        alert('Error saving script');
+      }
+    });
+  }
+
+  // Format button handler
+  const formatBtn = document.getElementById('format-btn');
+  if (formatBtn) {
+    formatBtn.addEventListener('click', () => {
+      const editor = document.getElementById('editor-textarea');
+      if (!editor || !editor.value) return;
+      
+      const formatted = formatJavaScript(editor.value);
+      editor.value = formatted;
+      updateLineNumbers(formatted);
+      document.getElementById('unsaved-indicator').style.display = 'inline';
+    });
+  }
+
+  // JavaScript formatter function
+  function formatJavaScript(code) {
+    const lines = code.split('\n');
+    const formattedLines = [];
+    let indent = 0;
+    const indentStr = '  ';
+    
+    for (let rawLine of lines) {
+      let line = rawLine.trim();
+      if (!line) {
+        formattedLines.push('');
+        continue;
+      }
+      
+      // Preserve comments
+      if (line.startsWith('//')) {
+        formattedLines.push(indentStr.repeat(indent) + line);
+        continue;
+      }
+      
+      // Handle imports - keep them together on one line or split properly
+      if (line.startsWith('import ') && line.includes(' from ')) {
+        // Keep import on one line with proper spacing
+        line = line.replace(/import\s*\{/g, 'import {')
+                   .replace(/\}\s*from/g, '} from')
+                   .replace(/from\s*'/g, "from '");
+        formattedLines.push(indentStr.repeat(indent) + line);
+        continue;
+      }
+      
+      // Handle closing braces - decrease indent first
+      if (line.startsWith('}')) {
+        indent = Math.max(0, indent - 1);
+      }
+      
+      // Add the line with current indent
+      formattedLines.push(indentStr.repeat(indent) + line);
+      
+      // Handle opening braces - increase indent after
+      if (line.endsWith('{') || line.includes(' {')) {
+        indent++;
+      }
+      if (line === '{') {
+        indent++;
+      }
+    }
+    
+    // Join and do basic cleanup
+    let formatted = formattedLines.join('\n');
+    
+    // Clean up spacing around operators but keep keywords intact
+    formatted = formatted
+      .replace(/\s*([{};=,>])\s*/g, '$1')
+      .replace(/\s*=>\s*/g, ' => ')
+      .replace(/\(\s+/g, '(')
+      .replace(/\s+\)/g, ')')
+      .replace(/async\s+/g, 'async ')
+      .replace(/await\s+/g, 'await ');
+    
+    // Handle import statements specifically - ensure proper spacing
+    formatted = formatted
+      .replace(/import\{/g, 'import {')
+      .replace(/\}from/g, '} from');
+    
+    // Re-split and re-indent properly
+    const finalLines = [];
+    indent = 0;
+    
+    for (let rawLine of formatted.split('\n')) {
+      let line = rawLine.trim();
+      if (!line) {
+        finalLines.push('');
+        continue;
+      }
+      
+      // Preserve comments
+      if (line.startsWith('//')) {
+        finalLines.push(indentStr.repeat(indent) + line);
+        continue;
+      }
+      
+      // Handle closing
+      if (line.startsWith('}')) {
+        indent = Math.max(0, indent - 1);
+      }
+      
+      finalLines.push(indentStr.repeat(indent) + line);
+      
+      // Handle opening
+      if (line.endsWith('{') || line.includes(' {')) {
+        indent++;
+      }
+      if (line === '{') {
+        indent++;
+      }
+    }
+    
+    return finalLines.join('\n').trim();
+  }
+
+  // Delete script handler
+  const confirmDeleteScriptBtn = document.getElementById('confirm-delete-script-btn');
+  if (confirmDeleteScriptBtn) {
+    confirmDeleteScriptBtn.addEventListener('click', async () => {
+      const scriptId = editorTextarea.dataset.scriptId;
+      
+      if (!scriptId) {
+        alert('No script selected');
+        return;
+      }
+      
+      try {
+        const response = await fetch('/api/scripts/' + scriptId, {
+          method: 'DELETE'
+        });
+        
+        if (response.ok) {
+          closeModal('delete-script-modal');
+          closeModal('edit-script-modal');
+          window.location.reload();
+        } else {
+          alert('Failed to delete script');
+        }
+      } catch (error) {
+        console.error('Error deleting script:', error);
+        alert('Error deleting script');
+      }
+    });
+  }
+
+  window.openDeleteScriptModal = function() {
+    const scriptName = document.getElementById('current-script-name').textContent;
+    document.getElementById('delete-script-name').textContent = scriptName;
+    const modal = document.getElementById('delete-script-modal');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  function updateEditorHeight() {
+    const textarea = document.getElementById('editor-textarea');
+    if (textarea) {
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
+    }
+  }
+
+  function updateLineNumbers(text) {
+    const lineNumbers = document.getElementById('line-numbers');
+    const lines = text.split('\n').length;
+    let html = '';
+    for (let i = 1; i <= lines; i++) {
+      html += '<span>' + i + '</span>';
+    }
+    lineNumbers.innerHTML = html;
+  }
+
+  // Script execution handler
+  const runBtn = document.getElementById('run-btn');
+  const stopBtn = document.getElementById('stop-btn');
+  const logsContent = document.getElementById('logs-content');
+  const resultStatus = document.getElementById('result-status');
+  const executionTime = document.getElementById('execution-time');
+  const stepCount = document.getElementById('step-count');
+
+  if (runBtn) {
+    runBtn.addEventListener('click', async () => {
+      const scriptId = editorTextarea.dataset.scriptId;
+      if (!scriptId) {
+        alert('No script selected');
+        return;
+      }
+
+      const browser = 'chromium';
+      const headed = false;
+
+      runBtn.disabled = true;
+      stopBtn.disabled = false;
+      logsContent.innerHTML = '<div class="log-entry info">[INFO] Starting execution...</div>';
+
+      try {
+        const response = await fetch(`/api/scripts/${scriptId}/execute?browser=${browser}&headed=${headed}`, {
+          method: 'POST'
+        });
+
+        const result = await response.json();
+
+        logsContent.innerHTML = result.logs.map(log => {
+          let className = 'info';
+          let msg = '';
+          
+          // Handle both string logs and object logs
+          if (typeof log === 'string') {
+            msg = log;
+          } else if (log && typeof log === 'object') {
+            msg = log.message || JSON.stringify(log);
+            const type = log.type || '';
+            
+            if (type === 'error' || msg.includes('[FAIL]') || msg.includes('[ERROR]')) className = 'error';
+            else if (type === 'warn' || msg.includes('[WARN]')) className = 'warning';
+            else if (type === 'console') className = 'console';
+            else if (msg.includes('[PASS]') || msg.includes('passed')) className = 'success';
+            else if (type === 'info') className = 'info';
+          } else {
+            msg = String(log);
+          }
+          
+          return `<div class="log-entry ${className}">${msg}</div>`;
+        }).join('');
+
+        if (result.status === 'PASS' || result.status === 'Passed') {
+          resultStatus.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>PASSED</span>';
+          resultStatus.className = 'result-status pass';
+        } else {
+          resultStatus.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6"/><path d="M9 9l6 6"/></svg><span>FAILED</span>';
+          resultStatus.className = 'result-status fail';
+        }
+
+        executionTime.textContent = ((result.duration || result.executionTime) / 1000).toFixed(2) + 's';
+        stepCount.textContent = result.logs.filter(l => (typeof l === 'string' ? l : l.message || '').includes('[INFO]')).length;
+
+      } catch (error) {
+        logsContent.innerHTML += `<div class="log-entry error">[ERROR] ${error.message}</div>`;
+      }
+
+      runBtn.disabled = false;
+      stopBtn.disabled = true;
+    });
+  }
+
+  if (stopBtn) {
+    stopBtn.addEventListener('click', () => {
+      logsContent.innerHTML += '<div class="log-entry warning">[INFO] Execution stopped by user</div>';
+      runBtn.disabled = false;
+      stopBtn.disabled = true;
+    });
+  }
+
+  const logsTabs = document.querySelectorAll('.logs-tab');
+  const logsPanel = document.getElementById('logs-content');
+  const browserView = document.getElementById('browser-view');
+  
+  if (logsTabs.length > 0) {
+    logsTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        logsTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        if (tab.dataset.tab === 'browser') {
+          logsPanel.style.display = 'none';
+          browserView.style.display = 'flex';
+        } else {
+          logsPanel.style.display = 'block';
+          browserView.style.display = 'none';
+        }
+      });
     });
   }
 }
