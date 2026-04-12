@@ -86,9 +86,28 @@
   <div class="panel">
     <div class="panel-header">
       <h3>Projects</h3>
-      <span class="badge-soft">8 total</span>
+      <span class="badge-soft" th:if="${projects != null}" th:text="${#lists.size(projects)} + ' total'">8 total</span>
+      <span class="badge-soft" th:unless="${projects != null}">8 total</span>
     </div>
     <div class="card-grid">
+      <th:block th:if="${projects != null and not #lists.isEmpty(projects)}">
+        <div class="project-card" th:each="project : ${projects}">
+          <div class="flex items-start gap-3">
+            <div class="p-2" style="background: rgba(8, 126, 164, 0.3); border-radius: 8px;">
+              <svg class="w-5 h-5" style="color: var(--brand-400);" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+            </div>
+            <div class="flex-1">
+              <h4 th:text="${project.name}">Project Name</h4>
+              <p class="muted mt-1" th:if="${project.description}" th:text="${project.description}">Description</p>
+              <p class="muted mt-1" th:unless="${project.description}">No description</p>
+              <p class="text-sm mt-2" style="color: var(--gray-600);" th:if="${project.createdAt}" th:text="${'Created ' + project.createdAt}">Created date</p>
+            </div>
+          </div>
+          <span class="chip success mt-3" th:if="${project.status == 'active'}" th:text="${project.status}">Active</span>
+          <span class="chip info mt-3" th:if="${project.status != 'active'}" th:text="${project.status}">Status</span>
+        </div>
+      </th:block>
+      <th:block th:unless="${projects != null and not #lists.isEmpty(projects)}">
       <div class="project-card">
         <div class="flex items-start gap-3">
           <div class="p-2" style="background: rgba(8, 126, 164, 0.3); border-radius: 8px;">
@@ -154,6 +173,7 @@
         </div>
         <span class="chip info mt-3">Development</span>
       </div>
+      </th:block>
     </div>
   </div>
 </div>

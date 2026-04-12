@@ -1,5 +1,7 @@
 package com.example.aiqa.controller;
 
+import com.example.aiqa.dto.ProjectDto;
+import com.example.aiqa.service.ProjectService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,13 +9,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 public class ViewController {
+
+    private final ProjectService projectService;
+
+    public ViewController(ProjectService projectService) {
+        this.projectService = projectService;
+    }
 
     @GetMapping({"/", "/index"})
     public String index(Model model, HttpServletRequest request) {
         setPath(model, request.getRequestURI());
         return "index"; // resolves to src/main/resources/templates/index.html via Thymeleaf
+    }
+
+    @GetMapping("/projects")
+    public String projects(Model model, HttpServletRequest request) {
+        setPath(model, request.getRequestURI());
+        List<ProjectDto> projects = projectService.getAllProjects();
+        model.addAttribute("projects", projects);
+        return "index";
     }
 
     @GetMapping("/login")
