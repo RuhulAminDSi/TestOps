@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>Query Performance</h1>
+      <p>Analyze and optimize SQL query performance</p>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Total Queries</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+      </div>
+      <p class="text-3xl">1,234</p>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #ef4444; background: rgba(239, 68, 68, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Slow Queries</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6"/><path d="M9 9l6 6"/></svg>
+      </div>
+      <p class="text-3xl">12</p>
+    </div>
+    <div class="stat-card">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Avg Execution</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <p class="text-3xl">45ms</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Slow Queries</h3>
+    </div>
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Query</th>
+            <th>Database</th>
+            <th>Duration</th>
+            <th>Rows</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="text-sm">SELECT * FROM orders WHERE...</code></td>
+            <td>Production</td>
+            <td class="text-red-500">2,340ms</td>
+            <td>10,000</td>
+            <td><button class="btn btn-sm btn-ghost">Optimize</button></td>
+          </tr>
+          <tr>
+            <td><code class="text-sm">JOIN users ON orders...</code></td>
+            <td>Production</td>
+            <td class="text-red-500">1,890ms</td>
+            <td>5,000</td>
+            <td><button class="btn btn-sm btn-ghost">Optimize</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

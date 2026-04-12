@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI QA Platform</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" th:href="@{/css/styles.css}" />
+  <script defer src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <div th:replace="~{fragments/header :: header}"></div>
+    <div class="app-body">
+      <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+      <main class="content" role="main">
+        <div id="page-dashboard" class="page-section">
+          <div th:replace="~{pages/dashboard :: content}"></div>
+        </div>
+        <div id="page-projects" class="page-section" style="display:none">
+          <div th:replace="~{pages/projects :: content}"></div>
+        </div>
+        <div id="page-scripts" class="page-section" style="display:none">
+          <div th:replace="~{pages/scripts :: content}"></div>
+        </div>
+        <div id="page-execution" class="page-section" style="display:none">
+          <div th:replace="~{pages/execution :: content}"></div>
+        </div>
+        <div id="page-monitoring" class="page-section" style="display:none">
+          <div th:replace="~{pages/monitoring :: content}"></div>
+        </div>
+        <div id="page-ui-automation" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation :: content}"></div>
+        </div>
+        <div id="page-ui-automation-dashboard" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation-dashboard :: content}"></div>
+        </div>
+        <div id="page-ui-automation-test-cases" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation-test-cases :: content}"></div>
+        </div>
+        <div id="page-ui-automation-scripts" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation-scripts :: content}"></div>
+        </div>
+        <div id="page-ui-automation-test-suites" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation-test-suites :: content}"></div>
+        </div>
+        <div id="page-ui-automation-ai-testing" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation-ai-testing :: content}"></div>
+        </div>
+        <div id="page-ui-automation-execution-history" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation-execution-history :: content}"></div>
+        </div>
+        <div id="page-ui-automation-object-repository" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation-object-repository :: content}"></div>
+        </div>
+        <div id="page-ui-automation-test-data" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation-test-data :: content}"></div>
+        </div>
+        <div id="page-ui-automation-scheduler" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation-scheduler :: content}"></div>
+        </div>
+        <div id="page-ui-automation-reports" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation-reports :: content}"></div>
+        </div>
+        <div id="page-api-automation" class="page-section" style="display:none">
+          <div th:replace="~{pages/api-automation :: content}"></div>
+        </div>
+        <div id="page-load-testing" class="page-section" style="display:none">
+          <div th:replace="~{pages/load-testing :: content}"></div>
+        </div>
+        <div id="page-ai-sql" class="page-section" style="display:none">
+          <div th:replace="~{pages/ai-sql :: content}"></div>
+        </div>
+        <div id="page-settings" class="page-section" style="display:none">
+          <div th:replace="~{pages/settings :: content}"></div>
+        </div>
+      </main>
+      <script>
+        (function() {
+          var path = window.location.pathname;
+          var page = 'page-dashboard';
+          
+          if (path.indexOf('/projects') === 0) page = 'page-projects';
+          else if (path.indexOf('/scripts') === 0) page = 'page-scripts';
+          else if (path.indexOf('/execution') === 0) page = 'page-execution';
+          else if (path.indexOf('/monitoring') === 0) page = 'page-monitoring';
+          else if (path.indexOf('/ui-automation') === 0) {
+            if (path === '/ui-automation' || path === '/ui-automation/') {
+              page = 'page-ui-automation';
+            } else if (path.indexOf('/ui-automation/dashboard') === 0) {
+              page = 'page-ui-automation-dashboard';
+            } else if (path.indexOf('/ui-automation/test-cases') === 0) {
+              page = 'page-ui-automation-test-cases';
+            } else if (path.indexOf('/ui-automation/scripts') === 0) {
+              page = 'page-ui-automation-scripts';
+            } else if (path.indexOf('/ui-automation/test-suites') === 0) {
+              page = 'page-ui-automation-test-suites';
+            } else if (path.indexOf('/ui-automation/ai-testing') === 0) {
+              page = 'page-ui-automation-ai-testing';
+            } else if (path.indexOf('/ui-automation/execution-history') === 0) {
+              page = 'page-ui-automation-execution-history';
+            } else if (path.indexOf('/ui-automation/object-repository') === 0) {
+              page = 'page-ui-automation-object-repository';
+            } else if (path.indexOf('/ui-automation/test-data') === 0) {
+              page = 'page-ui-automation-test-data';
+            } else if (path.indexOf('/ui-automation/scheduler') === 0) {
+              page = 'page-ui-automation-scheduler';
+            } else if (path.indexOf('/ui-automation/reports') === 0) {
+              page = 'page-ui-automation-reports';
+            } else {
+              page = 'page-ui-automation';
+            }
+          }
+          else if (path.indexOf('/api-automation') === 0) page = 'page-api-automation';
+          else if (path.indexOf('/load-testing') === 0) page = 'page-load-testing';
+          else if (path.indexOf('/ai-sql') === 0) page = 'page-ai-sql';
+          else if (path.indexOf('/settings') === 0) page = 'page-settings';
+          
+          var sections = document.querySelectorAll('.page-section');
+          for (var i = 0; i < sections.length; i++) {
+            sections[i].style.display = (sections[i].id === page) ? 'block' : 'none';
+          }
+        })();
+      </script>
+    </div>
+  </div>
+
+  <script src="/js/app.js" th:src="@{/js/app.js}"></script>
+</body>
+</html>

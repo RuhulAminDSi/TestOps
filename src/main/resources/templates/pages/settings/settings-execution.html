@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>Execution Settings</h1>
+      <p>Configure test execution behavior</p>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Timeouts</h3>
+      </div>
+      <div class="form-group">
+        <label class="label">Request Timeout (ms)</label>
+        <input type="number" class="input" value="30000">
+      </div>
+      <div class="form-group">
+        <label class="label">Element Wait (ms)</label>
+        <input type="number" class="input" value="10000">
+      </div>
+      <div class="form-group">
+        <label class="label">Page Load Timeout (ms)</label>
+        <input type="number" class="input" value="30000">
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Retry Policy</h3>
+      </div>
+      <div class="form-group">
+        <label class="label">Max Retries</label>
+        <input type="number" class="input" value="3">
+      </div>
+      <div class="form-group">
+        <label class="label">Retry Delay (ms)</label>
+        <input type="number" class="input" value="1000">
+      </div>
+      <button class="btn btn-primary w-full">Save Settings</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

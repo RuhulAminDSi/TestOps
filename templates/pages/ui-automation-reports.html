@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>Reports</h1>
+      <p>Test execution reports and analytics</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <select class="input w-48">
+        <option>Last 30 Days</option>
+        <option>Last 7 Days</option>
+        <option>Last 90 Days</option>
+      </select>
+      <button class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        Export Report
+      </button>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card" style="background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.2);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Total Runs</span>
+        <svg class="w-5 h-5 opacity-70" style="color: #3b82f6;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+      </div>
+      <p class="text-3xl">342</p>
+    </div>
+    <div class="stat-card" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.2);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Avg Pass Rate</span>
+        <svg class="w-5 h-5 opacity-70" style="color: #22c55e;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/></svg>
+      </div>
+      <p class="text-3xl">94.2%</p>
+    </div>
+    <div class="stat-card" style="background: rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.2);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Avg Duration</span>
+        <svg class="w-5 h-5 opacity-70" style="color: #a855f7;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <p class="text-3xl">2.4s</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Recent Reports</h3>
+    </div>
+    <ul class="list-rows">
+      <li>
+        <div class="dot blue"></div>
+        <div class="flex-1">
+          <span>Smoke Tests Report</span>
+          <span class="muted text-xs">Generated: Today, 11:00 AM</span>
+        </div>
+        <button class="btn btn-sm">View</button>
+      </li>
+      <li>
+        <div class="dot blue"></div>
+        <div class="flex-1">
+          <span>Regression Suite Report</span>
+          <span class="muted text-xs">Generated: Today, 10:00 AM</span>
+        </div>
+        <button class="btn btn-sm">View</button>
+      </li>
+      <li>
+        <div class="dot blue"></div>
+        <div class="flex-1">
+          <span>Full Suite Report</span>
+          <span class="muted text-xs">Generated: Yesterday, 6:00 PM</span>
+        </div>
+        <button class="btn btn-sm">View</button>
+      </li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

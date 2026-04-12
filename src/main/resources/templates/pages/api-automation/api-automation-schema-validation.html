@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>Schema Validation</h1>
+      <p>Validate API responses against JSON schemas</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <button class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+        New Schema
+      </button>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Total Schemas</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <p class="text-3xl">28</p>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #22c55e; background: rgba(34, 197, 94, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Valid</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/></svg>
+      </div>
+      <p class="text-3xl">25</p>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #ef4444; background: rgba(239, 68, 68, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Failed</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6"/><path d="M9 9l6 6"/></svg>
+      </div>
+      <p class="text-3xl">3</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Schema List</h3>
+    </div>
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Schema Name</th>
+            <th>Endpoint</th>
+            <th>Last Validated</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="font-medium">User Response</span></td>
+            <td>GET /api/users/:id</td>
+            <td>Today, 2:30 PM</td>
+            <td><span class="chip success">Valid</span></td>
+            <td><button class="btn btn-sm btn-ghost">Test</button></td>
+          </tr>
+          <tr>
+            <td><span class="font-medium">Order Create</span></td>
+            <td>POST /api/orders</td>
+            <td>Today, 1:15 PM</td>
+            <td><span class="chip success">Valid</span></td>
+            <td><button class="btn btn-sm btn-ghost">Test</button></td>
+          </tr>
+          <tr>
+            <td><span class="font-medium">Product List</span></td>
+            <td>GET /api/products</td>
+            <td>Yesterday</td>
+            <td><span class="chip danger">Failed</span></td>
+            <td><button class="btn btn-sm btn-ghost">Test</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

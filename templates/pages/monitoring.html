@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>Monitoring & Logs</h1>
+      <p>System health, metrics, and audit logs</p>
+    </div>
+    <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg" style="background: rgba(34, 197, 94, 0.2);">
+      <span class="w-2 h-2 rounded-full" style="background: #22c55e; animation: pulse 2s infinite;"></span>
+      <span class="text-sm font-medium" style="color: #22c55e;">OK</span>
+    </div>
+  </div>
+
+  <div class="flex gap-2 mb-6" style="border-bottom: 1px solid var(--gray-800); padding-bottom: 16px;">
+    <button class="flex items-center gap-2 px-4 py-2 text-sm font-medium" style="border-bottom: 2px solid var(--brand-500); color: var(--brand-400);">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      Overview
+    </button>
+    <button class="flex items-center gap-2 px-4 py-2 text-sm font-medium" style="border-bottom: 2px solid transparent; color: var(--gray-500);">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+      Audit Logs
+    </button>
+    <button class="flex items-center gap-2 px-4 py-2 text-sm font-medium" style="border-bottom: 2px solid transparent; color: var(--gray-500);">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+      Audit Stats
+    </button>
+  </div>
+
+  <div class="grid grid-cols-4 gap-4 mb-6">
+    <div class="stat-card">
+      <div class="flex items-center gap-3">
+        <div class="p-2" style="background: rgba(59, 130, 246, 0.2); border-radius: 8px;">
+          <svg class="w-5 h-5" style="color: #3b82f6;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <p class="text-sm muted">Uptime</p>
+          <p class="text-lg font-bold" style="color: #3b82f6;">14d 6h</p>
+        </div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="flex items-center gap-3">
+        <div class="p-2" style="background: rgba(168, 85, 247, 0.2); border-radius: 8px;">
+          <svg class="w-5 h-5" style="color: #a855f7;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="8" x="2" y="3" rx="2" ry="2"/><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div>
+          <p class="text-sm muted">Memory Usage</p>
+          <p class="text-lg font-bold" style="color: #a855f7;">62%</p>
+        </div>
+      </div>
+      <div class="mt-2 h-1.5" style="background: var(--gray-800); border-radius: 999px; overflow: hidden;">
+        <div class="h-full" style="width: 62%; background: #22c55e; border-radius: 999px;"></div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="flex items-center gap-3">
+        <div class="p-2" style="background: rgba(34, 197, 94, 0.2); border-radius: 8px;">
+          <svg class="w-5 h-5" style="color: #22c55e;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>
+        </div>
+        <div>
+          <p class="text-sm muted">Node Version</p>
+          <p class="text-lg font-bold" style="color: #22c55e;">v20.11.0</p>
+        </div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="flex items-center gap-3">
+        <div class="p-2" style="background: rgba(234, 179, 8, 0.2); border-radius: 8px;">
+          <svg class="w-5 h-5" style="color: #eab308;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div>
+          <p class="text-sm muted">Queue Jobs</p>
+          <p class="text-lg font-bold" style="color: #eab308;">3 waiting</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Queue Status</h3>
+      </div>
+      <div class="space-y-4">
+        <div>
+          <p class="text-xs muted mb-2">Test Execution Queue</p>
+          <div class="grid grid-cols-3 gap-2">
+            <div class="bg-gray-800/50 rounded-lg p-2 text-center">
+              <p class="text-lg font-bold" style="color: #eab308;">2</p>
+              <p class="text-xs muted">Waiting</p>
+            </div>
+            <div class="bg-gray-800/50 rounded-lg p-2 text-center">
+              <p class="text-lg font-bold" style="color: #3b82f6;">1</p>
+              <p class="text-xs muted">Active</p>
+            </div>
+            <div class="bg-gray-800/50 rounded-lg p-2 text-center">
+              <p class="text-lg font-bold" style="color: #22c55e;">156</p>
+              <p class="text-xs muted">Completed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <h3>System Status</h3>
+      </div>
+      <ul class="space-y-3">
+        <li class="flex items-center justify-between p-3" style="background: var(--gray-800); border-radius: 8px;">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4" style="color: #22c55e;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span>Database</span>
+          </div>
+          <span class="chip success">Connected</span>
+        </li>
+        <li class="flex items-center justify-between p-3" style="background: var(--gray-800); border-radius: 8px;">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4" style="color: #22c55e;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span>Redis</span>
+          </div>
+          <span class="chip success">Connected</span>
+        </li>
+        <li class="flex items-center justify-between p-3" style="background: var(--gray-800); border-radius: 8px;">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4" style="color: #22c55e;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span>Queue Worker</span>
+          </div>
+          <span class="chip success">Running</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

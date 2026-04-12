@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>Notifications</h1>
+      <p>Configure notification preferences</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Notification Channels</h3>
+    </div>
+    <div class="form-group">
+      <label class="checkbox-label">
+        <input type="checkbox" checked> Email notifications
+      </label>
+    </div>
+    <div class="form-group">
+      <label class="checkbox-label">
+        <input type="checkbox" checked> Slack notifications
+      </label>
+    </div>
+    <div class="form-group">
+      <label class="checkbox-label">
+        <input type="checkbox"> SMS alerts
+      </label>
+    </div>
+  </div>
+
+  <div class="panel mt-4">
+    <div class="panel-header">
+      <h3>Alert Types</h3>
+    </div>
+    <div class="form-group">
+      <label class="checkbox-label">
+        <input type="checkbox" checked> Test failures
+      </label>
+    </div>
+    <div class="form-group">
+      <label class="checkbox-label">
+        <input type="checkbox" checked> Execution completed
+      </label>
+    </div>
+    <div class="form-group">
+      <label class="checkbox-label">
+        <input type="checkbox" checked> Scheduler warnings
+      </label>
+    </div>
+    <button class="btn btn-primary">Save Preferences</button>
+  </div>
+</div>
+</body>
+</html>

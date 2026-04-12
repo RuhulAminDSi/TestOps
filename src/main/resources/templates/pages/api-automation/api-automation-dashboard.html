@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>API Automation Dashboard</h1>
+      <p>Overview of API test automation</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <select class="input w-48">
+        <option>All Collections</option>
+        <option>User API</option>
+        <option>Auth API</option>
+        <option>Payment API</option>
+      </select>
+      <button class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+        Refresh
+      </button>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card" style="background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.2);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Total Requests</span>
+        <svg class="w-5 h-5 opacity-70" style="color: #3b82f6;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <p class="text-3xl">1,456</p>
+      <span class="badge-soft">API Tests</span>
+    </div>
+    <div class="stat-card" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.2);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Passed</span>
+        <svg class="w-5 h-5 opacity-70" style="color: #22c55e;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/></svg>
+      </div>
+      <p class="text-3xl">1,389</p>
+      <span class="badge-soft">95.4%</span>
+    </div>
+    <div class="stat-card" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.2);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Failed</span>
+        <svg class="w-5 h-5 opacity-70" style="color: #ef4444;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6"/><path d="M9 9l6 6"/></svg>
+      </div>
+      <p class="text-3xl">67</p>
+      <span class="badge-soft">4.6%</span>
+    </div>
+    <div class="stat-card" style="background: rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.2);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Avg Response</span>
+        <svg class="w-5 h-5 opacity-70" style="color: #a855f7;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <p class="text-3xl">245ms</p>
+      <span class="badge-soft">P95</span>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Recent Collections</h3>
+        <span class="badge-soft">4 collections</span>
+      </div>
+      <ul class="list-rows">
+        <li>
+          <div class="dot green"></div>
+          <div class="flex-1">
+            <span>User API</span>
+            <span class="muted text-xs">48 requests</span>
+          </div>
+          <span class="chip success">passed</span>
+        </li>
+        <li>
+          <div class="dot green"></div>
+          <div class="flex-1">
+            <span>Auth API</span>
+            <span class="muted text-xs">12 requests</span>
+          </div>
+          <span class="chip success">passed</span>
+        </li>
+        <li>
+          <div class="dot red"></div>
+          <div class="flex-1">
+            <span>Payment API</span>
+            <span class="muted text-xs">25 requests</span>
+          </div>
+          <span class="chip danger">failed</span>
+        </li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Quick Actions</h3>
+      </div>
+      <div class="action-stack">
+        <button class="action-card">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+          New Collection
+        </button>
+        <button class="action-card">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Schema Validator
+        </button>
+        <button class="action-card">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4"/><path d="m6.8 14-3.5 2"/><path d="m20.7 16-3.5-2"/><path d="M6.8 10 3.3 8"/></svg>
+          Mock Server
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

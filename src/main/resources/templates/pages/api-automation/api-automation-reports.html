@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>API Reports</h1>
+      <p>View test execution reports and analytics</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <button class="btn btn-secondary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        Export
+      </button>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card" style="border-left: 3px solid #3b82f6; background: rgba(59, 130, 246, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Total Tests</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+      </div>
+      <p class="text-3xl">2,456</p>
+      <span class="badge-soft">This month</span>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #22c55e; background: rgba(34, 197, 94, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Pass Rate</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/></svg>
+      </div>
+      <p class="text-3xl">94.2%</p>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #ef4444; background: rgba(239, 68, 68, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Failures</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6"/><path d="M9 9l6 6"/></svg>
+      </div>
+      <p class="text-3xl">142</p>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #a855f7; background: rgba(168, 85, 247, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Avg Duration</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <p class="text-3xl">1.2s</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Recent Runs</h3>
+    </div>
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Run Date</th>
+            <th>Collection</th>
+            <th>Total</th>
+            <th>Passed</th>
+            <th>Failed</th>
+            <th>Duration</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Today, 3:00 PM</td>
+            <td>User API</td>
+            <td>48</td>
+            <td>46</td>
+            <td>2</td>
+            <td>12s</td>
+            <td><span class="chip warning">Partial</span></td>
+          </tr>
+          <tr>
+            <td>Today, 2:30 PM</td>
+            <td>Auth API</td>
+            <td>12</td>
+            <td>12</td>
+            <td>0</td>
+            <td>3s</td>
+            <td><span class="chip success">Passed</span></td>
+          </tr>
+          <tr>
+            <td>Yesterday</td>
+            <td>Payment API</td>
+            <td>25</td>
+            <td>23</td>
+            <td>2</td>
+            <td>18s</td>
+            <td><span class="chip warning">Partial</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

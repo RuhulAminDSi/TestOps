@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>Settings</h1>
+      <p>Configure application-wide settings</p>
+    </div>
+  </div>
+
+  <div class="panel mb-6">
+    <div class="panel-header">
+      <h3>General</h3>
+      <span class="badge-soft">Core settings</span>
+    </div>
+    <div class="card-grid">
+      <a href="/settings/general" class="settings-card">
+        <svg class="w-6 h-6" style="color: var(--brand-400);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+        <div>
+          <h4>General</h4>
+          <p class="muted text-sm">App name, timezone, theme</p>
+        </div>
+      </a>
+      <a href="/settings/projects" class="settings-card">
+        <svg class="w-6 h-6" style="color: #a855f7;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+        <div>
+          <h4>Projects & Env</h4>
+          <p class="muted text-sm">Manage projects and environments</p>
+        </div>
+      </a>
+      <a href="/settings/credentials" class="settings-card">
+        <svg class="w-6 h-6" style="color: #eab308;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+        <div>
+          <h4>Credentials</h4>
+          <p class="muted text-sm">API keys and secrets management</p>
+        </div>
+      </a>
+      <a href="/settings/ai-config" class="settings-card">
+        <svg class="w-6 h-6" style="color: #3b82f6;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+        <div>
+          <h4>AI Config</h4>
+          <p class="muted text-sm">LLM provider and settings</p>
+        </div>
+      </a>
+      <a href="/settings/execution" class="settings-card">
+        <svg class="w-6 h-6" style="color: #22c55e;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <div>
+          <h4>Execution</h4>
+          <p class="muted text-sm">Execution settings and timeouts</p>
+        </div>
+      </a>
+      <a href="/settings/integrations" class="settings-card">
+        <svg class="w-6 h-6" style="color: #f97316;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4"/><path d="m6.8 14-3.5 2"/><path d="m20.7 16-3.5-2"/><path d="M6.8 10 3.3 8"/><path d="m20.7 8-3.5 2"/><path d="m9 22 3-8 3 8"/><path d="M8 6h8"/><circle cx="12" cy="12" r="2"/></svg>
+        <div>
+          <h4>Integrations</h4>
+          <p class="muted text-sm">Third-party integrations</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="panel mb-6">
+    <div class="panel-header">
+      <h3>Notifications & Security</h3>
+      <span class="badge-soft">Access control</span>
+    </div>
+    <div class="card-grid">
+      <a href="/settings/notifications" class="settings-card">
+        <svg class="w-6 h-6" style="color: #ef4444;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+        <div>
+          <h4>Notifications</h4>
+          <p class="muted text-sm">Email and Slack alerts</p>
+        </div>
+      </a>
+      <a href="/settings/users" class="settings-card">
+        <svg class="w-6 h-6" style="color: #06b6d4;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div>
+          <h4>Users & Roles</h4>
+          <p class="muted text-sm">User management and permissions</p>
+        </div>
+      </a>
+      <a href="/settings/security" class="settings-card">
+        <svg class="w-6 h-6" style="color: #22c55e;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div>
+          <h4>Security</h4>
+          <p class="muted text-sm">Security policies and 2FA</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Audit & Logs</h3>
+      <span class="badge-soft">System</span>
+    </div>
+    <div class="card-grid">
+      <a href="/settings/logs" class="settings-card">
+        <svg class="w-6 h-6" style="color: var(--gray-400);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><path d="M12 9v4"/><path d="M10 11h4"/></svg>
+        <div>
+          <h4>Logs & Audit</h4>
+          <p class="muted text-sm">System logs and audit trail</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

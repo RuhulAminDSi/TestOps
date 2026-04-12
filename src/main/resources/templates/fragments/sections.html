@@ -1,0 +1,3276 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="dashboard">
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Total Tests</span>
+        <i data-lucide="file-code" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">142</p>
+      <span class="badge-soft">UI/API</span>
+    </div>
+    <div class="stat-card border-l-purple-500/20 bg-purple-500/10 text-purple-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Projects</span>
+        <i data-lucide="folder-kanban" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">8</p>
+      <span class="badge-soft">Active</span>
+    </div>
+    <div class="stat-card border-l-green-500/20 bg-green-500/10 text-green-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Pass Rate</span>
+        <i data-lucide="check-circle-2" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">94.2%</p>
+      <span class="badge-soft">Last 24h</span>
+    </div>
+    <div class="stat-card border-l-yellow-500/20 bg-yellow-500/10 text-yellow-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Avg Duration</span>
+        <i data-lucide="clock" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">2.3s</p>
+      <span class="badge-soft">Per run</span>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Recent Runs</h3>
+        <span class="badge-soft">5 latest</span>
+      </div>
+      <ul class="list-rows">
+        <li>
+          <div class="dot green"></div>
+          <span>run-4131</span>
+          <span class="muted">820ms</span>
+          <span class="chip success">passed</span>
+        </li>
+        <li>
+          <div class="dot green"></div>
+          <span>run-4130</span>
+          <span class="muted">1.2s</span>
+          <span class="chip success">passed</span>
+        </li>
+        <li>
+          <div class="dot red"></div>
+          <span>run-4129</span>
+          <span class="muted">640ms</span>
+          <span class="chip danger">failed</span>
+        </li>
+        <li>
+          <div class="dot yellow"></div>
+          <span>run-4128</span>
+          <span class="muted">running</span>
+          <span class="chip warn">running</span>
+        </li>
+        <li>
+          <div class="dot green"></div>
+          <span>run-4127</span>
+          <span class="muted">910ms</span>
+          <span class="chip success">passed</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Quick Actions</h3>
+      </div>
+      <div class="action-stack">
+        <button class="action-card">
+          <i data-lucide="play" class="w-4 h-4"></i>
+          <span>Run Smoke Tests</span>
+        </button>
+        <button class="action-card">
+          <i data-lucide="trending-up" class="w-4 h-4"></i>
+          <span>Run Load Test</span>
+        </button>
+        <button class="action-card">
+          <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+          <span>View Flaky Tests</span>
+        </button>
+        <button class="action-card">
+          <i data-lucide="gauge" class="w-4 h-4"></i>
+          <span>Generate AI Test</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:fragment="projects">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Projects</h1>
+      <p class="muted mt-1">Manage your test automation projects</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="plus" class="w-4 h-4"></i>
+      New Project
+    </button>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Projects</h3>
+      <span class="badge-soft">8 total</span>
+    </div>
+    <div class="card-grid">
+      <div class="project-card">
+        <div class="flex items-start gap-3">
+          <div class="p-2 bg-brand-900/30 rounded-lg">
+            <i data-lucide="folder-kanban" class="w-5 h-5 text-brand-400"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4>Demo Project</h4>
+            <p class="muted mt-1">UI regression suite</p>
+            <p class="text-xs text-gray-600 mt-2">Created Jan 15, 2026</p>
+          </div>
+        </div>
+        <div class="chip success mt-3">Active</div>
+      </div>
+      <div class="project-card">
+        <div class="flex items-start gap-3">
+          <div class="p-2 bg-green-900/30 rounded-lg">
+            <i data-lucide="globe" class="w-5 h-5 text-green-400"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4>API Tests</h4>
+            <p class="muted mt-1">Contract + monitoring</p>
+            <p class="text-xs text-gray-600 mt-2">Created Jan 20, 2026</p>
+          </div>
+        </div>
+        <div class="chip info mt-3">Stable</div>
+      </div>
+      <div class="project-card">
+        <div class="flex items-start gap-3">
+          <div class="p-2 bg-blue-900/30 rounded-lg">
+            <i data-lucide="gauge" class="w-5 h-5 text-blue-400"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4>Load Tests</h4>
+            <p class="muted mt-1">Performance baselines</p>
+            <p class="text-xs text-gray-600 mt-2">Created Feb 1, 2026</p>
+          </div>
+        </div>
+        <div class="chip warn mt-3">Scheduled</div>
+      </div>
+      <div class="project-card">
+        <div class="flex items-start gap-3">
+          <div class="p-2 bg-purple-900/30 rounded-lg">
+            <i data-lucide="database" class="w-5 h-5 text-purple-400"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4>Database Tests</h4>
+            <p class="muted mt-1">SQL validation suite</p>
+            <p class="text-xs text-gray-600 mt-2">Created Feb 5, 2026</p>
+          </div>
+        </div>
+        <div class="chip success mt-3">Active</div>
+      </div>
+      <div class="project-card">
+        <div class="flex items-start gap-3">
+          <div class="p-2 bg-yellow-900/30 rounded-lg">
+            <i data-lucide="sparkles" class="w-5 h-5 text-yellow-400"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4>AI Integration</h4>
+            <p class="muted mt-1">AI-powered test scenarios</p>
+            <p class="text-xs text-gray-600 mt-2">Created Mar 1, 2026</p>
+          </div>
+        </div>
+        <div class="chip info mt-3">Development</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:fragment="scripts">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Scripts</h1>
+      <p class="muted mt-1">Manage your test scripts</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="plus" class="w-4 h-4"></i>
+      New Script
+    </button>
+  </div>
+
+  <div class="flex gap-3 mb-6">
+    <div class="relative flex-1">
+      <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500"></i>
+      <input type="text" placeholder="Search scripts..." class="input w-full pl-10" />
+    </div>
+    <select class="input">
+      <option value="">All Types</option>
+      <option value="ui">UI</option>
+      <option value="api">API</option>
+      <option value="load">Load</option>
+    </select>
+  </div>
+
+  <div class="panel">
+    <div class="table">
+      <div class="table-head">
+        <span>Name</span><span>Type</span><span>Tags</span><span>Updated</span><span></span>
+      </div>
+      <div class="table-row">
+        <span>
+          <i data-lucide="file-code" class="w-4 h-4 inline mr-2 text-gray-500"></i>
+          Login Flow Test
+        </span>
+        <span class="chip info">UI</span>
+        <span class="flex gap-1">
+          <span class="badge badge-pending">smoke</span>
+          <span class="badge badge-pending">auth</span>
+        </span>
+        <span class="muted">Today</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+      <div class="table-row">
+        <span>
+          <i data-lucide="file-code" class="w-4 h-4 inline mr-2 text-gray-500"></i>
+          API Health Check
+        </span>
+        <span class="chip success">API</span>
+        <span class="flex gap-1">
+          <span class="badge badge-pending">smoke</span>
+        </span>
+        <span class="muted">Today</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+      <div class="table-row">
+        <span>
+          <i data-lucide="file-code" class="w-4 h-4 inline mr-2 text-gray-500"></i>
+          Checkout Process
+        </span>
+        <span class="chip info">UI</span>
+        <span class="flex gap-1">
+          <span class="badge badge-pending">regression</span>
+          <span class="badge badge-pending">checkout</span>
+        </span>
+        <span class="muted">Yesterday</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+      <div class="table-row">
+        <span>
+          <i data-lucide="file-code" class="w-4 h-4 inline mr-2 text-gray-500"></i>
+          User Registration
+        </span>
+        <span class="chip info">UI</span>
+        <span class="flex gap-1">
+          <span class="badge badge-pending">smoke</span>
+          <span class="badge badge-pending">auth</span>
+        </span>
+        <span class="muted">Yesterday</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+      <div class="table-row">
+        <span>
+          <i data-lucide="file-code" class="w-4 h-4 inline mr-2 text-gray-500"></i>
+          Search API
+        </span>
+        <span class="chip success">API</span>
+        <span class="flex gap-1">
+          <span class="badge badge-pending">regression</span>
+        </span>
+        <span class="muted">2 days ago</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:fragment="execution">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Execution History</h1>
+      <p class="muted mt-1">View all test runs and results</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="play" class="w-4 h-4"></i>
+      Run Tests
+    </button>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
+    <div class="card p-4">
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-blue-900/30 rounded-lg">
+          <i data-lucide="bug" class="w-5 h-5 text-blue-400"></i>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Total Runs</p>
+          <p class="text-xl font-bold text-blue-400">156</p>
+        </div>
+      </div>
+    </div>
+    <div class="card p-4">
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-green-900/30 rounded-lg">
+          <i data-lucide="check-circle-2" class="w-5 h-5 text-green-400"></i>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Passed</p>
+          <p class="text-xl font-bold text-green-400">142</p>
+        </div>
+      </div>
+    </div>
+    <div class="card p-4">
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-red-900/30 rounded-lg">
+          <i data-lucide="x-circle" class="w-5 h-5 text-red-400"></i>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Failed</p>
+          <p class="text-xl font-bold text-red-400">14</p>
+        </div>
+      </div>
+    </div>
+    <div class="card p-4">
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-yellow-900/30 rounded-lg">
+          <i data-lucide="clock" class="w-5 h-5 text-yellow-400"></i>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Running</p>
+          <p class="text-xl font-bold text-yellow-400">3</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="table">
+      <div class="table-head">
+        <span>Run ID</span><span>Status</span><span>Duration</span><span>Started</span><span>Source</span><span></span>
+      </div>
+      <div class="table-row">
+        <span>
+          <i data-lucide="check-circle-2" class="w-4 h-4 inline mr-2 text-green-500"></i>
+          <code class="font-mono text-sm text-gray-400">run-4156</code>
+        </span>
+        <span class="chip success">passed</span>
+        <span class="muted">1.2s</span>
+        <span class="muted">Today, 11:30 AM</span>
+        <span class="px-2 py-0.5 bg-gray-800 rounded text-xs">manual</span>
+        <span class="text-gray-400 text-sm flex items-center gap-1">
+          <i data-lucide="eye" class="w-3 h-3"></i> View
+        </span>
+      </div>
+      <div class="table-row">
+        <span>
+          <i data-lucide="check-circle-2" class="w-4 h-4 inline mr-2 text-green-500"></i>
+          <code class="font-mono text-sm text-gray-400">run-4155</code>
+        </span>
+        <span class="chip success">passed</span>
+        <span class="muted">0.8s</span>
+        <span class="muted">Today, 11:15 AM</span>
+        <span class="px-2 py-0.5 bg-gray-800 rounded text-xs">scheduler</span>
+        <span class="text-gray-400 text-sm flex items-center gap-1">
+          <i data-lucide="eye" class="w-3 h-3"></i> View
+        </span>
+      </div>
+      <div class="table-row">
+        <span>
+          <i data-lucide="x-circle" class="w-4 h-4 inline mr-2 text-red-500"></i>
+          <code class="font-mono text-sm text-gray-400">run-4154</code>
+        </span>
+        <span class="chip danger">failed</span>
+        <span class="muted">2.1s</span>
+        <span class="muted">Today, 10:45 AM</span>
+        <span class="px-2 py-0.5 bg-gray-800 rounded text-xs">manual</span>
+        <span class="text-gray-400 text-sm flex items-center gap-1">
+          <i data-lucide="eye" class="w-3 h-3"></i> View
+        </span>
+      </div>
+      <div class="table-row">
+        <span>
+          <i data-lucide="clock" class="w-4 h-4 inline mr-2 text-yellow-500 animate-spin"></i>
+          <code class="font-mono text-sm text-gray-400">run-4153</code>
+        </span>
+        <span class="chip warn">running</span>
+        <span class="muted">-</span>
+        <span class="muted">Today, 10:30 AM</span>
+        <span class="px-2 py-0.5 bg-gray-800 rounded text-xs">webhook</span>
+        <span class="text-brand-400 text-sm flex items-center gap-1">
+          <i data-lucide="eye" class="w-3 h-3"></i> Live
+        </span>
+      </div>
+      <div class="table-row">
+        <span>
+          <i data-lucide="check-circle-2" class="w-4 h-4 inline mr-2 text-green-500"></i>
+          <code class="font-mono text-sm text-gray-400">run-4152</code>
+        </span>
+        <span class="chip success">passed</span>
+        <span class="muted">1.5s</span>
+        <span class="muted">Yesterday</span>
+        <span class="px-2 py-0.5 bg-gray-800 rounded text-xs">manual</span>
+        <span class="text-gray-400 text-sm flex items-center gap-1">
+          <i data-lucide="eye" class="w-3 h-3"></i> View
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:fragment="monitoring">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Monitoring & Logs</h1>
+      <p class="muted mt-1">System health, metrics, and audit logs</p>
+    </div>
+    <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-900/20">
+      <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+      <span class="text-sm font-medium text-green-400">OK</span>
+    </div>
+  </div>
+
+  <div class="flex gap-2 border-b border-gray-800 mb-6">
+    <button class="flex items-center gap-2 px-4 py-2 text-sm font-medium border-b-2 border-brand-500 text-brand-400">
+      <i data-lucide="activity" class="w-4 h-4"></i>
+      Overview
+    </button>
+    <button class="flex items-center gap-2 px-4 py-2 text-sm font-medium border-b-2 border-transparent text-gray-500 hover:text-gray-300">
+      <i data-lucide="file-text" class="w-4 h-4"></i>
+      Audit Logs
+    </button>
+    <button class="flex items-center gap-2 px-4 py-2 text-sm font-medium border-b-2 border-transparent text-gray-500 hover:text-gray-300">
+      <i data-lucide="cpu" class="w-4 h-4"></i>
+      Audit Stats
+    </button>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <div class="card p-4">
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-blue-900/20 rounded-lg">
+          <i data-lucide="clock" class="w-5 h-5 text-blue-400"></i>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Uptime</p>
+          <p class="text-lg font-bold text-blue-400">14d 6h</p>
+        </div>
+      </div>
+    </div>
+    <div class="card p-4">
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-purple-900/20 rounded-lg">
+          <i data-lucide="hard-drive" class="w-5 h-5 text-purple-400"></i>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Memory Usage</p>
+          <p class="text-lg font-bold text-purple-400">62%</p>
+        </div>
+      </div>
+      <div class="mt-2 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+        <div class="h-full bg-green-500 rounded-full" style="width: 62%"></div>
+      </div>
+    </div>
+    <div class="card p-4">
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-green-900/20 rounded-lg">
+          <i data-lucide="server" class="w-5 h-5 text-green-400"></i>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Node Version</p>
+          <p class="text-lg font-bold text-green-400">v20.11.0</p>
+        </div>
+      </div>
+    </div>
+    <div class="card p-4">
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-yellow-900/20 rounded-lg">
+          <i data-lucide="activity" class="w-5 h-5 text-yellow-400"></i>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Queue Jobs</p>
+          <p class="text-lg font-bold text-yellow-400">3 waiting</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Queue Status</h3>
+      </div>
+      <div class="space-y-4">
+        <div>
+          <p class="text-xs text-gray-500 mb-2">Test Execution Queue</p>
+          <div class="grid grid-cols-3 gap-2">
+            <div class="bg-gray-800/50 rounded-lg p-2 text-center">
+              <p class="text-lg font-bold text-yellow-400">2</p>
+              <p class="text-xs text-gray-500">Waiting</p>
+            </div>
+            <div class="bg-gray-800/50 rounded-lg p-2 text-center">
+              <p class="text-lg font-bold text-blue-400">1</p>
+              <p class="text-xs text-gray-500">Active</p>
+            </div>
+            <div class="bg-gray-800/50 rounded-lg p-2 text-center">
+              <p class="text-lg font-bold text-green-400">156</p>
+              <p class="text-xs text-gray-500">Completed</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="text-xs text-gray-500 mb-2">Load Test Queue</p>
+          <div class="grid grid-cols-3 gap-2">
+            <div class="bg-gray-800/50 rounded-lg p-2 text-center">
+              <p class="text-lg font-bold text-yellow-400">1</p>
+              <p class="text-xs text-gray-500">Waiting</p>
+            </div>
+            <div class="bg-gray-800/50 rounded-lg p-2 text-center">
+              <p class="text-lg font-bold text-blue-400">0</p>
+              <p class="text-xs text-gray-500">Active</p>
+            </div>
+            <div class="bg-gray-800/50 rounded-lg p-2 text-center">
+              <p class="text-lg font-bold text-green-400">47</p>
+              <p class="text-xs text-gray-500">Completed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <h3>System Status</h3>
+      </div>
+      <ul class="space-y-3">
+        <li class="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg">
+          <div class="flex items-center gap-2">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-green-400"></i>
+            <span>Database</span>
+          </div>
+          <span class="chip success">Connected</span>
+        </li>
+        <li class="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg">
+          <div class="flex items-center gap-2">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-green-400"></i>
+            <span>Redis</span>
+          </div>
+          <span class="chip success">Connected</span>
+        </li>
+        <li class="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg">
+          <div class="flex items-center gap-2">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-green-400"></i>
+            <span>Queue Worker</span>
+          </div>
+          <span class="chip success">Running</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div th:fragment="uiAutomation">
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Total Tests</span>
+        <i data-lucide="bar-chart-3" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">142</p>
+      <span class="badge-soft">UI/API</span>
+    </div>
+    <div class="stat-card border-l-green-500/20 bg-green-500/10 text-green-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Passed</span>
+        <i data-lucide="check-circle-2" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">134</p>
+      <span class="badge-soft">Last 24h</span>
+    </div>
+    <div class="stat-card border-l-red-500/20 bg-red-500/10 text-red-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Failed</span>
+        <i data-lucide="x-circle" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">8</p>
+      <span class="badge-soft">Needs review</span>
+    </div>
+    <div class="stat-card border-l-purple-500/20 bg-purple-500/10 text-purple-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Success Rate</span>
+        <i data-lucide="trending-up" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">94.2%</p>
+      <span class="badge-soft">Above target</span>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Pass/Fail Trend</h3>
+        <span class="badge-soft">Last 7 days</span>
+      </div>
+      <div class="space-y-3">
+        <div class="flex items-center gap-4">
+          <span class="text-xs muted w-16">Apr 6</span>
+          <div class="flex-1 flex gap-2">
+            <div class="bg-green-500/20 h-6 rounded flex items-center justify-center text-xs text-green-400" style="width: 85%">18</div>
+            <div class="bg-red-500/20 h-6 rounded flex items-center justify-center text-xs text-red-400" style="width: 15%">3</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="text-xs muted w-16">Apr 7</span>
+          <div class="flex-1 flex gap-2">
+            <div class="bg-green-500/20 h-6 rounded flex items-center justify-center text-xs text-green-400" style="width: 90%">20</div>
+            <div class="bg-red-500/20 h-6 rounded flex items-center justify-center text-xs text-red-400" style="width: 10%">2</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="text-xs muted w-16">Apr 8</span>
+          <div class="flex-1 flex gap-2">
+            <div class="bg-green-500/20 h-6 rounded flex items-center justify-center text-xs text-green-400" style="width: 78%">15</div>
+            <div class="bg-red-500/20 h-6 rounded flex items-center justify-center text-xs text-red-400" style="width: 22%">4</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="text-xs muted w-16">Apr 9</span>
+          <div class="flex-1 flex gap-2">
+            <div class="bg-green-500/20 h-6 rounded flex items-center justify-center text-xs text-green-400" style="width: 92%">22</div>
+            <div class="bg-red-500/20 h-6 rounded flex items-center justify-center text-xs text-red-400" style="width: 8%">2</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="text-xs muted w-16">Apr 10</span>
+          <div class="flex-1 flex gap-2">
+            <div class="bg-green-500/20 h-6 rounded flex items-center justify-center text-xs text-green-400" style="width: 88%">19</div>
+            <div class="bg-red-500/20 h-6 rounded flex items-center justify-center text-xs text-red-400" style="width: 12%">3</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="text-xs muted w-16">Apr 11</span>
+          <div class="flex-1 flex gap-2">
+            <div class="bg-green-500/20 h-6 rounded flex items-center justify-center text-xs text-green-400" style="width: 95%">21</div>
+            <div class="bg-red-500/20 h-6 rounded flex items-center justify-center text-xs text-red-400" style="width: 5%">1</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="text-xs muted w-16">Apr 12</span>
+          <div class="flex-1 flex gap-2">
+            <div class="bg-green-500/20 h-6 rounded flex items-center justify-center text-xs text-green-400" style="width: 91%">19</div>
+            <div class="bg-red-500/20 h-6 rounded flex items-center justify-center text-xs text-red-400" style="width: 9%">2</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Recent Executions</h3>
+        <span class="badge-soft">5 latest</span>
+      </div>
+      <ul class="list-rows">
+        <li>
+          <div class="dot green"></div>
+          <div class="flex-1">
+            <span>Login Flow Test</span>
+            <span class="text-xs muted">Today, 10:32 AM</span>
+          </div>
+          <span class="muted">1.2s</span>
+          <span class="chip success">passed</span>
+        </li>
+        <li>
+          <div class="dot green"></div>
+          <div class="flex-1">
+            <span>Checkout Process</span>
+            <span class="text-xs muted">Today, 10:15 AM</span>
+          </div>
+          <span class="muted">2.8s</span>
+          <span class="chip success">passed</span>
+        </li>
+        <li>
+          <div class="dot red"></div>
+          <div class="flex-1">
+            <span>Payment Gateway</span>
+            <span class="text-xs muted">Today, 9:45 AM</span>
+          </div>
+          <span class="muted">0.8s</span>
+          <span class="chip danger">failed</span>
+        </li>
+        <li>
+          <div class="dot yellow"></div>
+          <div class="flex-1">
+            <span>Search Results</span>
+            <span class="text-xs muted">Yesterday</span>
+          </div>
+          <span class="muted">1.5s</span>
+          <span class="chip warn">running</span>
+        </li>
+        <li>
+          <div class="dot green"></div>
+          <div class="flex-1">
+            <span>User Profile</span>
+            <span class="text-xs muted">Yesterday</span>
+          </div>
+          <span class="muted">0.9s</span>
+          <span class="chip success">passed</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Performance Metrics</h3>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="p-4 bg-gray-800 rounded-lg">
+        <div class="flex items-center gap-3 mb-2">
+          <i data-lucide="clock" class="w-5 h-5 text-blue-400"></i>
+          <span class="muted">Average Duration</span>
+        </div>
+        <p class="text-2xl font-bold">1.8s</p>
+      </div>
+      <div class="p-4 bg-gray-800 rounded-lg">
+        <div class="flex items-center gap-3 mb-2">
+          <i data-lucide="activity" class="w-5 h-5 text-green-400"></i>
+          <span class="muted">Last Execution</span>
+        </div>
+        <p class="text-2xl font-bold">Just now</p>
+      </div>
+      <div class="p-4 bg-gray-800 rounded-lg">
+        <div class="flex items-center gap-3 mb-2">
+          <i data-lucide="x-circle" class="w-5 h-5 text-red-400"></i>
+          <span class="muted">Skipped Tests</span>
+        </div>
+        <p class="text-2xl font-bold">5</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:fragment="apiAutomation">
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Total Tests</span>
+        <i data-lucide="globe" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">89</p>
+      <span class="badge-soft">API</span>
+    </div>
+    <div class="stat-card border-l-green-500/20 bg-green-500/10 text-green-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Passed</span>
+        <i data-lucide="check-circle-2" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">82</p>
+      <span class="badge-soft">Last 24h</span>
+    </div>
+    <div class="stat-card border-l-red-500/20 bg-red-500/10 text-red-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Failed</span>
+        <i data-lucide="x-circle" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">7</p>
+      <span class="badge-soft">Needs review</span>
+    </div>
+    <div class="stat-card border-l-purple-500/20 bg-purple-500/10 text-purple-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Success Rate</span>
+        <i data-lucide="trending-up" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">92.1%</p>
+      <span class="badge-soft">Above target</span>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div class="p-4 bg-gray-900 border border-gray-800 rounded-xl">
+      <div class="flex items-center gap-3 mb-2">
+        <i data-lucide="clock" class="w-5 h-5 text-blue-400"></i>
+        <span class="muted">Avg Response Time</span>
+      </div>
+      <p class="text-2xl font-bold">245ms</p>
+    </div>
+    <div class="p-4 bg-gray-900 border border-gray-800 rounded-xl">
+      <div class="flex items-center gap-3 mb-2">
+        <i data-lucide="alert-triangle" class="w-5 h-5 text-yellow-400"></i>
+        <span class="muted">Error Rate</span>
+      </div>
+      <p class="text-2xl font-bold">2.3%</p>
+    </div>
+    <div class="p-4 bg-gray-900 border border-gray-800 rounded-xl">
+      <div class="flex items-center gap-3 mb-2">
+        <i data-lucide="bar-chart-3" class="w-5 h-5 text-green-400"></i>
+        <span class="muted">Total Requests</span>
+      </div>
+      <p class="text-2xl font-bold">1,284</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Recent Executions</h3>
+      <span class="badge-soft">Last 5</span>
+    </div>
+    <ul class="list-rows">
+      <li>
+        <div class="dot green"></div>
+        <div class="flex-1">
+          <span>User API Collection</span>
+          <span class="text-xs muted">Today, 11:00 AM</span>
+        </div>
+        <span class="muted">45/48 passed</span>
+        <span class="chip success">passed</span>
+      </li>
+      <li>
+        <div class="dot green"></div>
+        <div class="flex-1">
+          <span>Auth API Suite</span>
+          <span class="text-xs muted">Today, 10:30 AM</span>
+        </div>
+        <span class="muted">12/12 passed</span>
+        <span class="chip success">passed</span>
+      </li>
+      <li>
+        <div class="dot red"></div>
+        <div class="flex-1">
+          <span>Payment Gateway API</span>
+          <span class="text-xs muted">Today, 9:15 AM</span>
+        </div>
+        <span class="muted">8/10 passed</span>
+        <span class="chip danger">failed</span>
+      </li>
+      <li>
+        <div class="dot yellow"></div>
+        <div class="flex-1">
+          <span>Product API Tests</span>
+          <span class="text-xs muted">Yesterday</span>
+        </div>
+        <span class="muted">running</span>
+        <span class="chip warn">running</span>
+      </li>
+      <li>
+        <div class="dot green"></div>
+        <div class="flex-1">
+          <span>Inventory API</span>
+          <span class="text-xs muted">Yesterday</span>
+        </div>
+        <span class="muted">15/15 passed</span>
+        <span class="chip success">passed</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div th:fragment="loadTesting">
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Total Runs</span>
+        <i data-lucide="bar-chart-3" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">47</p>
+      <span class="badge-soft">This month</span>
+    </div>
+    <div class="stat-card border-l-blue-500/20 bg-blue-500/10 text-blue-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Avg Response Time</span>
+        <i data-lucide="clock" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">156<span class="text-lg">ms</span></p>
+      <span class="badge-soft">P95</span>
+    </div>
+    <div class="stat-card border-l-red-500/20 bg-red-500/10 text-red-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Error Rate</span>
+        <i data-lucide="alert-triangle" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">0.8<span class="text-lg">%</span></p>
+      <span class="badge-soft">Below threshold</span>
+    </div>
+    <div class="stat-card border-l-green-500/20 bg-green-500/10 text-green-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Total Samples</span>
+        <i data-lucide="activity" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">1.2M</p>
+      <span class="badge-soft">Processed</span>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Test Results</h3>
+        <span class="badge-soft">Latest run</span>
+      </div>
+      <div class="space-y-4">
+        <div class="flex items-center gap-4 p-3 bg-gray-800 rounded-lg">
+          <i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i>
+          <div class="flex-1">
+            <span class="font-medium">Completed</span>
+            <span class="text-xs muted ml-2">42 runs</span>
+          </div>
+          <span class="text-green-400 font-semibold">42</span>
+        </div>
+        <div class="flex items-center gap-4 p-3 bg-gray-800 rounded-lg">
+          <i data-lucide="x-circle" class="w-5 h-5 text-red-500"></i>
+          <div class="flex-1">
+            <span class="font-medium">Failed</span>
+            <span class="text-xs muted ml-2">5 runs</span>
+          </div>
+          <span class="text-red-400 font-semibold">5</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Performance Trend</h3>
+        <span class="badge-soft">Last 7 days</span>
+      </div>
+      <div class="space-y-3">
+        <div class="flex items-center gap-3">
+          <span class="text-xs muted w-12">Mon</span>
+          <div class="flex-1 h-2 bg-gray-800 rounded-full overflow-hidden">
+            <div class="h-full bg-brand-500 rounded-full" style="width: 65%"></div>
+          </div>
+          <span class="text-xs text-gray-400 w-16">145ms</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-xs muted w-12">Tue</span>
+          <div class="flex-1 h-2 bg-gray-800 rounded-full overflow-hidden">
+            <div class="h-full bg-brand-500 rounded-full" style="width: 72%"></div>
+          </div>
+          <span class="text-xs text-gray-400 w-16">162ms</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-xs muted w-12">Wed</span>
+          <div class="flex-1 h-2 bg-gray-800 rounded-full overflow-hidden">
+            <div class="h-full bg-brand-500 rounded-full" style="width: 58%"></div>
+          </div>
+          <span class="text-xs text-gray-400 w-16">128ms</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-xs muted w-12">Thu</span>
+          <div class="flex-1 h-2 bg-gray-800 rounded-full overflow-hidden">
+            <div class="h-full bg-brand-500 rounded-full" style="width: 70%"></div>
+          </div>
+          <span class="text-xs text-gray-400 w-16">155ms</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-xs muted w-12">Fri</span>
+          <div class="flex-1 h-2 bg-gray-800 rounded-full overflow-hidden">
+            <div class="h-full bg-brand-500 rounded-full" style="width: 75%"></div>
+          </div>
+          <span class="text-xs text-gray-400 w-16">178ms</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-xs muted w-12">Sat</span>
+          <div class="flex-1 h-2 bg-gray-800 rounded-full overflow-hidden">
+            <div class="h-full bg-brand-500 rounded-full" style="width: 62%"></div>
+          </div>
+          <span class="text-xs text-gray-400 w-16">139ms</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-xs muted w-12">Sun</span>
+          <div class="flex-1 h-2 bg-gray-800 rounded-full overflow-hidden">
+            <div class="h-full bg-brand-500 rounded-full" style="width: 68%"></div>
+          </div>
+          <span class="text-xs text-gray-400 w-16">152ms</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Recent Runs</h3>
+      <span class="badge-soft">Last 5</span>
+    </div>
+    <ul class="list-rows">
+      <li>
+        <i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i>
+        <div class="flex-1">
+          <span>Homepage Load Test</span>
+          <span class="text-xs muted">Today, 9:00 AM</span>
+        </div>
+        <span class="muted">142ms avg</span>
+        <span class="muted">10K samples</span>
+        <span class="chip success">passed</span>
+      </li>
+      <li>
+        <i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i>
+        <div class="flex-1">
+          <span>API Stress Test</span>
+          <span class="text-xs muted">Yesterday</span>
+        </div>
+        <span class="muted">215ms avg</span>
+          <span class="muted">25K samples</span>
+        <span class="chip success">passed</span>
+      </li>
+      <li>
+        <i data-lucide="x-circle" class="w-5 h-5 text-red-500"></i>
+        <div class="flex-1">
+          <span>Search Performance</span>
+          <span class="text-xs muted">Yesterday</span>
+        </div>
+        <span class="muted">450ms avg</span>
+          <span class="muted">8K samples</span>
+        <span class="chip danger">failed</span>
+      </li>
+      <li>
+        <i data-lucide="play" class="w-5 h-5 text-blue-500"></i>
+        <div class="flex-1">
+          <span>Checkout Flow</span>
+          <span class="text-xs muted">In progress</span>
+        </div>
+        <span class="muted">running</span>
+        <span class="muted">-</span>
+        <span class="chip warn">running</span>
+      </li>
+      <li>
+        <i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i>
+        <div class="flex-1">
+          <span>Auth Endpoint</span>
+          <span class="text-xs muted">2 days ago</span>
+        </div>
+        <span class="muted">89ms avg</span>
+          <span class="muted">5K samples</span>
+        <span class="chip success">passed</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div th:fragment="aiSql">
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Queries Executed</span>
+        <i data-lucide="database" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">1,842</p>
+      <span class="badge-soft">This month</span>
+    </div>
+    <div class="stat-card border-l-green-500/20 bg-green-500/10 text-green-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Successful</span>
+        <i data-lucide="check-circle-2" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">1,756</p>
+      <span class="badge-soft">95.3%</span>
+    </div>
+    <div class="stat-card border-l-blue-500/20 bg-blue-500/10 text-blue-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Avg Execution Time</span>
+        <i data-lucide="clock" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">89<span class="text-lg">ms</span></p>
+      <span class="badge-soft">Optimized</span>
+    </div>
+    <div class="stat-card border-l-purple-500/20 bg-purple-500/10 text-purple-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">AI Generated</span>
+        <i data-lucide="sparkles" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">324</p>
+      <span class="badge-soft">Queries</span>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Recent Queries</h3>
+        <span class="badge-soft">Last 5</span>
+      </div>
+      <ul class="list-rows">
+        <li>
+          <div class="dot green"></div>
+          <div class="flex-1">
+            <code class="text-sm">SELECT * FROM users WHERE...</code>
+            <span class="text-xs muted">Today, 10:30 AM</span>
+          </div>
+          <span class="muted">45ms</span>
+          <span class="chip success">success</span>
+        </li>
+        <li>
+          <div class="dot green"></div>
+          <div class="flex-1">
+            <code class="text-sm">INSERT INTO logs VALUES...</code>
+            <span class="text-xs muted">Today, 10:15 AM</span>
+          </div>
+          <span class="muted">12ms</span>
+          <span class="chip success">success</span>
+        </li>
+        <li>
+          <div class="dot red"></div>
+          <div class="flex-1">
+            <code class="text-sm">UPDATE products SET...</code>
+            <span class="text-xs muted">Today, 9:45 AM</span>
+          </div>
+          <span class="muted">-</span>
+          <span class="chip danger">error</span>
+        </li>
+        <li>
+          <div class="dot green"></div>
+          <div class="flex-1">
+            <code class="text-sm">SELECT COUNT(*) FROM orders...</code>
+            <span class="text-xs muted">Today, 9:30 AM</span>
+          </div>
+          <span class="muted">28ms</span>
+          <span class="chip success">success</span>
+        </li>
+        <li>
+          <div class="dot green"></div>
+          <div class="flex-1">
+            <code class="text-sm">AI: Generate monthly report</code>
+            <span class="text-xs muted">Today, 9:00 AM</span>
+          </div>
+          <span class="muted">156ms</span>
+          <span class="chip info">ai-generated</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Quick Actions</h3>
+      </div>
+      <div class="action-stack">
+        <button class="action-card">Run SQL Query</button>
+        <button class="action-card">Generate Query with AI</button>
+        <button class="action-card">View Query History</button>
+        <button class="action-card">Data Explorer</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Database Connections</h3>
+      <span class="badge-soft">Active</span>
+    </div>
+    <div class="table">
+      <div class="table-head">
+        <span>Name</span><span>Type</span><span>Status</span><span>Last Query</span>
+      </div>
+      <div class="table-row">
+        <span>Production DB</span><span class="chip info">PostgreSQL</span><span class="chip success">Connected</span><span class="muted">5 min ago</span>
+      </div>
+      <div class="table-row">
+        <span>Analytics DB</span><span class="chip info">MySQL</span><span class="chip success">Connected</span><span class="muted">12 min ago</span>
+      </div>
+      <div class="table-row">
+        <span>Test Database</span><span class="chip info">SQLite</span><span class="chip warn">Idle</span><span class="muted">1 hour ago</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:fragment="settings">
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold">Settings</h1>
+    <p class="muted mt-1">Configure application-wide settings</p>
+  </div>
+
+  <div class="panel mb-6">
+    <div class="panel-header">
+      <h3>General</h3>
+      <span class="badge-soft">Core settings</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <a href="/settings/general" class="settings-card">
+        <i data-lucide="settings" class="w-6 h-6 text-brand-400"></i>
+        <div>
+          <h4>General</h4>
+          <p class="muted text-sm">App name, timezone, theme</p>
+        </div>
+      </a>
+      <a href="/settings/projects" class="settings-card">
+        <i data-lucide="folder-kanban" class="w-6 h-6 text-purple-400"></i>
+        <div>
+          <h4>Projects & Env</h4>
+          <p class="muted text-sm">Manage projects and environments</p>
+        </div>
+      </a>
+      <a href="/settings/credentials" class="settings-card">
+        <i data-lucide="key" class="w-6 h-6 text-yellow-400"></i>
+        <div>
+          <h4>Credentials</h4>
+          <p class="muted text-sm">API keys and secrets management</p>
+        </div>
+      </a>
+      <a href="/settings/ai-config" class="settings-card">
+        <i data-lucide="sparkles" class="w-6 h-6 text-blue-400"></i>
+        <div>
+          <h4>AI Config</h4>
+          <p class="muted text-sm">LLM provider and settings</p>
+        </div>
+      </a>
+      <a href="/settings/execution" class="settings-card">
+        <i data-lucide="play" class="w-6 h-6 text-green-400"></i>
+        <div>
+          <h4>Execution</h4>
+          <p class="muted text-sm">Execution settings and timeouts</p>
+        </div>
+      </a>
+      <a href="/settings/integrations" class="settings-card">
+        <i data-lucide="puzzle" class="w-6 h-6 text-orange-400"></i>
+        <div>
+          <h4>Integrations</h4>
+          <p class="muted text-sm">Third-party integrations</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="panel mb-6">
+    <div class="panel-header">
+      <h3>Notifications & Security</h3>
+      <span class="badge-soft">Access control</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <a href="/settings/notifications" class="settings-card">
+        <i data-lucide="bell" class="w-6 h-6 text-red-400"></i>
+        <div>
+          <h4>Notifications</h4>
+          <p class="muted text-sm">Email and Slack alerts</p>
+        </div>
+      </a>
+      <a href="/settings/users" class="settings-card">
+        <i data-lucide="users" class="w-6 h-6 text-cyan-400"></i>
+        <div>
+          <h4>Users & Roles</h4>
+          <p class="muted text-sm">User management and permissions</p>
+        </div>
+      </a>
+      <a href="/settings/security" class="settings-card">
+        <i data-lucide="shield" class="w-6 h-6 text-green-400"></i>
+        <div>
+          <h4>Security</h4>
+          <p class="muted text-sm">Security policies and 2FA</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Audit & Logs</h3>
+      <span class="badge-soft">System</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <a href="/settings/logs" class="settings-card">
+        <i data-lucide="file-text" class="w-6 h-6 text-gray-400"></i>
+        <div>
+          <h4>Logs & Audit</h4>
+          <p class="muted text-sm">System logs and audit trail</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="panel mt-6">
+    <div class="table">
+      <div class="table-head">
+        <span>Area</span><span>Status</span><span>Notes</span>
+      </div>
+      <div class="table-row">
+        <span>General</span><span class="chip info">Active</span><span class="muted">Org name, locale</span>
+      </div>
+      <div class="table-row">
+        <span>Credentials</span><span class="chip warn">Review</span><span class="muted">Rotate secrets</span>
+      </div>
+      <div class="table-row">
+        <span>AI Config</span><span class="chip info">Configured</span><span class="muted">Mock provider</span>
+      </div>
+      <div class="table-row">
+        <span>Notifications</span><span class="chip info">On</span><span class="muted">Email + Slack</span>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+
+<!-- UI Automation Dashboard -->
+<div th:fragment="uiAutomationDashboard">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">UI Automation Dashboard</h1>
+      <p class="muted mt-1">Test execution overview and statistics</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <select class="input w-48">
+        <option>Demo Project</option>
+        <option>API Tests</option>
+        <option>UI Regression</option>
+      </select>
+      <button class="btn btn-primary">
+        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+        Refresh
+      </button>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card bg-blue-500/10 border-blue-500/20">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Total Tests</span>
+        <i data-lucide="bar-chart-3" class="w-5 h-5 text-blue-400 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">156</p>
+    </div>
+    <div class="stat-card bg-green-500/10 border-green-500/20">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Passed</span>
+        <i data-lucide="check-circle-2" class="w-5 h-5 text-green-400 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">142</p>
+    </div>
+    <div class="stat-card bg-red-500/10 border-red-500/20">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Failed</span>
+        <i data-lucide="x-circle" class="w-5 h-5 text-red-400 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">14</p>
+    </div>
+    <div class="stat-card bg-purple-500/10 border-purple-500/20">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Success Rate</span>
+        <i data-lucide="trending-up" class="w-5 h-5 text-purple-400 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">91.0%</p>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <h3 class="panel-header-title">Pass/Fail Trend</h3>
+      <div class="space-y-2 mt-4">
+        <div class="flex items-center gap-4">
+          <span class="text-xs muted w-20">Today</span>
+          <div class="flex-1 flex gap-2">
+            <div class="bg-green-500/20 h-6 rounded flex items-center justify-center text-xs text-green-400" style="width: 90%">18</div>
+            <div class="bg-red-500/20 h-6 rounded flex items-center justify-center text-xs text-red-400" style="width: 10%">2</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="text-xs muted w-20">Yesterday</span>
+          <div class="flex-1 flex gap-2">
+            <div class="bg-green-500/20 h-6 rounded flex items-center justify-center text-xs text-green-400" style="width: 85%">17</div>
+            <div class="bg-red-500/20 h-6 rounded flex items-center justify-center text-xs text-red-400" style="width: 15%">3</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="text-xs muted w-20">Apr 10</span>
+          <div class="flex-1 flex gap-2">
+            <div class="bg-green-500/20 h-6 rounded flex items-center justify-center text-xs text-green-400" style="width: 92%">22</div>
+            <div class="bg-red-500/20 h-6 rounded flex items-center justify-center text-xs text-red-400" style="width: 8%">2</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="text-xs muted w-20">Apr 9</span>
+          <div class="flex-1 flex gap-2">
+            <div class="bg-green-500/20 h-6 rounded flex items-center justify-center text-xs text-green-400" style="width: 78%">15</div>
+            <div class="bg-red-500/20 h-6 rounded flex items-center justify-center text-xs text-red-400" style="width: 22%">4</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3 class="panel-header-title">Recent Executions</h3>
+      <div class="space-y-3 mt-4">
+        <div class="flex items-center justify-between p-3 bg-gray-800 rounded-lg">
+          <div class="flex items-center gap-3">
+            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+            <div>
+              <p class="text-sm font-medium">Login Flow Test</p>
+              <p class="text-xs text-gray-500">Today, 10:32 AM</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <p class="text-sm font-medium">1.2s</p>
+            <p class="text-xs text-gray-500">Chrome</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between p-3 bg-gray-800 rounded-lg">
+          <div class="flex items-center gap-3">
+            <div class="w-2 h-2 rounded-full bg-red-500"></div>
+            <div>
+              <p class="text-sm font-medium">Checkout Process</p>
+              <p class="text-xs text-gray-500">Today, 10:15 AM</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <p class="text-sm font-medium">2.8s</p>
+            <p class="text-xs text-gray-500">Firefox</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between p-3 bg-gray-800 rounded-lg">
+          <div class="flex items-center gap-3">
+            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+            <div>
+              <p class="text-sm font-medium">User Profile</p>
+              <p class="text-xs text-gray-500">Yesterday</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <p class="text-sm font-medium">0.9s</p>
+            <p class="text-xs text-gray-500">Chrome</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel mt-6">
+    <h3 class="panel-header-title">Performance Metrics</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+      <div class="p-4 bg-gray-800 rounded-lg">
+        <div class="flex items-center gap-3 mb-2">
+          <i data-lucide="clock" class="w-5 h-5 text-blue-400"></i>
+          <span class="text-sm text-gray-400">Average Duration</span>
+        </div>
+        <p class="text-2xl font-bold">2.3s</p>
+      </div>
+      <div class="p-4 bg-gray-800 rounded-lg">
+        <div class="flex items-center gap-3 mb-2">
+          <i data-lucide="activity" class="w-5 h-5 text-green-400"></i>
+          <span class="text-sm text-gray-400">Last Execution</span>
+        </div>
+        <p class="text-2xl font-bold">Just now</p>
+      </div>
+      <div class="p-4 bg-gray-800 rounded-lg">
+        <div class="flex items-center gap-3 mb-2">
+          <i data-lucide="x-circle" class="w-5 h-5 text-red-400"></i>
+          <span class="text-sm text-gray-400">Skipped Tests</span>
+        </div>
+        <p class="text-2xl font-bold">0</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UI Automation Test Cases -->
+<div th:fragment="uiAutomationTestCases">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Test Cases</h1>
+      <p class="muted mt-1">AI-Generated test cases from business requirements</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="upload" class="w-4 h-4"></i>
+      Generate from BRS
+    </button>
+  </div>
+
+  <div class="flex items-center gap-4 mb-6">
+    <div class="relative flex-1 max-w-md">
+      <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500"></i>
+      <input type="text" placeholder="Search test cases..." class="input w-full pl-10" />
+    </div>
+    <select class="input w-40">
+      <option value="">All Status</option>
+      <option value="draft">Draft</option>
+      <option value="active">Active</option>
+      <option value="archived">Archived</option>
+    </select>
+    <select class="input w-40">
+      <option value="">All Priority</option>
+      <option value="high">High</option>
+      <option value="medium">Medium</option>
+      <option value="low">Low</option>
+    </select>
+  </div>
+
+  <div class="panel">
+    <div class="table">
+      <div class="table-head">
+        <span>Title</span><span>Steps</span><span>Tags</span><span>Priority</span><span>Status</span><span>Created</span><span></span>
+      </div>
+      <div class="table-row">
+        <span><i data-lucide="file-text" class="w-4 h-4 inline mr-2 text-gray-500"></i>Login Validation</span>
+        <span class="muted">5 steps</span>
+        <span class="flex gap-1"><span class="badge badge-pending">auth</span></span>
+        <span class="chip danger">high</span>
+        <span class="chip info">active</span>
+        <span class="muted">Today</span>
+        <span class="text-brand-400 text-sm">View</span>
+      </div>
+      <div class="table-row">
+        <span><i data-lucide="file-text" class="w-4 h-4 inline mr-2 text-gray-500"></i>Checkout Flow</span>
+        <span class="muted">8 steps</span>
+        <span class="flex gap-1"><span class="badge badge-pending">regression</span></span>
+        <span class="chip warn">medium</span>
+        <span class="chip info">active</span>
+        <span class="muted">Yesterday</span>
+        <span class="text-brand-400 text-sm">View</span>
+      </div>
+      <div class="table-row">
+        <span><i data-lucide="file-text" class="w-4 h-4 inline mr-2 text-gray-500"></i>Search Results</span>
+        <span class="muted">3 steps</span>
+        <span class="flex gap-1"><span class="badge badge-pending">smoke</span></span>
+        <span class="chip success">low</span>
+        <span class="chip info">active</span>
+        <span class="muted">2 days ago</span>
+        <span class="text-brand-400 text-sm">View</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UI Automation Scripts -->
+<div th:fragment="uiAutomationScripts">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Scripts</h1>
+      <p class="muted mt-1">Manage UI automation scripts</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="plus" class="w-4 h-4"></i>
+      New Script
+    </button>
+  </div>
+
+  <div class="panel">
+    <div class="table">
+      <div class="table-head">
+        <span>Name</span><span>Type</span><span>Browser</span><span>Last Run</span><span>Status</span><span></span>
+      </div>
+      <div class="table-row">
+        <span><i data-lucide="file-code" class="w-4 h-4 inline mr-2 text-gray-500"></i>login.spec.ts</span>
+        <span class="chip info">Playwright</span>
+        <span class="muted">Chrome</span>
+        <span class="muted">Today, 10:30 AM</span>
+        <span class="chip success">passed</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+      <div class="table-row">
+        <span><i data-lucide="file-code" class="w-4 h-4 inline mr-2 text-gray-500"></i>checkout.spec.ts</span>
+        <span class="chip info">Playwright</span>
+        <span class="muted">Firefox</span>
+        <span class="muted">Today, 9:15 AM</span>
+        <span class="chip danger">failed</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+      <div class="table-row">
+        <span><i data-lucide="file-code" class="w-4 h-4 inline mr-2 text-gray-500"></i>search.spec.ts</span>
+        <span class="chip info">Playwright</span>
+        <span class="muted">Chrome</span>
+        <span class="muted">Yesterday</span>
+        <span class="chip success">passed</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UI Automation Test Suites -->
+<div th:fragment="uiAutomationSuites">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Test Suites</h1>
+      <p class="muted mt-1">Group and organize test scripts</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="plus" class="w-4 h-4"></i>
+      New Suite
+    </button>
+  </div>
+
+  <div class="card-grid">
+    <div class="project-card">
+      <div class="flex items-start gap-3">
+        <div class="p-2 bg-green-900/30 rounded-lg">
+          <i data-lucide="folder" class="w-5 h-5 text-green-400"></i>
+        </div>
+        <div class="flex-1">
+          <h4>Smoke Tests</h4>
+          <p class="muted mt-1">Core functionality tests</p>
+          <p class="text-xs text-gray-600 mt-2">12 scripts</p>
+        </div>
+      </div>
+      <div class="chip success mt-3">Active</div>
+    </div>
+    <div class="project-card">
+      <div class="flex items-start gap-3">
+        <div class="p-2 bg-blue-900/30 rounded-lg">
+          <i data-lucide="folder" class="w-5 h-5 text-blue-400"></i>
+        </div>
+        <div class="flex-1">
+          <h4>Regression Suite</h4>
+          <p class="muted mt-1">Full regression tests</p>
+          <p class="text-xs text-gray-600 mt-2">45 scripts</p>
+        </div>
+      </div>
+      <div class="chip info mt-3">Active</div>
+    </div>
+    <div class="project-card">
+      <div class="flex items-start gap-3">
+        <div class="p-2 bg-purple-900/30 rounded-lg">
+          <i data-lucide="folder" class="w-5 h-5 text-purple-400"></i>
+        </div>
+        <div class="flex-1">
+          <h4>End-to-End</h4>
+          <p class="muted mt-1">Complete user flows</p>
+          <p class="text-xs text-gray-600 mt-2">8 scripts</p>
+        </div>
+      </div>
+      <div class="chip warn mt-3">Scheduled</div>
+    </div>
+  </div>
+</div>
+
+<!-- UI Automation AI Testing -->
+<div th:fragment="uiAutomationAITesting">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">AI Testing</h1>
+      <p class="muted mt-1">Generate UI tests with AI</p>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Generate Test</h3>
+      </div>
+      <div class="space-y-4">
+        <textarea class="input" rows="6" placeholder="Describe the test scenario..."></textarea>
+        <button class="btn btn-primary w-full">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+          Generate Test Script
+        </button>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Recent Generations</h3>
+      </div>
+      <ul class="list-rows">
+        <li>
+          <i data-lucide="sparkles" class="w-4 h-4 text-brand-400"></i>
+          <span>Login test with validation</span>
+          <span class="muted">2 min ago</span>
+          <span class="chip success">ready</span>
+        </li>
+        <li>
+          <i data-lucide="sparkles" class="w-4 h-4 text-brand-400"></i>
+          <span>Checkout flow test</span>
+          <span class="muted">1 hour ago</span>
+          <span class="chip success">ready</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- UI Automation Execution History -->
+<div th:fragment="uiAutomationExecution">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Execution History</h1>
+      <p class="muted mt-1">View UI test execution results</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="play" class="w-4 h-4"></i>
+      Run Tests
+    </button>
+  </div>
+
+  <div class="panel">
+    <div class="table">
+      <div class="table-head">
+        <span>Test</span><span>Browser</span><span>Duration</span><span>Started</span><span>Status</span><span></span>
+      </div>
+      <div class="table-row">
+        <span>Smoke Suite</span>
+        <span class="muted">Chrome</span>
+        <span class="muted">2m 30s</span>
+        <span class="muted">Today, 10:00 AM</span>
+        <span class="chip success">passed</span>
+        <span class="text-brand-400 text-sm">View</span>
+      </div>
+      <div class="table-row">
+        <span>Regression Suite</span>
+        <span class="muted">Firefox</span>
+        <span class="muted">15m 45s</span>
+        <span class="muted">Today, 8:00 AM</span>
+        <span class="chip danger">failed</span>
+        <span class="text-brand-400 text-sm">View</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UI Automation Object Repository -->
+<div th:fragment="uiAutomationObjects">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Object Repository</h1>
+      <p class="muted mt-1">Manage page objects and locators</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="plus" class="w-4 h-4"></i>
+      Add Object
+    </button>
+  </div>
+
+  <div class="card-grid">
+    <div class="project-card">
+      <h4>LoginPage</h4>
+      <p class="muted mt-1">Login page elements</p>
+      <div class="flex gap-2 mt-3">
+        <span class="badge badge-pending">username</span>
+        <span class="badge badge-pending">password</span>
+        <span class="badge badge-pending">submit</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <h4>DashboardPage</h4>
+      <p class="muted mt-1">Main dashboard elements</p>
+      <div class="flex gap-2 mt-3">
+        <span class="badge badge-pending">header</span>
+        <span class="badge badge-pending">sidebar</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <h4>CheckoutPage</h4>
+      <p class="muted mt-1">Checkout flow elements</p>
+      <div class="flex gap-2 mt-3">
+        <span class="badge badge-pending">cart</span>
+        <span class="badge badge-pending">payment</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UI Automation Test Data -->
+<div th:fragment="uiAutomationTestData">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Test Data</h1>
+      <p class="muted mt-1">Manage test data sets</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="plus" class="w-4 h-4"></i>
+      Add Data Set
+    </button>
+  </div>
+
+  <div class="card-grid">
+    <div class="project-card">
+      <div class="flex items-start gap-3">
+        <div class="p-2 bg-blue-900/30 rounded-lg">
+          <i data-lucide="database" class="w-5 h-5 text-blue-400"></i>
+        </div>
+        <div class="flex-1">
+          <h4>User Accounts</h4>
+          <p class="muted mt-1">Test user credentials</p>
+          <p class="text-xs text-gray-600 mt-2">25 records</p>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="flex items-start gap-3">
+        <div class="p-2 bg-green-900/30 rounded-lg">
+          <i data-lucide="database" class="w-5 h-5 text-green-400"></i>
+        </div>
+        <div class="flex-1">
+          <h4>Product Data</h4>
+          <p class="muted mt-1">Test product catalog</p>
+          <p class="text-xs text-gray-600 mt-2">150 records</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UI Automation Scheduler -->
+<div th:fragment="uiAutomationScheduler">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Scheduler</h1>
+      <p class="muted mt-1">Schedule automated test runs</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="plus" class="w-4 h-4"></i>
+      New Schedule
+    </button>
+  </div>
+
+  <div class="panel">
+    <div class="table">
+      <div class="table-head">
+        <span>Schedule Name</span><span>Suite</span><span>Frequency</span><span>Next Run</span><span>Status</span><span></span>
+      </div>
+      <div class="table-row">
+        <span>Daily Smoke</span>
+        <span class="muted">Smoke Tests</span>
+        <span class="muted">Daily 8:00 AM</span>
+        <span class="muted">Tomorrow 8:00 AM</span>
+        <span class="chip success">active</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+      <div class="table-row">
+        <span>Weekly Regression</span>
+        <span class="muted">Regression Suite</span>
+        <span class="muted">Weekly Sunday</span>
+        <span class="muted">Sunday 12:00 AM</span>
+        <span class="chip success">active</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UI Automation Reports -->
+<div th:fragment="uiAutomationReports">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Reports</h1>
+      <p class="muted mt-1">Test execution reports</p>
+    </div>
+  </div>
+
+  <div class="stat-grid mb-6">
+    <div class="stat-card">
+      <p class="muted">Total Runs</p>
+      <p class="text-3xl font-bold">245</p>
+    </div>
+    <div class="stat-card">
+      <p class="muted">Avg Duration</p>
+      <p class="text-3xl font-bold">5.2m</p>
+    </div>
+    <div class="stat-card">
+      <p class="muted">Pass Rate</p>
+      <p class="text-3xl font-bold">89%</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Recent Reports</h3>
+    </div>
+    <ul class="list-rows">
+      <li>
+        <i data-lucide="file-text" class="w-4 h-4 text-blue-400"></i>
+        <span>Smoke Test Report</span>
+        <span class="muted">Today</span>
+        <span class="chip success">passed</span>
+      </li>
+      <li>
+        <i data-lucide="file-text" class="w-4 h-4 text-blue-400"></i>
+        <span>Regression Report</span>
+        <span class="muted">Yesterday</span>
+        <span class="chip danger">failed</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- API Automation Dashboard -->
+<div th:fragment="apiAutomationDashboard">
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Total Requests</span>
+        <i data-lucide="globe" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">1,456</p>
+      <span class="badge-soft">API Tests</span>
+    </div>
+    <div class="stat-card border-l-green-500/20 bg-green-500/10 text-green-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Passed</span>
+        <i data-lucide="check-circle-2" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">1,389</p>
+      <span class="badge-soft">95.4%</span>
+    </div>
+    <div class="stat-card border-l-red-500/20 bg-red-500/10 text-red-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Failed</span>
+        <i data-lucide="x-circle" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">67</p>
+      <span class="badge-soft">4.6%</span>
+    </div>
+    <div class="stat-card border-l-blue-500/20 bg-blue-500/10 text-blue-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Avg Response</span>
+        <i data-lucide="clock" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">245ms</p>
+      <span class="badge-soft">P95</span>
+    </div>
+  </div>
+
+  <div class="panel mt-6">
+    <div class="panel-header">
+      <h3>Recent Collections</h3>
+    </div>
+    <ul class="list-rows">
+      <li>
+        <i data-lucide="folder" class="w-4 h-4 text-blue-400"></i>
+        <span>User API</span>
+        <span class="muted">48 requests</span>
+        <span class="chip success">passed</span>
+      </li>
+      <li>
+        <i data-lucide="folder" class="w-4 h-4 text-blue-400"></i>
+        <span>Auth API</span>
+        <span class="muted">12 requests</span>
+        <span class="chip success">passed</span>
+      </li>
+      <li>
+        <i data-lucide="folder" class="w-4 h-4 text-blue-400"></i>
+        <span>Payment API</span>
+        <span class="muted">25 requests</span>
+        <span class="chip danger">failed</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- API Automation Collections -->
+<div th:fragment="apiAutomationCollections">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Collections</h1>
+      <p class="muted mt-1">Group API requests</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="plus" class="w-4 h-4"></i>
+      New Collection
+    </button>
+  </div>
+
+  <div class="card-grid">
+    <div class="project-card">
+      <div class="flex items-start gap-3">
+        <div class="p-2 bg-blue-900/30 rounded-lg">
+          <i data-lucide="folder" class="w-5 h-5 text-blue-400"></i>
+        </div>
+        <div class="flex-1">
+          <h4>User Management</h4>
+          <p class="muted mt-1">User CRUD operations</p>
+          <p class="text-xs text-gray-600 mt-2">15 requests</p>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="flex items-start gap-3">
+        <div class="p-2 bg-green-900/30 rounded-lg">
+          <i data-lucide="folder" class="w-5 h-5 text-green-400"></i>
+        </div>
+        <div class="flex-1">
+          <h4>Authentication</h4>
+          <p class="muted mt-1">Auth endpoints</p>
+          <p class="text-xs text-gray-600 mt-2">8 requests</p>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="flex items-start gap-3">
+        <div class="p-2 bg-purple-900/30 rounded-lg">
+          <i data-lucide="folder" class="w-5 h-5 text-purple-400"></i>
+        </div>
+        <div class="flex-1">
+          <h4>Products</h4>
+          <p class="muted mt-1">Product API</p>
+          <p class="text-xs text-gray-600 mt-2">22 requests</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- API Automation Requests -->
+<div th:fragment="apiAutomationRequests">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Requests</h1>
+      <p class="muted mt-1">Define HTTP API calls</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="plus" class="w-4 h-4"></i>
+      New Request
+    </button>
+  </div>
+
+  <div class="panel">
+    <div class="table">
+      <div class="table-head">
+        <span>Name</span><span>Method</span><span>Endpoint</span><span>Collection</span><span></span>
+      </div>
+      <div class="table-row">
+        <span>Get Users</span>
+        <span class="chip success">GET</span>
+        <span class="muted">/api/users</span>
+        <span class="muted">User Management</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+      <div class="table-row">
+        <span>Create User</span>
+        <span class="chip warn">POST</span>
+        <span class="muted">/api/users</span>
+        <span class="muted">User Management</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+      <div class="table-row">
+        <span>Login</span>
+        <span class="chip warn">POST</span>
+        <span class="muted">/api/auth/login</span>
+        <span class="muted">Authentication</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- API Automation Test Suites -->
+<div th:fragment="apiAutomationSuites">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Test Suites</h1>
+      <p class="muted mt-1">API test suites</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="plus" class="w-4 h-4"></i>
+      New Suite
+    </button>
+  </div>
+
+  <div class="card-grid">
+    <div class="project-card">
+      <h4>Smoke Tests</h4>
+      <p class="muted mt-1">Critical path API tests</p>
+      <p class="text-xs text-gray-600 mt-2">12 requests</p>
+      <div class="chip success mt-3">Active</div>
+    </div>
+    <div class="project-card">
+      <h4>Full Regression</h4>
+      <p class="muted mt-1">Complete API coverage</p>
+      <p class="text-xs text-gray-600 mt-2">56 requests</p>
+      <div class="chip info mt-3">Active</div>
+    </div>
+  </div>
+</div>
+
+<!-- API Automation Mock Server -->
+<div th:fragment="apiAutomationMockServer">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Mock Server</h1>
+      <p class="muted mt-1">Create API stubs</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="plus" class="w-4 h-4"></i>
+      New Mock
+    </button>
+  </div>
+
+  <div class="panel">
+    <div class="table">
+      <div class="table-head">
+        <span>Name</span><span>Endpoint</span><span>Status</span><span>Responses</span><span></span>
+      </div>
+      <div class="table-row">
+        <span>User Mock</span>
+        <span class="muted">/mock/users</span>
+        <span class="chip success">Active</span>
+        <span class="muted">5</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+      <div class="table-row">
+        <span>Payment Mock</span>
+        <span class="muted">/mock/payment</span>
+        <span class="chip success">Active</span>
+        <span class="muted">3</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- API Automation Monitoring -->
+<div th:fragment="apiAutomationMonitoring">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">API Monitoring</h1>
+      <p class="muted mt-1">Monitor API health</p>
+    </div>
+  </div>
+
+  <div class="stat-grid mb-6">
+    <div class="stat-card">
+      <p class="muted">Uptime</p>
+      <p class="text-3xl font-bold">99.9%</p>
+    </div>
+    <div class="stat-card">
+      <p class="muted">Avg Response</p>
+      <p class="text-3xl font-bold">145ms</p>
+    </div>
+    <div class="stat-card">
+      <p class="muted">Total Calls</p>
+      <p class="text-3xl font-bold">45K</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Endpoint Health</h3>
+    </div>
+    <ul class="list-rows">
+      <li>
+        <div class="dot green"></div>
+        <span>GET /api/users</span>
+        <span class="muted">98ms</span>
+        <span class="chip success">healthy</span>
+      </li>
+      <li>
+        <div class="dot green"></div>
+        <span>POST /api/auth</span>
+        <span class="muted">125ms</span>
+        <span class="chip success">healthy</span>
+      </li>
+      <li>
+        <div class="dot red"></div>
+        <span>GET /api/orders</span>
+        <span class="muted">timeout</span>
+        <span class="chip danger">down</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- API Automation AI Testing -->
+<div th:fragment="apiAutomationAITesting">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">AI API Testing</h1>
+      <p class="muted mt-1">Generate API tests with AI</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Generate Test from API Spec</h3>
+    </div>
+    <div class="space-y-4">
+      <textarea class="input" rows="6" placeholder="Paste OpenAPI/Swagger spec or describe API..."></textarea>
+      <button class="btn btn-primary">
+        <i data-lucide="sparkles" class="w-4 h-4"></i>
+        Generate Tests
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- API Automation Data Chaining -->
+<div th:fragment="apiAutomationDataChaining">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Data Chaining</h1>
+      <p class="muted mt-1">Link API responses to requests</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="table">
+      <div class="table-head">
+        <span>Chain Name</span><span>Source</span><span>Target</span><span>Status</span><span></span>
+      </div>
+      <div class="table-row">
+        <span>User -> Orders</span>
+        <span class="muted">GET /users</span>
+        <span class="muted">GET /users/:id/orders</span>
+        <span class="chip success">active</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- API Automation Schema Validation -->
+<div th:fragment="apiAutomationSchema">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Schema Validation</h1>
+      <p class="muted mt-1">Validate API responses</p>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="project-card">
+      <h4>User Schema</h4>
+      <p class="muted mt-1">User response validation</p>
+      <div class="chip success mt-3">Active</div>
+    </div>
+    <div class="project-card">
+      <h4>Order Schema</h4>
+      <p class="muted mt-1">Order response validation</p>
+      <div class="chip success mt-3">Active</div>
+    </div>
+  </div>
+</div>
+
+<!-- API Automation Scripts -->
+<div th:fragment="apiAutomationScripts">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Scripts</h1>
+      <p class="muted mt-1">API automation scripts</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="plus" class="w-4 h-4"></i>
+      New Script
+    </button>
+  </div>
+
+  <div class="panel">
+    <div class="table">
+      <div class="table-head">
+        <span>Name</span><span>Type</span><span>Last Run</span><span>Status</span><span></span>
+      </div>
+      <div class="table-row">
+        <span>auth-flow.js</span>
+        <span class="chip info">JavaScript</span>
+        <span class="muted">Today</span>
+        <span class="chip success">passed</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- API Automation Environment -->
+<div th:fragment="apiAutomationEnvironment">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Environment</h1>
+      <p class="muted mt-1">Manage environments and variables</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="plus" class="w-4 h-4"></i>
+      New Environment
+    </button>
+  </div>
+
+  <div class="card-grid">
+    <div class="project-card">
+      <h4>Development</h4>
+      <p class="muted mt-1">Local development</p>
+      <div class="chip success mt-3">Active</div>
+    </div>
+    <div class="project-card">
+      <h4>Staging</h4>
+      <p class="muted mt-1">Staging environment</p>
+      <div class="chip info mt-3">Active</div>
+    </div>
+    <div class="project-card">
+      <h4>Production</h4>
+      <p class="muted mt-1">Production environment</p>
+      <div class="chip warn mt-3">Inactive</div>
+    </div>
+  </div>
+</div>
+
+<!-- API Automation Reports -->
+<div th:fragment="apiAutomationReports">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Reports</h1>
+      <p class="muted mt-1">API test reports</p>
+    </div>
+  </div>
+
+  <div class="stat-grid mb-6">
+    <div class="stat-card">
+      <p class="muted">Total Runs</p>
+      <p class="text-3xl font-bold">892</p>
+    </div>
+    <div class="stat-card">
+      <p class="muted">Pass Rate</p>
+      <p class="text-3xl font-bold">95.4%</p>
+    </div>
+  </div>
+</div>
+
+<!-- Load Testing Dashboard -->
+<div th:fragment="loadTestingDashboard">
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Total Runs</span>
+        <i data-lucide="bar-chart-3" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">47</p>
+      <span class="badge-soft">This month</span>
+    </div>
+    <div class="stat-card border-l-blue-500/20 bg-blue-500/10 text-blue-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Avg Response</span>
+        <i data-lucide="clock" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">156ms</p>
+      <span class="badge-soft">P95</span>
+    </div>
+    <div class="stat-card border-l-green-500/20 bg-green-500/10 text-green-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Passed</span>
+        <i data-lucide="check-circle-2" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">42</p>
+      <span class="badge-soft">89%</span>
+    </div>
+    <div class="stat-card border-l-red-500/20 bg-red-500/10 text-red-400">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Failed</span>
+        <i data-lucide="x-circle" class="w-5 h-5 opacity-70"></i>
+      </div>
+      <p class="text-3xl font-bold">5</p>
+      <span class="badge-soft">11%</span>
+    </div>
+  </div>
+
+  <div class="panel mt-6">
+    <div class="panel-header">
+      <h3>Recent Runs</h3>
+    </div>
+    <ul class="list-rows">
+      <li>
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-green-500"></i>
+        <span>Homepage Load Test</span>
+        <span class="muted">10K samples</span>
+        <span class="chip success">passed</span>
+      </li>
+      <li>
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-green-500"></i>
+        <span>API Stress Test</span>
+        <span class="muted">25K samples</span>
+        <span class="chip success">passed</span>
+      </li>
+      <li>
+        <i data-lucide="x-circle" class="w-4 h-4 text-red-500"></i>
+        <span>Search Performance</span>
+        <span class="muted">8K samples</span>
+        <span class="chip danger">failed</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Load Testing Plans -->
+<div th:fragment="loadTestingPlans">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Test Plans</h1>
+      <p class="muted mt-1">Configure load test scenarios</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="plus" class="w-4 h-4"></i>
+      New Plan
+    </button>
+  </div>
+
+  <div class="card-grid">
+    <div class="project-card">
+      <div class="flex items-start gap-3">
+        <div class="p-2 bg-blue-900/30 rounded-lg">
+          <i data-lucide="gauge" class="w-5 h-5 text-blue-400"></i>
+        </div>
+        <div class="flex-1">
+          <h4>Homepage Load</h4>
+          <p class="muted mt-1">100 concurrent users</p>
+          <p class="text-xs text-gray-600 mt-2">5 min duration</p>
+        </div>
+      </div>
+      <div class="chip success mt-3">Active</div>
+    </div>
+    <div class="project-card">
+      <div class="flex items-start gap-3">
+        <div class="p-2 bg-purple-900/30 rounded-lg">
+          <i data-lucide="gauge" class="w-5 h-5 text-purple-400"></i>
+        </div>
+        <div class="flex-1">
+          <h4>API Stress</h4>
+          <p class="muted mt-1">500 concurrent users</p>
+          <p class="text-xs text-gray-600 mt-2">10 min duration</p>
+        </div>
+      </div>
+      <div class="chip info mt-3">Active</div>
+    </div>
+  </div>
+</div>
+
+<!-- Load Testing Configuration -->
+<div th:fragment="loadTestingConfiguration">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Configuration</h1>
+      <p class="muted mt-1">Configure load test settings</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Test Configuration</h3>
+    </div>
+    <div class="space-y-4">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="muted block mb-2">Concurrent Users</label>
+          <input type="number" class="input" value="100" />
+        </div>
+        <div>
+          <label class="muted block mb-2">Duration (minutes)</label>
+          <input type="number" class="input" value="10" />
+        </div>
+        <div>
+          <label class="muted block mb-2">Ramp-up (seconds)</label>
+          <input type="number" class="input" value="60" />
+        </div>
+        <div>
+          <label class="muted block mb-2">Target URL</label>
+          <input type="text" class="input" value="https://example.com" />
+        </div>
+      </div>
+      <button class="btn btn-primary">Save Configuration</button>
+    </div>
+  </div>
+</div>
+
+<!-- Load Testing Run & Monitor -->
+<div th:fragment="loadTestingRun">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Run & Monitor</h1>
+      <p class="muted mt-1">Execute and monitor load tests</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="play" class="w-4 h-4"></i>
+      Start Test
+    </button>
+  </div>
+
+  <div class="stat-grid mb-6">
+    <div class="stat-card">
+      <p class="muted">Active Runs</p>
+      <p class="text-3xl font-bold">2</p>
+    </div>
+    <div class="stat-card">
+      <p class="muted">Queued</p>
+      <p class="text-3xl font-bold">1</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Running Tests</h3>
+    </div>
+    <ul class="list-rows">
+      <li>
+        <i data-lucide="play" class="w-4 h-4 text-blue-500 animate-pulse"></i>
+        <span>Homepage Load Test</span>
+        <span class="muted">Running...</span>
+        <span class="chip warn">in progress</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Load Testing Reports -->
+<div th:fragment="loadTestingReports">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Results & Reports</h1>
+      <p class="muted mt-1">Analyze test results</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="table">
+      <div class="table-head">
+        <span>Test Name</span><span>Date</span><span>Users</span><span>Throughput</span><span>Status</span><span></span>
+      </div>
+      <div class="table-row">
+        <span>Homepage Load</span>
+        <span class="muted">Today</span>
+        <span class="muted">100</span>
+        <span class="muted">500/s</span>
+        <span class="chip success">passed</span>
+        <span class="text-brand-400 text-sm">View</span>
+      </div>
+      <div class="table-row">
+        <span>API Stress</span>
+        <span class="muted">Yesterday</span>
+        <span class="muted">500</span>
+        <span class="muted">1200/s</span>
+        <span class="chip success">passed</span>
+        <span class="text-brand-400 text-sm">View</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Load Testing Distributed -->
+<div th:fragment="loadTestingDistributed">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Distributed Testing</h1>
+      <p class="muted mt-1">Configure distributed load generation</p>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="project-card">
+      <div class="flex items-start gap-3">
+        <div class="p-2 bg-green-900/30 rounded-lg">
+          <i data-lucide="server" class="w-5 h-5 text-green-400"></i>
+        </div>
+        <div class="flex-1">
+          <h4>Load Generator 1</h4>
+          <p class="muted mt-1">192.168.1.10</p>
+          <p class="text-xs text-gray-600 mt-2">Active</p>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="flex items-start gap-3">
+        <div class="p-2 bg-green-900/30 rounded-lg">
+          <i data-lucide="server" class="w-5 h-5 text-green-400"></i>
+        </div>
+        <div class="flex-1">
+          <h4>Load Generator 2</h4>
+          <p class="muted mt-1">192.168.1.11</p>
+          <p class="text-xs text-gray-600 mt-2">Active</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Load Testing Templates -->
+<div th:fragment="loadTestingTemplates">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Templates</h1>
+      <p class="muted mt-1">Test plan templates</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="plus" class="w-4 h-4"></i>
+      New Template
+    </button>
+  </div>
+
+  <div class="card-grid">
+    <div class="project-card">
+      <h4>Basic Load</h4>
+      <p class="muted mt-1">Simple load test</p>
+    </div>
+    <div class="project-card">
+      <h4>Stress Test</h4>
+      <p class="muted mt-1">Gradual increase</p>
+    </div>
+    <div class="project-card">
+      <h4>Spike Test</h4>
+      <p class="muted mt-1">Sudden load</p>
+    </div>
+  </div>
+</div>
+
+<!-- Load Testing AI Testing -->
+<div th:fragment="loadTestingAITesting">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">AI Based Testing</h1>
+      <p class="muted mt-1">AI-powered load test scenarios</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Generate Test Scenario</h3>
+    </div>
+    <div class="space-y-4">
+      <textarea class="input" rows="4" placeholder="Describe your load test scenario..."></textarea>
+      <button class="btn btn-primary">
+        <i data-lucide="sparkles" class="w-4 h-4"></i>
+        Generate Scenario
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- AI SQL Runner -->
+<div th:fragment="aiSqlRunner">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">SQL Runner</h1>
+      <p class="muted mt-1">Execute SQL queries</p>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Query Editor</h3>
+      </div>
+      <textarea class="input font-mono" rows="10" placeholder="SELECT * FROM users WHERE..."></textarea>
+      <div class="flex gap-2 mt-4">
+        <select class="input w-40">
+          <option>Production DB</option>
+          <option>Test DB</option>
+        </select>
+        <button class="btn btn-primary">
+          <i data-lucide="play" class="w-4 h-4"></i>
+          Execute
+        </button>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Results</h3>
+      </div>
+      <div class="table">
+        <div class="table-head">
+          <span>id</span><span>name</span><span>email</span><span>created_at</span>
+        </div>
+        <div class="table-row">
+          <span>1</span><span>John Doe</span><span>john@example.com</span><span>2026-01-15</span>
+        </div>
+        <div class="table-row">
+          <span>2</span><span>Jane Smith</span><span>jane@example.com</span><span>2026-01-16</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AI SQL Generator -->
+<div th:fragment="aiSqlGenerator">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">AI Query Generator</h1>
+      <p class="muted mt-1">Generate SQL from natural language</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Describe Your Query</h3>
+    </div>
+    <div class="space-y-4">
+      <textarea class="input" rows="4" placeholder="e.g., Show me all users who signed up in the last 30 days"></textarea>
+      <button class="btn btn-primary">
+        <i data-lucide="sparkles" class="w-4 h-4"></i>
+        Generate SQL
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- AI SQL Scripts -->
+<div th:fragment="aiSqlScripts">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">SQL Scripts</h1>
+      <p class="muted mt-1">Manage saved SQL scripts</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="plus" class="w-4 h-4"></i>
+      New Script
+    </button>
+  </div>
+
+  <div class="panel">
+    <div class="table">
+      <div class="table-head">
+        <span>Name</span><span>Database</span><span>Last Modified</span><span></span>
+      </div>
+      <div class="table-row">
+        <span>User Analytics</span>
+        <span class="muted">Production DB</span>
+        <span class="muted">Today</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+      <div class="table-row">
+        <span>Monthly Report</span>
+        <span class="muted">Analytics DB</span>
+        <span class="muted">Yesterday</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AI SQL History -->
+<div th:fragment="aiSqlHistory">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Query History</h1>
+      <p class="muted mt-1">Recent query executions</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="table">
+      <div class="table-head">
+        <span>Query</span><span>Database</span><span>Duration</span><span>Time</span><span>Status</span>
+      </div>
+      <div class="table-row">
+        <code class="text-sm">SELECT COUNT(*) FROM users</code>
+        <span class="muted">Production</span>
+        <span class="muted">45ms</span>
+        <span class="muted">Today</span>
+        <span class="chip success">success</span>
+      </div>
+      <div class="table-row">
+        <code class="text-sm">INSERT INTO logs...</code>
+        <span class="muted">Production</span>
+        <span class="muted">12ms</span>
+        <span class="muted">Today</span>
+        <span class="chip success">success</span>
+      </div>
+      <div class="table-row">
+        <code class="text-sm">UPDATE products SET...</code>
+        <span class="muted">Production</span>
+        <span class="muted">-</span>
+        <span class="muted">Today</span>
+        <span class="chip danger">error</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AI SQL Data Explorer -->
+<div th:fragment="aiSqlExplorer">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Data Explorer</h1>
+      <p class="muted mt-1">Browse database schema</p>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="project-card">
+      <h4>users</h4>
+      <p class="muted mt-1">User accounts table</p>
+      <p class="text-xs text-gray-600 mt-2">12 columns</p>
+    </div>
+    <div class="project-card">
+      <h4>orders</h4>
+      <p class="muted mt-1">Order records</p>
+      <p class="text-xs text-gray-600 mt-2">18 columns</p>
+    </div>
+    <div class="project-card">
+      <h4>products</h4>
+      <p class="muted mt-1">Product catalog</p>
+      <p class="text-xs text-gray-600 mt-2">15 columns</p>
+    </div>
+  </div>
+</div>
+
+<!-- AI SQL Validation -->
+<div th:fragment="aiSqlValidation">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Data Validation</h1>
+      <p class="muted mt-1">Validate data quality</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Validation Rules</h3>
+    </div>
+    <ul class="list-rows">
+      <li>
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-green-500"></i>
+        <span>Email format validation</span>
+        <span class="chip success">passing</span>
+      </li>
+      <li>
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-green-500"></i>
+        <span>Date range validation</span>
+        <span class="chip success">passing</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- AI SQL Migration -->
+<div th:fragment="aiSqlMigration">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Migration</h1>
+      <p class="muted mt-1">Database migration tools</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="table">
+      <div class="table-head">
+        <span>Migration</span><span>Status</span><span>Applied</span><span></span>
+      </div>
+      <div class="table-row">
+        <span>v1_initial_schema</span>
+        <span class="chip success">completed</span>
+        <span class="muted">Jan 15, 2026</span>
+        <span class="text-gray-400 text-sm">View</span>
+      </div>
+      <div class="table-row">
+        <span>v2_add_users</span>
+        <span class="chip success">completed</span>
+        <span class="muted">Feb 1, 2026</span>
+        <span class="text-gray-400 text-sm">View</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AI SQL Performance -->
+<div th:fragment="aiSqlPerformance">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Performance</h1>
+      <p class="muted mt-1">Query performance analysis</p>
+    </div>
+  </div>
+
+  <div class="stat-grid mb-6">
+    <div class="stat-card">
+      <p class="muted">Avg Query Time</p>
+      <p class="text-3xl font-bold">89ms</p>
+    </div>
+    <div class="stat-card">
+      <p class="muted">Slow Queries</p>
+      <p class="text-3xl font-bold">5</p>
+    </div>
+    <div class="stat-card">
+      <p class="muted">Total Queries</p>
+      <p class="text-3xl font-bold">1,842</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Slow Queries</h3>
+    </div>
+    <ul class="list-rows">
+      <li>
+        <i data-lucide="alert-triangle" class="w-4 h-4 text-yellow-500"></i>
+        <code class="text-sm">SELECT * FROM orders WHERE...</code>
+        <span class="muted">1.2s</span>
+        <span class="chip warn">slow</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Settings General -->
+<div th:fragment="settingsGeneral">
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold">General Settings</h1>
+    <p class="muted mt-1">Configure application-wide settings</p>
+  </div>
+
+  <div class="panel">
+    <div class="space-y-6 max-w-2xl">
+      <div>
+        <label class="muted block mb-2">Application Name</label>
+        <input type="text" class="input" value="AI QA Platform" />
+      </div>
+      <div>
+        <label class="muted block mb-2">Default Timezone</label>
+        <select class="input">
+          <option>UTC</option>
+          <option>America/New_York</option>
+          <option>Europe/London</option>
+        </select>
+      </div>
+      <div>
+        <label class="muted block mb-2">Theme</label>
+        <div class="flex gap-4">
+          <button class="btn btn-secondary">Light</button>
+          <button class="btn btn-primary">Dark</button>
+        </div>
+      </div>
+      <button class="btn btn-primary">Save Settings</button>
+    </div>
+  </div>
+</div>
+
+<!-- Settings Projects -->
+<div th:fragment="settingsProjects">
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold">Projects & Environments</h1>
+    <p class="muted mt-1">Manage projects and environments</p>
+  </div>
+
+  <div class="card-grid mb-6">
+    <div class="project-card">
+      <h4>Demo Project</h4>
+      <p class="muted mt-1">Default project</p>
+      <div class="chip success mt-3">Active</div>
+    </div>
+    <div class="project-card">
+      <h4>API Tests</h4>
+      <p class="muted mt-1">API automation project</p>
+      <div class="chip info mt-3">Active</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Environments</h3>
+    </div>
+    <div class="table">
+      <div class="table-head">
+        <span>Name</span><span>URL</span><span>Status</span>
+      </div>
+      <div class="table-row">
+        <span>Development</span>
+        <span class="muted">https://dev.example.com</span>
+        <span class="chip success">Active</span>
+      </div>
+      <div class="table-row">
+        <span>Staging</span>
+        <span class="muted">https://staging.example.com</span>
+        <span class="chip success">Active</span>
+      </div>
+      <div class="table-row">
+        <span>Production</span>
+        <span class="muted">https://example.com</span>
+        <span class="chip warn">Inactive</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Settings Credentials -->
+<div th:fragment="settingsCredentials">
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold">Credentials & Secrets</h1>
+    <p class="muted mt-1">Manage API keys and secrets</p>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>API Keys</h3>
+      <button class="btn btn-primary btn-sm">
+        <i data-lucide="plus" class="w-4 h-4"></i>
+        Add Key
+      </button>
+    </div>
+    <div class="table">
+      <div class="table-head">
+        <span>Name</span><span>Key</span><span>Created</span><span>Status</span><span></span>
+      </div>
+      <div class="table-row">
+        <span>Production Key</span>
+        <span class="muted">sk-****...****1234</span>
+        <span class="muted">Jan 15, 2026</span>
+        <span class="chip success">Active</span>
+        <span class="text-red-400 text-sm">Revoke</span>
+      </div>
+      <div class="table-row">
+        <span>Test Key</span>
+        <span class="muted">sk-****...****5678</span>
+        <span class="muted">Feb 1, 2026</span>
+        <span class="chip success">Active</span>
+        <span class="text-red-400 text-sm">Revoke</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Settings AI Config -->
+<div th:fragment="settingsAIConfig">
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold">AI Configuration</h1>
+    <p class="muted mt-1">Configure LLM provider settings</p>
+  </div>
+
+  <div class="panel">
+    <div class="space-y-6 max-w-2xl">
+      <div>
+        <label class="muted block mb-2">Provider</label>
+        <select class="input">
+          <option>OpenAI</option>
+          <option>Anthropic</option>
+          <option>Google AI</option>
+        </select>
+      </div>
+      <div>
+        <label class="muted block mb-2">Model</label>
+        <select class="input">
+          <option>gpt-4</option>
+          <option>gpt-3.5-turbo</option>
+        </select>
+      </div>
+      <div>
+        <label class="muted block mb-2">API Key</label>
+        <input type="password" class="input" value="sk-..." />
+      </div>
+      <div>
+        <label class="muted block mb-2">Temperature</label>
+        <input type="range" class="w-full" min="0" max="1" step="0.1" value="0.7" />
+      </div>
+      <button class="btn btn-primary">Save Configuration</button>
+    </div>
+  </div>
+</div>
+
+<!-- Settings Execution -->
+<div th:fragment="settingsExecution">
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold">Execution Settings</h1>
+    <p class="muted mt-1">Configure test execution behavior</p>
+  </div>
+
+  <div class="panel">
+    <div class="space-y-6 max-w-2xl">
+      <div>
+        <label class="muted block mb-2">Default Timeout (seconds)</label>
+        <input type="number" class="input" value="30" />
+      </div>
+      <div>
+        <label class="muted block mb-2">Retry Count</label>
+        <input type="number" class="input" value="2" />
+      </div>
+      <div>
+        <label class="muted block mb-2">Max Parallel Workers</label>
+        <input type="number" class="input" value="5" />
+      </div>
+      <div>
+        <label class="muted block mb-2">Screenshot on Failure</label>
+        <input type="checkbox" checked /> <span class="text-gray-300">Enabled</span>
+      </div>
+      <button class="btn btn-primary">Save Settings</button>
+    </div>
+  </div>
+</div>
+
+<!-- Settings Integrations -->
+<div th:fragment="settingsIntegrations">
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold">Integrations</h1>
+    <p class="muted mt-1">Third-party integrations</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="project-card">
+      <div class="flex items-start gap-3">
+        <div class="p-2 bg-purple-900/30 rounded-lg">
+          <i data-lucide="github" class="w-5 h-5 text-purple-400"></i>
+        </div>
+        <div class="flex-1">
+          <h4>GitHub</h4>
+          <p class="muted mt-1">Code repository</p>
+        </div>
+      </div>
+      <div class="chip success mt-3">Connected</div>
+    </div>
+    <div class="project-card">
+      <div class="flex items-start gap-3">
+        <div class="p-2 bg-orange-900/30 rounded-lg">
+          <i data-lucide="slack" class="w-5 h-5 text-orange-400"></i>
+        </div>
+        <div class="flex-1">
+          <h4>Slack</h4>
+          <p class="muted mt-1">Notifications</p>
+        </div>
+      </div>
+      <div class="chip warn mt-3">Not Connected</div>
+    </div>
+    <div class="project-card">
+      <div class="flex items-start gap-3">
+        <div class="p-2 bg-blue-900/30 rounded-lg">
+          <i data-lucide="jira" class="w-5 h-5 text-blue-400"></i>
+        </div>
+        <div class="flex-1">
+          <h4>Jira</h4>
+          <p class="muted mt-1">Issue tracking</p>
+        </div>
+      </div>
+      <div class="chip success mt-3">Connected</div>
+    </div>
+  </div>
+</div>
+
+<!-- Settings Notifications -->
+<div th:fragment="settingsNotifications">
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold">Notifications</h1>
+    <p class="muted mt-1">Configure alerts and notifications</p>
+  </div>
+
+  <div class="panel">
+    <div class="space-y-4">
+      <div class="flex items-center justify-between p-4 bg-gray-800 rounded-lg">
+        <div>
+          <h4>Email Notifications</h4>
+          <p class="muted text-sm">Receive test results via email</p>
+        </div>
+        <input type="checkbox" checked />
+      </div>
+      <div class="flex items-center justify-between p-4 bg-gray-800 rounded-lg">
+        <div>
+          <h4>Slack Notifications</h4>
+          <p class="muted text-sm">Send alerts to Slack channel</p>
+        </div>
+        <input type="checkbox" checked />
+      </div>
+      <div class="flex items-center justify-between p-4 bg-gray-800 rounded-lg">
+        <div>
+          <h4>Failure Alerts</h4>
+          <p class="muted text-sm">Immediate alerts on test failures</p>
+        </div>
+        <input type="checkbox" checked />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Settings Users -->
+<div th:fragment="settingsUsers">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold">Users & Roles</h1>
+      <p class="muted mt-1">User management and permissions</p>
+    </div>
+    <button class="btn btn-primary">
+      <i data-lucide="plus" class="w-4 h-4"></i>
+      Add User
+    </button>
+  </div>
+
+  <div class="panel">
+    <div class="table">
+      <div class="table-head">
+        <span>Name</span><span>Email</span><span>Role</span><span>Status</span><span></span>
+      </div>
+      <div class="table-row">
+        <span>Admin User</span>
+        <span class="muted">admin@example.com</span>
+        <span class="chip info">Admin</span>
+        <span class="chip success">Active</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+      <div class="table-row">
+        <span>Test Engineer</span>
+        <span class="muted">tester@example.com</span>
+        <span class="chip warn">Editor</span>
+        <span class="chip success">Active</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+      <div class="table-row">
+        <span>Viewer</span>
+        <span class="muted">viewer@example.com</span>
+        <span class="muted">Viewer</span>
+        <span class="chip warn">Inactive</span>
+        <span class="text-brand-400 text-sm">Edit</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Settings Security -->
+<div th:fragment="settingsSecurity">
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold">Security</h1>
+    <p class="muted mt-1">Security policies and access control</p>
+  </div>
+
+  <div class="panel">
+    <div class="space-y-6">
+      <div>
+        <h3 class="mb-4">Two-Factor Authentication</h3>
+        <div class="flex items-center justify-between p-4 bg-gray-800 rounded-lg">
+          <div>
+            <h4>Enable 2FA</h4>
+            <p class="muted text-sm">Require 2FA for all users</p>
+          </div>
+          <input type="checkbox" />
+        </div>
+      </div>
+      <div>
+        <h3 class="mb-4">Session Settings</h3>
+        <div class="space-y-4">
+          <div>
+            <label class="muted block mb-2">Session Timeout (minutes)</label>
+            <input type="number" class="input" value="60" />
+          </div>
+          <div>
+            <label class="muted block mb-2">Password Policy</label>
+            <select class="input">
+              <option>Strong</option>
+              <option>Medium</option>
+              <option>Basic</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary">Save Security Settings</button>
+    </div>
+  </div>
+</div>
+
+<!-- Settings Logs -->
+<div th:fragment="settingsLogs">
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold">Logs & Audit</h1>
+    <p class="muted mt-1">System logs and audit trail</p>
+  </div>
+
+  <div class="stat-grid mb-6">
+    <div class="stat-card">
+      <p class="muted">Total Events (7d)</p>
+      <p class="text-3xl font-bold">1,245</p>
+    </div>
+    <div class="stat-card">
+      <p class="muted">Users Active</p>
+      <p class="text-3xl font-bold">8</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="table">
+      <div class="table-head">
+        <span>Timestamp</span><span>User</span><span>Action</span><span>Resource</span>
+      </div>
+      <div class="table-row">
+        <span class="muted">Today 10:30 AM</span>
+        <span>admin</span>
+        <span class="chip info">LOGIN</span>
+        <span class="muted">/</span>
+      </div>
+      <div class="table-row">
+        <span class="muted">Today 10:15 AM</span>
+        <span>admin</span>
+        <span class="chip info">PROJECT_CREATE</span>
+        <span class="muted">/projects</span>
+      </div>
+      <div class="table-row">
+        <span class="muted">Today 9:45 AM</span>
+        <span>tester</span>
+        <span class="chip warn">RUN_EXECUTE</span>
+        <span class="muted">/execution</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

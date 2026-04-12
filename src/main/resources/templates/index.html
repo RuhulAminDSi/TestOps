@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI QA Platform</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" th:href="@{/css/styles.css}" />
+  <script defer src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <div th:replace="~{fragments/header :: header}"></div>
+    <div class="app-body">
+      <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+      <main class="content" role="main">
+        <div id="page-dashboard" class="page-section">
+          <div th:replace="~{pages/dashboard/dashboard :: content}"></div>
+        </div>
+        <div id="page-projects" class="page-section" style="display:none">
+          <div th:replace="~{pages/projects/projects :: content}"></div>
+        </div>
+        <div id="page-scripts" class="page-section" style="display:none">
+          <div th:replace="~{pages/scripts/scripts :: content}"></div>
+        </div>
+        <div id="page-execution" class="page-section" style="display:none">
+          <div th:replace="~{pages/execution/execution :: content}"></div>
+        </div>
+        <div id="page-monitoring" class="page-section" style="display:none">
+          <div th:replace="~{pages/monitoring/monitoring :: content}"></div>
+        </div>
+        <div id="page-monitoring-audit-logs" class="page-section" style="display:none">
+          <div th:replace="~{pages/monitoring/monitoring-audit-logs :: content}"></div>
+        </div>
+        <div id="page-monitoring-audit-stats" class="page-section" style="display:none">
+          <div th:replace="~{pages/monitoring/monitoring-audit-stats :: content}"></div>
+        </div>
+        <div id="page-ui-automation" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation/ui-automation :: content}"></div>
+        </div>
+        <div id="page-ui-automation-dashboard" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation/ui-automation-dashboard :: content}"></div>
+        </div>
+        <div id="page-ui-automation-test-cases" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation/ui-automation-test-cases :: content}"></div>
+        </div>
+        <div id="page-ui-automation-scripts" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation/ui-automation-scripts :: content}"></div>
+        </div>
+        <div id="page-ui-automation-test-suites" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation/ui-automation-test-suites :: content}"></div>
+        </div>
+        <div id="page-ui-automation-ai-testing" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation/ui-automation-ai-testing :: content}"></div>
+        </div>
+        <div id="page-ui-automation-execution-history" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation/ui-automation-execution-history :: content}"></div>
+        </div>
+        <div id="page-ui-automation-object-repository" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation/ui-automation-object-repository :: content}"></div>
+        </div>
+        <div id="page-ui-automation-test-data" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation/ui-automation-test-data :: content}"></div>
+        </div>
+        <div id="page-ui-automation-scheduler" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation/ui-automation-scheduler :: content}"></div>
+        </div>
+        <div id="page-ui-automation-reports" class="page-section" style="display:none">
+          <div th:replace="~{pages/ui-automation/ui-automation-reports :: content}"></div>
+        </div>
+        <div id="page-api-automation" class="page-section" style="display:none">
+          <div th:replace="~{pages/api-automation/api-automation :: content}"></div>
+        </div>
+        <div id="page-api-automation-dashboard" class="page-section" style="display:none">
+          <div th:replace="~{pages/api-automation/api-automation-dashboard :: content}"></div>
+        </div>
+        <div id="page-api-automation-collections" class="page-section" style="display:none">
+          <div th:replace="~{pages/api-automation/api-automation-collections :: content}"></div>
+        </div>
+        <div id="page-api-automation-requests" class="page-section" style="display:none">
+          <div th:replace="~{pages/api-automation/api-automation-requests :: content}"></div>
+        </div>
+        <div id="page-api-automation-test-suites" class="page-section" style="display:none">
+          <div th:replace="~{pages/api-automation/api-automation-test-suites :: content}"></div>
+        </div>
+        <div id="page-api-automation-mock-server" class="page-section" style="display:none">
+          <div th:replace="~{pages/api-automation/api-automation-mock-server :: content}"></div>
+        </div>
+        <div id="page-api-automation-monitoring" class="page-section" style="display:none">
+          <div th:replace="~{pages/api-automation/api-automation-monitoring :: content}"></div>
+        </div>
+        <div id="page-api-automation-ai-testing" class="page-section" style="display:none">
+          <div th:replace="~{pages/api-automation/api-automation-ai-testing :: content}"></div>
+        </div>
+        <div id="page-api-automation-data-chaining" class="page-section" style="display:none">
+          <div th:replace="~{pages/api-automation/api-automation-data-chaining :: content}"></div>
+        </div>
+        <div id="page-api-automation-schema-validation" class="page-section" style="display:none">
+          <div th:replace="~{pages/api-automation/api-automation-schema-validation :: content}"></div>
+        </div>
+        <div id="page-api-automation-scripts" class="page-section" style="display:none">
+          <div th:replace="~{pages/api-automation/api-automation-scripts :: content}"></div>
+        </div>
+        <div id="page-api-automation-environment" class="page-section" style="display:none">
+          <div th:replace="~{pages/api-automation/api-automation-environment :: content}"></div>
+        </div>
+        <div id="page-api-automation-reports" class="page-section" style="display:none">
+          <div th:replace="~{pages/api-automation/api-automation-reports :: content}"></div>
+        </div>
+        <div id="page-load-testing" class="page-section" style="display:none">
+          <div th:replace="~{pages/load-testing/load-testing :: content}"></div>
+        </div>
+        <div id="page-load-testing-dashboard" class="page-section" style="display:none">
+          <div th:replace="~{pages/load-testing/load-testing-dashboard :: content}"></div>
+        </div>
+        <div id="page-load-testing-test-plans" class="page-section" style="display:none">
+          <div th:replace="~{pages/load-testing/load-testing-test-plans :: content}"></div>
+        </div>
+        <div id="page-load-testing-configuration" class="page-section" style="display:none">
+          <div th:replace="~{pages/load-testing/load-testing-configuration :: content}"></div>
+        </div>
+        <div id="page-load-testing-run-monitor" class="page-section" style="display:none">
+          <div th:replace="~{pages/load-testing/load-testing-run-monitor :: content}"></div>
+        </div>
+        <div id="page-load-testing-results" class="page-section" style="display:none">
+          <div th:replace="~{pages/load-testing/load-testing-results :: content}"></div>
+        </div>
+        <div id="page-load-testing-distributed" class="page-section" style="display:none">
+          <div th:replace="~{pages/load-testing/load-testing-distributed :: content}"></div>
+        </div>
+        <div id="page-load-testing-templates" class="page-section" style="display:none">
+          <div th:replace="~{pages/load-testing/load-testing-templates :: content}"></div>
+        </div>
+        <div id="page-load-testing-ai-testing" class="page-section" style="display:none">
+          <div th:replace="~{pages/load-testing/load-testing-ai-testing :: content}"></div>
+        </div>
+        <div id="page-ai-sql" class="page-section" style="display:none">
+          <div th:replace="~{pages/ai-sql/ai-sql :: content}"></div>
+        </div>
+        <div id="page-ai-sql-runner" class="page-section" style="display:none">
+          <div th:replace="~{pages/ai-sql/ai-sql-runner :: content}"></div>
+        </div>
+        <div id="page-ai-sql-query-generator" class="page-section" style="display:none">
+          <div th:replace="~{pages/ai-sql/ai-sql-query-generator :: content}"></div>
+        </div>
+        <div id="page-ai-sql-scripts" class="page-section" style="display:none">
+          <div th:replace="~{pages/ai-sql/ai-sql-scripts :: content}"></div>
+        </div>
+        <div id="page-ai-sql-history" class="page-section" style="display:none">
+          <div th:replace="~{pages/ai-sql/ai-sql-history :: content}"></div>
+        </div>
+        <div id="page-ai-sql-explorer" class="page-section" style="display:none">
+          <div th:replace="~{pages/ai-sql/ai-sql-explorer :: content}"></div>
+        </div>
+        <div id="page-ai-sql-validation" class="page-section" style="display:none">
+          <div th:replace="~{pages/ai-sql/ai-sql-validation :: content}"></div>
+        </div>
+        <div id="page-ai-sql-migration" class="page-section" style="display:none">
+          <div th:replace="~{pages/ai-sql/ai-sql-migration :: content}"></div>
+        </div>
+        <div id="page-ai-sql-performance" class="page-section" style="display:none">
+          <div th:replace="~{pages/ai-sql/ai-sql-performance :: content}"></div>
+        </div>
+        <div id="page-settings" class="page-section" style="display:none">
+          <div th:replace="~{pages/settings/settings :: content}"></div>
+        </div>
+        <div id="page-settings-general" class="page-section" style="display:none">
+          <div th:replace="~{pages/settings/settings-general :: content}"></div>
+        </div>
+        <div id="page-settings-projects" class="page-section" style="display:none">
+          <div th:replace="~{pages/settings/settings-projects :: content}"></div>
+        </div>
+        <div id="page-settings-credentials" class="page-section" style="display:none">
+          <div th:replace="~{pages/settings/settings-credentials :: content}"></div>
+        </div>
+        <div id="page-settings-ai-config" class="page-section" style="display:none">
+          <div th:replace="~{pages/settings/settings-ai-config :: content}"></div>
+        </div>
+        <div id="page-settings-execution" class="page-section" style="display:none">
+          <div th:replace="~{pages/settings/settings-execution :: content}"></div>
+        </div>
+        <div id="page-settings-integrations" class="page-section" style="display:none">
+          <div th:replace="~{pages/settings/settings-integrations :: content}"></div>
+        </div>
+        <div id="page-settings-notifications" class="page-section" style="display:none">
+          <div th:replace="~{pages/settings/settings-notifications :: content}"></div>
+        </div>
+        <div id="page-settings-users" class="page-section" style="display:none">
+          <div th:replace="~{pages/settings/settings-users :: content}"></div>
+        </div>
+        <div id="page-settings-security" class="page-section" style="display:none">
+          <div th:replace="~{pages/settings/settings-security :: content}"></div>
+        </div>
+        <div id="page-settings-logs" class="page-section" style="display:none">
+          <div th:replace="~{pages/settings/settings-logs :: content}"></div>
+        </div>
+      </main>
+      <script>
+        (function() {
+          var path = window.location.pathname;
+          var page = 'page-dashboard';
+          
+          if (path.indexOf('/projects') === 0) page = 'page-projects';
+          else if (path.indexOf('/scripts') === 0) page = 'page-scripts';
+          else if (path.indexOf('/execution') === 0) page = 'page-execution';
+          else if (path.indexOf('/monitoring') === 0) {
+            if (path === '/monitoring' || path === '/monitoring/') {
+              page = 'page-monitoring';
+            } else if (path.indexOf('/monitoring/audit-logs') === 0) {
+              page = 'page-monitoring-audit-logs';
+            } else if (path.indexOf('/monitoring/audit-stats') === 0) {
+              page = 'page-monitoring-audit-stats';
+            } else {
+              page = 'page-monitoring';
+            }
+          }
+          else if (path.indexOf('/ui-automation') === 0) {
+            if (path === '/ui-automation' || path === '/ui-automation/') {
+              page = 'page-ui-automation';
+            } else if (path.indexOf('/ui-automation/dashboard') === 0) {
+              page = 'page-ui-automation-dashboard';
+            } else if (path.indexOf('/ui-automation/test-cases') === 0) {
+              page = 'page-ui-automation-test-cases';
+            } else if (path.indexOf('/ui-automation/scripts') === 0) {
+              page = 'page-ui-automation-scripts';
+            } else if (path.indexOf('/ui-automation/test-suites') === 0) {
+              page = 'page-ui-automation-test-suites';
+            } else if (path.indexOf('/ui-automation/ai-testing') === 0) {
+              page = 'page-ui-automation-ai-testing';
+            } else if (path.indexOf('/ui-automation/execution-history') === 0) {
+              page = 'page-ui-automation-execution-history';
+            } else if (path.indexOf('/ui-automation/object-repository') === 0) {
+              page = 'page-ui-automation-object-repository';
+            } else if (path.indexOf('/ui-automation/test-data') === 0) {
+              page = 'page-ui-automation-test-data';
+            } else if (path.indexOf('/ui-automation/scheduler') === 0) {
+              page = 'page-ui-automation-scheduler';
+            } else if (path.indexOf('/ui-automation/reports') === 0) {
+              page = 'page-ui-automation-reports';
+            } else {
+              page = 'page-ui-automation';
+            }
+          }
+          else if (path.indexOf('/api-automation') === 0) {
+            if (path === '/api-automation' || path === '/api-automation/') {
+              page = 'page-api-automation';
+            } else if (path.indexOf('/api-automation/dashboard') === 0) {
+              page = 'page-api-automation-dashboard';
+            } else if (path.indexOf('/api-automation/collections') === 0) {
+              page = 'page-api-automation-collections';
+            } else if (path.indexOf('/api-automation/requests') === 0) {
+              page = 'page-api-automation-requests';
+            } else if (path.indexOf('/api-automation/test-suites') === 0) {
+              page = 'page-api-automation-test-suites';
+            } else if (path.indexOf('/api-automation/mock-server') === 0) {
+              page = 'page-api-automation-mock-server';
+            } else if (path.indexOf('/api-automation/monitoring') === 0) {
+              page = 'page-api-automation-monitoring';
+            } else if (path.indexOf('/api-automation/ai-testing') === 0) {
+              page = 'page-api-automation-ai-testing';
+            } else if (path.indexOf('/api-automation/data-chaining') === 0) {
+              page = 'page-api-automation-data-chaining';
+            } else if (path.indexOf('/api-automation/schema-validation') === 0) {
+              page = 'page-api-automation-schema-validation';
+            } else if (path.indexOf('/api-automation/scripts') === 0) {
+              page = 'page-api-automation-scripts';
+            } else if (path.indexOf('/api-automation/environment') === 0) {
+              page = 'page-api-automation-environment';
+            } else if (path.indexOf('/api-automation/reports') === 0) {
+              page = 'page-api-automation-reports';
+            } else {
+              page = 'page-api-automation';
+            }
+          }
+          else if (path.indexOf('/load-testing') === 0) {
+            if (path === '/load-testing' || path === '/load-testing/') {
+              page = 'page-load-testing';
+            } else if (path.indexOf('/load-testing/dashboard') === 0) {
+              page = 'page-load-testing-dashboard';
+            } else if (path.indexOf('/load-testing/test-plans') === 0) {
+              page = 'page-load-testing-test-plans';
+            } else if (path.indexOf('/load-testing/configuration') === 0) {
+              page = 'page-load-testing-configuration';
+            } else if (path.indexOf('/load-testing/run-monitor') === 0) {
+              page = 'page-load-testing-run-monitor';
+            } else if (path.indexOf('/load-testing/results') === 0) {
+              page = 'page-load-testing-results';
+            } else if (path.indexOf('/load-testing/distributed') === 0) {
+              page = 'page-load-testing-distributed';
+            } else if (path.indexOf('/load-testing/templates') === 0) {
+              page = 'page-load-testing-templates';
+            } else if (path.indexOf('/load-testing/ai-testing') === 0) {
+              page = 'page-load-testing-ai-testing';
+            } else {
+              page = 'page-load-testing';
+            }
+          }
+          else if (path.indexOf('/ai-sql') === 0) {
+            if (path === '/ai-sql' || path === '/ai-sql/') {
+              page = 'page-ai-sql';
+            } else if (path.indexOf('/ai-sql/runner') === 0) {
+              page = 'page-ai-sql-runner';
+            } else if (path.indexOf('/ai-sql/query-generator') === 0) {
+              page = 'page-ai-sql-query-generator';
+            } else if (path.indexOf('/ai-sql/scripts') === 0) {
+              page = 'page-ai-sql-scripts';
+            } else if (path.indexOf('/ai-sql/history') === 0) {
+              page = 'page-ai-sql-history';
+            } else if (path.indexOf('/ai-sql/explorer') === 0) {
+              page = 'page-ai-sql-explorer';
+            } else if (path.indexOf('/ai-sql/validation') === 0) {
+              page = 'page-ai-sql-validation';
+            } else if (path.indexOf('/ai-sql/migration') === 0) {
+              page = 'page-ai-sql-migration';
+            } else if (path.indexOf('/ai-sql/performance') === 0) {
+              page = 'page-ai-sql-performance';
+            } else {
+              page = 'page-ai-sql';
+            }
+          }
+          else if (path.indexOf('/settings') === 0) {
+            if (path === '/settings' || path === '/settings/') {
+              page = 'page-settings';
+            } else if (path.indexOf('/settings/general') === 0) {
+              page = 'page-settings-general';
+            } else if (path.indexOf('/settings/projects') === 0) {
+              page = 'page-settings-projects';
+            } else if (path.indexOf('/settings/credentials') === 0) {
+              page = 'page-settings-credentials';
+            } else if (path.indexOf('/settings/ai-config') === 0) {
+              page = 'page-settings-ai-config';
+            } else if (path.indexOf('/settings/execution') === 0) {
+              page = 'page-settings-execution';
+            } else if (path.indexOf('/settings/integrations') === 0) {
+              page = 'page-settings-integrations';
+            } else if (path.indexOf('/settings/notifications') === 0) {
+              page = 'page-settings-notifications';
+            } else if (path.indexOf('/settings/users') === 0) {
+              page = 'page-settings-users';
+            } else if (path.indexOf('/settings/security') === 0) {
+              page = 'page-settings-security';
+            } else if (path.indexOf('/settings/logs') === 0) {
+              page = 'page-settings-logs';
+            } else {
+              page = 'page-settings';
+            }
+          }
+          
+          var sections = document.querySelectorAll('.page-section');
+          for (var i = 0; i < sections.length; i++) {
+            sections[i].style.display = (sections[i].id === page) ? 'block' : 'none';
+          }
+        })();
+      </script>
+    </div>
+  </div>
+
+  <script src="/js/app.js" th:src="@{/js/app.js}"></script>
+</body>
+</html>

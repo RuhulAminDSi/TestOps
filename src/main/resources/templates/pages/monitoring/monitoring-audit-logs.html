@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>Audit Logs</h1>
+      <p>Detailed activity and event logs</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <select class="input w-40">
+        <option>All Events</option>
+        <option>User Actions</option>
+        <option>Test Executions</option>
+        <option>System Events</option>
+      </select>
+      <button class="btn btn-secondary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        Export
+      </button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>User</th>
+            <th>Action</th>
+            <th>Resource</th>
+            <th>IP Address</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Today, 2:45 PM</td>
+            <td>admin</td>
+            <td>Login</td>
+            <td>System</td>
+            <td>192.168.1.100</td>
+            <td><span class="chip success">Success</span></td>
+          </tr>
+          <tr>
+            <td>Today, 2:30 PM</td>
+            <td>tester</td>
+            <td>Run Test</td>
+            <td>UI Test Suite</td>
+            <td>192.168.1.105</td>
+            <td><span class="chip success">Success</span></td>
+          </tr>
+          <tr>
+            <td>Today, 2:15 PM</td>
+            <td>admin</td>
+            <td>Update Settings</td>
+            <td>AI Configuration</td>
+            <td>192.168.1.100</td>
+            <td><span class="chip success">Success</span></td>
+          </tr>
+          <tr>
+            <td>Today, 1:45 PM</td>
+            <td>tester</td>
+            <td>Create Project</td>
+            <td>E2E Tests</td>
+            <td>192.168.1.105</td>
+            <td><span class="chip success">Success</span></td>
+          </tr>
+          <tr>
+            <td>Today, 1:30 PM</td>
+            <td>system</td>
+            <td>Scheduled Job</td>
+            <td>Test Scheduler</td>
+            <td>127.0.0.1</td>
+            <td><span class="chip success">Success</span></td>
+          </tr>
+          <tr>
+            <td>Today, 1:00 PM</td>
+            <td>viewer</td>
+            <td>View Report</td>
+            <td>API Reports</td>
+            <td>192.168.1.110</td>
+            <td><span class="chip success">Success</span></td>
+          </tr>
+          <tr>
+            <td>Today, 12:45 PM</td>
+            <td>tester</td>
+            <td>Delete Test</td>
+            <td>Test Case #42</td>
+            <td>192.168.1.105</td>
+            <td><span class="chip warning">Warning</span></td>
+          </tr>
+          <tr>
+            <td>Today, 12:30 PM</td>
+            <td>admin</td>
+            <td>Add User</td>
+            <td>Team Member</td>
+            <td>192.168.1.100</td>
+            <td><span class="chip success">Success</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

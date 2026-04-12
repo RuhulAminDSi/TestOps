@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>API Scripts</h1>
+      <p>Write custom pre-request and test scripts</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <button class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+        New Script
+      </button>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Saved Scripts</h3>
+      </div>
+      <ul class="list-rows">
+        <li>
+          <div class="flex-1">
+            <span class="font-medium">Auth Token Generator</span>
+            <span class="muted text-xs">Pre-request script</span>
+          </div>
+          <button class="btn btn-sm btn-ghost">Edit</button>
+        </li>
+        <li>
+          <div class="flex-1">
+            <span class="font-medium">Response Validator</span>
+            <span class="muted text-xs">Test script</span>
+          </div>
+          <button class="btn btn-sm btn-ghost">Edit</button>
+        </li>
+        <li>
+          <div class="flex-1">
+            <span class="font-medium">Data Extractor</span>
+            <span class="muted text-xs">Post-response script</span>
+          </div>
+          <button class="btn btn-sm btn-ghost">Edit</button>
+        </li>
+        <li>
+          <div class="flex-1">
+            <span class="font-medium">Error Handler</span>
+            <span class="muted text-xs">Test script</span>
+          </div>
+          <button class="btn btn-sm btn-ghost">Edit</button>
+        </li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Script Editor</h3>
+      </div>
+      <div class="form-group">
+        <label class="label">Script Type</label>
+        <select class="input">
+          <option>Pre-request</option>
+          <option>Test</option>
+          <option>Post-response</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="label">Script</label>
+        <textarea class="input font-mono" rows="12" placeholder="// Write your JavaScript here
+const token = pm.environment.get('auth_token');
+pm.request.headers.add({
+  key: 'Authorization',
+  value: 'Bearer ' + token
+});"></textarea>
+      </div>
+      <div class="flex gap-2">
+        <button class="btn btn-secondary flex-1">Test</button>
+        <button class="btn btn-primary flex-1">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

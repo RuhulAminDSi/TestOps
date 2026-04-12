@@ -1,0 +1,10 @@
+target/
+.idea/
+.project
+.classpath
+.factorypath
+.settings/
+.playwright-mcp/
+*.class
+*.log
+.DS_Store

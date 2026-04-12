@@ -1,0 +1,46 @@
+package com.example.aiqa.dto;
+
+import java.time.Instant;
+
+public class ErrorResponse {
+    private Instant timestamp;
+    private int status;
+    private String error;
+    private String message;
+    private String path;
+
+    public ErrorResponse() {}
+
+    public ErrorResponse(Instant timestamp, int status, String error, String message, String path) {
+        this.timestamp = timestamp;
+        this.status = status;
+        this.error = error;
+        this.message = message;
+        this.path = path;
+    }
+
+    public Instant getTimestamp() { return timestamp; }
+    public int getStatus() { return status; }
+    public String getError() { return error; }
+    public String getMessage() { return message; }
+    public String getPath() { return path; }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private Instant timestamp;
+        private int status;
+        private String error;
+        private String message;
+        private String path;
+
+        public Builder timestamp(Instant t) { this.timestamp = t; return this; }
+        public Builder status(int s) { this.status = s; return this; }
+        public Builder error(String e) { this.error = e; return this; }
+        public Builder message(String m) { this.message = m; return this; }
+        public Builder path(String p) { this.path = p; return this; }
+        public ErrorResponse build() { return new ErrorResponse(timestamp, status, error, message, path); }
+    }
+}

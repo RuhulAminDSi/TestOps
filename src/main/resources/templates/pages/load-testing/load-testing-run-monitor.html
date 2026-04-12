@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>Run & Monitor</h1>
+      <p>Execute load tests and monitor in real-time</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <button class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Start Test
+      </button>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card" style="border-left: 3px solid #22c55e; background: rgba(34, 197, 94, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Status</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <p class="text-3xl">Running</p>
+      <span class="badge-soft">Test #42</span>
+    </div>
+    <div class="stat-card">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Virtual Users</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/></svg>
+      </div>
+      <p class="text-3xl">500</p>
+      <span class="badge-soft">of 1000</span>
+    </div>
+    <div class="stat-card">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Current RPS</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <p class="text-3xl">2,340</p>
+    </div>
+    <div class="stat-card">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Elapsed</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <p class="text-3xl">12:45</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Live Metrics</h3>
+    </div>
+    <ul class="list-rows">
+      <li>
+        <span class="muted">Response Time (avg)</span>
+        <span class="font-medium">145ms</span>
+      </li>
+      <li>
+        <span class="muted">Error Rate</span>
+        <span class="font-medium">0.2%</span>
+      </li>
+      <li>
+        <span class="muted">Throughput</span>
+        <span class="font-medium">2.34 MB/s</span>
+      </li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

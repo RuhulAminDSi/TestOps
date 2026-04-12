@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<section class="chat-page" th:fragment="chat">
+  <div class="page-header">
+    <div>
+      <h1>AI QA Copilot</h1>
+      <p>Generate, review, and execute QA flows with the assistant.</p>
+    </div>
+    <div class="header-actions">
+      <button type="button" class="ghost-btn" id="clearChat">Clear</button>
+      <button type="button" class="primary-btn">New Chat</button>
+    </div>
+  </div>
+
+  <div class="chat-layout">
+    <div class="chat-panel">
+      <div class="panel-heading">
+        <div class="pill">
+          <i data-lucide="sparkles"></i>
+          <span>AI QA</span>
+        </div>
+        <div class="status-row">
+          <span class="status-dot online"></span>
+          <span class="status-label">Connected to TestOps stack</span>
+        </div>
+      </div>
+
+      <div class="chat-body" id="chatMessages">
+        <article class="message ai">
+          <div class="avatar">AI</div>
+          <div class="bubble">
+            <div class="meta">
+              <span class="name">TestOps AI</span>
+              <span class="time">Just now</span>
+            </div>
+            <p>Hi! Paste a test case or describe what you want to automate. I can generate Playwright tests, API checks, or load scripts.</p>
+            <div class="tags">
+              <span class="tag">UI</span>
+              <span class="tag">API</span>
+              <span class="tag">Load</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="message user">
+          <div class="avatar">U</div>
+          <div class="bubble">
+            <div class="meta">
+              <span class="name">You</span>
+              <span class="time">10:32</span>
+            </div>
+            <p>Generate a Playwright test that logs in, navigates to the dashboard, and validates the last run status is successful.</p>
+          </div>
+        </article>
+
+        <article class="message ai">
+          <div class="avatar">AI</div>
+          <div class="bubble">
+            <div class="meta">
+              <span class="name">TestOps AI</span>
+              <span class="time">Typing</span>
+            </div>
+            <p>Sure thing. I will create a robust flow with selectors, assertions, and helpers. Do you have a preferred environment?</p>
+          </div>
+        </article>
+
+        <div class="typing" id="loadingIndicator" hidden>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="label">Generating</span>
+        </div>
+      </div>
+
+      <form class="chat-input" id="chatForm">
+        <div class="input-wrapper">
+          <textarea id="chatText" rows="2" placeholder="Ask anything about your QA workflows..." required></textarea>
+          <div class="input-actions">
+            <div class="action-buttons">
+              <button type="button" class="icon-button" aria-label="Attach file"><i data-lucide="paperclip"></i></button>
+              <button type="button" class="icon-button" aria-label="Insert code"><i data-lucide="code"></i></button>
+            </div>
+            <div class="input-meta">
+              <span class="hint">Shift + Enter for newline</span>
+              <button type="submit" class="primary-btn">
+                <i data-lucide="send"></i>
+                <span>Send</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <aside class="context-panel">
+      <div class="card">
+        <div class="card-heading">
+          <h3>Execution Summary</h3>
+          <span class="pill soft">Last run</span>
+        </div>
+        <ul class="list">
+          <li><span>Suite</span><strong>Smoke 12</strong></li>
+          <li><span>Status</span><strong class="text-success">Passed</strong></li>
+          <li><span>Duration</span><strong>2.3s</strong></li>
+          <li><span>Env</span><strong>Staging</strong></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-heading">
+          <h3>Quick Actions</h3>
+        </div>
+        <div class="action-list">
+          <button type="button" class="action-chip"><i data-lucide="play"></i><span>Run Smoke Tests</span></button>
+          <button type="button" class="action-chip"><i data-lucide="trending-up"></i><span>Run Load Test</span></button>
+          <button type="button" class="action-chip"><i data-lucide="gauge"></i><span>Generate AI Test</span></button>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+</body>
+</html>

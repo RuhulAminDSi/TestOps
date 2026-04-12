@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>Dashboard</h1>
+      <p>AI QA Copilot - Test automation at scale</p>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Total Tests</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+      </div>
+      <p class="text-3xl">142</p>
+      <span class="badge-soft">UI/API</span>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #a855f7; background: rgba(168, 85, 247, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Projects</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+      </div>
+      <p class="text-3xl">8</p>
+      <span class="badge-soft">Active</span>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #22c55e; background: rgba(34, 197, 94, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Pass Rate</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <p class="text-3xl">94.2%</p>
+      <span class="badge-soft">Last 24h</span>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #eab308; background: rgba(234, 179, 8, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Avg Duration</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <p class="text-3xl">2.3s</p>
+      <span class="badge-soft">Per run</span>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Recent Runs</h3>
+        <span class="badge-soft">5 latest</span>
+      </div>
+      <ul class="list-rows">
+        <li>
+          <div class="dot green"></div>
+          <span class="font-mono text-sm">run-4131</span>
+          <span class="muted">820ms</span>
+          <span class="chip success">passed</span>
+        </li>
+        <li>
+          <div class="dot green"></div>
+          <span class="font-mono text-sm">run-4130</span>
+          <span class="muted">1.2s</span>
+          <span class="chip success">passed</span>
+        </li>
+        <li>
+          <div class="dot red"></div>
+          <span class="font-mono text-sm">run-4129</span>
+          <span class="muted">640ms</span>
+          <span class="chip danger">failed</span>
+        </li>
+        <li>
+          <div class="dot yellow"></div>
+          <span class="font-mono text-sm">run-4128</span>
+          <span class="muted">running</span>
+          <span class="chip warn">running</span>
+        </li>
+        <li>
+          <div class="dot green"></div>
+          <span class="font-mono text-sm">run-4127</span>
+          <span class="muted">910ms</span>
+          <span class="chip success">passed</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Quick Actions</h3>
+      </div>
+      <div class="action-stack">
+        <button class="action-card">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Run Smoke Tests
+        </button>
+        <button class="action-card">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          Run Load Test
+        </button>
+        <button class="action-card">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+          View Flaky Tests
+        </button>
+        <button class="action-card">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3.27 6.96 12 12.01l8.73-5.05"/><path d="M12 22.08V12"/></svg>
+          Generate AI Test
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

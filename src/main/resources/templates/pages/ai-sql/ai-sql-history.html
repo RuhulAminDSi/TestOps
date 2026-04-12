@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>Query History</h1>
+      <p>View your recent SQL query executions</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Recent Queries</h3>
+    </div>
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Query</th>
+            <th>Database</th>
+            <th>Rows</th>
+            <th>Duration</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="text-sm">SELECT * FROM users...</code></td>
+            <td>Production</td>
+            <td>10</td>
+            <td>45ms</td>
+            <td>Today, 2:30 PM</td>
+          </tr>
+          <tr>
+            <td><code class="text-sm">INSERT INTO orders...</code></td>
+            <td>Production</td>
+            <td>1</td>
+            <td>12ms</td>
+            <td>Today, 2:15 PM</td>
+          </tr>
+          <tr>
+            <td><code class="text-sm">UPDATE products...</code></td>
+            <td>Staging</td>
+            <td>25</td>
+            <td>89ms</td>
+            <td>Today, 1:00 PM</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

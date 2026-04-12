@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>API Test Suites</h1>
+      <p>Group and run multiple API tests together</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <button class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+        New Test Suite
+      </button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Test Suites</h3>
+    </div>
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Suite Name</th>
+            <th>Tests</th>
+            <th>Last Run</th>
+            <th>Pass Rate</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="font-medium">Full Regression</span></td>
+            <td>45</td>
+            <td>Today, 11:00 AM</td>
+            <td><span class="chip success">98%</span></td>
+            <td>
+              <button class="btn btn-sm btn-ghost">Run</button>
+              <button class="btn btn-sm btn-ghost">Edit</button>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="font-medium">Smoke Tests</span></td>
+            <td>12</td>
+            <td>Today, 9:30 AM</td>
+            <td><span class="chip success">100%</span></td>
+            <td>
+              <button class="btn btn-sm btn-ghost">Run</button>
+              <button class="btn btn-sm btn-ghost">Edit</button>
+            </td>
+          </tr>
+          <tr>
+            <td><span class="font-medium">Auth Flow</span></td>
+            <td>8</td>
+            <td>Yesterday</td>
+            <td><span class="chip danger">75%</span></td>
+            <td>
+              <button class="btn btn-sm btn-ghost">Run</button>
+              <button class="btn btn-sm btn-ghost">Edit</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

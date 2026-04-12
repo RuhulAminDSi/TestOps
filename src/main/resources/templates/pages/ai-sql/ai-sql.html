@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>AI SQL</h1>
+      <p>AI-powered SQL query generation and execution</p>
+    </div>
+    <button class="btn btn-primary">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+      New Query
+    </button>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Queries Executed</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+      </div>
+      <p class="text-3xl">1,842</p>
+      <span class="badge-soft">This month</span>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #22c55e; background: rgba(34, 197, 94, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Successful</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/></svg>
+      </div>
+      <p class="text-3xl">1,756</p>
+      <span class="badge-soft">95.3%</span>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #3b82f6; background: rgba(59, 130, 246, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Avg Time</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <p class="text-3xl">89<span style="font-size: 18px;">ms</span></p>
+      <span class="badge-soft">Optimized</span>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #a855f7; background: rgba(168, 85, 247, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">AI Generated</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+      </div>
+      <p class="text-3xl">324</p>
+      <span class="badge-soft">Queries</span>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Recent Queries</h3>
+        <span class="badge-soft">5 latest</span>
+      </div>
+      <ul class="list-rows">
+        <li>
+          <div class="dot green"></div>
+          <div class="flex-1">
+            <code class="text-sm">SELECT * FROM users WHERE...</code>
+            <span class="muted text-xs">Today, 10:30 AM</span>
+          </div>
+          <span class="muted">45ms</span>
+          <span class="chip success">success</span>
+        </li>
+        <li>
+          <div class="dot green"></div>
+          <div class="flex-1">
+            <code class="text-sm">INSERT INTO logs VALUES...</code>
+            <span class="muted text-xs">Today, 10:15 AM</span>
+          </div>
+          <span class="muted">12ms</span>
+          <span class="chip success">success</span>
+        </li>
+        <li>
+          <div class="dot red"></div>
+          <div class="flex-1">
+            <code class="text-sm">UPDATE products SET...</code>
+            <span class="muted text-xs">Today, 9:45 AM</span>
+          </div>
+          <span class="muted">-</span>
+          <span class="chip danger">error</span>
+        </li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Quick Actions</h3>
+      </div>
+      <div class="action-stack">
+        <button class="action-card">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>
+          Run SQL Query
+        </button>
+        <button class="action-card">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 4-4 4 4 4"/><path d="M9 20-4-4 4-4"/><path d="M5 8h14"/><path d="M5 16h14"/></svg>
+          Generate Query with AI
+        </button>
+        <button class="action-card">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          Data Explorer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Database Connections</h3>
+      <span class="badge-soft">3 active</span>
+    </div>
+    <div class="table">
+      <div class="table-head">
+        <span>Name</span><span>Type</span><span>Status</span><span>Last Query</span>
+      </div>
+      <div class="table-row">
+        <span>Production DB</span><span class="chip info">PostgreSQL</span><span class="chip success">Connected</span><span class="muted">5 min ago</span>
+      </div>
+      <div class="table-row">
+        <span>Analytics DB</span><span class="chip info">MySQL</span><span class="chip success">Connected</span><span class="muted">12 min ago</span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

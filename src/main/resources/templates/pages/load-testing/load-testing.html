@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>Load Testing</h1>
+      <p>Performance and stress testing</p>
+    </div>
+    <button class="btn btn-primary">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+      New Test
+    </button>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Total Runs</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+      </div>
+      <p class="text-3xl">47</p>
+      <span class="badge-soft">This month</span>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #3b82f6; background: rgba(59, 130, 246, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Avg Response</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <p class="text-3xl">156<span style="font-size: 18px;">ms</span></p>
+      <span class="badge-soft">P95</span>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #ef4444; background: rgba(239, 68, 68, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Error Rate</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+      </div>
+      <p class="text-3xl">0.8<span style="font-size: 18px;">%</span></p>
+      <span class="badge-soft">Below threshold</span>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #22c55e; background: rgba(34, 197, 94, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Total Samples</span>
+        <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <p class="text-3xl">1.2M</p>
+      <span class="badge-soft">Processed</span>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Performance Trend</h3>
+        <span class="badge-soft">Last 7 days</span>
+      </div>
+      <div class="space-y-3">
+        <div class="flex items-center gap-3">
+          <span class="muted text-xs w-12">Mon</span>
+          <div class="flex-1 h-2" style="background: var(--gray-800); border-radius: 999px; overflow: hidden;">
+            <div class="h-full" style="width: 65%; background: var(--brand-500); border-radius: 999px;"></div>
+          </div>
+          <span class="muted text-xs">145ms</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="muted text-xs w-12">Tue</span>
+          <div class="flex-1 h-2" style="background: var(--gray-800); border-radius: 999px; overflow: hidden;">
+            <div class="h-full" style="width: 72%; background: var(--brand-500); border-radius: 999px;"></div>
+          </div>
+          <span class="muted text-xs">162ms</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="muted text-xs w-12">Wed</span>
+          <div class="flex-1 h-2" style="background: var(--gray-800); border-radius: 999px; overflow: hidden;">
+            <div class="h-full" style="width: 58%; background: var(--brand-500); border-radius: 999px;"></div>
+          </div>
+          <span class="muted text-xs">128ms</span>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Quick Actions</h3>
+      </div>
+      <div class="action-stack">
+        <button class="action-card">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Run Test
+        </button>
+        <button class="action-card">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+          New Plan
+        </button>
+        <button class="action-card">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><path d="M12 9v4"/><path d="M10 11h4"/></svg>
+          View Reports
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

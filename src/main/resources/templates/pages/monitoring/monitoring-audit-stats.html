@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>Audit Statistics</h1>
+      <p>Activity metrics and analytics</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <select class="input w-40">
+        <option>Last 7 Days</option>
+        <option>Last 30 Days</option>
+        <option>Last 90 Days</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card" style="border-left: 3px solid #3b82f6; background: rgba(59, 130, 246, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Total Events</span>
+        <svg class="w-5 h-5 opacity-70" style="color: #3b82f6;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+      </div>
+      <p class="text-3xl">2,456</p>
+      <span class="badge-soft">This period</span>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #22c55e; background: rgba(34, 197, 94, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Successful</span>
+        <svg class="w-5 h-5 opacity-70" style="color: #22c55e;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/></svg>
+      </div>
+      <p class="text-3xl">2,389</p>
+      <span class="badge-soft">97.3%</span>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #f59e0b; background: rgba(245, 158, 11, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Warnings</span>
+        <svg class="w-5 h-5 opacity-70" style="color: #f59e0b;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+      </div>
+      <p class="text-3xl">52</p>
+      <span class="badge-soft">2.1%</span>
+    </div>
+    <div class="stat-card" style="border-left: 3px solid #ef4444; background: rgba(239, 68, 68, 0.1);">
+      <div class="flex items-center justify-between mb-4">
+        <span class="muted">Failed</span>
+        <svg class="w-5 h-5 opacity-70" style="color: #ef4444;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6"/><path d="M9 9l6 6"/></svg>
+      </div>
+      <p class="text-3xl">15</p>
+      <span class="badge-soft">0.6%</span>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Events by Type</h3>
+      </div>
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full" style="background: #3b82f6;"></div>
+            <span>Login/Logout</span>
+          </div>
+          <span class="font-medium">842</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full" style="background: #22c55e;"></div>
+            <span>Test Executions</span>
+          </div>
+          <span class="font-medium">623</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full" style="background: #a855f7;"></div>
+            <span>Configuration Changes</span>
+          </div>
+          <span class="font-medium">412</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full" style="background: #f59e0b;"></div>
+            <span>Data Exports</span>
+          </div>
+          <span class="font-medium">289</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full" style="background: #ef4444;"></div>
+            <span>User Management</span>
+          </div>
+          <span class="font-medium">156</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full" style="background: #6b7280;"></div>
+            <span>Other</span>
+          </div>
+          <span class="font-medium">134</span>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Top Users</h3>
+      </div>
+      <ul class="list-rows">
+        <li>
+          <span class="dot green"></span>
+          <div class="flex-1">
+            <span class="font-medium">admin</span>
+            <span class="muted text-xs">Administrator</span>
+          </div>
+          <span class="font-medium">456</span>
+        </li>
+        <li>
+          <span class="dot green"></span>
+          <div class="flex-1">
+            <span class="font-medium">tester</span>
+            <span class="muted text-xs">Test Engineer</span>
+          </div>
+          <span class="font-medium">312</span>
+        </li>
+        <li>
+          <span class="dot yellow"></span>
+          <div class="flex-1">
+            <span class="font-medium">dev</span>
+            <span class="muted text-xs">Developer</span>
+          </div>
+          <span class="font-medium">189</span>
+        </li>
+        <li>
+          <span class="dot gray"></span>
+          <div class="flex-1">
+            <span class="font-medium">viewer</span>
+            <span class="muted text-xs">Viewer</span>
+          </div>
+          <span class="font-medium">78</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

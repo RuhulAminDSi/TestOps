@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>Data Explorer</h1>
+      <p>Browse database schemas and data</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <select class="input w-48">
+        <option>Production DB</option>
+        <option>Staging DB</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Tables</h3>
+      </div>
+      <ul class="list-rows">
+        <li>
+          <div class="flex-1">
+            <span class="font-medium">users</span>
+            <span class="muted text-xs">1,234 rows</span>
+          </div>
+        </li>
+        <li>
+          <div class="flex-1">
+            <span class="font-medium">orders</span>
+            <span class="muted text-xs">5,678 rows</span>
+          </div>
+        </li>
+        <li>
+          <div class="flex-1">
+            <span class="font-medium">products</span>
+            <span class="muted text-xs">890 rows</span>
+          </div>
+        </li>
+        <li>
+          <div class="flex-1">
+            <span class="font-medium">payments</span>
+            <span class="muted text-xs">3,456 rows</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Table Preview: users</h3>
+      </div>
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>name</th>
+              <th>email</th>
+              <th>active</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>John Doe</td><td>john@example.com</td><td>true</td></tr>
+            <tr><td>2</td><td>Jane Smith</td><td>jane@example.com</td><td>true</td></tr>
+            <tr><td>3</td><td>Bob Wilson</td><td>bob@example.com</td><td>false</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<header class="app-header" th:fragment="header">
+  <div class="header-left">
+    <div class="brand">TestOps</div>
+    <div class="divider"></div>
+    <label class="select-wrap">
+      <span class="sr-only">Project</span>
+      <select aria-label="Select project">
+        <option>All Projects</option>
+        <option>Demo Project</option>
+        <option>API Tests</option>
+        <option>UI Regression</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="header-right">
+    <div class="search-bar">
+      <i data-lucide="search" aria-hidden="true"></i>
+      <input type="text" placeholder="Search scripts, runs, projects..." aria-label="Search" />
+      <kbd>Ctrl+K</kbd>
+      <div class="search-results" hidden>
+        <div class="search-heading">Quick Actions</div>
+        <button type="button" class="search-item">Create new script</button>
+        <button type="button" class="search-item">Run test</button>
+      </div>
+    </div>
+
+    <button class="icon-button" type="button" aria-label="Notifications">
+      <i data-lucide="bell" aria-hidden="true"></i>
+      <span class="status-dot"></span>
+    </button>
+
+    <div class="user-menu" data-menu>
+      <button class="user-button" type="button" aria-haspopup="true" aria-expanded="false">
+        <div class="avatar">A</div>
+        <span class="user-label">Admin</span>
+        <i data-lucide="chevron-down" aria-hidden="true"></i>
+      </button>
+      <div class="user-dropdown" hidden>
+        <div class="user-meta">
+          <p class="name">Admin</p>
+          <p class="email">admin@testops.com</p>
+        </div>
+        <button type="button" class="menu-link">Profile</button>
+        <button type="button" class="menu-link">Settings</button>
+        <button type="button" class="menu-link">Sign out</button>
+      </div>
+    </div>
+  </div>
+</header>
+</body>
+</html>

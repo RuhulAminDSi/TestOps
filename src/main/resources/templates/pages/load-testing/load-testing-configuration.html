@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content">
+  <div class="page-header">
+    <div>
+      <h1>Load Test Configuration</h1>
+      <p>Configure load test parameters and targets</p>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Test Configuration</h3>
+      </div>
+      <div class="form-group">
+        <label class="label">Test Type</label>
+        <select class="input">
+          <option>Load Test</option>
+          <option>Stress Test</option>
+          <option>Spike Test</option>
+          <option>Endurance Test</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="label">Target URL</label>
+        <input type="text" class="input" placeholder="https://api.example.com/endpoint">
+      </div>
+      <div class="form-group">
+        <label class="label">Duration (minutes)</label>
+        <input type="number" class="input" value="30">
+      </div>
+      <div class="form-group">
+        <label class="label">Ramp-up Period (seconds)</label>
+        <input type="number" class="input" value="60">
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Load Parameters</h3>
+      </div>
+      <div class="form-group">
+        <label class="label">Virtual Users</label>
+        <input type="number" class="input" value="100">
+      </div>
+      <div class="form-group">
+        <label class="label">Requests per Second</label>
+        <input type="number" class="input" value="1000">
+      </div>
+      <div class="form-group">
+        <label class="label">Think Time (seconds)</label>
+        <input type="number" class="input" value="2">
+      </div>
+      <button class="btn btn-primary w-full">Save Configuration</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
