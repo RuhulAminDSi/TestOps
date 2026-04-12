@@ -74,4 +74,24 @@ public class ProjectDto {
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
+    
+    public String getFormattedDate() {
+        if (createdAt == null || createdAt.isEmpty()) return "-";
+        if (createdAt.length() > 10) {
+            String datePart = createdAt.substring(0, 10);
+            String timePart = createdAt.length() > 16 ? createdAt.substring(11, 16) : "";
+            String[] parts = datePart.split("-");
+            if (parts.length == 3) {
+                String month = parts[1];
+                String day = parts[2];
+                String year = parts[0];
+                String[] months = {"", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+                int m = 0;
+                try { m = Integer.parseInt(month); } catch (Exception e) {}
+                month = (m >= 1 && m <= 12) ? months[m] : month;
+                return month + " " + day + ", " + year;
+            }
+        }
+        return createdAt;
+    }
 }

@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,6 +21,12 @@ public class ViewController {
         this.projectService = projectService;
     }
 
+    @ModelAttribute
+    public void addProjectsToModel(Model model) {
+        List<ProjectDto> projects = projectService.getAllProjects();
+        model.addAttribute("projects", projects);
+    }
+
     @GetMapping({"/", "/index"})
     public String index(Model model, HttpServletRequest request) {
         setPath(model, request.getRequestURI());
@@ -29,8 +36,6 @@ public class ViewController {
     @GetMapping("/projects")
     public String projects(Model model, HttpServletRequest request) {
         setPath(model, request.getRequestURI());
-        List<ProjectDto> projects = projectService.getAllProjects();
-        model.addAttribute("projects", projects);
         return "index";
     }
 

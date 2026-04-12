@@ -14,7 +14,7 @@
   </div>
 
   <div id="new-project-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-modal="true" data-modal>
-    <div class="modal-backdrop" data-modal-close></div>
+    <div class="modal-backdrop" onclick="closeModal('new-project-modal')"></div>
     <div class="modal-content">
       <div class="modal-header">
         <h2 id="modal-title">Create New Project</h2>
@@ -42,15 +42,14 @@
         </div>
       </form>
       <div class="modal-footer">
-        <button type="button" class="btn btn-ghost" data-modal-close>Cancel</button>
+        <button type="button" class="btn btn-ghost" onclick="closeModal('new-project-modal')">Cancel</button>
         <button type="submit" form="new-project-form" class="btn btn-primary">Create Project</button>
       </div>
     </div>
   </div>
 
-  <!-- Edit Project Modal -->
   <div id="edit-project-modal" class="modal" role="dialog" aria-labelledby="edit-modal-title" aria-modal="true" data-modal>
-    <div class="modal-backdrop" data-modal-close onclick="closeModal('edit-project-modal')"></div>
+    <div class="modal-backdrop" onclick="closeModal('edit-project-modal')"></div>
     <div class="modal-content">
       <div class="modal-header">
         <h2 id="edit-modal-title">Edit Project</h2>
@@ -88,7 +87,7 @@
         </div>
       </form>
       <div class="modal-footer">
-        <button type="button" class="btn btn-ghost" data-modal-close>Cancel</button>
+        <button type="button" class="btn btn-ghost" onclick="closeModal('edit-project-modal')">Cancel</button>
         <button type="submit" form="edit-project-form" class="btn btn-primary">Update Project</button>
       </div>
     </div>
@@ -166,7 +165,7 @@
                 <span class="chip info" th:if="${project.status == 'archived'}" th:text="${project.status}">Archived</span>
                 <span class="chip info" th:if="${project.status == 'development'}" th:text="${project.status}">Development</span>
               </td>
-              <td class="muted text-sm" th:text="${project.createdAt != null ? project.createdAt : '-'}">Date</td>
+              <td class="muted text-sm" th:text="${project.formattedDate}">Date</td>
               <td>
                 <button type="button" class="btn btn-sm btn-ghost" th:data-project-id="${project.id}" th:data-project-name="${project.name}" th:data-project-desc="${project.description}" th:data-project-type="${project.projectType}" th:data-project-status="${project.status}" onclick="openEditModal(this)">
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
@@ -190,99 +189,6 @@
       <button class="btn btn-sm btn-ghost" disabled>Next</button>
     </div>
     </th:block>
-  </div>
-      <th:block th:if="${projects != null and not #lists.isEmpty(projects)}">
-        <div class="project-card" th:each="project : ${projects}">
-          <div class="flex items-start gap-3">
-            <div class="p-2" style="background: rgba(8, 126, 164, 0.3); border-radius: 8px;">
-              <svg class="w-5 h-5" style="color: var(--brand-400);" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-            </div>
-            <div class="flex-1">
-              <h4 th:text="${project.name}">Project Name</h4>
-              <p class="muted mt-1" th:if="${project.description}" th:text="${project.description}">Description</p>
-              <p class="muted mt-1" th:unless="${project.description}">No description</p>
-              <p class="text-sm mt-2" style="color: var(--gray-600);" th:if="${project.createdAt}" th:text="${'Created ' + project.createdAt}">Created date</p>
-            </div>
-          </div>
-          <div class="flex items-center gap-2 mt-3">
-            <span class="chip success" th:if="${project.status == 'active'}" th:text="${project.status}">Active</span>
-            <span class="chip warning" th:if="${project.status == 'inactive'}" th:text="${project.status}">Inactive</span>
-            <span class="chip info" th:if="${project.status == 'archived'}" th:text="${project.status}">Archived</span>
-            <span class="chip info" th:if="${project.status == 'development'}" th:text="${project.status}">Development</span>
-            <button type="button" class="btn btn-sm btn-ghost" th:data-project-id="${project.id}" th:data-project-name="${project.name}" th:data-project-desc="${project.description}" th:data-project-type="${project.projectType}" th:data-project-status="${project.status}" onclick="openEditModal(this)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
-              Edit
-            </button>
-          </div>
-        </div>
-      </th:block>
-      <th:block th:unless="${projects != null and not #lists.isEmpty(projects)}">
-      <div class="project-card">
-        <div class="flex items-start gap-3">
-          <div class="p-2" style="background: rgba(8, 126, 164, 0.3); border-radius: 8px;">
-            <svg class="w-5 h-5" style="color: var(--brand-400);" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-          </div>
-          <div class="flex-1">
-            <h4>Demo Project</h4>
-            <p class="muted mt-1">UI regression suite</p>
-            <p class="text-sm mt-2" style="color: var(--gray-600);">Created Jan 15, 2026</p>
-          </div>
-        </div>
-        <span class="chip success mt-3">Active</span>
-      </div>
-      <div class="project-card">
-        <div class="flex items-start gap-3">
-          <div class="p-2" style="background: rgba(34, 197, 94, 0.3); border-radius: 8px;">
-            <svg class="w-5 h-5" style="color: #22c55e;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          </div>
-          <div class="flex-1">
-            <h4>API Tests</h4>
-            <p class="muted mt-1">Contract + monitoring</p>
-            <p class="text-sm mt-2" style="color: var(--gray-600);">Created Jan 20, 2026</p>
-          </div>
-        </div>
-        <span class="chip info mt-3">Stable</span>
-      </div>
-      <div class="project-card">
-        <div class="flex items-start gap-3">
-          <div class="p-2" style="background: rgba(59, 130, 246, 0.3); border-radius: 8px;">
-            <svg class="w-5 h-5" style="color: #3b82f6;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3.27 6.96 12 12.01l8.73-5.05"/><path d="M12 22.08V12"/></svg>
-          </div>
-          <div class="flex-1">
-            <h4>Load Tests</h4>
-            <p class="muted mt-1">Performance baselines</p>
-            <p class="text-sm mt-2" style="color: var(--gray-600);">Created Feb 1, 2026</p>
-          </div>
-        </div>
-        <span class="chip warn mt-3">Scheduled</span>
-      </div>
-      <div class="project-card">
-        <div class="flex items-start gap-3">
-          <div class="p-2" style="background: rgba(168, 85, 247, 0.3); border-radius: 8px;">
-            <svg class="w-5 h-5" style="color: #a855f7;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-          </div>
-          <div class="flex-1">
-            <h4>Database Tests</h4>
-            <p class="muted mt-1">SQL validation suite</p>
-            <p class="text-sm mt-2" style="color: var(--gray-600);">Created Feb 5, 2026</p>
-          </div>
-        </div>
-        <span class="chip success mt-3">Active</span>
-      </div>
-      <div class="project-card">
-        <div class="flex items-start gap-3">
-          <div class="p-2" style="background: rgba(234, 179, 8, 0.3); border-radius: 8px;">
-            <svg class="w-5 h-5" style="color: #eab308;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-          </div>
-          <div class="flex-1">
-            <h4>AI Integration</h4>
-            <p class="muted mt-1">AI-powered test scenarios</p>
-            <p class="text-sm mt-2" style="color: var(--gray-600);">Created Mar 1, 2026</p>
-          </div>
-        </div>
-        <span class="chip info mt-3">Development</span>
-      </div>
-      </th:block>
     </div>
   </div>
 </div>

@@ -2,6 +2,7 @@ package com.example.aiqa.domain;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "projects")
@@ -86,5 +87,10 @@ public class Project {
     
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+    
+    public String getFormattedDate() {
+        if (createdAt == null) return "-";
+        return createdAt.format(DateTimeFormatter.ofPattern("MMM dd, yyyy"));
     }
 }
