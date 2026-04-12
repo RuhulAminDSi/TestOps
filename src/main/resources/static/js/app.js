@@ -676,6 +676,34 @@ function scrollToEnd(container) {
 }
 
 function initModal() {
+  // Close modal function
+  window.closeModal = function(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  };
+  
+  // Open edit modal function
+  window.openEditModal = function(button) {
+    const projectId = button.getAttribute('data-project-id');
+    const projectName = button.getAttribute('data-project-name');
+    const projectDesc = button.getAttribute('data-project-desc');
+    const projectType = button.getAttribute('data-project-type');
+    const projectStatus = button.getAttribute('data-project-status');
+    
+    document.getElementById('edit-project-id').value = projectId;
+    document.getElementById('edit-project-name').value = projectName;
+    document.getElementById('edit-project-desc').value = projectDesc || '';
+    document.getElementById('edit-project-type').value = projectType;
+    document.getElementById('edit-project-status').value = projectStatus || 'active';
+    
+    const modal = document.getElementById('edit-project-modal');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  
   const modalToggles = document.querySelectorAll('[data-modal-toggle]');
   
   modalToggles.forEach(toggle => {
@@ -745,6 +773,46 @@ function initModal() {
       } catch (error) {
         console.error('Error creating project:', error);
         alert('Error creating project');
+      }
+    });
+  }
+  
+  // Edit project form handler
+  const editProjectForm = document.getElementById('edit-project-form');
+  if (editProjectForm) {
+    editProjectForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const projectId = document.getElementById('edit-project-id').value;
+      const formData = new FormData(editProjectForm);
+      const projectData = {
+        name: formData.get('name'),
+        description: formData.get('description'),
+        projectType: formData.get('projectType'),
+        status: formData.get('status')
+      };
+      
+      try {
+        const response = await fetch('/api/projects/' + projectId, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(projectData)
+        });
+        
+        if (response.ok) {
+          const modal = document.getElementById('edit-project-modal');
+          modal.classList.remove('open');
+          document.body.style.overflow = '';
+          editProjectForm.reset();
+          window.location.reload();
+        } else {
+          alert('Failed to update project');
+        }
+      } catch (error) {
+        console.error('Error updating project:', error);
+        alert('Error updating project');
       }
     });
   }

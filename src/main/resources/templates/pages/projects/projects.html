@@ -13,12 +13,12 @@
     </button>
   </div>
 
-  <div id="new-project-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+  <div id="new-project-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-modal="true" data-modal>
     <div class="modal-backdrop" data-modal-close></div>
     <div class="modal-content">
       <div class="modal-header">
         <h2 id="modal-title">Create New Project</h2>
-        <button class="modal-close" type="button" aria-label="Close" data-modal-close>
+        <button class="modal-close" type="button" aria-label="Close" onclick="closeModal('new-project-modal')">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
       </div>
@@ -44,6 +44,52 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-ghost" data-modal-close>Cancel</button>
         <button type="submit" form="new-project-form" class="btn btn-primary">Create Project</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Project Modal -->
+  <div id="edit-project-modal" class="modal" role="dialog" aria-labelledby="edit-modal-title" aria-modal="true" data-modal>
+    <div class="modal-backdrop" data-modal-close onclick="closeModal('edit-project-modal')"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="edit-modal-title">Edit Project</h2>
+        <button class="modal-close" type="button" aria-label="Close" onclick="closeModal('edit-project-modal')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <form class="modal-body" id="edit-project-form">
+        <input type="hidden" id="edit-project-id" name="id">
+        <div class="form-group">
+          <label class="label" for="edit-project-name">Project Name</label>
+          <input type="text" id="edit-project-name" name="name" class="input" placeholder="Enter project name" required>
+        </div>
+        <div class="form-group">
+          <label class="label" for="edit-project-desc">Description</label>
+          <textarea id="edit-project-desc" name="description" class="input" rows="3" placeholder="Enter project description"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="label" for="edit-project-type">Project Type</label>
+          <select id="edit-project-type" name="projectType" class="input">
+            <option value="UI Automation">UI Automation</option>
+            <option value="API Testing">API Testing</option>
+            <option value="Load Testing">Load Testing</option>
+            <option value="Database Testing">Database Testing</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="label" for="edit-project-status">Status</label>
+          <select id="edit-project-status" name="status" class="input">
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="archived">Archived</option>
+            <option value="development">Development</option>
+          </select>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" data-modal-close>Cancel</button>
+        <button type="submit" form="edit-project-form" class="btn btn-primary">Update Project</button>
       </div>
     </div>
   </div>
@@ -89,7 +135,62 @@
       <span class="badge-soft" th:if="${projects != null}" th:text="${#lists.size(projects)} + ' total'">8 total</span>
       <span class="badge-soft" th:unless="${projects != null}">8 total</span>
     </div>
-    <div class="card-grid">
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Project Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <th:block th:if="${projects != null and not #lists.isEmpty(projects)}">
+            <tr th:each="project : ${projects}">
+              <td>
+                <div class="flex items-center gap-2">
+                  <div class="p-1" style="background: rgba(8, 126, 164, 0.3); border-radius: 4px;">
+                    <svg class="w-4 h-4" style="color: var(--brand-400);" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+                  </div>
+                  <span class="font-medium" th:text="${project.name}">Project Name</span>
+                </div>
+              </td>
+              <td class="muted" th:text="${project.description != null ? project.description : '-'}">Description</td>
+              <td th:text="${project.projectType}">Type</td>
+              <td>
+                <span class="chip success" th:if="${project.status == 'active'}" th:text="${project.status}">Active</span>
+                <span class="chip warning" th:if="${project.status == 'inactive'}" th:text="${project.status}">Inactive</span>
+                <span class="chip info" th:if="${project.status == 'archived'}" th:text="${project.status}">Archived</span>
+                <span class="chip info" th:if="${project.status == 'development'}" th:text="${project.status}">Development</span>
+              </td>
+              <td class="muted text-sm" th:text="${project.createdAt != null ? project.createdAt : '-'}">Date</td>
+              <td>
+                <button type="button" class="btn btn-sm btn-ghost" th:data-project-id="${project.id}" th:data-project-name="${project.name}" th:data-project-desc="${project.description}" th:data-project-type="${project.projectType}" th:data-project-status="${project.status}" onclick="openEditModal(this)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+                  Edit
+                </button>
+              </td>
+            </tr>
+          </th:block>
+          <th:block th:unless="${projects != null and not #lists.isEmpty(projects)}">
+            <tr>
+              <td colspan="6" class="text-center muted">No projects found. Create a new project to get started.</td>
+            </tr>
+          </th:block>
+        </tbody>
+      </table>
+    </div>
+    <th:block th:if="${projects != null and #lists.size(projects) > 5}">
+    <div class="pagination">
+      <button class="btn btn-sm btn-ghost" disabled>Previous</button>
+      <span class="muted text-sm">Page 1 of 1</span>
+      <button class="btn btn-sm btn-ghost" disabled>Next</button>
+    </div>
+    </th:block>
+  </div>
       <th:block th:if="${projects != null and not #lists.isEmpty(projects)}">
         <div class="project-card" th:each="project : ${projects}">
           <div class="flex items-start gap-3">
@@ -103,8 +204,16 @@
               <p class="text-sm mt-2" style="color: var(--gray-600);" th:if="${project.createdAt}" th:text="${'Created ' + project.createdAt}">Created date</p>
             </div>
           </div>
-          <span class="chip success mt-3" th:if="${project.status == 'active'}" th:text="${project.status}">Active</span>
-          <span class="chip info mt-3" th:if="${project.status != 'active'}" th:text="${project.status}">Status</span>
+          <div class="flex items-center gap-2 mt-3">
+            <span class="chip success" th:if="${project.status == 'active'}" th:text="${project.status}">Active</span>
+            <span class="chip warning" th:if="${project.status == 'inactive'}" th:text="${project.status}">Inactive</span>
+            <span class="chip info" th:if="${project.status == 'archived'}" th:text="${project.status}">Archived</span>
+            <span class="chip info" th:if="${project.status == 'development'}" th:text="${project.status}">Development</span>
+            <button type="button" class="btn btn-sm btn-ghost" th:data-project-id="${project.id}" th:data-project-name="${project.name}" th:data-project-desc="${project.description}" th:data-project-type="${project.projectType}" th:data-project-status="${project.status}" onclick="openEditModal(this)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+              Edit
+            </button>
+          </div>
         </div>
       </th:block>
       <th:block th:unless="${projects != null and not #lists.isEmpty(projects)}">

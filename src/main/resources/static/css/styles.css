@@ -2083,6 +2083,20 @@ h4 {
   display: block;
 }
 
+/* Pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  border-top: 1px solid var(--gray-800);
+}
+
+.text-center {
+  text-align: center;
+}
+
 /* Modal Responsive */
 @media (max-width: 640px) {
   .modal-content {
