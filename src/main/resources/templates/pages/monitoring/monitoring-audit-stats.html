@@ -56,48 +56,36 @@
       <div class="panel-header">
         <h3>Events by Type</h3>
       </div>
-      <div class="space-y-3">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <div class="w-3 h-3 rounded-full" style="background: #3b82f6;"></div>
-            <span>Login/Logout</span>
-          </div>
-          <span class="font-medium">842</span>
+      <div class="event-list">
+        <div class="event-item">
+          <div class="event-dot" style="background: #3b82f6;"></div>
+          <span class="event-label">Login/Logout</span>
+          <span class="event-count">842</span>
         </div>
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <div class="w-3 h-3 rounded-full" style="background: #22c55e;"></div>
-            <span>Test Executions</span>
-          </div>
-          <span class="font-medium">623</span>
+        <div class="event-item">
+          <div class="event-dot" style="background: #22c55e;"></div>
+          <span class="event-label">Test Executions</span>
+          <span class="event-count">623</span>
         </div>
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <div class="w-3 h-3 rounded-full" style="background: #a855f7;"></div>
-            <span>Configuration Changes</span>
-          </div>
-          <span class="font-medium">412</span>
+        <div class="event-item">
+          <div class="event-dot" style="background: #a855f7;"></div>
+          <span class="event-label">Configuration Changes</span>
+          <span class="event-count">412</span>
         </div>
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <div class="w-3 h-3 rounded-full" style="background: #f59e0b;"></div>
-            <span>Data Exports</span>
-          </div>
-          <span class="font-medium">289</span>
+        <div class="event-item">
+          <div class="event-dot" style="background: #f59e0b;"></div>
+          <span class="event-label">Data Exports</span>
+          <span class="event-count">289</span>
         </div>
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <div class="w-3 h-3 rounded-full" style="background: #ef4444;"></div>
-            <span>User Management</span>
-          </div>
-          <span class="font-medium">156</span>
+        <div class="event-item">
+          <div class="event-dot" style="background: #ef4444;"></div>
+          <span class="event-label">User Management</span>
+          <span class="event-count">156</span>
         </div>
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <div class="w-3 h-3 rounded-full" style="background: #6b7280;"></div>
-            <span>Other</span>
-          </div>
-          <span class="font-medium">134</span>
+        <div class="event-item">
+          <div class="event-dot" style="background: #6b7280;"></div>
+          <span class="event-label">Other</span>
+          <span class="event-count">134</span>
         </div>
       </div>
     </div>
@@ -139,6 +127,62 @@
           <span class="font-medium">78</span>
         </li>
       </ul>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h3>Event by Event</h3>
+    </div>
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Event Type</th>
+            <th>User</th>
+            <th>Action</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="muted">Today, 10:32 AM</td>
+            <td>Login</td>
+            <td>admin</td>
+            <td>User logged in</td>
+            <td><span class="chip success">Success</span></td>
+          </tr>
+          <tr>
+            <td class="muted">Today, 10:30 AM</td>
+            <td>Test Execution</td>
+            <td>tester</td>
+            <td>Run: API Suite</td>
+            <td><span class="chip success">Passed</span></td>
+          </tr>
+          <tr>
+            <td class="muted">Today, 10:15 AM</td>
+            <td>Configuration</td>
+            <td>dev</td>
+            <td>Updated environment</td>
+            <td><span class="chip warning">Warning</span></td>
+          </tr>
+          <tr>
+            <td class="muted">Today, 9:45 AM</td>
+            <td>Data Export</td>
+            <td>admin</td>
+            <td>Export: Test Results</td>
+            <td><span class="chip success">Success</span></td>
+          </tr>
+          <tr>
+            <td class="muted">Today, 9:30 AM</td>
+            <td>User Management</td>
+            <td>admin</td>
+            <td>Create new user</td>
+            <td><span class="chip success">Success</span></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
