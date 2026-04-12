@@ -1,0 +1,2130 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: TestOps
+      - generic [ref=e7]:
+        - generic [ref=e8]: Project
+        - combobox "Select project" [ref=e9]:
+          - option "All Projects" [selected]
+          - option "Demo Project"
+          - option "API Tests"
+          - option "UI Regression"
+    - generic [ref=e10]:
+      - generic [ref=e11]:
+        - img [ref=e12]
+        - textbox "Search" [ref=e15]:
+          - /placeholder: Search scripts, runs, projects...
+        - generic [ref=e16]: Ctrl+K
+      - button "Notifications" [ref=e17] [cursor=pointer]:
+        - img [ref=e18]
+      - button "A Admin" [ref=e23] [cursor=pointer]:
+        - generic [ref=e24]: A
+        - generic [ref=e25]: Admin
+        - img [ref=e26]
+  - generic [ref=e28]:
+    - complementary [ref=e29]:
+      - generic [ref=e30]:
+        - heading "Navigation" [level=2] [ref=e31]
+        - button "Toggle sidebar" [ref=e32] [cursor=pointer]:
+          - img [ref=e33]
+      - navigation [ref=e35]:
+        - link "Dashboard" [ref=e36] [cursor=pointer]:
+          - /url: /
+          - img [ref=e37]
+          - generic [ref=e42]: Dashboard
+        - link "Projects" [ref=e43] [cursor=pointer]:
+          - /url: /projects
+          - img [ref=e44]
+          - generic [ref=e46]: Projects
+        - generic [ref=e47]:
+          - button "UI Automation" [ref=e48] [cursor=pointer]:
+            - generic [ref=e49]:
+              - img [ref=e50]
+              - text: UI Automation
+            - img [ref=e52]
+          - generic [ref=e54]:
+            - link "Dashboard" [ref=e55] [cursor=pointer]:
+              - /url: /ui-automation/dashboard
+              - img [ref=e56]
+              - generic [ref=e58]: Dashboard
+            - link "Test Cases" [ref=e59] [cursor=pointer]:
+              - /url: /ui-automation/test-cases
+              - img [ref=e60]
+              - generic [ref=e63]: Test Cases
+            - link "Scripts" [ref=e64] [cursor=pointer]:
+              - /url: /ui-automation/scripts
+              - img [ref=e65]
+              - generic [ref=e70]: Scripts
+            - link "Test Suites" [ref=e71] [cursor=pointer]:
+              - /url: /ui-automation/suites
+              - img [ref=e72]
+              - generic [ref=e76]: Test Suites
+            - link "AI Testing" [ref=e77] [cursor=pointer]:
+              - /url: /ui-automation/ai-testing
+              - img [ref=e78]
+              - generic [ref=e81]: AI Testing
+            - link "Execution History" [ref=e82] [cursor=pointer]:
+              - /url: /ui-automation/execution
+              - img [ref=e83]
+              - generic [ref=e92]: Execution History
+            - link "Object Repository" [ref=e93] [cursor=pointer]:
+              - /url: /ui-automation/objects
+              - img [ref=e94]
+              - generic [ref=e98]: Object Repository
+            - link "Test Data" [ref=e99] [cursor=pointer]:
+              - /url: /ui-automation/test-data
+              - img [ref=e100]
+              - generic [ref=e104]: Test Data
+            - link "Scheduler" [ref=e105] [cursor=pointer]:
+              - /url: /ui-automation/scheduler
+              - img [ref=e106]
+              - generic [ref=e108]: Scheduler
+            - link "Reports" [ref=e109] [cursor=pointer]:
+              - /url: /ui-automation/reports
+              - img [ref=e110]
+              - generic [ref=e112]: Reports
+        - generic [ref=e113]:
+          - button "API Automation" [ref=e114] [cursor=pointer]:
+            - generic [ref=e115]:
+              - img [ref=e116]
+              - text: API Automation
+            - img [ref=e119]
+          - generic [ref=e121]:
+            - link "Dashboard" [ref=e122] [cursor=pointer]:
+              - /url: /api-automation/dashboard
+              - img [ref=e123]
+              - generic [ref=e125]: Dashboard
+            - link "Collections" [ref=e126] [cursor=pointer]:
+              - /url: /api-automation/collections
+              - img [ref=e127]
+              - generic [ref=e137]: Collections
+            - link "Requests" [ref=e138] [cursor=pointer]:
+              - /url: /api-automation/requests
+              - img [ref=e139]
+              - generic [ref=e141]: Requests
+            - link "Test Suites" [ref=e142] [cursor=pointer]:
+              - /url: /api-automation/suites
+              - img [ref=e143]
+              - generic [ref=e147]: Test Suites
+            - link "Mock Server" [ref=e148] [cursor=pointer]:
+              - /url: /api-automation/mock-server
+              - img [ref=e149]
+              - generic [ref=e152]: Mock Server
+            - link "API Monitoring" [ref=e153] [cursor=pointer]:
+              - /url: /api-automation/monitoring
+              - img [ref=e154]
+              - generic [ref=e157]: API Monitoring
+            - link "AI API Testing" [ref=e158] [cursor=pointer]:
+              - /url: /api-automation/ai-testing
+              - img [ref=e159]
+              - generic [ref=e162]: AI API Testing
+            - link "Data Chaining" [ref=e163] [cursor=pointer]:
+              - /url: /api-automation/data-chaining
+              - img [ref=e164]
+              - generic [ref=e167]: Data Chaining
+            - link "Schema Validation" [ref=e168] [cursor=pointer]:
+              - /url: /api-automation/schema
+              - img [ref=e169]
+              - generic [ref=e172]: Schema Validation
+            - link "Scripts" [ref=e173] [cursor=pointer]:
+              - /url: /api-automation/scripts
+              - img [ref=e174]
+              - generic [ref=e178]: Scripts
+            - link "Environment" [ref=e179] [cursor=pointer]:
+              - /url: /api-automation/environment
+              - img [ref=e180]
+              - generic [ref=e185]: Environment
+            - link "Reports" [ref=e186] [cursor=pointer]:
+              - /url: /api-automation/reports
+              - img [ref=e187]
+              - generic [ref=e192]: Reports
+        - generic [ref=e193]:
+          - button "Load Testing" [ref=e194] [cursor=pointer]:
+            - generic [ref=e195]:
+              - img [ref=e196]
+              - text: Load Testing
+            - img [ref=e199]
+          - generic [ref=e201]:
+            - link "Dashboard" [ref=e202] [cursor=pointer]:
+              - /url: /load-testing/dashboard
+              - img [ref=e203]
+              - generic [ref=e205]: Dashboard
+            - link "Test Plans" [ref=e206] [cursor=pointer]:
+              - /url: /load-testing/plans
+              - img [ref=e207]
+              - generic [ref=e210]: Test Plans
+            - link "Configuration" [ref=e211] [cursor=pointer]:
+              - /url: /load-testing/configuration
+              - img [ref=e212]
+              - generic [ref=e215]: Configuration
+            - link "Run & Monitor" [ref=e216] [cursor=pointer]:
+              - /url: /load-testing/run
+              - img [ref=e217]
+              - generic [ref=e220]: Run & Monitor
+            - link "Results & Reports" [ref=e221] [cursor=pointer]:
+              - /url: /load-testing/reports
+              - img [ref=e222]
+              - generic [ref=e225]: Results & Reports
+            - link "Distributed" [ref=e226] [cursor=pointer]:
+              - /url: /load-testing/distributed
+              - img [ref=e227]
+              - generic [ref=e230]: Distributed
+            - link "Templates" [ref=e231] [cursor=pointer]:
+              - /url: /load-testing/templates
+              - img [ref=e232]
+              - generic [ref=e234]: Templates
+            - link "AI Based Testing" [ref=e235] [cursor=pointer]:
+              - /url: /load-testing/ai-testing
+              - img [ref=e236]
+              - generic [ref=e238]: AI Based Testing
+        - generic [ref=e239]:
+          - button "AI SQL" [ref=e240] [cursor=pointer]:
+            - generic [ref=e241]:
+              - img [ref=e242]
+              - text: AI SQL
+            - img [ref=e246]
+          - generic [ref=e248]:
+            - link "SQL Runner" [ref=e249] [cursor=pointer]:
+              - /url: /ai-sql/runner
+              - img [ref=e250]
+              - generic [ref=e252]: SQL Runner
+            - link "AI Query Generator" [ref=e253] [cursor=pointer]:
+              - /url: /ai-sql/generator
+              - img [ref=e254]
+              - generic [ref=e257]: AI Query Generator
+            - link "SQL Scripts" [ref=e258] [cursor=pointer]:
+              - /url: /ai-sql/scripts
+              - img [ref=e259]
+              - generic [ref=e264]: SQL Scripts
+            - link "Query History" [ref=e265] [cursor=pointer]:
+              - /url: /ai-sql/history
+              - img [ref=e266]
+              - generic [ref=e269]: Query History
+            - link "Data Explorer" [ref=e270] [cursor=pointer]:
+              - /url: /ai-sql/explorer
+              - img [ref=e271]
+              - generic [ref=e274]: Data Explorer
+            - link "Data Validation" [ref=e275] [cursor=pointer]:
+              - /url: /ai-sql/validation
+              - img [ref=e276]
+              - generic [ref=e279]: Data Validation
+            - link "Migration" [ref=e280] [cursor=pointer]:
+              - /url: /ai-sql/migration
+              - img [ref=e281]
+              - generic [ref=e284]: Migration
+            - link "Performance" [ref=e285] [cursor=pointer]:
+              - /url: /ai-sql/performance
+              - img [ref=e286]
+              - generic [ref=e289]: Performance
+        - link "Monitoring" [ref=e290] [cursor=pointer]:
+          - /url: /monitoring
+          - img [ref=e291]
+          - generic [ref=e293]: Monitoring
+        - generic [ref=e294]:
+          - button "Settings" [ref=e295] [cursor=pointer]:
+            - generic [ref=e296]:
+              - img [ref=e297]
+              - text: Settings
+            - img [ref=e300]
+          - generic [ref=e302]:
+            - link "General" [ref=e303] [cursor=pointer]:
+              - /url: /settings/general
+              - img [ref=e304]
+              - generic [ref=e307]: General
+            - link "Projects & Env" [ref=e308] [cursor=pointer]:
+              - /url: /settings/projects
+              - img [ref=e309]
+              - generic [ref=e311]: Projects & Env
+            - link "Credentials" [ref=e312] [cursor=pointer]:
+              - /url: /settings/credentials
+              - img [ref=e313]
+              - generic [ref=e317]: Credentials
+            - link "AI Config" [ref=e318] [cursor=pointer]:
+              - /url: /settings/ai-config
+              - img [ref=e319]
+              - generic [ref=e327]: AI Config
+            - link "Execution" [ref=e328] [cursor=pointer]:
+              - /url: /settings/execution
+              - img [ref=e329]
+              - generic [ref=e331]: Execution
+            - link "Integrations" [ref=e332] [cursor=pointer]:
+              - /url: /settings/integrations
+              - img [ref=e333]
+              - generic [ref=e335]: Integrations
+            - link "Notifications" [ref=e336] [cursor=pointer]:
+              - /url: /settings/notifications
+              - img [ref=e337]
+              - generic [ref=e340]: Notifications
+            - link "Users & Roles" [ref=e341] [cursor=pointer]:
+              - /url: /settings/users
+              - img [ref=e342]
+              - generic [ref=e347]: Users & Roles
+            - link "Security" [ref=e348] [cursor=pointer]:
+              - /url: /settings/security
+              - img [ref=e349]
+              - generic [ref=e351]: Security
+            - link "Logs & Audit" [ref=e352] [cursor=pointer]:
+              - /url: /settings/logs
+              - img [ref=e353]
+              - generic [ref=e356]: Logs & Audit
+    - main [ref=e357]:
+      - generic [ref=e358]:
+        - generic [ref=e359]:
+          - generic [ref=e360]:
+            - heading "AI QA Copilot" [level=1] [ref=e361]
+            - paragraph [ref=e362]: Generate, review, and execute QA flows with the assistant.
+          - generic [ref=e363]:
+            - button "Clear" [ref=e364] [cursor=pointer]
+            - button "New Chat" [ref=e365] [cursor=pointer]
+        - generic [ref=e366]:
+          - generic [ref=e367]:
+            - generic [ref=e368]:
+              - generic [ref=e369]:
+                - img [ref=e370]
+                - generic [ref=e373]: AI QA
+              - generic [ref=e376]: Connected to TestOps stack
+            - generic [ref=e377]:
+              - article [ref=e378]:
+                - generic [ref=e379]: AI
+                - generic [ref=e380]:
+                  - generic [ref=e381]:
+                    - generic [ref=e382]: TestOps AI
+                    - generic [ref=e383]: Just now
+                  - paragraph [ref=e384]: Hi! Paste a test case or describe what you want to automate. I can generate Playwright tests, API checks, or load scripts.
+                  - generic [ref=e385]:
+                    - generic [ref=e386]: UI
+                    - generic [ref=e387]: API
+                    - generic [ref=e388]: Load
+              - generic [ref=e393]: Generating
+            - generic [ref=e395]:
+              - textbox "Ask anything about your QA workflows..." [ref=e396]
+              - generic [ref=e397]:
+                - generic [ref=e398]:
+                  - button "Attach file" [ref=e399] [cursor=pointer]:
+                    - img [ref=e400]
+                  - button "Insert code" [ref=e402] [cursor=pointer]:
+                    - img [ref=e403]
+                - generic [ref=e406]:
+                  - generic [ref=e407]: Shift + Enter for newline
+                  - button "Send" [ref=e408] [cursor=pointer]:
+                    - img [ref=e409]
+                    - generic [ref=e412]: Send
+          - complementary [ref=e413]:
+            - generic [ref=e414]:
+              - generic [ref=e415]:
+                - heading "Execution Summary" [level=3] [ref=e416]
+                - generic [ref=e417]: Last run
+              - list [ref=e418]:
+                - listitem [ref=e419]:
+                  - generic [ref=e420]: Suite
+                  - strong [ref=e421]: Smoke 12
+                - listitem [ref=e422]:
+                  - generic [ref=e423]: Status
+                  - strong [ref=e424]: Passed
+                - listitem [ref=e425]:
+                  - generic [ref=e426]: Duration
+                  - strong [ref=e427]: 2.3s
+                - listitem [ref=e428]:
+                  - generic [ref=e429]: Env
+                  - strong [ref=e430]: Staging
+            - generic [ref=e431]:
+              - heading "Quick Actions" [level=3] [ref=e433]
+              - generic [ref=e434]:
+                - button "Run Smoke Tests" [ref=e435] [cursor=pointer]:
+                  - img [ref=e436]
+                  - generic [ref=e438]: Run Smoke Tests
+                - button "Run Load Test" [ref=e439] [cursor=pointer]:
+                  - img [ref=e440]
+                  - generic [ref=e443]: Run Load Test
+                - button "Generate AI Test" [ref=e444] [cursor=pointer]:
+                  - img [ref=e445]
+                  - generic [ref=e448]: Generate AI Test
+      - generic [ref=e449]:
+        - generic [ref=e450]:
+          - paragraph [ref=e451]: /projects
+          - heading "Projects" [level=1] [ref=e452]
+          - paragraph [ref=e453]: Static snapshot for this route. Wire real data when ready.
+        - generic [ref=e454]:
+          - generic [ref=e455]:
+            - generic [ref=e456]:
+              - generic [ref=e457]:
+                - generic [ref=e458]:
+                  - text: Total Tests
+                  - img [ref=e459]
+                - paragraph [ref=e464]: "142"
+                - generic [ref=e465]: UI/API
+              - generic [ref=e466]:
+                - generic [ref=e467]:
+                  - text: Projects
+                  - img [ref=e468]
+                - paragraph [ref=e470]: "8"
+                - generic [ref=e471]: Active
+              - generic [ref=e472]:
+                - generic [ref=e473]:
+                  - text: Pass Rate
+                  - img [ref=e474]
+                - paragraph [ref=e477]: 94.2%
+                - generic [ref=e478]: Last 24h
+              - generic [ref=e479]:
+                - generic [ref=e480]:
+                  - text: Avg Duration
+                  - img [ref=e481]
+                - paragraph [ref=e484]: 2.3s
+                - generic [ref=e485]: Per run
+            - generic [ref=e486]:
+              - generic [ref=e487]:
+                - generic [ref=e488]:
+                  - heading "Recent Runs" [level=3] [ref=e489]
+                  - generic [ref=e490]: 5 latest
+                - list [ref=e491]:
+                  - listitem [ref=e492]:
+                    - generic [ref=e494]: run-4131
+                    - generic [ref=e495]: 820ms
+                    - generic [ref=e496]: passed
+                  - listitem [ref=e497]:
+                    - generic [ref=e499]: run-4130
+                    - generic [ref=e500]: 1.2s
+                    - generic [ref=e501]: passed
+                  - listitem [ref=e502]:
+                    - generic [ref=e504]: run-4129
+                    - generic [ref=e505]: 640ms
+                    - generic [ref=e506]: failed
+                  - listitem [ref=e507]:
+                    - generic [ref=e509]: run-4128
+                    - generic [ref=e510]: running
+                    - generic [ref=e511]: running
+                  - listitem [ref=e512]:
+                    - generic [ref=e514]: run-4127
+                    - generic [ref=e515]: 910ms
+                    - generic [ref=e516]: passed
+              - generic [ref=e517]:
+                - heading "Quick Actions" [level=3] [ref=e519]
+                - generic [ref=e520]:
+                  - button "Run Smoke Tests" [ref=e521] [cursor=pointer]:
+                    - img [ref=e522]
+                    - text: Run Smoke Tests
+                  - button "Run Load Test" [ref=e524] [cursor=pointer]:
+                    - img [ref=e525]
+                    - text: Run Load Test
+                  - button "View Flaky Tests" [ref=e528] [cursor=pointer]:
+                    - img [ref=e529]
+                    - text: View Flaky Tests
+                  - button "Generate AI Test" [ref=e531] [cursor=pointer]:
+                    - img [ref=e532]
+                    - text: Generate AI Test
+          - generic [ref=e535]:
+            - generic [ref=e536]:
+              - generic [ref=e537]:
+                - heading "Projects" [level=1] [ref=e538]
+                - paragraph [ref=e539]: Manage your test automation projects
+              - button "New Project" [ref=e540] [cursor=pointer]:
+                - img [ref=e541]
+                - text: New Project
+            - generic [ref=e542]:
+              - generic [ref=e543]:
+                - heading "Projects" [level=3] [ref=e544]
+                - generic [ref=e545]: 8 total
+              - generic [ref=e546]:
+                - generic [ref=e547]:
+                  - generic [ref=e548]:
+                    - img [ref=e550]
+                    - generic [ref=e552]:
+                      - heading "Demo Project" [level=4] [ref=e553]
+                      - paragraph [ref=e554]: UI regression suite
+                      - paragraph [ref=e555]: Created Jan 15, 2026
+                  - generic [ref=e556]: Active
+                - generic [ref=e557]:
+                  - generic [ref=e558]:
+                    - img [ref=e560]
+                    - generic [ref=e563]:
+                      - heading "API Tests" [level=4] [ref=e564]
+                      - paragraph [ref=e565]: Contract + monitoring
+                      - paragraph [ref=e566]: Created Jan 20, 2026
+                  - generic [ref=e567]: Stable
+                - generic [ref=e568]:
+                  - generic [ref=e569]:
+                    - img [ref=e571]
+                    - generic [ref=e574]:
+                      - heading "Load Tests" [level=4] [ref=e575]
+                      - paragraph [ref=e576]: Performance baselines
+                      - paragraph [ref=e577]: Created Feb 1, 2026
+                  - generic [ref=e578]: Scheduled
+                - generic [ref=e579]:
+                  - generic [ref=e580]:
+                    - img [ref=e582]
+                    - generic [ref=e586]:
+                      - heading "Database Tests" [level=4] [ref=e587]
+                      - paragraph [ref=e588]: SQL validation suite
+                      - paragraph [ref=e589]: Created Feb 5, 2026
+                  - generic [ref=e590]: Active
+                - generic [ref=e591]:
+                  - generic [ref=e592]:
+                    - img [ref=e594]
+                    - generic [ref=e597]:
+                      - heading "AI Integration" [level=4] [ref=e598]
+                      - paragraph [ref=e599]: AI-powered test scenarios
+                      - paragraph [ref=e600]: Created Mar 1, 2026
+                  - generic [ref=e601]: Development
+          - generic [ref=e602]:
+            - generic [ref=e603]:
+              - generic [ref=e604]:
+                - heading "Scripts" [level=1] [ref=e605]
+                - paragraph [ref=e606]: Manage your test scripts
+              - button "New Script" [ref=e607] [cursor=pointer]:
+                - img [ref=e608]
+                - text: New Script
+            - generic [ref=e609]:
+              - generic [ref=e610]:
+                - img [ref=e611]
+                - textbox "Search scripts..." [ref=e614]
+              - combobox [ref=e615]:
+                - option "All Types" [selected]
+                - option "UI"
+                - option "API"
+                - option "Load"
+            - generic [ref=e617]:
+              - generic [ref=e618]:
+                - generic [ref=e619]: Name
+                - generic [ref=e620]: Type
+                - generic [ref=e621]: Tags
+                - generic [ref=e622]: Updated
+              - generic [ref=e623]:
+                - generic [ref=e624]:
+                  - img [ref=e625]
+                  - text: Login Flow Test
+                - generic [ref=e630]: UI
+                - generic [ref=e631]: smoke auth
+                - generic [ref=e632]: Today
+                - generic [ref=e633]: Edit
+              - generic [ref=e634]:
+                - generic [ref=e635]:
+                  - img [ref=e636]
+                  - text: API Health Check
+                - generic [ref=e641]: API
+                - generic [ref=e642]: smoke
+                - generic [ref=e643]: Today
+                - generic [ref=e644]: Edit
+              - generic [ref=e645]:
+                - generic [ref=e646]:
+                  - img [ref=e647]
+                  - text: Checkout Process
+                - generic [ref=e652]: UI
+                - generic [ref=e653]: regression checkout
+                - generic [ref=e654]: Yesterday
+                - generic [ref=e655]: Edit
+              - generic [ref=e656]:
+                - generic [ref=e657]:
+                  - img [ref=e658]
+                  - text: User Registration
+                - generic [ref=e663]: UI
+                - generic [ref=e664]: smoke auth
+                - generic [ref=e665]: Yesterday
+                - generic [ref=e666]: Edit
+              - generic [ref=e667]:
+                - generic [ref=e668]:
+                  - img [ref=e669]
+                  - text: Search API
+                - generic [ref=e674]: API
+                - generic [ref=e675]: regression
+                - generic [ref=e676]: 2 days ago
+                - generic [ref=e677]: Edit
+          - generic [ref=e678]:
+            - generic [ref=e679]:
+              - generic [ref=e680]:
+                - heading "Execution History" [level=1] [ref=e681]
+                - paragraph [ref=e682]: View all test runs and results
+              - button "Run Tests" [ref=e683] [cursor=pointer]:
+                - img [ref=e684]
+                - text: Run Tests
+            - generic [ref=e686]:
+              - generic [ref=e688]:
+                - img [ref=e690]
+                - generic [ref=e699]:
+                  - paragraph [ref=e700]: Total Runs
+                  - paragraph [ref=e701]: "156"
+              - generic [ref=e703]:
+                - img [ref=e705]
+                - generic [ref=e708]:
+                  - paragraph [ref=e709]: Passed
+                  - paragraph [ref=e710]: "142"
+              - generic [ref=e712]:
+                - img [ref=e714]
+                - generic [ref=e718]:
+                  - paragraph [ref=e719]: Failed
+                  - paragraph [ref=e720]: "14"
+              - generic [ref=e722]:
+                - img [ref=e724]
+                - generic [ref=e727]:
+                  - paragraph [ref=e728]: Running
+                  - paragraph [ref=e729]: "3"
+            - generic [ref=e731]:
+              - generic [ref=e732]:
+                - generic [ref=e733]: Run ID
+                - generic [ref=e734]: Status
+                - generic [ref=e735]: Duration
+                - generic [ref=e736]: Started
+                - generic [ref=e737]: Source
+              - generic [ref=e739]:
+                - generic [ref=e740]:
+                  - img [ref=e741]
+                  - code [ref=e744]: run-4156
+                - generic [ref=e745]: passed
+                - generic [ref=e746]: 1.2s
+                - generic [ref=e747]: Today, 11:30 AM
+                - generic [ref=e748]: manual
+                - generic [ref=e749]:
+                  - img [ref=e750]
+                  - text: View
+              - generic [ref=e753]:
+                - generic [ref=e754]:
+                  - img [ref=e755]
+                  - code [ref=e758]: run-4155
+                - generic [ref=e759]: passed
+                - generic [ref=e760]: 0.8s
+                - generic [ref=e761]: Today, 11:15 AM
+                - generic [ref=e762]: scheduler
+                - generic [ref=e763]:
+                  - img [ref=e764]
+                  - text: View
+              - generic [ref=e767]:
+                - generic [ref=e768]:
+                  - img [ref=e769]
+                  - code [ref=e773]: run-4154
+                - generic [ref=e774]: failed
+                - generic [ref=e775]: 2.1s
+                - generic [ref=e776]: Today, 10:45 AM
+                - generic [ref=e777]: manual
+                - generic [ref=e778]:
+                  - img [ref=e779]
+                  - text: View
+              - generic [ref=e782]:
+                - generic [ref=e783]:
+                  - img [ref=e784]
+                  - code [ref=e787]: run-4153
+                - generic [ref=e788]: running
+                - generic [ref=e789]: "-"
+                - generic [ref=e790]: Today, 10:30 AM
+                - generic [ref=e791]: webhook
+                - generic [ref=e792]:
+                  - img [ref=e793]
+                  - text: Live
+              - generic [ref=e796]:
+                - generic [ref=e797]:
+                  - img [ref=e798]
+                  - code [ref=e801]: run-4152
+                - generic [ref=e802]: passed
+                - generic [ref=e803]: 1.5s
+                - generic [ref=e804]: Yesterday
+                - generic [ref=e805]: manual
+                - generic [ref=e806]:
+                  - img [ref=e807]
+                  - text: View
+          - generic [ref=e810]:
+            - generic [ref=e811]:
+              - generic [ref=e812]:
+                - heading "Monitoring & Logs" [level=1] [ref=e813]
+                - paragraph [ref=e814]: System health, metrics, and audit logs
+              - generic [ref=e815]: OK
+            - generic [ref=e816]:
+              - button "Overview" [ref=e817]:
+                - img [ref=e818]
+                - text: Overview
+              - button "Audit Logs" [ref=e820]:
+                - img [ref=e821]
+                - text: Audit Logs
+              - button "Audit Stats" [ref=e824]:
+                - img [ref=e825]
+                - text: Audit Stats
+            - generic [ref=e828]:
+              - generic [ref=e830]:
+                - img [ref=e832]
+                - generic [ref=e835]:
+                  - paragraph [ref=e836]: Uptime
+                  - paragraph [ref=e837]: 14d 6h
+              - generic [ref=e839]:
+                - img [ref=e841]
+                - generic [ref=e843]:
+                  - paragraph [ref=e844]: Memory Usage
+                  - paragraph [ref=e845]: 62%
+              - generic [ref=e847]:
+                - img [ref=e849]
+                - generic [ref=e852]:
+                  - paragraph [ref=e853]: Node Version
+                  - paragraph [ref=e854]: v20.11.0
+              - generic [ref=e856]:
+                - img [ref=e858]
+                - generic [ref=e860]:
+                  - paragraph [ref=e861]: Queue Jobs
+                  - paragraph [ref=e862]: 3 waiting
+            - generic [ref=e863]:
+              - generic [ref=e864]:
+                - heading "Queue Status" [level=3] [ref=e866]
+                - generic [ref=e867]:
+                  - generic [ref=e868]:
+                    - paragraph [ref=e869]: Test Execution Queue
+                    - generic [ref=e870]:
+                      - generic [ref=e871]:
+                        - paragraph [ref=e872]: "2"
+                        - paragraph [ref=e873]: Waiting
+                      - generic [ref=e874]:
+                        - paragraph [ref=e875]: "1"
+                        - paragraph [ref=e876]: Active
+                      - generic [ref=e877]:
+                        - paragraph [ref=e878]: "156"
+                        - paragraph [ref=e879]: Completed
+                  - generic [ref=e880]:
+                    - paragraph [ref=e881]: Load Test Queue
+                    - generic [ref=e882]:
+                      - generic [ref=e883]:
+                        - paragraph [ref=e884]: "1"
+                        - paragraph [ref=e885]: Waiting
+                      - generic [ref=e886]:
+                        - paragraph [ref=e887]: "0"
+                        - paragraph [ref=e888]: Active
+                      - generic [ref=e889]:
+                        - paragraph [ref=e890]: "47"
+                        - paragraph [ref=e891]: Completed
+              - generic [ref=e892]:
+                - heading "System Status" [level=3] [ref=e894]
+                - list [ref=e895]:
+                  - listitem [ref=e896]:
+                    - generic [ref=e897]:
+                      - img [ref=e898]
+                      - text: Database
+                    - text: Connected
+                  - listitem [ref=e901]:
+                    - generic [ref=e902]:
+                      - img [ref=e903]
+                      - text: Redis
+                    - text: Connected
+                  - listitem [ref=e906]:
+                    - generic [ref=e907]:
+                      - img [ref=e908]
+                      - text: Queue Worker
+                    - text: Running
+          - generic [ref=e911]:
+            - generic [ref=e912]:
+              - generic [ref=e913]:
+                - heading "UI Automation Dashboard" [level=1] [ref=e914]
+                - paragraph [ref=e915]: Test execution overview and statistics
+              - generic [ref=e916]:
+                - combobox [ref=e917]:
+                  - option "Demo Project" [selected]
+                  - option "API Tests"
+                  - option "UI Regression"
+                - button "Refresh" [ref=e918] [cursor=pointer]:
+                  - img [ref=e919]
+                  - text: Refresh
+            - generic [ref=e924]:
+              - generic [ref=e925]:
+                - generic [ref=e926]:
+                  - text: Total Tests
+                  - img [ref=e927]
+                - paragraph [ref=e929]: "156"
+              - generic [ref=e930]:
+                - generic [ref=e931]:
+                  - text: Passed
+                  - img [ref=e932]
+                - paragraph [ref=e935]: "142"
+              - generic [ref=e936]:
+                - generic [ref=e937]:
+                  - text: Failed
+                  - img [ref=e938]
+                - paragraph [ref=e942]: "14"
+              - generic [ref=e943]:
+                - generic [ref=e944]:
+                  - text: Success Rate
+                  - img [ref=e945]
+                - paragraph [ref=e948]: 91.0%
+            - generic [ref=e949]:
+              - generic [ref=e950]:
+                - heading "Pass/Fail Trend" [level=3] [ref=e951]
+                - generic [ref=e952]:
+                  - generic [ref=e953]:
+                    - text: Today
+                    - generic [ref=e954]:
+                      - generic [ref=e955]: "18"
+                      - generic [ref=e956]: "2"
+                  - generic [ref=e957]:
+                    - text: Yesterday
+                    - generic [ref=e958]:
+                      - generic [ref=e959]: "17"
+                      - generic [ref=e960]: "3"
+                  - generic [ref=e961]:
+                    - text: Apr 10
+                    - generic [ref=e962]:
+                      - generic [ref=e963]: "22"
+                      - generic [ref=e964]: "2"
+                  - generic [ref=e965]:
+                    - text: Apr 9
+                    - generic [ref=e966]:
+                      - generic [ref=e967]: "15"
+                      - generic [ref=e968]: "4"
+              - generic [ref=e969]:
+                - heading "Recent Executions" [level=3] [ref=e970]
+                - generic [ref=e971]:
+                  - generic [ref=e972]:
+                    - generic [ref=e974]:
+                      - paragraph [ref=e975]: Login Flow Test
+                      - paragraph [ref=e976]: Today, 10:32 AM
+                    - generic [ref=e977]:
+                      - paragraph [ref=e978]: 1.2s
+                      - paragraph [ref=e979]: Chrome
+                  - generic [ref=e980]:
+                    - generic [ref=e982]:
+                      - paragraph [ref=e983]: Checkout Process
+                      - paragraph [ref=e984]: Today, 10:15 AM
+                    - generic [ref=e985]:
+                      - paragraph [ref=e986]: 2.8s
+                      - paragraph [ref=e987]: Firefox
+                  - generic [ref=e988]:
+                    - generic [ref=e990]:
+                      - paragraph [ref=e991]: User Profile
+                      - paragraph [ref=e992]: Yesterday
+                    - generic [ref=e993]:
+                      - paragraph [ref=e994]: 0.9s
+                      - paragraph [ref=e995]: Chrome
+            - generic [ref=e996]:
+              - heading "Performance Metrics" [level=3] [ref=e997]
+              - generic [ref=e998]:
+                - generic [ref=e999]:
+                  - generic [ref=e1000]:
+                    - img [ref=e1001]
+                    - text: Average Duration
+                  - paragraph [ref=e1004]: 2.3s
+                - generic [ref=e1005]:
+                  - generic [ref=e1006]:
+                    - img [ref=e1007]
+                    - text: Last Execution
+                  - paragraph [ref=e1009]: Just now
+                - generic [ref=e1010]:
+                  - generic [ref=e1011]:
+                    - img [ref=e1012]
+                    - text: Skipped Tests
+                  - paragraph [ref=e1016]: "0"
+          - generic [ref=e1017]:
+            - generic [ref=e1018]:
+              - generic [ref=e1019]:
+                - heading "Test Cases" [level=1] [ref=e1020]
+                - paragraph [ref=e1021]: AI-Generated test cases from business requirements
+              - button "Generate from BRS" [ref=e1022] [cursor=pointer]:
+                - img [ref=e1023]
+                - text: Generate from BRS
+            - generic [ref=e1026]:
+              - generic [ref=e1027]:
+                - img [ref=e1028]
+                - textbox "Search test cases..." [ref=e1031]
+              - combobox [ref=e1032]:
+                - option "All Status" [selected]
+                - option "Draft"
+                - option "Active"
+                - option "Archived"
+              - combobox [ref=e1033]:
+                - option "All Priority" [selected]
+                - option "High"
+                - option "Medium"
+                - option "Low"
+            - generic [ref=e1035]:
+              - generic [ref=e1036]:
+                - generic [ref=e1037]: Title
+                - generic [ref=e1038]: Steps
+                - generic [ref=e1039]: Tags
+                - generic [ref=e1040]: Priority
+                - generic [ref=e1041]: Status
+                - generic [ref=e1042]: Created
+              - generic [ref=e1044]:
+                - generic [ref=e1045]:
+                  - img [ref=e1046]
+                  - text: Login Validation
+                - generic [ref=e1049]: 5 steps
+                - generic [ref=e1050]: auth
+                - generic [ref=e1051]: high
+                - generic [ref=e1052]: active
+                - generic [ref=e1053]: Today
+                - generic [ref=e1054]: View
+              - generic [ref=e1055]:
+                - generic [ref=e1056]:
+                  - img [ref=e1057]
+                  - text: Checkout Flow
+                - generic [ref=e1060]: 8 steps
+                - generic [ref=e1061]: regression
+                - generic [ref=e1062]: medium
+                - generic [ref=e1063]: active
+                - generic [ref=e1064]: Yesterday
+                - generic [ref=e1065]: View
+              - generic [ref=e1066]:
+                - generic [ref=e1067]:
+                  - img [ref=e1068]
+                  - text: Search Results
+                - generic [ref=e1071]: 3 steps
+                - generic [ref=e1072]: smoke
+                - generic [ref=e1073]: low
+                - generic [ref=e1074]: active
+                - generic [ref=e1075]: 2 days ago
+                - generic [ref=e1076]: View
+          - generic [ref=e1077]:
+            - generic [ref=e1078]:
+              - generic [ref=e1079]:
+                - heading "Scripts" [level=1] [ref=e1080]
+                - paragraph [ref=e1081]: Manage UI automation scripts
+              - button "New Script" [ref=e1082] [cursor=pointer]:
+                - img [ref=e1083]
+                - text: New Script
+            - generic [ref=e1085]:
+              - generic [ref=e1086]:
+                - generic [ref=e1087]: Name
+                - generic [ref=e1088]: Type
+                - generic [ref=e1089]: Browser
+                - generic [ref=e1090]: Last Run
+                - generic [ref=e1091]: Status
+              - generic [ref=e1093]:
+                - generic [ref=e1094]:
+                  - img [ref=e1095]
+                  - text: login.spec.ts
+                - generic [ref=e1100]: Playwright
+                - generic [ref=e1101]: Chrome
+                - generic [ref=e1102]: Today, 10:30 AM
+                - generic [ref=e1103]: passed
+                - generic [ref=e1104]: Edit
+              - generic [ref=e1105]:
+                - generic [ref=e1106]:
+                  - img [ref=e1107]
+                  - text: checkout.spec.ts
+                - generic [ref=e1112]: Playwright
+                - generic [ref=e1113]: Firefox
+                - generic [ref=e1114]: Today, 9:15 AM
+                - generic [ref=e1115]: failed
+                - generic [ref=e1116]: Edit
+              - generic [ref=e1117]:
+                - generic [ref=e1118]:
+                  - img [ref=e1119]
+                  - text: search.spec.ts
+                - generic [ref=e1124]: Playwright
+                - generic [ref=e1125]: Chrome
+                - generic [ref=e1126]: Yesterday
+                - generic [ref=e1127]: passed
+                - generic [ref=e1128]: Edit
+          - generic [ref=e1129]:
+            - generic [ref=e1130]:
+              - generic [ref=e1131]:
+                - heading "Test Suites" [level=1] [ref=e1132]
+                - paragraph [ref=e1133]: Group and organize test scripts
+              - button "New Suite" [ref=e1134] [cursor=pointer]:
+                - img [ref=e1135]
+                - text: New Suite
+            - generic [ref=e1136]:
+              - generic [ref=e1137]:
+                - generic [ref=e1138]:
+                  - img [ref=e1140]
+                  - generic [ref=e1142]:
+                    - heading "Smoke Tests" [level=4] [ref=e1143]
+                    - paragraph [ref=e1144]: Core functionality tests
+                    - paragraph [ref=e1145]: 12 scripts
+                - generic [ref=e1146]: Active
+              - generic [ref=e1147]:
+                - generic [ref=e1148]:
+                  - img [ref=e1150]
+                  - generic [ref=e1152]:
+                    - heading "Regression Suite" [level=4] [ref=e1153]
+                    - paragraph [ref=e1154]: Full regression tests
+                    - paragraph [ref=e1155]: 45 scripts
+                - generic [ref=e1156]: Active
+              - generic [ref=e1157]:
+                - generic [ref=e1158]:
+                  - img [ref=e1160]
+                  - generic [ref=e1162]:
+                    - heading "End-to-End" [level=4] [ref=e1163]
+                    - paragraph [ref=e1164]: Complete user flows
+                    - paragraph [ref=e1165]: 8 scripts
+                - generic [ref=e1166]: Scheduled
+          - generic [ref=e1167]:
+            - generic [ref=e1169]:
+              - heading "AI Testing" [level=1] [ref=e1170]
+              - paragraph [ref=e1171]: Generate UI tests with AI
+            - generic [ref=e1172]:
+              - generic [ref=e1173]:
+                - heading "Generate Test" [level=3] [ref=e1175]
+                - generic [ref=e1176]:
+                  - textbox "Describe the test scenario..." [ref=e1177]
+                  - button "Generate Test Script" [ref=e1178] [cursor=pointer]:
+                    - img [ref=e1179]
+                    - text: Generate Test Script
+              - generic [ref=e1182]:
+                - heading "Recent Generations" [level=3] [ref=e1184]
+                - list [ref=e1185]:
+                  - listitem [ref=e1186]:
+                    - img [ref=e1187]
+                    - generic [ref=e1190]: Login test with validation
+                    - generic [ref=e1191]: 2 min ago
+                    - generic [ref=e1192]: ready
+                  - listitem [ref=e1193]:
+                    - img [ref=e1194]
+                    - generic [ref=e1197]: Checkout flow test
+                    - generic [ref=e1198]: 1 hour ago
+                    - generic [ref=e1199]: ready
+          - generic [ref=e1200]:
+            - generic [ref=e1201]:
+              - generic [ref=e1202]:
+                - heading "Execution History" [level=1] [ref=e1203]
+                - paragraph [ref=e1204]: View UI test execution results
+              - button "Run Tests" [ref=e1205] [cursor=pointer]:
+                - img [ref=e1206]
+                - text: Run Tests
+            - generic [ref=e1209]:
+              - generic [ref=e1210]:
+                - generic [ref=e1211]: Test
+                - generic [ref=e1212]: Browser
+                - generic [ref=e1213]: Duration
+                - generic [ref=e1214]: Started
+                - generic [ref=e1215]: Status
+              - generic [ref=e1217]:
+                - generic [ref=e1218]: Smoke Suite
+                - generic [ref=e1219]: Chrome
+                - generic [ref=e1220]: 2m 30s
+                - generic [ref=e1221]: Today, 10:00 AM
+                - generic [ref=e1222]: passed
+                - generic [ref=e1223]: View
+              - generic [ref=e1224]:
+                - generic [ref=e1225]: Regression Suite
+                - generic [ref=e1226]: Firefox
+                - generic [ref=e1227]: 15m 45s
+                - generic [ref=e1228]: Today, 8:00 AM
+                - generic [ref=e1229]: failed
+                - generic [ref=e1230]: View
+          - generic [ref=e1231]:
+            - generic [ref=e1232]:
+              - generic [ref=e1233]:
+                - heading "Object Repository" [level=1] [ref=e1234]
+                - paragraph [ref=e1235]: Manage page objects and locators
+              - button "Add Object" [ref=e1236] [cursor=pointer]:
+                - img [ref=e1237]
+                - text: Add Object
+            - generic [ref=e1238]:
+              - generic [ref=e1239]:
+                - heading "LoginPage" [level=4] [ref=e1240]
+                - paragraph [ref=e1241]: Login page elements
+                - generic [ref=e1242]: username password submit
+              - generic [ref=e1243]:
+                - heading "DashboardPage" [level=4] [ref=e1244]
+                - paragraph [ref=e1245]: Main dashboard elements
+                - generic [ref=e1246]: header sidebar
+              - generic [ref=e1247]:
+                - heading "CheckoutPage" [level=4] [ref=e1248]
+                - paragraph [ref=e1249]: Checkout flow elements
+                - generic [ref=e1250]: cart payment
+          - generic [ref=e1251]:
+            - generic [ref=e1252]:
+              - generic [ref=e1253]:
+                - heading "Test Data" [level=1] [ref=e1254]
+                - paragraph [ref=e1255]: Manage test data sets
+              - button "Add Data Set" [ref=e1256] [cursor=pointer]:
+                - img [ref=e1257]
+                - text: Add Data Set
+            - generic [ref=e1258]:
+              - generic [ref=e1260]:
+                - img [ref=e1262]
+                - generic [ref=e1266]:
+                  - heading "User Accounts" [level=4] [ref=e1267]
+                  - paragraph [ref=e1268]: Test user credentials
+                  - paragraph [ref=e1269]: 25 records
+              - generic [ref=e1271]:
+                - img [ref=e1273]
+                - generic [ref=e1277]:
+                  - heading "Product Data" [level=4] [ref=e1278]
+                  - paragraph [ref=e1279]: Test product catalog
+                  - paragraph [ref=e1280]: 150 records
+          - generic [ref=e1281]:
+            - generic [ref=e1282]:
+              - generic [ref=e1283]:
+                - heading "Scheduler" [level=1] [ref=e1284]
+                - paragraph [ref=e1285]: Schedule automated test runs
+              - button "New Schedule" [ref=e1286] [cursor=pointer]:
+                - img [ref=e1287]
+                - text: New Schedule
+            - generic [ref=e1289]:
+              - generic [ref=e1290]:
+                - generic [ref=e1291]: Schedule Name
+                - generic [ref=e1292]: Suite
+                - generic [ref=e1293]: Frequency
+                - generic [ref=e1294]: Next Run
+                - generic [ref=e1295]: Status
+              - generic [ref=e1297]:
+                - generic [ref=e1298]: Daily Smoke
+                - generic [ref=e1299]: Smoke Tests
+                - generic [ref=e1300]: Daily 8:00 AM
+                - generic [ref=e1301]: Tomorrow 8:00 AM
+                - generic [ref=e1302]: active
+                - generic [ref=e1303]: Edit
+              - generic [ref=e1304]:
+                - generic [ref=e1305]: Weekly Regression
+                - generic [ref=e1306]: Regression Suite
+                - generic [ref=e1307]: Weekly Sunday
+                - generic [ref=e1308]: Sunday 12:00 AM
+                - generic [ref=e1309]: active
+                - generic [ref=e1310]: Edit
+          - generic [ref=e1311]:
+            - generic [ref=e1313]:
+              - heading "Reports" [level=1] [ref=e1314]
+              - paragraph [ref=e1315]: Test execution reports
+            - generic [ref=e1316]:
+              - generic [ref=e1317]:
+                - paragraph [ref=e1318]: Total Runs
+                - paragraph [ref=e1319]: "245"
+              - generic [ref=e1320]:
+                - paragraph [ref=e1321]: Avg Duration
+                - paragraph [ref=e1322]: 5.2m
+              - generic [ref=e1323]:
+                - paragraph [ref=e1324]: Pass Rate
+                - paragraph [ref=e1325]: 89%
+            - generic [ref=e1326]:
+              - heading "Recent Reports" [level=3] [ref=e1328]
+              - list [ref=e1329]:
+                - listitem [ref=e1330]:
+                  - img [ref=e1331]
+                  - generic [ref=e1334]: Smoke Test Report
+                  - generic [ref=e1335]: Today
+                  - generic [ref=e1336]: passed
+                - listitem [ref=e1337]:
+                  - img [ref=e1338]
+                  - generic [ref=e1341]: Regression Report
+                  - generic [ref=e1342]: Yesterday
+                  - generic [ref=e1343]: failed
+          - generic [ref=e1344]:
+            - generic [ref=e1345]:
+              - generic [ref=e1346]:
+                - generic [ref=e1347]:
+                  - text: Total Requests
+                  - img [ref=e1348]
+                - paragraph [ref=e1351]: 1,456
+                - generic [ref=e1352]: API Tests
+              - generic [ref=e1353]:
+                - generic [ref=e1354]:
+                  - text: Passed
+                  - img [ref=e1355]
+                - paragraph [ref=e1358]: 1,389
+                - generic [ref=e1359]: 95.4%
+              - generic [ref=e1360]:
+                - generic [ref=e1361]:
+                  - text: Failed
+                  - img [ref=e1362]
+                - paragraph [ref=e1366]: "67"
+                - generic [ref=e1367]: 4.6%
+              - generic [ref=e1368]:
+                - generic [ref=e1369]:
+                  - text: Avg Response
+                  - img [ref=e1370]
+                - paragraph [ref=e1373]: 245ms
+                - generic [ref=e1374]: P95
+            - generic [ref=e1375]:
+              - heading "Recent Collections" [level=3] [ref=e1377]
+              - list [ref=e1378]:
+                - listitem [ref=e1379]:
+                  - img [ref=e1380]
+                  - generic [ref=e1382]: User API
+                  - generic [ref=e1383]: 48 requests
+                  - generic [ref=e1384]: passed
+                - listitem [ref=e1385]:
+                  - img [ref=e1386]
+                  - generic [ref=e1388]: Auth API
+                  - generic [ref=e1389]: 12 requests
+                  - generic [ref=e1390]: passed
+                - listitem [ref=e1391]:
+                  - img [ref=e1392]
+                  - generic [ref=e1394]: Payment API
+                  - generic [ref=e1395]: 25 requests
+                  - generic [ref=e1396]: failed
+          - generic [ref=e1397]:
+            - generic [ref=e1398]:
+              - generic [ref=e1399]:
+                - heading "Collections" [level=1] [ref=e1400]
+                - paragraph [ref=e1401]: Group API requests
+              - button "New Collection" [ref=e1402] [cursor=pointer]:
+                - img [ref=e1403]
+                - text: New Collection
+            - generic [ref=e1404]:
+              - generic [ref=e1406]:
+                - img [ref=e1408]
+                - generic [ref=e1410]:
+                  - heading "User Management" [level=4] [ref=e1411]
+                  - paragraph [ref=e1412]: User CRUD operations
+                  - paragraph [ref=e1413]: 15 requests
+              - generic [ref=e1415]:
+                - img [ref=e1417]
+                - generic [ref=e1419]:
+                  - heading "Authentication" [level=4] [ref=e1420]
+                  - paragraph [ref=e1421]: Auth endpoints
+                  - paragraph [ref=e1422]: 8 requests
+              - generic [ref=e1424]:
+                - img [ref=e1426]
+                - generic [ref=e1428]:
+                  - heading "Products" [level=4] [ref=e1429]
+                  - paragraph [ref=e1430]: Product API
+                  - paragraph [ref=e1431]: 22 requests
+          - generic [ref=e1432]:
+            - generic [ref=e1433]:
+              - generic [ref=e1434]:
+                - heading "Requests" [level=1] [ref=e1435]
+                - paragraph [ref=e1436]: Define HTTP API calls
+              - button "New Request" [ref=e1437] [cursor=pointer]:
+                - img [ref=e1438]
+                - text: New Request
+            - generic [ref=e1440]:
+              - generic [ref=e1441]:
+                - generic [ref=e1442]: Name
+                - generic [ref=e1443]: Method
+                - generic [ref=e1444]: Endpoint
+                - generic [ref=e1445]: Collection
+              - generic [ref=e1446]:
+                - generic [ref=e1447]: Get Users
+                - generic [ref=e1448]: GET
+                - generic [ref=e1449]: /api/users
+                - generic [ref=e1450]: User Management
+                - generic [ref=e1451]: Edit
+              - generic [ref=e1452]:
+                - generic [ref=e1453]: Create User
+                - generic [ref=e1454]: POST
+                - generic [ref=e1455]: /api/users
+                - generic [ref=e1456]: User Management
+                - generic [ref=e1457]: Edit
+              - generic [ref=e1458]:
+                - generic [ref=e1459]: Login
+                - generic [ref=e1460]: POST
+                - generic [ref=e1461]: /api/auth/login
+                - generic [ref=e1462]: Authentication
+                - generic [ref=e1463]: Edit
+          - generic [ref=e1464]:
+            - generic [ref=e1465]:
+              - generic [ref=e1466]:
+                - heading "Test Suites" [level=1] [ref=e1467]
+                - paragraph [ref=e1468]: API test suites
+              - button "New Suite" [ref=e1469] [cursor=pointer]:
+                - img [ref=e1470]
+                - text: New Suite
+            - generic [ref=e1471]:
+              - generic [ref=e1472]:
+                - heading "Smoke Tests" [level=4] [ref=e1473]
+                - paragraph [ref=e1474]: Critical path API tests
+                - paragraph [ref=e1475]: 12 requests
+                - generic [ref=e1476]: Active
+              - generic [ref=e1477]:
+                - heading "Full Regression" [level=4] [ref=e1478]
+                - paragraph [ref=e1479]: Complete API coverage
+                - paragraph [ref=e1480]: 56 requests
+                - generic [ref=e1481]: Active
+          - generic [ref=e1482]:
+            - generic [ref=e1483]:
+              - generic [ref=e1484]:
+                - heading "Mock Server" [level=1] [ref=e1485]
+                - paragraph [ref=e1486]: Create API stubs
+              - button "New Mock" [ref=e1487] [cursor=pointer]:
+                - img [ref=e1488]
+                - text: New Mock
+            - generic [ref=e1490]:
+              - generic [ref=e1491]:
+                - generic [ref=e1492]: Name
+                - generic [ref=e1493]: Endpoint
+                - generic [ref=e1494]: Status
+                - generic [ref=e1495]: Responses
+              - generic [ref=e1496]:
+                - generic [ref=e1497]: User Mock
+                - generic [ref=e1498]: /mock/users
+                - generic [ref=e1499]: Active
+                - generic [ref=e1500]: "5"
+                - generic [ref=e1501]: Edit
+              - generic [ref=e1502]:
+                - generic [ref=e1503]: Payment Mock
+                - generic [ref=e1504]: /mock/payment
+                - generic [ref=e1505]: Active
+                - generic [ref=e1506]: "3"
+                - generic [ref=e1507]: Edit
+          - generic [ref=e1508]:
+            - generic [ref=e1510]:
+              - heading "API Monitoring" [level=1] [ref=e1511]
+              - paragraph [ref=e1512]: Monitor API health
+            - generic [ref=e1513]:
+              - generic [ref=e1514]:
+                - paragraph [ref=e1515]: Uptime
+                - paragraph [ref=e1516]: 99.9%
+              - generic [ref=e1517]:
+                - paragraph [ref=e1518]: Avg Response
+                - paragraph [ref=e1519]: 145ms
+              - generic [ref=e1520]:
+                - paragraph [ref=e1521]: Total Calls
+                - paragraph [ref=e1522]: 45K
+            - generic [ref=e1523]:
+              - heading "Endpoint Health" [level=3] [ref=e1525]
+              - list [ref=e1526]:
+                - listitem [ref=e1527]:
+                  - generic [ref=e1529]: GET /api/users
+                  - generic [ref=e1530]: 98ms
+                  - generic [ref=e1531]: healthy
+                - listitem [ref=e1532]:
+                  - generic [ref=e1534]: POST /api/auth
+                  - generic [ref=e1535]: 125ms
+                  - generic [ref=e1536]: healthy
+                - listitem [ref=e1537]:
+                  - generic [ref=e1539]: GET /api/orders
+                  - generic [ref=e1540]: timeout
+                  - generic [ref=e1541]: down
+          - generic [ref=e1542]:
+            - generic [ref=e1544]:
+              - heading "AI API Testing" [level=1] [ref=e1545]
+              - paragraph [ref=e1546]: Generate API tests with AI
+            - generic [ref=e1547]:
+              - heading "Generate Test from API Spec" [level=3] [ref=e1549]
+              - generic [ref=e1550]:
+                - textbox "Paste OpenAPI/Swagger spec or describe API..." [ref=e1551]
+                - button "Generate Tests" [ref=e1552] [cursor=pointer]:
+                  - img [ref=e1553]
+                  - text: Generate Tests
+          - generic [ref=e1556]:
+            - generic [ref=e1558]:
+              - heading "Data Chaining" [level=1] [ref=e1559]
+              - paragraph [ref=e1560]: Link API responses to requests
+            - generic [ref=e1562]:
+              - generic [ref=e1563]:
+                - generic [ref=e1564]: Chain Name
+                - generic [ref=e1565]: Source
+                - generic [ref=e1566]: Target
+                - generic [ref=e1567]: Status
+              - generic [ref=e1568]:
+                - generic [ref=e1569]: User -> Orders
+                - generic [ref=e1570]: GET /users
+                - generic [ref=e1571]: GET /users/:id/orders
+                - generic [ref=e1572]: active
+                - generic [ref=e1573]: Edit
+          - generic [ref=e1574]:
+            - generic [ref=e1576]:
+              - heading "Schema Validation" [level=1] [ref=e1577]
+              - paragraph [ref=e1578]: Validate API responses
+            - generic [ref=e1579]:
+              - generic [ref=e1580]:
+                - heading "User Schema" [level=4] [ref=e1581]
+                - paragraph [ref=e1582]: User response validation
+                - generic [ref=e1583]: Active
+              - generic [ref=e1584]:
+                - heading "Order Schema" [level=4] [ref=e1585]
+                - paragraph [ref=e1586]: Order response validation
+                - generic [ref=e1587]: Active
+          - generic [ref=e1588]:
+            - generic [ref=e1589]:
+              - generic [ref=e1590]:
+                - heading "Scripts" [level=1] [ref=e1591]
+                - paragraph [ref=e1592]: API automation scripts
+              - button "New Script" [ref=e1593] [cursor=pointer]:
+                - img [ref=e1594]
+                - text: New Script
+            - generic [ref=e1596]:
+              - generic [ref=e1597]:
+                - generic [ref=e1598]: Name
+                - generic [ref=e1599]: Type
+                - generic [ref=e1600]: Last Run
+                - generic [ref=e1601]: Status
+              - generic [ref=e1602]:
+                - generic [ref=e1603]: auth-flow.js
+                - generic [ref=e1604]: JavaScript
+                - generic [ref=e1605]: Today
+                - generic [ref=e1606]: passed
+                - generic [ref=e1607]: Edit
+          - generic [ref=e1608]:
+            - generic [ref=e1609]:
+              - generic [ref=e1610]:
+                - heading "Environment" [level=1] [ref=e1611]
+                - paragraph [ref=e1612]: Manage environments and variables
+              - button "New Environment" [ref=e1613] [cursor=pointer]:
+                - img [ref=e1614]
+                - text: New Environment
+            - generic [ref=e1615]:
+              - generic [ref=e1616]:
+                - heading "Development" [level=4] [ref=e1617]
+                - paragraph [ref=e1618]: Local development
+                - generic [ref=e1619]: Active
+              - generic [ref=e1620]:
+                - heading "Staging" [level=4] [ref=e1621]
+                - paragraph [ref=e1622]: Staging environment
+                - generic [ref=e1623]: Active
+              - generic [ref=e1624]:
+                - heading "Production" [level=4] [ref=e1625]
+                - paragraph [ref=e1626]: Production environment
+                - generic [ref=e1627]: Inactive
+          - generic [ref=e1628]:
+            - generic [ref=e1630]:
+              - heading "Reports" [level=1] [ref=e1631]
+              - paragraph [ref=e1632]: API test reports
+            - generic [ref=e1633]:
+              - generic [ref=e1634]:
+                - paragraph [ref=e1635]: Total Runs
+                - paragraph [ref=e1636]: "892"
+              - generic [ref=e1637]:
+                - paragraph [ref=e1638]: Pass Rate
+                - paragraph [ref=e1639]: 95.4%
+          - generic [ref=e1640]:
+            - generic [ref=e1641]:
+              - generic [ref=e1642]:
+                - generic [ref=e1643]:
+                  - text: Total Runs
+                  - img [ref=e1644]
+                - paragraph [ref=e1646]: "47"
+                - generic [ref=e1647]: This month
+              - generic [ref=e1648]:
+                - generic [ref=e1649]:
+                  - text: Avg Response
+                  - img [ref=e1650]
+                - paragraph [ref=e1653]: 156ms
+                - generic [ref=e1654]: P95
+              - generic [ref=e1655]:
+                - generic [ref=e1656]:
+                  - text: Passed
+                  - img [ref=e1657]
+                - paragraph [ref=e1660]: "42"
+                - generic [ref=e1661]: 89%
+              - generic [ref=e1662]:
+                - generic [ref=e1663]:
+                  - text: Failed
+                  - img [ref=e1664]
+                - paragraph [ref=e1668]: "5"
+                - generic [ref=e1669]: 11%
+            - generic [ref=e1670]:
+              - heading "Recent Runs" [level=3] [ref=e1672]
+              - list [ref=e1673]:
+                - listitem [ref=e1674]:
+                  - img [ref=e1675]
+                  - generic [ref=e1678]: Homepage Load Test
+                  - generic [ref=e1679]: 10K samples
+                  - generic [ref=e1680]: passed
+                - listitem [ref=e1681]:
+                  - img [ref=e1682]
+                  - generic [ref=e1685]: API Stress Test
+                  - generic [ref=e1686]: 25K samples
+                  - generic [ref=e1687]: passed
+                - listitem [ref=e1688]:
+                  - img [ref=e1689]
+                  - generic [ref=e1693]: Search Performance
+                  - generic [ref=e1694]: 8K samples
+                  - generic [ref=e1695]: failed
+          - generic [ref=e1696]:
+            - generic [ref=e1697]:
+              - generic [ref=e1698]:
+                - heading "Test Plans" [level=1] [ref=e1699]
+                - paragraph [ref=e1700]: Configure load test scenarios
+              - button "New Plan" [ref=e1701] [cursor=pointer]:
+                - img [ref=e1702]
+                - text: New Plan
+            - generic [ref=e1703]:
+              - generic [ref=e1704]:
+                - generic [ref=e1705]:
+                  - img [ref=e1707]
+                  - generic [ref=e1710]:
+                    - heading "Homepage Load" [level=4] [ref=e1711]
+                    - paragraph [ref=e1712]: 100 concurrent users
+                    - paragraph [ref=e1713]: 5 min duration
+                - generic [ref=e1714]: Active
+              - generic [ref=e1715]:
+                - generic [ref=e1716]:
+                  - img [ref=e1718]
+                  - generic [ref=e1721]:
+                    - heading "API Stress" [level=4] [ref=e1722]
+                    - paragraph [ref=e1723]: 500 concurrent users
+                    - paragraph [ref=e1724]: 10 min duration
+                - generic [ref=e1725]: Active
+          - generic [ref=e1726]:
+            - generic [ref=e1728]:
+              - heading "Configuration" [level=1] [ref=e1729]
+              - paragraph [ref=e1730]: Configure load test settings
+            - generic [ref=e1731]:
+              - heading "Test Configuration" [level=3] [ref=e1733]
+              - generic [ref=e1734]:
+                - generic [ref=e1735]:
+                  - generic [ref=e1736]:
+                    - text: Concurrent Users
+                    - spinbutton [ref=e1737]: "100"
+                  - generic [ref=e1738]:
+                    - text: Duration (minutes)
+                    - spinbutton [ref=e1739]: "10"
+                  - generic [ref=e1740]:
+                    - text: Ramp-up (seconds)
+                    - spinbutton [ref=e1741]: "60"
+                  - generic [ref=e1742]:
+                    - text: Target URL
+                    - textbox [ref=e1743]: https://example.com
+                - button "Save Configuration" [ref=e1744] [cursor=pointer]
+          - generic [ref=e1745]:
+            - generic [ref=e1746]:
+              - generic [ref=e1747]:
+                - heading "Run & Monitor" [level=1] [ref=e1748]
+                - paragraph [ref=e1749]: Execute and monitor load tests
+              - button "Start Test" [ref=e1750] [cursor=pointer]:
+                - img [ref=e1751]
+                - text: Start Test
+            - generic [ref=e1753]:
+              - generic [ref=e1754]:
+                - paragraph [ref=e1755]: Active Runs
+                - paragraph [ref=e1756]: "2"
+              - generic [ref=e1757]:
+                - paragraph [ref=e1758]: Queued
+                - paragraph [ref=e1759]: "1"
+            - generic [ref=e1760]:
+              - heading "Running Tests" [level=3] [ref=e1762]
+              - list [ref=e1763]:
+                - listitem [ref=e1764]:
+                  - img [ref=e1765]
+                  - generic [ref=e1767]: Homepage Load Test
+                  - generic [ref=e1768]: Running...
+                  - generic [ref=e1769]: in progress
+          - generic [ref=e1770]:
+            - generic [ref=e1772]:
+              - heading "Results & Reports" [level=1] [ref=e1773]
+              - paragraph [ref=e1774]: Analyze test results
+            - generic [ref=e1776]:
+              - generic [ref=e1777]:
+                - generic [ref=e1778]: Test Name
+                - generic [ref=e1779]: Date
+                - generic [ref=e1780]: Users
+                - generic [ref=e1781]: Throughput
+                - generic [ref=e1782]: Status
+              - generic [ref=e1784]:
+                - generic [ref=e1785]: Homepage Load
+                - generic [ref=e1786]: Today
+                - generic [ref=e1787]: "100"
+                - generic [ref=e1788]: 500/s
+                - generic [ref=e1789]: passed
+                - generic [ref=e1790]: View
+              - generic [ref=e1791]:
+                - generic [ref=e1792]: API Stress
+                - generic [ref=e1793]: Yesterday
+                - generic [ref=e1794]: "500"
+                - generic [ref=e1795]: 1200/s
+                - generic [ref=e1796]: passed
+                - generic [ref=e1797]: View
+          - generic [ref=e1798]:
+            - generic [ref=e1800]:
+              - heading "Distributed Testing" [level=1] [ref=e1801]
+              - paragraph [ref=e1802]: Configure distributed load generation
+            - generic [ref=e1803]:
+              - generic [ref=e1805]:
+                - img [ref=e1807]
+                - generic [ref=e1810]:
+                  - heading "Load Generator 1" [level=4] [ref=e1811]
+                  - paragraph [ref=e1812]: 192.168.1.10
+                  - paragraph [ref=e1813]: Active
+              - generic [ref=e1815]:
+                - img [ref=e1817]
+                - generic [ref=e1820]:
+                  - heading "Load Generator 2" [level=4] [ref=e1821]
+                  - paragraph [ref=e1822]: 192.168.1.11
+                  - paragraph [ref=e1823]: Active
+          - generic [ref=e1824]:
+            - generic [ref=e1825]:
+              - generic [ref=e1826]:
+                - heading "Templates" [level=1] [ref=e1827]
+                - paragraph [ref=e1828]: Test plan templates
+              - button "New Template" [ref=e1829] [cursor=pointer]:
+                - img [ref=e1830]
+                - text: New Template
+            - generic [ref=e1831]:
+              - generic [ref=e1832]:
+                - heading "Basic Load" [level=4] [ref=e1833]
+                - paragraph [ref=e1834]: Simple load test
+              - generic [ref=e1835]:
+                - heading "Stress Test" [level=4] [ref=e1836]
+                - paragraph [ref=e1837]: Gradual increase
+              - generic [ref=e1838]:
+                - heading "Spike Test" [level=4] [ref=e1839]
+                - paragraph [ref=e1840]: Sudden load
+          - generic [ref=e1841]:
+            - generic [ref=e1843]:
+              - heading "AI Based Testing" [level=1] [ref=e1844]
+              - paragraph [ref=e1845]: AI-powered load test scenarios
+            - generic [ref=e1846]:
+              - heading "Generate Test Scenario" [level=3] [ref=e1848]
+              - generic [ref=e1849]:
+                - textbox "Describe your load test scenario..." [ref=e1850]
+                - button "Generate Scenario" [ref=e1851] [cursor=pointer]:
+                  - img [ref=e1852]
+                  - text: Generate Scenario
+          - generic [ref=e1855]:
+            - generic [ref=e1857]:
+              - heading "SQL Runner" [level=1] [ref=e1858]
+              - paragraph [ref=e1859]: Execute SQL queries
+            - generic [ref=e1860]:
+              - generic [ref=e1861]:
+                - heading "Query Editor" [level=3] [ref=e1863]
+                - textbox "SELECT * FROM users WHERE..." [ref=e1864]
+                - generic [ref=e1865]:
+                  - combobox [ref=e1866]:
+                    - option "Production DB" [selected]
+                    - option "Test DB"
+                  - button "Execute" [ref=e1867] [cursor=pointer]:
+                    - img [ref=e1868]
+                    - text: Execute
+              - generic [ref=e1870]:
+                - heading "Results" [level=3] [ref=e1872]
+                - generic [ref=e1873]:
+                  - generic [ref=e1874]:
+                    - generic [ref=e1875]: id
+                    - generic [ref=e1876]: name
+                    - generic [ref=e1877]: email
+                    - generic [ref=e1878]: created_at
+                  - generic [ref=e1879]:
+                    - generic [ref=e1880]: "1"
+                    - generic [ref=e1881]: John Doe
+                    - generic [ref=e1882]: john@example.com
+                    - generic [ref=e1883]: 2026-01-15
+                  - generic [ref=e1884]:
+                    - generic [ref=e1885]: "2"
+                    - generic [ref=e1886]: Jane Smith
+                    - generic [ref=e1887]: jane@example.com
+                    - generic [ref=e1888]: 2026-01-16
+          - generic [ref=e1889]:
+            - generic [ref=e1891]:
+              - heading "AI Query Generator" [level=1] [ref=e1892]
+              - paragraph [ref=e1893]: Generate SQL from natural language
+            - generic [ref=e1894]:
+              - heading "Describe Your Query" [level=3] [ref=e1896]
+              - generic [ref=e1897]:
+                - textbox "e.g., Show me all users who signed up in the last 30 days" [ref=e1898]
+                - button "Generate SQL" [ref=e1899] [cursor=pointer]:
+                  - img [ref=e1900]
+                  - text: Generate SQL
+          - generic [ref=e1903]:
+            - generic [ref=e1904]:
+              - generic [ref=e1905]:
+                - heading "SQL Scripts" [level=1] [ref=e1906]
+                - paragraph [ref=e1907]: Manage saved SQL scripts
+              - button "New Script" [ref=e1908] [cursor=pointer]:
+                - img [ref=e1909]
+                - text: New Script
+            - generic [ref=e1911]:
+              - generic [ref=e1912]:
+                - generic [ref=e1913]: Name
+                - generic [ref=e1914]: Database
+                - generic [ref=e1915]: Last Modified
+              - generic [ref=e1917]:
+                - generic [ref=e1918]: User Analytics
+                - generic [ref=e1919]: Production DB
+                - generic [ref=e1920]: Today
+                - generic [ref=e1921]: Edit
+              - generic [ref=e1922]:
+                - generic [ref=e1923]: Monthly Report
+                - generic [ref=e1924]: Analytics DB
+                - generic [ref=e1925]: Yesterday
+                - generic [ref=e1926]: Edit
+          - generic [ref=e1927]:
+            - generic [ref=e1929]:
+              - heading "Query History" [level=1] [ref=e1930]
+              - paragraph [ref=e1931]: Recent query executions
+            - generic [ref=e1933]:
+              - generic [ref=e1934]:
+                - generic [ref=e1935]: Query
+                - generic [ref=e1936]: Database
+                - generic [ref=e1937]: Duration
+                - generic [ref=e1938]: Time
+                - generic [ref=e1939]: Status
+              - generic [ref=e1940]:
+                - code [ref=e1941]: SELECT COUNT(*) FROM users
+                - generic [ref=e1942]: Production
+                - generic [ref=e1943]: 45ms
+                - generic [ref=e1944]: Today
+                - generic [ref=e1945]: success
+              - generic [ref=e1946]:
+                - code [ref=e1947]: INSERT INTO logs...
+                - generic [ref=e1948]: Production
+                - generic [ref=e1949]: 12ms
+                - generic [ref=e1950]: Today
+                - generic [ref=e1951]: success
+              - generic [ref=e1952]:
+                - code [ref=e1953]: UPDATE products SET...
+                - generic [ref=e1954]: Production
+                - generic [ref=e1955]: "-"
+                - generic [ref=e1956]: Today
+                - generic [ref=e1957]: error
+          - generic [ref=e1958]:
+            - generic [ref=e1960]:
+              - heading "Data Explorer" [level=1] [ref=e1961]
+              - paragraph [ref=e1962]: Browse database schema
+            - generic [ref=e1963]:
+              - generic [ref=e1964]:
+                - heading "users" [level=4] [ref=e1965]
+                - paragraph [ref=e1966]: User accounts table
+                - paragraph [ref=e1967]: 12 columns
+              - generic [ref=e1968]:
+                - heading "orders" [level=4] [ref=e1969]
+                - paragraph [ref=e1970]: Order records
+                - paragraph [ref=e1971]: 18 columns
+              - generic [ref=e1972]:
+                - heading "products" [level=4] [ref=e1973]
+                - paragraph [ref=e1974]: Product catalog
+                - paragraph [ref=e1975]: 15 columns
+          - generic [ref=e1976]:
+            - generic [ref=e1978]:
+              - heading "Data Validation" [level=1] [ref=e1979]
+              - paragraph [ref=e1980]: Validate data quality
+            - generic [ref=e1981]:
+              - heading "Validation Rules" [level=3] [ref=e1983]
+              - list [ref=e1984]:
+                - listitem [ref=e1985]:
+                  - img [ref=e1986]
+                  - generic [ref=e1989]: Email format validation
+                  - generic [ref=e1990]: passing
+                - listitem [ref=e1991]:
+                  - img [ref=e1992]
+                  - generic [ref=e1995]: Date range validation
+                  - generic [ref=e1996]: passing
+          - generic [ref=e1997]:
+            - generic [ref=e1999]:
+              - heading "Migration" [level=1] [ref=e2000]
+              - paragraph [ref=e2001]: Database migration tools
+            - generic [ref=e2003]:
+              - generic [ref=e2004]:
+                - generic [ref=e2005]: Migration
+                - generic [ref=e2006]: Status
+                - generic [ref=e2007]: Applied
+              - generic [ref=e2009]:
+                - generic [ref=e2010]: v1_initial_schema
+                - generic [ref=e2011]: completed
+                - generic [ref=e2012]: Jan 15, 2026
+                - generic [ref=e2013]: View
+              - generic [ref=e2014]:
+                - generic [ref=e2015]: v2_add_users
+                - generic [ref=e2016]: completed
+                - generic [ref=e2017]: Feb 1, 2026
+                - generic [ref=e2018]: View
+          - generic [ref=e2019]:
+            - generic [ref=e2021]:
+              - heading "Performance" [level=1] [ref=e2022]
+              - paragraph [ref=e2023]: Query performance analysis
+            - generic [ref=e2024]:
+              - generic [ref=e2025]:
+                - paragraph [ref=e2026]: Avg Query Time
+                - paragraph [ref=e2027]: 89ms
+              - generic [ref=e2028]:
+                - paragraph [ref=e2029]: Slow Queries
+                - paragraph [ref=e2030]: "5"
+              - generic [ref=e2031]:
+                - paragraph [ref=e2032]: Total Queries
+                - paragraph [ref=e2033]: 1,842
+            - generic [ref=e2034]:
+              - heading "Slow Queries" [level=3] [ref=e2036]
+              - list [ref=e2037]:
+                - listitem [ref=e2038]:
+                  - img [ref=e2039]
+                  - code [ref=e2041]: SELECT * FROM orders WHERE...
+                  - generic [ref=e2042]: 1.2s
+                  - generic [ref=e2043]: slow
+          - generic [ref=e2044]:
+            - generic [ref=e2045]:
+              - heading "Settings" [level=1] [ref=e2046]
+              - paragraph [ref=e2047]: Configure application-wide settings
+            - generic [ref=e2048]:
+              - generic [ref=e2049]:
+                - heading "General" [level=3] [ref=e2050]
+                - generic [ref=e2051]: Core settings
+              - generic [ref=e2052]:
+                - link "General App name, timezone, theme" [ref=e2053] [cursor=pointer]:
+                  - /url: /settings/general
+                  - img [ref=e2054]
+                  - generic [ref=e2057]:
+                    - heading "General" [level=4] [ref=e2058]
+                    - paragraph [ref=e2059]: App name, timezone, theme
+                - link "Projects & Env Manage projects and environments" [ref=e2060] [cursor=pointer]:
+                  - /url: /settings/projects
+                  - img [ref=e2061]
+                  - generic [ref=e2063]:
+                    - heading "Projects & Env" [level=4] [ref=e2064]
+                    - paragraph [ref=e2065]: Manage projects and environments
+                - link "Credentials API keys and secrets management" [ref=e2066] [cursor=pointer]:
+                  - /url: /settings/credentials
+                  - img [ref=e2067]
+                  - generic [ref=e2071]:
+                    - heading "Credentials" [level=4] [ref=e2072]
+                    - paragraph [ref=e2073]: API keys and secrets management
+                - link "AI Config LLM provider and settings" [ref=e2074] [cursor=pointer]:
+                  - /url: /settings/ai-config
+                  - img [ref=e2075]
+                  - generic [ref=e2078]:
+                    - heading "AI Config" [level=4] [ref=e2079]
+                    - paragraph [ref=e2080]: LLM provider and settings
+                - link "Execution Execution settings and timeouts" [ref=e2081] [cursor=pointer]:
+                  - /url: /settings/execution
+                  - img [ref=e2082]
+                  - generic [ref=e2084]:
+                    - heading "Execution" [level=4] [ref=e2085]
+                    - paragraph [ref=e2086]: Execution settings and timeouts
+                - link "Integrations Third-party integrations" [ref=e2087] [cursor=pointer]:
+                  - /url: /settings/integrations
+                  - img [ref=e2088]
+                  - generic [ref=e2090]:
+                    - heading "Integrations" [level=4] [ref=e2091]
+                    - paragraph [ref=e2092]: Third-party integrations
+            - generic [ref=e2093]:
+              - generic [ref=e2094]:
+                - heading "Notifications & Security" [level=3] [ref=e2095]
+                - generic [ref=e2096]: Access control
+              - generic [ref=e2097]:
+                - link "Notifications Email and Slack alerts" [ref=e2098] [cursor=pointer]:
+                  - /url: /settings/notifications
+                  - img [ref=e2099]
+                  - generic [ref=e2102]:
+                    - heading "Notifications" [level=4] [ref=e2103]
+                    - paragraph [ref=e2104]: Email and Slack alerts
+                - link "Users & Roles User management and permissions" [ref=e2105] [cursor=pointer]:
+                  - /url: /settings/users
+                  - img [ref=e2106]
+                  - generic [ref=e2111]:
+                    - heading "Users & Roles" [level=4] [ref=e2112]
+                    - paragraph [ref=e2113]: User management and permissions
+                - link "Security Security policies and 2FA" [ref=e2114] [cursor=pointer]:
+                  - /url: /settings/security
+                  - img [ref=e2115]
+                  - generic [ref=e2117]:
+                    - heading "Security" [level=4] [ref=e2118]
+                    - paragraph [ref=e2119]: Security policies and 2FA
+            - generic [ref=e2120]:
+              - generic [ref=e2121]:
+                - heading "Audit & Logs" [level=3] [ref=e2122]
+                - generic [ref=e2123]: System
+              - link "Logs & Audit System logs and audit trail" [ref=e2125] [cursor=pointer]:
+                - /url: /settings/logs
+                - img [ref=e2126]
+                - generic [ref=e2129]:
+                  - heading "Logs & Audit" [level=4] [ref=e2130]
+                  - paragraph [ref=e2131]: System logs and audit trail
+            - generic [ref=e2133]:
+              - generic [ref=e2134]:
+                - generic [ref=e2135]: Area
+                - generic [ref=e2136]: Status
+                - generic [ref=e2137]: Notes
+              - generic [ref=e2138]:
+                - generic [ref=e2139]: General
+                - generic [ref=e2140]: Active
+                - generic [ref=e2141]: Org name, locale
+              - generic [ref=e2142]:
+                - generic [ref=e2143]: Credentials
+                - generic [ref=e2144]: Review
+                - generic [ref=e2145]: Rotate secrets
+              - generic [ref=e2146]:
+                - generic [ref=e2147]: AI Config
+                - generic [ref=e2148]: Configured
+                - generic [ref=e2149]: Mock provider
+              - generic [ref=e2150]:
+                - generic [ref=e2151]: Notifications
+                - generic [ref=e2152]: "On"
+                - generic [ref=e2153]: Email + Slack
+          - generic [ref=e2154]:
+            - generic [ref=e2155]:
+              - heading "General Settings" [level=1] [ref=e2156]
+              - paragraph [ref=e2157]: Configure application-wide settings
+            - generic [ref=e2159]:
+              - generic [ref=e2160]:
+                - text: Application Name
+                - textbox [ref=e2161]: AI QA Platform
+              - generic [ref=e2162]:
+                - text: Default Timezone
+                - combobox [ref=e2163]:
+                  - option "UTC" [selected]
+                  - option "America/New_York"
+                  - option "Europe/London"
+              - generic [ref=e2164]:
+                - text: Theme
+                - generic [ref=e2165]:
+                  - button "Light" [ref=e2166] [cursor=pointer]
+                  - button "Dark" [ref=e2167] [cursor=pointer]
+              - button "Save Settings" [ref=e2168] [cursor=pointer]
+          - generic [ref=e2169]:
+            - generic [ref=e2170]:
+              - heading "Projects & Environments" [level=1] [ref=e2171]
+              - paragraph [ref=e2172]: Manage projects and environments
+            - generic [ref=e2173]:
+              - generic [ref=e2174]:
+                - heading "Demo Project" [level=4] [ref=e2175]
+                - paragraph [ref=e2176]: Default project
+                - generic [ref=e2177]: Active
+              - generic [ref=e2178]:
+                - heading "API Tests" [level=4] [ref=e2179]
+                - paragraph [ref=e2180]: API automation project
+                - generic [ref=e2181]: Active
+            - generic [ref=e2182]:
+              - heading "Environments" [level=3] [ref=e2184]
+              - generic [ref=e2185]:
+                - generic [ref=e2186]:
+                  - generic [ref=e2187]: Name
+                  - generic [ref=e2188]: URL
+                  - generic [ref=e2189]: Status
+                - generic [ref=e2190]:
+                  - generic [ref=e2191]: Development
+                  - generic [ref=e2192]: https://dev.example.com
+                  - generic [ref=e2193]: Active
+                - generic [ref=e2194]:
+                  - generic [ref=e2195]: Staging
+                  - generic [ref=e2196]: https://staging.example.com
+                  - generic [ref=e2197]: Active
+                - generic [ref=e2198]:
+                  - generic [ref=e2199]: Production
+                  - generic [ref=e2200]: https://example.com
+                  - generic [ref=e2201]: Inactive
+          - generic [ref=e2202]:
+            - generic [ref=e2203]:
+              - heading "Credentials & Secrets" [level=1] [ref=e2204]
+              - paragraph [ref=e2205]: Manage API keys and secrets
+            - generic [ref=e2206]:
+              - generic [ref=e2207]:
+                - heading "API Keys" [level=3] [ref=e2208]
+                - button "Add Key" [ref=e2209] [cursor=pointer]:
+                  - img [ref=e2210]
+                  - text: Add Key
+              - generic [ref=e2211]:
+                - generic [ref=e2212]:
+                  - generic [ref=e2213]: Name
+                  - generic [ref=e2214]: Key
+                  - generic [ref=e2215]: Created
+                  - generic [ref=e2216]: Status
+                - generic [ref=e2217]:
+                  - generic [ref=e2218]: Production Key
+                  - generic [ref=e2219]: sk-****...****1234
+                  - generic [ref=e2220]: Jan 15, 2026
+                  - generic [ref=e2221]: Active
+                  - generic [ref=e2222]: Revoke
+                - generic [ref=e2223]:
+                  - generic [ref=e2224]: Test Key
+                  - generic [ref=e2225]: sk-****...****5678
+                  - generic [ref=e2226]: Feb 1, 2026
+                  - generic [ref=e2227]: Active
+                  - generic [ref=e2228]: Revoke
+          - generic [ref=e2229]:
+            - generic [ref=e2230]:
+              - heading "AI Configuration" [level=1] [ref=e2231]
+              - paragraph [ref=e2232]: Configure LLM provider settings
+            - generic [ref=e2234]:
+              - generic [ref=e2235]:
+                - text: Provider
+                - combobox [ref=e2236]:
+                  - option "OpenAI" [selected]
+                  - option "Anthropic"
+                  - option "Google AI"
+              - generic [ref=e2237]:
+                - text: Model
+                - combobox [ref=e2238]:
+                  - option "gpt-4" [selected]
+                  - option "gpt-3.5-turbo"
+              - generic [ref=e2239]:
+                - text: API Key
+                - textbox [ref=e2240]: sk-...
+              - generic [ref=e2241]:
+                - text: Temperature
+                - slider [ref=e2242]: "0.7"
+              - button "Save Configuration" [ref=e2243] [cursor=pointer]
+          - generic [ref=e2244]:
+            - generic [ref=e2245]:
+              - heading "Execution Settings" [level=1] [ref=e2246]
+              - paragraph [ref=e2247]: Configure test execution behavior
+            - generic [ref=e2249]:
+              - generic [ref=e2250]:
+                - text: Default Timeout (seconds)
+                - spinbutton [ref=e2251]: "30"
+              - generic [ref=e2252]:
+                - text: Retry Count
+                - spinbutton [ref=e2253]: "2"
+              - generic [ref=e2254]:
+                - text: Max Parallel Workers
+                - spinbutton [ref=e2255]: "5"
+              - generic [ref=e2256]:
+                - text: Screenshot on Failure
+                - checkbox [checked] [ref=e2257]
+                - text: Enabled
+              - button "Save Settings" [ref=e2258] [cursor=pointer]
+          - generic [ref=e2259]:
+            - generic [ref=e2260]:
+              - heading "Integrations" [level=1] [ref=e2261]
+              - paragraph [ref=e2262]: Third-party integrations
+            - generic [ref=e2263]:
+              - generic [ref=e2264]:
+                - generic [ref=e2266]:
+                  - heading "GitHub" [level=4] [ref=e2267]
+                  - paragraph [ref=e2268]: Code repository
+                - generic [ref=e2269]: Connected
+              - generic [ref=e2270]:
+                - generic [ref=e2272]:
+                  - heading "Slack" [level=4] [ref=e2273]
+                  - paragraph [ref=e2274]: Notifications
+                - generic [ref=e2275]: Not Connected
+              - generic [ref=e2276]:
+                - generic [ref=e2278]:
+                  - heading "Jira" [level=4] [ref=e2279]
+                  - paragraph [ref=e2280]: Issue tracking
+                - generic [ref=e2281]: Connected
+          - generic [ref=e2282]:
+            - generic [ref=e2283]:
+              - heading "Notifications" [level=1] [ref=e2284]
+              - paragraph [ref=e2285]: Configure alerts and notifications
+            - generic [ref=e2287]:
+              - generic [ref=e2288]:
+                - generic [ref=e2289]:
+                  - heading "Email Notifications" [level=4] [ref=e2290]
+                  - paragraph [ref=e2291]: Receive test results via email
+                - checkbox [checked] [ref=e2292]
+              - generic [ref=e2293]:
+                - generic [ref=e2294]:
+                  - heading "Slack Notifications" [level=4] [ref=e2295]
+                  - paragraph [ref=e2296]: Send alerts to Slack channel
+                - checkbox [checked] [ref=e2297]
+              - generic [ref=e2298]:
+                - generic [ref=e2299]:
+                  - heading "Failure Alerts" [level=4] [ref=e2300]
+                  - paragraph [ref=e2301]: Immediate alerts on test failures
+                - checkbox [checked] [ref=e2302]
+          - generic [ref=e2303]:
+            - generic [ref=e2304]:
+              - generic [ref=e2305]:
+                - heading "Users & Roles" [level=1] [ref=e2306]
+                - paragraph [ref=e2307]: User management and permissions
+              - button "Add User" [ref=e2308] [cursor=pointer]:
+                - img [ref=e2309]
+                - text: Add User
+            - generic [ref=e2311]:
+              - generic [ref=e2312]:
+                - generic [ref=e2313]: Name
+                - generic [ref=e2314]: Email
+                - generic [ref=e2315]: Role
+                - generic [ref=e2316]: Status
+              - generic [ref=e2317]:
+                - generic [ref=e2318]: Admin User
+                - generic [ref=e2319]: admin@example.com
+                - generic [ref=e2320]: Admin
+                - generic [ref=e2321]: Active
+                - generic [ref=e2322]: Edit
+              - generic [ref=e2323]:
+                - generic [ref=e2324]: Test Engineer
+                - generic [ref=e2325]: tester@example.com
+                - generic [ref=e2326]: Editor
+                - generic [ref=e2327]: Active
+                - generic [ref=e2328]: Edit
+              - generic [ref=e2329]:
+                - generic [ref=e2330]: Viewer
+                - generic [ref=e2331]: viewer@example.com
+                - generic [ref=e2332]: Viewer
+                - generic [ref=e2333]: Inactive
+                - generic [ref=e2334]: Edit
+          - generic [ref=e2335]:
+            - generic [ref=e2336]:
+              - heading "Security" [level=1] [ref=e2337]
+              - paragraph [ref=e2338]: Security policies and access control
+            - generic [ref=e2340]:
+              - generic [ref=e2341]:
+                - heading "Two-Factor Authentication" [level=3] [ref=e2342]
+                - generic [ref=e2343]:
+                  - generic [ref=e2344]:
+                    - heading "Enable 2FA" [level=4] [ref=e2345]
+                    - paragraph [ref=e2346]: Require 2FA for all users
+                  - checkbox [ref=e2347]
+              - generic [ref=e2348]:
+                - heading "Session Settings" [level=3] [ref=e2349]
+                - generic [ref=e2350]:
+                  - generic [ref=e2351]:
+                    - text: Session Timeout (minutes)
+                    - spinbutton [ref=e2352]: "60"
+                  - generic [ref=e2353]:
+                    - text: Password Policy
+                    - combobox [ref=e2354]:
+                      - option "Strong" [selected]
+                      - option "Medium"
+                      - option "Basic"
+              - button "Save Security Settings" [ref=e2355] [cursor=pointer]
+          - generic [ref=e2356]:
+            - generic [ref=e2357]:
+              - heading "Logs & Audit" [level=1] [ref=e2358]
+              - paragraph [ref=e2359]: System logs and audit trail
+            - generic [ref=e2360]:
+              - generic [ref=e2361]:
+                - paragraph [ref=e2362]: Total Events (7d)
+                - paragraph [ref=e2363]: 1,245
+              - generic [ref=e2364]:
+                - paragraph [ref=e2365]: Users Active
+                - paragraph [ref=e2366]: "8"
+            - generic [ref=e2368]:
+              - generic [ref=e2369]:
+                - generic [ref=e2370]: Timestamp
+                - generic [ref=e2371]: User
+                - generic [ref=e2372]: Action
+                - generic [ref=e2373]: Resource
+              - generic [ref=e2374]:
+                - generic [ref=e2375]: Today 10:30 AM
+                - generic [ref=e2376]: admin
+                - generic [ref=e2377]: LOGIN
+                - generic [ref=e2378]: /
+              - generic [ref=e2379]:
+                - generic [ref=e2380]: Today 10:15 AM
+                - generic [ref=e2381]: admin
+                - generic [ref=e2382]: PROJECT_CREATE
+                - generic [ref=e2383]: /projects
+              - generic [ref=e2384]:
+                - generic [ref=e2385]: Today 9:45 AM
+                - generic [ref=e2386]: tester
+                - generic [ref=e2387]: RUN_EXECUTE
+                - generic [ref=e2388]: /execution
+          - generic [ref=e2389]:
+            - generic [ref=e2390]:
+              - generic [ref=e2391]:
+                - generic [ref=e2392]:
+                  - text: Total Tests
+                  - img [ref=e2393]
+                - paragraph [ref=e2398]: "142"
+                - generic [ref=e2399]: UI/API
+              - generic [ref=e2400]:
+                - generic [ref=e2401]:
+                  - text: Projects
+                  - img [ref=e2402]
+                - paragraph [ref=e2404]: "8"
+                - generic [ref=e2405]: Active
+              - generic [ref=e2406]:
+                - generic [ref=e2407]:
+                  - text: Pass Rate
+                  - img [ref=e2408]
+                - paragraph [ref=e2411]: 94.2%
+                - generic [ref=e2412]: Last 24h
+              - generic [ref=e2413]:
+                - generic [ref=e2414]:
+                  - text: Avg Duration
+                  - img [ref=e2415]
+                - paragraph [ref=e2418]: 2.3s
+                - generic [ref=e2419]: Per run
+            - generic [ref=e2420]:
+              - generic [ref=e2421]:
+                - generic [ref=e2422]:
+                  - heading "Recent Runs" [level=3] [ref=e2423]
+                  - generic [ref=e2424]: 5 latest
+                - list [ref=e2425]:
+                  - listitem [ref=e2426]:
+                    - generic [ref=e2428]: run-4131
+                    - generic [ref=e2429]: 820ms
+                    - generic [ref=e2430]: passed
+                  - listitem [ref=e2431]:
+                    - generic [ref=e2433]: run-4130
+                    - generic [ref=e2434]: 1.2s
+                    - generic [ref=e2435]: passed
+                  - listitem [ref=e2436]:
+                    - generic [ref=e2438]: run-4129
+                    - generic [ref=e2439]: 640ms
+                    - generic [ref=e2440]: failed
+                  - listitem [ref=e2441]:
+                    - generic [ref=e2443]: run-4128
+                    - generic [ref=e2444]: running
+                    - generic [ref=e2445]: running
+                  - listitem [ref=e2446]:
+                    - generic [ref=e2448]: run-4127
+                    - generic [ref=e2449]: 910ms
+                    - generic [ref=e2450]: passed
+              - generic [ref=e2451]:
+                - heading "Quick Actions" [level=3] [ref=e2453]
+                - generic [ref=e2454]:
+                  - button "Run Smoke Tests" [ref=e2455] [cursor=pointer]:
+                    - img [ref=e2456]
+                    - text: Run Smoke Tests
+                  - button "Run Load Test" [ref=e2458] [cursor=pointer]:
+                    - img [ref=e2459]
+                    - text: Run Load Test
+                  - button "View Flaky Tests" [ref=e2462] [cursor=pointer]:
+                    - img [ref=e2463]
+                    - text: View Flaky Tests
+                  - button "Generate AI Test" [ref=e2465] [cursor=pointer]:
+                    - img [ref=e2466]
+                    - text: Generate AI Test
