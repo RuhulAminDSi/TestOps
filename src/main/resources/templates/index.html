@@ -198,6 +198,36 @@
         <div id="page-settings-logs" class="page-section" style="display:none">
           <div th:replace="~{pages/settings/settings-logs :: content}"></div>
         </div>
+        <div id="page-security-automation" class="page-section" style="display:none">
+          <div th:replace="~{pages/security-automation/security-automation-dashboard :: content}"></div>
+        </div>
+        <div id="page-security-automation-vuln-scanner" class="page-section" style="display:none">
+          <div th:replace="~{pages/security-automation/security-automation-vuln-scanner :: content}"></div>
+        </div>
+        <div id="page-security-automation-headers" class="page-section" style="display:none">
+          <div th:replace="~{pages/security-automation/security-automation-headers :: content}"></div>
+        </div>
+        <div id="page-security-automation-port-scanner" class="page-section" style="display:none">
+          <div th:replace="~{pages/security-automation/security-automation-port-scanner :: content}"></div>
+        </div>
+        <div id="page-security-automation-ssl-check" class="page-section" style="display:none">
+          <div th:replace="~{pages/security-automation/security-automation-ssl-check :: content}"></div>
+        </div>
+        <div id="page-security-automation-password-check" class="page-section" style="display:none">
+          <div th:replace="~{pages/security-automation/security-automation-password-check :: content}"></div>
+        </div>
+        <div id="page-security-automation-jwt-analyzer" class="page-section" style="display:none">
+          <div th:replace="~{pages/security-automation/security-automation-jwt-analyzer :: content}"></div>
+        </div>
+        <div id="page-security-automation-input-test" class="page-section" style="display:none">
+          <div th:replace="~{pages/security-automation/security-automation-input-test :: content}"></div>
+        </div>
+        <div id="page-security-automation-subdomain" class="page-section" style="display:none">
+          <div th:replace="~{pages/security-automation/security-automation-subdomain :: content}"></div>
+        </div>
+        <div id="page-security-automation-reports" class="page-section" style="display:none">
+          <div th:replace="~{pages/security-automation/security-automation-reports :: content}"></div>
+        </div>
       </main>
       <script>
         (function() {
@@ -347,6 +377,31 @@
               page = 'page-settings-logs';
             } else {
               page = 'page-settings';
+            }
+          }
+          else if (path.indexOf('/security-automation') === 0) {
+            if (path === '/security-automation' || path === '/security-automation/') {
+              page = 'page-security-automation';
+            } else if (path.indexOf('/security-automation/vuln-scanner') === 0) {
+              page = 'page-security-automation-vuln-scanner';
+            } else if (path.indexOf('/security-automation/headers') === 0) {
+              page = 'page-security-automation-headers';
+            } else if (path.indexOf('/security-automation/port-scanner') === 0) {
+              page = 'page-security-automation-port-scanner';
+            } else if (path.indexOf('/security-automation/ssl-check') === 0) {
+              page = 'page-security-automation-ssl-check';
+            } else if (path.indexOf('/security-automation/password-check') === 0) {
+              page = 'page-security-automation-password-check';
+            } else if (path.indexOf('/security-automation/jwt-analyzer') === 0) {
+              page = 'page-security-automation-jwt-analyzer';
+            } else if (path.indexOf('/security-automation/input-test') === 0) {
+              page = 'page-security-automation-input-test';
+            } else if (path.indexOf('/security-automation/subdomain') === 0) {
+              page = 'page-security-automation-subdomain';
+            } else if (path.indexOf('/security-automation/reports') === 0) {
+              page = 'page-security-automation-reports';
+            } else {
+              page = 'page-security-automation';
             }
           }
           

@@ -74,6 +74,89 @@ Each commit updates CHANGELOG.md:
 
 ---
 
+## Command 5: Bug Fix Workflow
+
+**When:** You have fixed a bug and want to document it properly, run tests, and ensure the fix is verified.
+
+**What to do:** Say "Run bug fix workflow" or use the task below.
+
+**What happens:**
+1. Identifies the bug and root cause
+2. Implements the fix
+3. Creates a summary file in `.bug_fixes` with fix details
+4. Runs unit tests (`mvn test`)
+5. Runs UI tests (if applicable)
+6. Verifies the fix works
+7. Optionally pushes to dev branch
+
+```
+Task(description="bug fix workflow", prompt="Fix bug, save summary to .bug_fixes, run unit and UI tests", subagent_type="explore")
+```
+
+### Bug Fix Summary Template
+
+When saving to `.bug_fixes`, use this format:
+
+```markdown
+# Bug Fix Summary
+
+## Date: YYYY-MM-DD
+
+## Issue Description
+- What was the problem?
+- Error messages or symptoms
+
+## Root Cause
+- Why did this happen?
+- What code/config caused it?
+
+## Solution Applied
+- Steps taken to fix
+- Files modified
+- Commands run
+
+## Verification
+- Test results
+- Before/after behavior
+
+## Configuration or Dependencies
+- Any config changes?
+- New dependencies?
+
+## Notes
+- Lessons learned
+- Prevention suggestions
+```
+
+### Example Summary
+
+```markdown
+# Bug Fix Summary
+
+## Date: 2026-04-13
+
+## Issue
+Application failed to start with "Failed to configure a DataSource" error.
+
+## Root Cause
+PostgreSQL container not running, application couldn't connect to database.
+
+## Solution
+1. Created docker-compose.yml for PostgreSQL
+2. Started container: docker run -d --name aiqa-postgres ...
+3. Freed port 8081 from other process
+4. Started application: mvn spring-boot:run
+
+## Verification
+- Application started successfully on port 8081
+- Database connection working (HikariPool-1 started)
+- All tests passed
+
+## Notes
+- Always ensure PostgreSQL is running before starting app
+- Added docker-compose.yml for easy setup
+```
+
 ## Summary
 
 | Your Action | Agent/I Do |

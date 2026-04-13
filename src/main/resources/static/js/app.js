@@ -169,6 +169,30 @@ function initPageRouter() {
     } else {
       activeSection = 'page-settings';
     }
+  } else if (currentPath.startsWith('/security-automation')) {
+    if (currentPath === '/security-automation' || currentPath === '/security-automation/') {
+      activeSection = 'page-security-automation';
+    } else if (currentPath.includes('/security-automation/vuln-scanner')) {
+      activeSection = 'page-security-automation-vuln-scanner';
+    } else if (currentPath.includes('/security-automation/headers')) {
+      activeSection = 'page-security-automation-headers';
+    } else if (currentPath.includes('/security-automation/port-scanner')) {
+      activeSection = 'page-security-automation-port-scanner';
+    } else if (currentPath.includes('/security-automation/ssl-check')) {
+      activeSection = 'page-security-automation-ssl-check';
+    } else if (currentPath.includes('/security-automation/password-check')) {
+      activeSection = 'page-security-automation-password-check';
+    } else if (currentPath.includes('/security-automation/jwt-analyzer')) {
+      activeSection = 'page-security-automation-jwt-analyzer';
+    } else if (currentPath.includes('/security-automation/input-test')) {
+      activeSection = 'page-security-automation-input-test';
+    } else if (currentPath.includes('/security-automation/subdomain')) {
+      activeSection = 'page-security-automation-subdomain';
+    } else if (currentPath.includes('/security-automation/reports')) {
+      activeSection = 'page-security-automation-reports';
+    } else {
+      activeSection = 'page-security-automation';
+    }
   }
 
   sections.forEach(section => {
@@ -314,6 +338,28 @@ function highlightSidebarActive() {
     }
     if (!activeLink && (currentPath === '/settings' || currentPath === '/settings/')) {
       activeLink = document.querySelector('.nav-child[href="/settings/general"]');
+    }
+  } else if (currentPath.startsWith('/security-automation')) {
+    const securityPaths = [
+      '/security-automation',
+      '/security-automation/vuln-scanner',
+      '/security-automation/headers',
+      '/security-automation/port-scanner',
+      '/security-automation/ssl-check',
+      '/security-automation/password-check',
+      '/security-automation/jwt-analyzer',
+      '/security-automation/input-test',
+      '/security-automation/subdomain',
+      '/security-automation/reports'
+    ];
+    for (const p of securityPaths) {
+      if (currentPath.includes(p)) {
+        activeLink = document.querySelector(`.nav-child[href="${p}"]`);
+        break;
+      }
+    }
+    if (!activeLink && (currentPath === '/security-automation' || currentPath === '/security-automation/')) {
+      activeLink = document.querySelector('.nav-child[href="/security-automation"]');
     }
   }
 

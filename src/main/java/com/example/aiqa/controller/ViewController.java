@@ -132,7 +132,17 @@ public class ViewController {
             "/settings/notifications",
             "/settings/users",
             "/settings/security",
-            "/settings/logs"
+            "/settings/logs",
+            "/security-automation",
+            "/security-automation/vuln-scanner",
+            "/security-automation/headers",
+            "/security-automation/port-scanner",
+            "/security-automation/ssl-check",
+            "/security-automation/password-check",
+            "/security-automation/jwt-analyzer",
+            "/security-automation/input-test",
+            "/security-automation/subdomain",
+            "/security-automation/reports"
     })
     public String forwardKnown(Model model, HttpServletRequest request) {
         setPath(model, request.getRequestURI());
@@ -228,6 +238,19 @@ public class ViewController {
             if (path.contains("/security")) return "settingsSecurity";
             if (path.contains("/logs")) return "settingsLogs";
             return "settingsGeneral";
+        }
+        if (path.startsWith("/security-automation")) {
+            if (path.equals("/security-automation") || path.equals("/security-automation/")) return "securityAutomationDashboard";
+            if (path.contains("/vuln-scanner")) return "securityAutomationVulnScanner";
+            if (path.contains("/headers")) return "securityAutomationHeaders";
+            if (path.contains("/port-scanner")) return "securityAutomationPortScanner";
+            if (path.contains("/ssl-check")) return "securityAutomationSslCheck";
+            if (path.contains("/password-check")) return "securityAutomationPasswordCheck";
+            if (path.contains("/jwt-analyzer")) return "securityAutomationJwtAnalyzer";
+            if (path.contains("/input-test")) return "securityAutomationInputTest";
+            if (path.contains("/subdomain")) return "securityAutomationSubdomain";
+            if (path.contains("/reports")) return "securityAutomationReports";
+            return "securityAutomationDashboard";
         }
         return "dashboard";
     }
