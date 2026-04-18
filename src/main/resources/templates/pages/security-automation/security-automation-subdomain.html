@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content security-page">
+  <div class="mb-6">
+    <nav class="breadcrumb mb-2">
+      <a href="/security-automation" class="breadcrumb-link">Security Automation</a>
+      <span class="breadcrumb-separator">/</span>
+      <span class="breadcrumb-current">Subdomain Finder</span>
+    </nav>
+    <div class="flex items-center gap-3 mb-2">
+      <div class="tool-icon" style="background: rgba(16, 185, 129, 0.1);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M2 12h20"/></svg>
+      </div>
+      <div>
+        <h1 class="text-2xl font-bold">Subdomain Finder</h1>
+        <p class="muted text-sm">Discover subdomains for a given domain</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-4 gap-6 mb-6">
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">Total Searches</span>
+        <span class="text-xl font-bold" id="subdomain-total-searches">0</span>
+      </div>
+      <p class="text-xs text-gray-500">Lifetime searches</p>
+    </div>
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">Domains Found</span>
+        <span class="text-xl font-bold text-green-500" id="subdomain-total-found">0</span>
+      </div>
+      <p class="text-xs text-gray-500">Subdomains discovered</p>
+    </div>
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">Unique Domains</span>
+        <span class="text-xl font-bold" id="subdomain-unique-domains">0</span>
+      </div>
+      <p class="text-xs text-gray-500">Base domains searched</p>
+    </div>
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">Avg. Subdomains</span>
+        <span class="text-xl font-bold text-blue-500" id="subdomain-avg">0</span>
+      </div>
+      <p class="text-xs text-gray-500">Per domain</p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-3 gap-6">
+    <div class="col-span-2">
+      <div class="card mb-6">
+        <div class="card-header">
+          <h3 class="font-semibold">Search Configuration</h3>
+        </div>
+        <div class="card-body">
+          <div class="form-group mb-4">
+            <label class="label">
+              Base Domain
+              <span class="label-hint">Enter the domain to find subdomains (e.g., example.com)</span>
+            </label>
+            <div class="relative">
+              <input type="text" id="subdomain-domain" class="input pl-10" placeholder="example.com" />
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-3">
+            <button class="btn btn-primary" onclick="runSubdomainFind()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M2 12h20"/></svg>
+              Find Subdomains
+            </button>
+            <button class="btn btn-ghost" onclick="clearSubdomainForm()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+              Clear
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="subdomain-loading" class="card mb-6" style="display: none;">
+        <div class="card-body text-center py-8">
+          <div class="scan-animation mb-4">
+            <svg class="w-12 h-12 mx-auto animate-spin" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+          </div>
+          <h4 class="font-semibold mb-2">Searching for Subdomains</h4>
+          <p class="muted text-sm mb-4">This may take a while...</p>
+          <div class="progress-bar w-full mb-2">
+            <div class="progress-fill" id="subdomain-progress" style="width: 0%"></div>
+          </div>
+          <p class="text-xs text-gray-500" id="subdomain-progress-text">Initializing DNS checks...</p>
+        </div>
+      </div>
+
+      <div id="subdomain-results" class="card mb-6" style="display: none;">
+        <div class="card-header">
+          <h3 class="font-semibold">Discovered Subdomains</h3>
+          <div class="flex items-center gap-2">
+            <span class="badge badge-success" id="subdomain-count-badge">0 Found</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="subdomain-summary" class="grid grid-cols-3 gap-4 mb-6">
+          </div>
+          
+          <div id="subdomain-list" class="subdomain-list">
+          </div>
+        </div>
+      </div>
+
+      <div id="subdomain-error" class="card mb-6" style="display: none;">
+        <div class="card-body">
+          <div class="flex items-start gap-3">
+            <div class="error-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6"/><path d="M9 9l6 6"/></svg>
+            </div>
+            <div>
+              <h4 class="font-semibold text-red-500">Search Failed</h4>
+              <p class="muted text-sm mt-1" id="subdomain-error-message">An error occurred during the search.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-span-1">
+      <div class="card mb-6">
+        <div class="card-header">
+          <h3 class="font-semibold">Common Subdomains</h3>
+        </div>
+        <div class="card-body">
+          <div class="common-subs-list">
+            <div class="sub-item">www</div>
+            <div class="sub-item">mail</div>
+            <div class="sub-item">ftp</div>
+            <div class="sub-item">localhost</div>
+            <div class="sub-item">webmail</div>
+            <div class="sub-item">smtp</div>
+            <div class="sub-item">pop</div>
+            <div class="sub-item">ns1</div>
+            <div class="sub-item">webdisk</div>
+            <div class="sub-item">cpanel</div>
+            <div class="sub-item">whm</div>
+            <div class="sub-item">autodiscover</div>
+            <div class="sub-item">dev</div>
+            <div class="sub-item">test</div>
+            <div class="sub-item">blog</div>
+            <div class="sub-item">shop</div>
+            <div class="sub-item">login</div>
+            <div class="sub-item">vpn</div>
+            <div class="sub-item">cdn</div>
+            <div class="sub-item">s3</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-6">
+        <div class="card-header">
+          <h3 class="font-semibold">What We Check</h3>
+        </div>
+        <div class="card-body">
+          <ul class="tips-list">
+            <li><strong>DNS Resolution:</strong> Check if subdomain resolves to an IP</li>
+            <li><strong>Common Names:</strong> Test 50+ common subdomain patterns</li>
+            <li><strong>HTTP Availability:</strong> Verify if subdomains respond to HTTP/HTTPS</li>
+            <li><strong>IP Extraction:</strong> Extract and display resolved IP addresses</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="font-semibold">Use Cases</h3>
+        </div>
+        <div class="card-body">
+          <ul class="tips-list">
+            <li>Reconnaissance for security assessments</li>
+            <li>Discover hidden assets</li>
+            <li>Map attack surface</li>
+            <li>Find forgotten subdomains</li>
+            <li>Verify subdomain takeover</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.breadcrumb-link { color: #6b7280; text-decoration: none; }
+.breadcrumb-link:hover { color: #3b82f6; }
+.breadcrumb-separator { color: #374151; }
+.breadcrumb-current { color: #111827; font-weight: 500; }
+
+.tool-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.badge {
+  padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500;
+}
+.badge-success { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+.badge-warning { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+.badge-danger { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+.badge-info { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+.badge-pending { background: rgba(107, 114, 128, 0.1); color: #6b7280; }
+
+.card {
+  background: #111827; border: 1px solid #1f2937; border-radius: 12px;
+}
+.card-header {
+  padding: 16px 20px; border-bottom: 1px solid #1f2937;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.card-body { padding: 20px; }
+
+.form-group { margin-bottom: 16px; }
+.label {
+  display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; color: #e5e7eb;
+}
+.label-hint {
+  display: block; font-size: 12px; font-weight: 400; color: #6b7280; margin-top: 2px;
+}
+
+.input {
+  width: 100%; padding: 10px 14px;
+  background: #1f2937; border: 1px solid #374151;
+  border-radius: 8px; color: #e5e7eb; font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input:focus {
+  outline: none; border-color: #10b981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+.input::placeholder { color: #6b7280; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s; border: none;
+}
+.btn-primary {
+  background: #10b981; color: white;
+}
+.btn-primary:hover { background: #059669; }
+.btn-ghost {
+  background: transparent; color: #9ca3af; border: 1px solid #374151;
+}
+.btn-ghost:hover { background: #1f2937; color: #e5e7eb; }
+
+.progress-bar {
+  height: 6px; background: #1f2937; border-radius: 3px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, #10b981, #34d399);
+  border-radius: 3px; transition: width 0.3s ease;
+}
+
+.common-subs-list {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
+}
+.sub-item {
+  padding: 8px 12px; background: #0f172a; border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  color: #10b981; text-align: center;
+}
+
+.tips-list {
+  list-style: none; padding: 0; margin: 0;
+  font-size: 13px; color: #9ca3af;
+}
+.tips-list li {
+  padding: 8px 0; padding-left: 16px;
+  position: relative;
+}
+.tips-list li::before {
+  content: "•"; position: absolute; left: 0; color: #10b981;
+}
+.tips-list strong { color: #e5e7eb; }
+
+.subdomain-list { display: flex; flex-direction: column; gap: 8px; }
+.subdomain-item {
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 16px; background: #0f172a;
+  border: 1px solid #1e293b; border-radius: 10px;
+  transition: all 0.2s;
+}
+.subdomain-item:hover { border-color: #334155; }
+.subdomain-icon {
+  width: 40px; height: 40px;
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+.subdomain-info { flex: 1; }
+.subdomain-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px; font-weight: 600; color: #10b981;
+  margin-bottom: 2px;
+}
+.subdomain-ip {
+  font-size: 12px; color: #6b7280;
+}
+.subdomain-status {
+  padding: 6px 12px; border-radius: 20px;
+  font-size: 11px; font-weight: 600;
+}
+.subdomain-status.found {
+  background: rgba(16, 185, 129, 0.15); color: #10b981;
+}
+
+.summary-card {
+  padding: 16px; border-radius: 8px; text-align: center;
+}
+.summary-value { font-size: 24px; font-weight: 700; display: block; }
+.summary-label { font-size: 12px; color: #9ca3af; }
+
+.error-icon {
+  width: 40px; height: 40px;
+  background: rgba(239, 68, 68, 0.1); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.grid { display: grid; }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+.gap-3 { gap: 12px; }
+.gap-4 { gap: 16px; }
+.gap-6 { gap: 24px; }
+.mb-2 { margin-bottom: 8px; }
+.mb-3 { margin-bottom: 12px; }
+.mb-4 { margin-bottom: 16px; }
+.mb-6 { margin-bottom: 24px; }
+.mb-2 { margin-bottom: 8px; }
+
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 8px; }
+.gap-3 { gap: 12px; }
+
+.text-center { text-align: center; }
+.text-xl { font-size: 1.25rem; }
+.text-2xl { font-size: 1.5rem; }
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+.font-mono { font-family: 'JetBrains Mono', monospace; }
+.text-sm { font-size: 0.875rem; }
+.text-xs { font-size: 0.75rem; }
+.muted { color: #9ca3af; }
+.text-gray-500 { color: #6b7280; }
+.text-red-500 { color: #ef4444; }
+.text-green-500 { color: #10b981; }
+.text-blue-500 { color: #3b82f6; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.animate-spin { animation: spin 1s linear infinite; }
+</style>
+
+<script>
+let subdomainSearchCount = 0;
+let subdomainTotalFound = 0;
+let subdomainUniqueDomains = new Set();
+
+async function runSubdomainFind() {
+  const domain = document.getElementById('subdomain-domain').value.trim();
+  if (!domain) {
+    showSubdomainError('Please enter a domain');
+    return;
+  }
+
+  hideSubdomainResults();
+  hideSubdomainError();
+  showSubdomainLoading();
+
+  let progress = 0;
+  const progressInterval = setInterval(() => {
+    progress += Math.random() * 15;
+    if (progress > 90) progress = 90;
+    document.getElementById('subdomain-progress').style.width = progress + '%';
+    const checked = Math.round((progress / 100) * 50);
+    document.getElementById('subdomain-progress-text').textContent = `Checking subdomain ${checked} of 50...`;
+  }, 300);
+
+  try {
+    const res = await fetch('/api/security/subdomain', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({domain})
+    });
+    
+    clearInterval(progressInterval);
+    document.getElementById('subdomain-progress').style.width = '100%';
+    document.getElementById('subdomain-progress-text').textContent = 'Search complete!';
+    
+    const data = await res.json();
+    hideSubdomainLoading();
+    
+    subdomainSearchCount++;
+    subdomainUniqueDomains.add(domain);
+    document.getElementById('subdomain-total-searches').textContent = subdomainSearchCount;
+    document.getElementById('subdomain-unique-domains').textContent = subdomainUniqueDomains.size;
+    
+    displaySubdomainResults(data);
+    
+  } catch (e) {
+    clearInterval(progressInterval);
+    hideSubdomainLoading();
+    showSubdomainError('Search failed: ' + e.message);
+  }
+}
+
+function displaySubdomainResults(data) {
+  let result;
+  try {
+    result = typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
+  } catch { result = data; }
+
+  const subdomains = result.foundSubdomains || [];
+  subdomainTotalFound += subdomains.length;
+  
+  const avgSubdomains = Math.round(subdomainTotalFound / subdomainSearchCount);
+  
+  document.getElementById('subdomain-total-found').textContent = subdomainTotalFound;
+  document.getElementById('subdomain-avg').textContent = avgSubdomains;
+
+  const countBadge = document.getElementById('subdomain-count-badge');
+  countBadge.textContent = subdomains.length + ' Found';
+  countBadge.className = 'badge ' + (subdomains.length > 10 ? 'badge-warning' : subdomains.length > 0 ? 'badge-success' : 'badge-pending');
+
+  let summaryHtml = '';
+  summaryHtml += `<div class="summary-card" style="background: rgba(16, 185, 129, 0.1);">
+    <span class="summary-value text-green-500">${subdomains.length}</span>
+    <span class="summary-label">Found</span>
+  </div>`;
+  summaryHtml += `<div class="summary-card" style="background: rgba(59, 130, 246, 0.1);">
+    <span class="summary-value text-blue-500">${result.count || 0}</span>
+    <span class="summary-label">Checked</span>
+  </div>`;
+  summaryHtml += `<div class="summary-card" style="background: rgba(168, 85, 247, 0.1);">
+    <span class="summary-value">${result.baseDomain || '-'}</span>
+    <span class="summary-label">Base Domain</span>
+  </div>`;
+  document.getElementById('subdomain-summary').innerHTML = summaryHtml;
+
+  if (subdomains.length > 0) {
+    let listHtml = '';
+    subdomains.forEach(sub => {
+      const parts = sub.split(' -> ');
+      const name = parts[0] || sub;
+      const ip = parts[1] || 'N/A';
+      
+      listHtml += `<div class="subdomain-item">
+        <div class="subdomain-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M2 12h20"/></svg>
+        </div>
+        <div class="subdomain-info">
+          <div class="subdomain-name">${escapeHtml(name)}</div>
+          <div class="subdomain-ip">IP: ${escapeHtml(ip)}</div>
+        </div>
+        <span class="subdomain-status found">Active</span>
+      </div>`;
+    });
+    document.getElementById('subdomain-list').innerHTML = listHtml;
+  } else {
+    document.getElementById('subdomain-list').innerHTML = `
+      <div class="subdomain-item" style="text-align: center; padding: 32px;">
+        <svg class="w-12 h-12 mx-auto mb-3" style="color: #6b7280;" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M2 12h20"/></svg>
+        <p class="font-semibold text-lg mb-1">No Subdomains Found</p>
+        <p class="muted text-sm">No subdomains were discovered for this domain.</p>
+      </div>
+    `;
+  }
+
+  document.getElementById('subdomain-results').style.display = 'block';
+}
+
+function showSubdomainLoading() {
+  document.getElementById('subdomain-loading').style.display = 'block';
+}
+
+function hideSubdomainLoading() {
+  document.getElementById('subdomain-loading').style.display = 'none';
+}
+
+function showSubdomainResults() {
+  document.getElementById('subdomain-results').style.display = 'block';
+}
+
+function hideSubdomainResults() {
+  document.getElementById('subdomain-results').style.display = 'none';
+}
+
+function showSubdomainError(message) {
+  document.getElementById('subdomain-error-message').textContent = message;
+  document.getElementById('subdomain-error').style.display = 'block';
+}
+
+function hideSubdomainError() {
+  document.getElementById('subdomain-error').style.display = 'none';
+}
+
+function clearSubdomainForm() {
+  document.getElementById('subdomain-domain').value = '';
+  hideSubdomainResults();
+  hideSubdomainError();
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+</script>
+</body>
+</html>

@@ -1004,7 +1004,8 @@ function initModal() {
       const scriptData = {
         name: formData.get('name'),
         language: formData.get('language'),
-        projectId: formData.get('projectId')
+        projectId: formData.get('projectId'),
+        suiteId: formData.get('suiteId') || null
       };
       
       try {
@@ -1032,6 +1033,77 @@ function initModal() {
     });
   }
 
+  // Edit Script modal functions
+  window.openEditScriptModal = function(btn) {
+    const scriptId = btn.getAttribute('data-script-id');
+    const scriptName = btn.getAttribute('data-script-name') || '';
+    const scriptLanguage = btn.getAttribute('data-script-language') || 'javascript';
+    const scriptProjectId = btn.getAttribute('data-script-project-id') || '';
+    
+    console.log('Opening edit modal for script:', scriptId, scriptName);
+    
+    // Set form fields
+    document.getElementById('edit-script-id').value = scriptId;
+    document.getElementById('edit-script-name').value = scriptName;
+    document.getElementById('edit-script-language').value = scriptLanguage;
+    if (scriptProjectId) {
+      document.getElementById('edit-script-project').value = scriptProjectId;
+    }
+    
+    // Also set window vars for delete
+    window.lastEditScriptId = scriptId;
+    window.lastEditScriptName = scriptName;
+    window.lastEditBtn = btn;
+    
+    document.getElementById('edit-script-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.openDeleteScriptModal = function() {
+    let scriptId = document.getElementById('edit-script-id').value;
+    let scriptName = document.getElementById('edit-script-name').value;
+    
+    // Try from last clicked edit button
+    if (!scriptId && window.lastEditBtn) {
+      scriptId = window.lastEditBtn.getAttribute('data-script-id');
+      scriptName = window.lastEditBtn.getAttribute('data-script-name');
+    }
+    
+    console.log('Delete - scriptId:', scriptId, 'scriptName:', scriptName);
+    
+    if (!scriptId) {
+      alert('No script selected. Please click the edit icon first.');
+      return;
+    }
+    
+    document.getElementById('delete-script-name').textContent = scriptName;
+    document.getElementById('confirm-delete-script-btn').onclick = function() {
+      deleteScript(scriptId);
+    };
+    closeModal('edit-script-modal');
+    document.getElementById('delete-script-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  async function deleteScript(scriptId) {
+    console.log('Deleting script:', scriptId);
+    try {
+      const response = await fetch('/api/scripts/' + scriptId, {
+        method: 'DELETE'
+      });
+      if (response.ok) {
+        closeModal('delete-script-modal');
+        document.body.style.overflow = '';
+        window.location.reload();
+      } else {
+        alert('Failed to delete script');
+      }
+    } catch (error) {
+      console.error('Error deleting script:', error);
+      alert('Error deleting script');
+    }
+  }
+
   const editScriptForm = document.getElementById('edit-script-form');
   if (editScriptForm) {
     editScriptForm.addEventListener('submit', async (e) => {
@@ -1040,7 +1112,9 @@ function initModal() {
       const scriptId = document.getElementById('edit-script-id').value;
       const formData = new FormData(editScriptForm);
       const scriptData = {
-        name: formData.get('name')
+        name: formData.get('name'),
+        language: formData.get('language'),
+        projectId: formData.get('projectId')
       };
       
       try {
@@ -1068,12 +1142,51 @@ function initModal() {
     });
   }
 
+  // Test Suite CRUD handlers
+  const suiteForm = document.getElementById('new-suite-form');
+  if (suiteForm) {
+    suiteForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(suiteForm);
+      const suiteData = {
+        name: formData.get('name'),
+        description: formData.get('description'),
+        projectId: formData.get('projectId')
+      };
+      
+      try {
+        const response = await fetch('/api/test-suites', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(suiteData)
+        });
+        
+        if (response.ok) {
+          const modal = document.getElementById('new-suite-modal');
+          modal.classList.remove('open');
+          document.body.style.overflow = '';
+          suiteForm.reset();
+          window.location.reload();
+        } else {
+          alert('Failed to create test suite');
+        }
+      } catch (error) {
+        console.error('Error creating test suite:', error);
+        alert('Error creating test suite');
+      }
+    });
+  }
+
   // Script editor functionality
   window.selectScript = function(element) {
     const scriptId = element.getAttribute('data-script-id');
     const scriptName = element.querySelector('.script-name').textContent;
     const scriptContent = element.getAttribute('data-content') || '';
     const scriptLanguage = element.getAttribute('data-language') || 'javascript';
+    const scriptProjectId = element.getAttribute('data-project-id') || '';
     
     document.querySelectorAll('.script-item').forEach(item => item.classList.remove('active'));
     element.classList.add('active');
@@ -1090,8 +1203,212 @@ function initModal() {
     document.getElementById('run-btn').disabled = false;
     document.getElementById('save-btn').disabled = false;
     
+    // Also populate edit form for delete functionality
+    document.getElementById('edit-script-id').value = scriptId;
+    document.getElementById('edit-script-name').value = scriptName;
+    document.getElementById('edit-script-language').value = scriptLanguage;
+    if (scriptProjectId) {
+      document.getElementById('edit-script-project').value = scriptProjectId;
+    }
+    
     updateEditorHeight();
   };
+
+  // Folder tree toggle functionality
+  window.toggleFolder = function(header) {
+    document.querySelectorAll('.folder-header').forEach(f => f.classList.remove('active'));
+    header.classList.add('active');
+    header.classList.toggle('expanded');
+    const folderItem = header.closest('.folder-item');
+    const scriptsList = folderItem.querySelector('.folder-scripts');
+    if (scriptsList) {
+      scriptsList.classList.toggle('expanded');
+    }
+  };
+
+  // Set default suite when clicking New Script button
+  window.setDefaultSuite = function(btn) {
+    const activeFolder = document.querySelector('.folder-header.active');
+    const suiteSelect = document.getElementById('script-suite');
+    if (activeFolder && suiteSelect) {
+      const suiteId = activeFolder.closest('.folder-item').dataset.suiteId;
+      if (suiteId) {
+        suiteSelect.value = suiteId;
+      }
+    }
+  };
+
+  // Drag and drop for moving scripts between folders
+  let draggedScriptId = null;
+
+  window.handleDragStart = function(e, element) {
+    draggedScriptId = element.getAttribute('data-script-id');
+    e.dataTransfer.setData('text/plain', draggedScriptId);
+    e.target.classList.add('dragging');
+  };
+
+  window.handleDragOver = function(e) {
+    e.preventDefault();
+    const folderItem = e.target.closest('.folder-item') || e.target;
+    if (folderItem && folderItem.classList.contains('folder-item')) {
+      folderItem.classList.add('drag-over');
+    }
+  };
+
+  window.handleDragLeave = function(e) {
+    const folderItem = e.target.closest('.folder-scripts');
+    if (folderItem) {
+      folderItem.classList.remove('drag-over');
+    }
+  };
+
+  window.handleDrop = async function(e, targetSuiteId) {
+    e.preventDefault();
+    
+    const folderItem = e.target.closest('.folder-item');
+    if (folderItem && folderItem.classList.contains('folder-item')) {
+      folderItem.classList.remove('drag-over');
+      if (!targetSuiteId) {
+        targetSuiteId = folderItem.getAttribute('data-suite-id');
+      }
+    }
+
+    if (!draggedScriptId || !targetSuiteId) return;
+
+    try {
+      const response = await fetch('/api/scripts/' + draggedScriptId, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ suiteId: parseInt(targetSuiteId) })
+      });
+      if (response.ok) {
+        const draggedItem = document.querySelector('.script-item.dragging');
+        if (draggedItem) {
+          const targetList = document.querySelector('.folder-scripts[data-suite-id="' + targetSuiteId + '"]');
+          if (targetList) {
+            draggedItem.remove();
+            targetList.appendChild(draggedItem);
+            draggedItem.classList.remove('dragging');
+            draggedItem.setAttribute('draggable', 'true');
+            draggedItem.setAttribute('ondragstart', 'handleDragStart(event, this)');
+          }
+        }
+      } else {
+        alert('Failed to move script');
+      }
+    } catch (error) {
+      console.error('Error moving script:', error);
+      alert('Error moving script');
+    }
+    draggedScriptId = null;
+  };
+
+  // Test Suite functionality
+  window.viewSuiteScripts = function(suiteId) {
+    const scriptsRow = document.getElementById('suite-scripts-' + suiteId);
+    if (scriptsRow) {
+      scriptsRow.style.display = scriptsRow.style.display === 'none' ? 'block' : 'none';
+    }
+  };
+
+  window.hideSuiteScripts = function(suiteId) {
+    const scriptsRow = document.getElementById('suite-scripts-' + suiteId);
+    if (scriptsRow) {
+      scriptsRow.style.display = 'none';
+    }
+  };
+
+  window.openEditSuiteModal = function(btn) {
+    const suiteId = btn.dataset.suiteId;
+    const suiteName = btn.dataset.suiteName || '';
+    const suiteDesc = btn.dataset.suiteDesc || '';
+    document.getElementById('edit-suite-id').value = suiteId;
+    document.getElementById('edit-suite-name').value = suiteName;
+    document.getElementById('edit-suite-description').value = suiteDesc;
+    document.getElementById('edit-suite-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.openDeleteSuiteModal = function(btn) {
+    const suiteId = btn.dataset.suiteId;
+    const suiteName = btn.dataset.suiteName;
+    document.getElementById('delete-suite-name').textContent = suiteName;
+    document.getElementById('confirm-delete-suite-btn').onclick = function() {
+      deleteSuite(suiteId);
+    };
+    document.getElementById('delete-suite-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  async function deleteSuite(suiteId) {
+    try {
+      const response = await fetch('/api/test-suites/' + suiteId, {
+        method: 'DELETE'
+      });
+      if (response.ok) {
+        const modal = document.getElementById('delete-suite-modal');
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+        window.location.reload();
+      } else {
+        alert('Failed to delete test suite');
+      }
+    } catch (error) {
+      console.error('Error deleting test suite:', error);
+      alert('Error deleting test suite');
+    }
+  }
+
+  // Edit Suite form handler
+  const editSuiteForm = document.getElementById('edit-suite-form');
+  if (editSuiteForm) {
+    editSuiteForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const suiteId = document.getElementById('edit-suite-id').value;
+      const formData = new FormData(editSuiteForm);
+      const suiteData = {
+        name: formData.get('name'),
+        description: formData.get('description')
+      };
+      try {
+        const response = await fetch('/api/test-suites/' + suiteId, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(suiteData)
+        });
+        if (response.ok) {
+          const modal = document.getElementById('edit-suite-modal');
+          modal.classList.remove('open');
+          document.body.style.overflow = '';
+          editSuiteForm.reset();
+          window.location.reload();
+        } else {
+          alert('Failed to update test suite');
+        }
+      } catch (error) {
+        console.error('Error updating test suite:', error);
+        alert('Error updating test suite');
+      }
+    });
+  }
+
+  // Suite filter handler
+  const suiteFilter = document.getElementById('suite-filter');
+  if (suiteFilter) {
+    suiteFilter.addEventListener('change', function() {
+      const selectedId = this.value;
+      document.querySelectorAll('.suite-item').forEach(item => {
+        if (!selectedId || item.getAttribute('data-suite-id') === selectedId) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+      document.querySelectorAll('.suite-scripts').forEach(item => {
+        item.style.display = 'none';
+      });
+    });
+  }
 
   const editorTextarea = document.getElementById('editor-textarea');
   const lineNumbers = document.getElementById('line-numbers');

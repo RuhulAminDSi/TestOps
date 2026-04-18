@@ -1,0 +1,42 @@
+{
+  "preCommit": {
+    "description": "Run tests and compilation before committing",
+    "command": "mvn clean compile test",
+    "runWhen": "onCommit",
+    "blocking": true
+  },
+  "postCommit": {
+    "description": "Log commit information",
+    "command": "echo 'Commit successful: {commitHash}' && git log -1 --oneline",
+    "runWhen": "afterCommit",
+    "blocking": false
+  },
+  "javaFileSave": {
+    "description": "Compile Java files when saved",
+    "command": "mvn compile -q",
+    "runWhen": "onFileSave",
+    "filePattern": "**/*.java",
+    "blocking": false
+  },
+  "testFileSave": {
+    "description": "Run related tests when test files are saved",
+    "command": "mvn test -Dtest={filename} -q",
+    "runWhen": "onFileSave",
+    "filePattern": "**/*Test.java",
+    "blocking": false
+  },
+  "propertiesFileSave": {
+    "description": "Validate application.properties when saved",
+    "command": "echo 'Configuration updated - restart may be required'",
+    "runWhen": "onFileSave",
+    "filePattern": "**/application.properties",
+    "blocking": false
+  },
+  "pomFileSave": {
+    "description": "Update dependencies when pom.xml changes",
+    "command": "mvn dependency:resolve -q",
+    "runWhen": "onFileSave",
+    "filePattern": "pom.xml",
+    "blocking": false
+  }
+}

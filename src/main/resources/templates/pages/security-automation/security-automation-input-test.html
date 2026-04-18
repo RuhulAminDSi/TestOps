@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content security-page">
+  <div class="mb-6">
+    <nav class="breadcrumb mb-2">
+      <a href="/security-automation" class="breadcrumb-link">Security Automation</a>
+      <span class="breadcrumb-separator">/</span>
+      <span class="breadcrumb-current">Input Validation</span>
+    </nav>
+    <div class="flex items-center gap-3 mb-2">
+      <div class="tool-icon" style="background: rgba(59, 130, 246, 0.1);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M12 2v4"/><path d="m6.8 14-3.5 2"/><path d="m20.7 16-3.5-2"/></svg>
+      </div>
+      <div>
+        <h1 class="text-2xl font-bold">Input Validation Tester</h1>
+        <p class="muted text-sm">Test input fields for injection vulnerabilities</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-4 gap-6 mb-6">
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">Total Tests</span>
+        <span class="text-xl font-bold" id="input-total-tests">0</span>
+      </div>
+      <p class="text-xs text-gray-500">Lifetime tests</p>
+    </div>
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">Issues Found</span>
+        <span class="text-xl font-bold text-red-500" id="input-issues-found">0</span>
+      </div>
+      <p class="text-xs text-gray-500">Vulnerabilities detected</p>
+    </div>
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">XSS Tests</span>
+        <span class="text-xl font-bold text-yellow-500" id="input-xss-count">0</span>
+      </div>
+      <p class="text-xs text-gray-500">Cross-site scripting</p>
+    </div>
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">SQLi Tests</span>
+        <span class="text-xl font-bold text-purple-500" id="input-sqli-count">0</span>
+      </div>
+      <p class="text-xs text-gray-500">SQL injection</p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-3 gap-6">
+    <div class="col-span-2">
+      <div class="card mb-6">
+        <div class="card-header">
+          <h3 class="font-semibold">Test Configuration</h3>
+        </div>
+        <div class="card-body">
+          <div class="form-group mb-4">
+            <label class="label">
+              Target URL
+              <span class="label-hint">The URL with the input parameter</span>
+            </label>
+            <div class="relative">
+              <input type="text" id="input-url" class="input pl-10" placeholder="https://example.com/search" />
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <div class="form-group">
+              <label class="label">
+                Parameter Name
+                <span class="label-hint">The query parameter to test</span>
+              </label>
+              <input type="text" id="input-param" class="input" placeholder="q, search, id..." />
+            </div>
+            <div class="form-group">
+              <label class="label">
+                Test Type
+                <span class="label-hint">Types of payloads to test</span>
+              </label>
+              <select id="input-test-type" class="input">
+                <option value="basic">All (XSS, SQLi, Path)</option>
+                <option value="xss">XSS Only</option>
+                <option value="sqli">SQL Injection Only</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-3">
+            <button class="btn btn-primary" onclick="runInputTest()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4"/><path d="m6.8 14-3.5 2"/><path d="m20.7 16-3.5-2"/></svg>
+              Run Test
+            </button>
+            <button class="btn btn-ghost" onclick="clearInputForm()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+              Clear
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="input-loading" class="card mb-6" style="display: none;">
+        <div class="card-body text-center py-8">
+          <div class="scan-animation mb-4">
+            <svg class="w-12 h-12 mx-auto animate-spin" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+          </div>
+          <h4 class="font-semibold mb-2">Testing Input Fields</h4>
+          <p class="muted text-sm mb-4">Sending test payloads...</p>
+          <div class="progress-bar w-full">
+            <div class="progress-fill" id="input-progress" style="width: 0%"></div>
+          </div>
+          <p class="text-xs text-gray-500 mt-2" id="input-progress-text">Initializing...</p>
+        </div>
+      </div>
+
+      <div id="input-results" class="card mb-6" style="display: none;">
+        <div class="card-header">
+          <h3 class="font-semibold">Test Results</h3>
+          <div class="flex items-center gap-2">
+            <span class="badge badge-warning" id="input-findings-badge">0 Issues</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="input-summary" class="grid grid-cols-3 gap-4 mb-6">
+          </div>
+          
+          <div id="input-findings" class="findings-list">
+          </div>
+        </div>
+      </div>
+
+      <div id="input-error" class="card mb-6" style="display: none;">
+        <div class="card-body">
+          <div class="flex items-start gap-3">
+            <div class="error-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6"/><path d="M9 9l6 6"/></svg>
+            </div>
+            <div>
+              <h4 class="font-semibold text-red-500">Test Failed</h4>
+              <p class="muted text-sm mt-1" id="input-error-message">An error occurred during testing.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-span-1">
+      <div class="card mb-6">
+        <div class="card-header">
+          <h3 class="font-semibold">Test Payloads</h3>
+        </div>
+        <div class="card-body">
+          <div class="payloads-list">
+            <div class="payload-category">
+              <span class="payload-type">XSS</span>
+              <code class="payload-code">&lt;script&gt;alert(1)&lt;/script&gt;</code>
+            </div>
+            <div class="payload-category">
+              <span class="payload-type">SQLi</span>
+              <code class="payload-code">' OR '1'='1</code>
+            </div>
+            <div class="payload-category">
+              <span class="payload-type">Path</span>
+              <code class="payload-code">../../../etc/passwd</code>
+            </div>
+            <div class="payload-category">
+              <span class="payload-type">Template</span>
+              <code class="payload-code">{{7*7}}</code>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-6">
+        <div class="card-header">
+          <h3 class="font-semibold">Vulnerability Types</h3>
+        </div>
+        <div class="card-body">
+          <div class="vuln-types">
+            <div class="vuln-type">
+              <span class="vuln-dot xss"></span>
+              <div>
+                <span class="vuln-name">Cross-Site Scripting (XSS)</span>
+                <p class="text-xs text-gray-500">Inject malicious scripts</p>
+              </div>
+            </div>
+            <div class="vuln-type">
+              <span class="vuln-dot sqli"></span>
+              <div>
+                <span class="vuln-name">SQL Injection</span>
+                <p class="text-xs text-gray-500">Manipulate database queries</p>
+              </div>
+            </div>
+            <div class="vuln-type">
+              <span class="vuln-dot path"></span>
+              <div>
+                <span class="vuln-name">Path Traversal</span>
+                <p class="text-xs text-gray-500">Access restricted files</p>
+              </div>
+            </div>
+            <div class="vuln-type">
+              <span class="vuln-dot template"></span>
+              <div>
+                <span class="vuln-name">Template Injection</span>
+                <p class="text-xs text-gray-500">Server-side code execution</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="font-semibold">Best Practices</h3>
+        </div>
+        <div class="card-body">
+          <ul class="tips-list">
+            <li>Sanitize all user inputs</li>
+            <li>Use parameterized queries</li>
+            <li>Implement input validation</li>
+            <li>Encode output properly</li>
+            <li>Use Content Security Policy</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.breadcrumb-link { color: #6b7280; text-decoration: none; }
+.breadcrumb-link:hover { color: #3b82f6; }
+.breadcrumb-separator { color: #374151; }
+.breadcrumb-current { color: #111827; font-weight: 500; }
+
+.tool-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.badge {
+  padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500;
+}
+.badge-success { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+.badge-warning { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+.badge-danger { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+.badge-info { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+.badge-pending { background: rgba(107, 114, 128, 0.1); color: #6b7280; }
+
+.card {
+  background: #111827; border: 1px solid #1f2937; border-radius: 12px;
+}
+.card-header {
+  padding: 16px 20px; border-bottom: 1px solid #1f2937;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.card-body { padding: 20px; }
+
+.form-group { margin-bottom: 16px; }
+.label {
+  display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; color: #e5e7eb;
+}
+.label-hint {
+  display: block; font-size: 12px; font-weight: 400; color: #6b7280; margin-top: 2px;
+}
+
+.input {
+  width: 100%; padding: 10px 14px;
+  background: #1f2937; border: 1px solid #374151;
+  border-radius: 8px; color: #e5e7eb; font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input:focus {
+  outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+.input::placeholder { color: #6b7280; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s; border: none;
+}
+.btn-primary {
+  background: #3b82f6; color: white;
+}
+.btn-primary:hover { background: #2563eb; }
+.btn-ghost {
+  background: transparent; color: #9ca3af; border: 1px solid #374151;
+}
+.btn-ghost:hover { background: #1f2937; color: #e5e7eb; }
+
+.progress-bar {
+  height: 6px; background: #1f2937; border-radius: 3px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  border-radius: 3px; transition: width 0.3s ease;
+}
+
+.payloads-list { display: flex; flex-direction: column; gap: 10px; }
+.payload-category {
+  padding: 10px; background: #0f172a; border-radius: 8px;
+}
+.payload-type {
+  display: block; font-size: 11px; font-weight: 600;
+  color: #3b82f6; margin-bottom: 6px; text-transform: uppercase;
+}
+.payload-code {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: #94a3b8; display: block; word-break: break-all;
+}
+
+.vuln-types { display: flex; flex-direction: column; gap: 12px; }
+.vuln-type { display: flex; align-items: center; gap: 10px; }
+.vuln-dot { width: 10px; height: 10px; border-radius: 50%; }
+.vuln-dot.xss { background: #f59e0b; }
+.vuln-dot.sqli { background: #ef4444; }
+.vuln-dot.path { background: #8b5cf6; }
+.vuln-dot.template { background: #06b6d4; }
+.vuln-name { font-size: 13px; color: #e5e7eb; display: block; }
+
+.tips-list {
+  list-style: none; padding: 0; margin: 0;
+  font-size: 13px; color: #9ca3af;
+}
+.tips-list li {
+  padding: 6px 0; padding-left: 16px;
+  position: relative;
+}
+.tips-list li::before {
+  content: "•"; position: absolute; left: 0; color: #3b82f6;
+}
+
+.findings-list { display: flex; flex-direction: column; gap: 12px; }
+.finding-card {
+  background: #0f172a; border: 1px solid #1e293b;
+  border-radius: 10px; padding: 16px;
+}
+.finding-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px;
+}
+.finding-type {
+  font-size: 12px; font-weight: 600; padding: 4px 10px;
+  border-radius: 6px;
+}
+.finding-type.xss { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+.finding-type.sqli { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+.finding-type.path { background: rgba(139, 92, 246, 0.15); color: #a78bfa; }
+.finding-type.template { background: rgba(6, 182, 212, 0.15); color: #22d3ee; }
+.finding-type.reflected { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+
+.finding-payload {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: #f87171;
+  background: #020617; padding: 10px;
+  border-radius: 6px; margin-bottom: 10px;
+  word-break: break-all;
+}
+.finding-message { font-size: 13px; color: #9ca3af; }
+
+.summary-card {
+  padding: 16px; border-radius: 8px; text-align: center;
+}
+.summary-value { font-size: 24px; font-weight: 700; display: block; }
+.summary-label { font-size: 12px; color: #9ca3af; }
+
+.error-icon {
+  width: 40px; height: 40px;
+  background: rgba(239, 68, 68, 0.1); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.grid { display: grid; }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+.gap-3 { gap: 12px; }
+.gap-4 { gap: 16px; }
+.gap-6 { gap: 24px; }
+.mb-2 { margin-bottom: 8px; }
+.mb-3 { margin-bottom: 12px; }
+.mb-4 { margin-bottom: 16px; }
+.mb-6 { margin-bottom: 24px; }
+.mt-2 { margin-top: 8px; }
+
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 8px; }
+.gap-3 { gap: 12px; }
+
+.text-center { text-align: center; }
+.text-xl { font-size: 1.25rem; }
+.text-2xl { font-size: 1.5rem; }
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+.text-sm { font-size: 0.875rem; }
+.text-xs { font-size: 0.75rem; }
+.muted { color: #9ca3af; }
+.text-gray-500 { color: #6b7280; }
+.text-red-500 { color: #ef4444; }
+.text-yellow-500 { color: #f59e0b; }
+.text-purple-500 { color: #a855f7; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.animate-spin { animation: spin 1s linear infinite; }
+</style>
+
+<script>
+let inputTestCount = 0;
+let inputIssuesFound = 0;
+let inputXssCount = 0;
+let inputSqliCount = 0;
+
+async function runInputTest() {
+  const url = document.getElementById('input-url').value.trim();
+  const paramName = document.getElementById('input-param').value.trim();
+  
+  if (!url) {
+    showInputError('Please enter a target URL');
+    return;
+  }
+  if (!paramName) {
+    showInputError('Please enter a parameter name');
+    return;
+  }
+
+  hideInputResults();
+  hideInputError();
+  showInputLoading();
+
+  let progress = 0;
+  const progressInterval = setInterval(() => {
+    progress += 15;
+    if (progress > 80) progress = 80;
+    document.getElementById('input-progress').style.width = progress + '%';
+    document.getElementById('input-progress-text').textContent = `Testing payload ${Math.ceil(progress/15)}...`;
+  }, 200);
+
+  try {
+    const res = await fetch('/api/security/input-test', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        url,
+        paramName,
+        testType: document.getElementById('input-test-type').value
+      })
+    });
+    
+    clearInterval(progressInterval);
+    document.getElementById('input-progress').style.width = '100%';
+    document.getElementById('input-progress-text').textContent = 'Test complete!';
+    
+    const data = await res.json();
+    hideInputLoading();
+    
+    inputTestCount++;
+    document.getElementById('input-total-tests').textContent = inputTestCount;
+    
+    displayInputResults(data);
+    
+  } catch (e) {
+    clearInterval(progressInterval);
+    hideInputLoading();
+    showInputError('Test failed: ' + e.message);
+  }
+}
+
+function displayInputResults(data) {
+  let result;
+  try {
+    result = typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
+  } catch { result = data; }
+
+  const findings = result.findings || [];
+  inputIssuesFound += findings.length;
+  
+  const xssFindings = findings.filter(f => f.type === 'XSS' || f.type === 'Reflected');
+  const sqliFindings = findings.filter(f => f.type === 'SQLi' || f.type === 'SQL Injection');
+  
+  inputXssCount += xssFindings.length;
+  inputSqliCount += sqliFindings.length;
+  
+  document.getElementById('input-issues-found').textContent = inputIssuesFound;
+  document.getElementById('input-xss-count').textContent = inputXssCount;
+  document.getElementById('input-sqli-count').textContent = inputSqliCount;
+
+  const findingsBadge = document.getElementById('input-findings-badge');
+  findingsBadge.textContent = findings.length + ' Issues';
+  findingsBadge.className = 'badge ' + (findings.length > 0 ? 'badge-warning' : 'badge-success');
+
+  let summaryHtml = '';
+  summaryHtml += `<div class="summary-card" style="background: rgba(59, 130, 246, 0.1);">
+    <span class="summary-value">${findings.length}</span>
+    <span class="summary-label">Total Issues</span>
+  </div>`;
+  summaryHtml += `<div class="summary-card" style="background: rgba(245, 158, 11, 0.1);">
+    <span class="summary-value text-yellow-500">${xssFindings.length}</span>
+    <span class="summary-label">XSS</span>
+  </div>`;
+  summaryHtml += `<div class="summary-card" style="background: rgba(239, 68, 68, 0.1);">
+    <span class="summary-value text-red-500">${sqliFindings.length}</span>
+    <span class="summary-label">SQLi</span>
+  </div>`;
+  document.getElementById('input-summary').innerHTML = summaryHtml;
+
+  if (findings.length > 0) {
+    let findingsHtml = '';
+    findings.forEach(f => {
+      let typeClass = 'reflected';
+      if (f.type && f.type.toLowerCase().includes('xss')) typeClass = 'xss';
+      else if (f.type && f.type.toLowerCase().includes('sql')) typeClass = 'sqli';
+      else if (f.type && f.type.toLowerCase().includes('path')) typeClass = 'path';
+      else if (f.type && f.type.toLowerCase().includes('template')) typeClass = 'template';
+      
+      findingsHtml += `<div class="finding-card">
+        <div class="finding-header">
+          <span class="finding-type ${typeClass}">${f.type || 'Issue'}</span>
+        </div>
+        <div class="finding-payload">${escapeHtml(f.payload || '-')}</div>
+        ${f.message ? `<div class="finding-message">${escapeHtml(f.message)}</div>` : ''}
+      </div>`;
+    });
+    document.getElementById('input-findings').innerHTML = findingsHtml;
+  } else {
+    document.getElementById('input-findings').innerHTML = `
+      <div class="finding-card" style="text-align: center; padding: 32px;">
+        <svg class="w-12 h-12 mx-auto mb-3" style="color: #22c55e;" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <p class="font-semibold text-lg mb-1">No Issues Found</p>
+        <p class="muted text-sm">The input field appears to be properly sanitized.</p>
+      </div>
+    `;
+  }
+
+  document.getElementById('input-results').style.display = 'block';
+}
+
+function showInputLoading() {
+  document.getElementById('input-loading').style.display = 'block';
+}
+
+function hideInputLoading() {
+  document.getElementById('input-loading').style.display = 'none';
+}
+
+function showInputResults() {
+  document.getElementById('input-results').style.display = 'block';
+}
+
+function hideInputResults() {
+  document.getElementById('input-results').style.display = 'none';
+}
+
+function showInputError(message) {
+  document.getElementById('input-error-message').textContent = message;
+  document.getElementById('input-error').style.display = 'block';
+}
+
+function hideInputError() {
+  document.getElementById('input-error').style.display = 'none';
+}
+
+function clearInputForm() {
+  document.getElementById('input-url').value = '';
+  document.getElementById('input-param').value = '';
+  document.getElementById('input-test-type').value = 'basic';
+  hideInputResults();
+  hideInputError();
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+</script>
+</body>
+</html>

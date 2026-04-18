@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content security-page">
+  <div class="mb-6">
+    <nav class="breadcrumb mb-2">
+      <a href="/security-automation" class="breadcrumb-link">Security Automation</a>
+      <span class="breadcrumb-separator">/</span>
+      <span class="breadcrumb-current">Reports</span>
+    </nav>
+    <div class="flex items-center gap-3 mb-2">
+      <div class="tool-icon" style="background: rgba(99, 102, 241, 0.1);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+      </div>
+      <div>
+        <h1 class="text-2xl font-bold">Security Reports</h1>
+        <p class="muted text-sm">View and manage all security scan results</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-4 gap-6 mb-6">
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">Total Reports</span>
+        <span class="text-xl font-bold" id="report-total-count">0</span>
+      </div>
+      <p class="text-xs text-gray-500">All time</p>
+    </div>
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">This Week</span>
+        <span class="text-xl font-bold text-blue-500" id="report-week-count">0</span>
+      </div>
+      <p class="text-xs text-gray-500">Recent scans</p>
+    </div>
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">Vulnerability Scans</span>
+        <span class="text-xl font-bold text-red-500" id="report-vuln-count">0</span>
+      </div>
+      <p class="text-xs text-gray-500">Security scans</p>
+    </div>
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">Avg per Day</span>
+        <span class="text-xl font-bold text-green-500" id="report-avg-day">0</span>
+      </div>
+      <p class="text-xs text-gray-500">Daily average</p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-3 gap-6">
+    <div class="col-span-2">
+      <div class="card mb-6">
+        <div class="card-header">
+          <h3 class="font-semibold">Scan History</h3>
+          <div class="flex items-center gap-3">
+            <select id="report-filter" class="input w-40" onchange="loadReports()">
+              <option value="">All Scans</option>
+              <option value="vuln-scan">Vulnerability Scanner</option>
+              <option value="headers-check">Headers Check</option>
+              <option value="port-scan">Port Scanner</option>
+              <option value="ssl-check">SSL/TLS</option>
+              <option value="password-check">Password Check</option>
+              <option value="jwt-analyze">JWT Analyzer</option>
+              <option value="input-test">Input Test</option>
+              <option value="subdomain">Subdomain</option>
+            </select>
+            <button class="btn btn-ghost" onclick="loadReports()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+              Refresh
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="reports-loading" class="text-center py-8" style="display: none;">
+            <svg class="w-8 h-8 mx-auto animate-spin mb-3" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+            <p class="muted text-sm">Loading reports...</p>
+          </div>
+
+          <div id="reports-table-container" class="reports-table-container">
+            <table class="reports-table">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Target</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="reports-table-body">
+              </tbody>
+            </table>
+          </div>
+
+          <div id="reports-empty" class="empty-state" style="display: none;">
+            <svg class="w-16 h-16 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="1.5"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><path d="M14 2v6h6"/></svg>
+            <p class="font-semibold text-lg mb-2">No Reports Yet</p>
+            <p class="muted text-sm">Run security scans to see results here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-span-1">
+      <div class="card mb-6">
+        <div class="card-header">
+          <h3 class="font-semibold">Scan Types</h3>
+        </div>
+        <div class="card-body">
+          <div class="scan-types-list">
+            <div class="scan-type-item">
+              <span class="scan-type-dot" style="background: #ef4444;"></span>
+              <span>Vulnerability Scanner</span>
+              <span class="scan-type-count" id="type-vuln">0</span>
+            </div>
+            <div class="scan-type-item">
+              <span class="scan-type-dot" style="background: #3b82f6;"></span>
+              <span>Security Headers</span>
+              <span class="scan-type-count" id="type-headers">0</span>
+            </div>
+            <div class="scan-type-item">
+              <span class="scan-type-dot" style="background: #a855f7;"></span>
+              <span>Port Scanner</span>
+              <span class="scan-type-count" id="type-port">0</span>
+            </div>
+            <div class="scan-type-item">
+              <span class="scan-type-dot" style="background: #22c55e;"></span>
+              <span>SSL/TLS</span>
+              <span class="scan-type-count" id="type-ssl">0</span>
+            </div>
+            <div class="scan-type-item">
+              <span class="scan-type-dot" style="background: #f59e0b;"></span>
+              <span>Password Check</span>
+              <span class="scan-type-count" id="type-password">0</span>
+            </div>
+            <div class="scan-type-item">
+              <span class="scan-type-dot" style="background: #ec4899;"></span>
+              <span>JWT Analyzer</span>
+              <span class="scan-type-count" id="type-jwt">0</span>
+            </div>
+            <div class="scan-type-item">
+              <span class="scan-type-dot" style="background: #06b6d4;"></span>
+              <span>Input Validation</span>
+              <span class="scan-type-count" id="type-input">0</span>
+            </div>
+            <div class="scan-type-item">
+              <span class="scan-type-dot" style="background: #10b981;"></span>
+              <span>Subdomain</span>
+              <span class="scan-type-count" id="type-subdomain">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-6">
+        <div class="card-header">
+          <h3 class="font-semibold">Quick Stats</h3>
+        </div>
+        <div class="card-body">
+          <div class="quick-stats">
+            <div class="stat-row">
+              <span class="stat-label">Most Used Tool</span>
+              <span class="stat-value" id="stat-most-used">-</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Last Scan</span>
+              <span class="stat-value" id="stat-last-scan">-</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Average Scans/Day</span>
+              <span class="stat-value" id="stat-avg-scan">-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="font-semibold">Export Options</h3>
+        </div>
+        <div class="card-body">
+          <div class="export-buttons">
+            <button class="export-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+              Export CSV
+            </button>
+            <button class="export-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><path d="M14 2v6h6"/></svg>
+              Export JSON
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="report-detail" class="modal">
+    <div class="modal-backdrop" onclick="closeReportDetail()"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Scan Details</h3>
+        <button class="btn btn-ghost" onclick="closeReportDetail()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="report-detail-meta" class="detail-meta mb-4">
+        </div>
+        <div class="detail-content">
+          <pre id="report-detail-content" class="detail-json"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.breadcrumb-link { color: #6b7280; text-decoration: none; }
+.breadcrumb-link:hover { color: #3b82f6; }
+.breadcrumb-separator { color: #374151; }
+.breadcrumb-current { color: #111827; font-weight: 500; }
+
+.tool-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.badge {
+  padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500;
+}
+.badge-success { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+.badge-warning { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+.badge-danger { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+.badge-info { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+.badge-pending { background: rgba(107, 114, 128, 0.1); color: #6b7280; }
+
+.card {
+  background: #111827; border: 1px solid #1f2937; border-radius: 12px;
+}
+.card-header {
+  padding: 16px 20px; border-bottom: 1px solid #1f2937;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.card-body { padding: 20px; }
+
+.input {
+  padding: 8px 12px;
+  background: #1f2937; border: 1px solid #374151;
+  border-radius: 8px; color: #e5e7eb; font-size: 13px;
+}
+.input:focus {
+  outline: none; border-color: #6366f1;
+}
+.w-40 { width: 160px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s; border: none;
+}
+.btn-ghost {
+  background: transparent; color: #9ca3af; border: 1px solid #374151;
+}
+.btn-ghost:hover { background: #1f2937; color: #e5e7eb; }
+
+.reports-table-container { overflow-x: auto; }
+.reports-table {
+  width: 100%; border-collapse: collapse;
+}
+.reports-table th {
+  text-align: left; padding: 14px 12px;
+  background: #0f172a; color: #9ca3af;
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  border-bottom: 1px solid #1e293b;
+}
+.reports-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #1e293b;
+  font-size: 13px;
+}
+.reports-table tr:hover { background: #0f172a; }
+
+.report-type {
+  display: flex; align-items: center; gap: 10px;
+}
+.report-type-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+}
+.report-type-name { color: #e5e7eb; }
+
+.report-target {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: #94a3b8; max-width: 200px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.report-date {
+  font-size: 12px; color: #6b7280;
+}
+
+.report-action {
+  display: flex; gap: 8px;
+}
+.report-action button {
+  padding: 6px 10px; font-size: 12px;
+  background: transparent; border: 1px solid #374151;
+  color: #9ca3af; border-radius: 6px; cursor: pointer;
+}
+.report-action button:hover {
+  background: #1f2937; color: #e5e7eb;
+}
+
+.scan-types-list { display: flex; flex-direction: column; gap: 10px; }
+.scan-type-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 0; border-bottom: 1px solid #1f2937;
+  font-size: 13px; color: #e5e7eb;
+}
+.scan-type-item:last-child { border-bottom: none; }
+.scan-type-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.scan-type-item span:nth-child(2) { flex: 1; }
+.scan-type-count {
+  font-size: 12px; font-weight: 600; color: #6b7280;
+}
+
+.quick-stats { display: flex; flex-direction: column; gap: 12px; }
+.stat-row {
+  display: flex; justify-content: space-between; padding: 10px;
+  background: #0f172a; border-radius: 8px;
+}
+.stat-label { font-size: 12px; color: #6b7280; }
+.stat-value { font-size: 13px; font-weight: 600; color: #e5e7eb; }
+
+.export-buttons { display: flex; flex-direction: column; gap: 10px; }
+.export-btn {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px; background: #0f172a; border: 1px solid #1e293b;
+  border-radius: 8px; color: #e5e7eb; font-size: 13px; cursor: pointer;
+  transition: all 0.2s;
+}
+.export-btn:hover { background: #1e293b; border-color: #374151; }
+
+.modal {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  display: none; align-items: center; justify-content: center;
+  z-index: 1000;
+}
+.modal.open { display: flex; }
+.modal-backdrop {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+.modal-content {
+  position: relative; width: 90%; max-width: 700px;
+  background: #111827; border: 1px solid #1f2937;
+  border-radius: 16px; overflow: hidden;
+  max-height: 80vh; display: flex; flex-direction: column;
+}
+.modal-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px; border-bottom: 1px solid #1f2937;
+}
+.modal-header h3 { font-size: 16px; font-weight: 600; color: #e5e7eb; }
+.modal-body { padding: 20px; overflow: auto; }
+
+.detail-meta {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+}
+.detail-meta-item {
+  padding: 12px; background: #0f172a; border-radius: 8px;
+}
+.detail-meta-label { font-size: 11px; color: #6b7280; display: block; margin-bottom: 4px; }
+.detail-meta-value { font-size: 13px; color: #e5e7eb; }
+
+.detail-json {
+  background: #020617; border-radius: 8px; padding: 16px;
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  color: #94a3b8; overflow: auto; max-height: 400px;
+  white-space: pre-wrap; word-break: break-all;
+}
+
+.empty-state { text-align: center; padding: 40px; }
+.empty-state p { color: #6b7280; }
+
+.grid { display: grid; }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+.gap-3 { gap: 12px; }
+.gap-6 { gap: 24px; }
+.mb-2 { margin-bottom: 8px; }
+.mb-3 { margin-bottom: 12px; }
+.mb-4 { margin-bottom: 16px; }
+.mb-6 { margin-bottom: 24px; }
+
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-3 { gap: 12px; }
+
+.text-xl { font-size: 1.25rem; }
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+.text-sm { font-size: 0.875rem; }
+.text-xs { font-size: 0.75rem; }
+.muted { color: #9ca3af; }
+.text-gray-500 { color: #6b7280; }
+.text-red-500 { color: #ef4444; }
+.text-green-500 { color: #22c55e; }
+.text-blue-500 { color: #3b82f6; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.animate-spin { animation: spin 1s linear infinite; }
+</style>
+
+<script>
+let reportsData = [];
+
+const typeColors = {
+  'vuln-scan': '#ef4444',
+  'headers-check': '#3b82f6',
+  'port-scan': '#a855f7',
+  'ssl-check': '#22c55e',
+  'password-check': '#f59e0b',
+  'jwt-analyze': '#ec4899',
+  'input-test': '#06b6d4',
+  'subdomain': '#10b981'
+};
+
+const typeLabels = {
+  'vuln-scan': 'Vulnerability Scanner',
+  'headers-check': 'Security Headers',
+  'port-scan': 'Port Scanner',
+  'ssl-check': 'SSL/TLS',
+  'password-check': 'Password Check',
+  'jwt-analyze': 'JWT Analyzer',
+  'input-test': 'Input Validation',
+  'subdomain': 'Subdomain Finder'
+};
+
+async function loadReports() {
+  const type = document.getElementById('report-filter').value;
+  document.getElementById('reports-loading').style.display = 'block';
+  document.getElementById('reports-table-container').style.display = 'none';
+  document.getElementById('reports-empty').style.display = 'none';
+
+  try {
+    const url = type ? '/api/security/reports?type=' + type : '/api/security/reports';
+    const res = await fetch(url);
+    reportsData = await res.json();
+
+    document.getElementById('reports-loading').style.display = 'none';
+
+    if (!Array.isArray(reportsData) || reportsData.length === 0) {
+      document.getElementById('reports-empty').style.display = 'block';
+      return;
+    }
+
+    document.getElementById('reports-table-container').style.display = 'block';
+    renderReportsTable(reportsData);
+    updateStats(reportsData);
+
+  } catch (e) {
+    document.getElementById('reports-loading').style.display = 'none';
+    document.getElementById('reports-empty').style.display = 'block';
+  }
+}
+
+function renderReportsTable(data) {
+  const typeCounts = {};
+  
+  const tbody = document.getElementById('reports-table-body');
+  tbody.innerHTML = data.map(scan => {
+    const type = scan.type || 'unknown';
+    typeCounts[type] = (typeCounts[type] || 0) + 1;
+    
+    const color = typeColors[type] || '#6b7280';
+    const label = typeLabels[type] || type;
+    const date = scan.createdAt ? new Date(scan.createdAt).toLocaleString() : 'N/A';
+    
+    return `<tr>
+      <td>
+        <div class="report-type">
+          <span class="report-type-dot" style="background: ${color}"></span>
+          <span class="report-type-name">${label}</span>
+        </div>
+      </td>
+      <td><span class="report-target" title="${escapeHtml(scan.target || '')}">${escapeHtml(scan.target || '-')}</span></td>
+      <td><span class="report-date">${date}</span></td>
+      <td><span class="badge badge-success">Completed</span></td>
+      <td class="report-action">
+        <button onclick="viewReport('${scan.id}')">View</button>
+        <button onclick="deleteReport('${scan.id}')">Delete</button>
+      </td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('type-vuln').textContent = typeCounts['vuln-scan'] || 0;
+  document.getElementById('type-headers').textContent = typeCounts['headers-check'] || 0;
+  document.getElementById('type-port').textContent = typeCounts['port-scan'] || 0;
+  document.getElementById('type-ssl').textContent = typeCounts['ssl-check'] || 0;
+  document.getElementById('type-password').textContent = typeCounts['password-check'] || 0;
+  document.getElementById('type-jwt').textContent = typeCounts['jwt-analyze'] || 0;
+  document.getElementById('type-input').textContent = typeCounts['input-test'] || 0;
+  document.getElementById('type-subdomain').textContent = typeCounts['subdomain'] || 0;
+}
+
+function updateStats(data) {
+  const total = data.length;
+  const oneWeekAgo = new Date();
+  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+  const weekCount = data.filter(s => new Date(s.createdAt) > oneWeekAgo).length;
+  
+  document.getElementById('report-total-count').textContent = total;
+  document.getElementById('report-week-count').textContent = weekCount;
+  
+  const vulnCount = data.filter(s => s.type === 'vuln-scan').length;
+  document.getElementById('report-vuln-count').textContent = vulnCount;
+  
+  const avgDay = total > 0 ? (total / 7).toFixed(1) : 0;
+  document.getElementById('report-avg-day').textContent = avgDay;
+
+  const typeCounts = {};
+  data.forEach(s => { typeCounts[s.type] = (typeCounts[s.type] || 0) + 1; });
+  const mostUsed = Object.entries(typeCounts).sort((a, b) => b[1] - a[1])[0];
+  document.getElementById('stat-most-used').textContent = mostUsed ? (typeLabels[mostUsed[0]] || mostUsed[0]) : '-';
+  
+  const lastScan = data[0]?.createdAt ? new Date(data[0].createdAt).toLocaleDateString() : '-';
+  document.getElementById('stat-last-scan').textContent = lastScan;
+  document.getElementById('stat-avg-scan').textContent = avgDay + '/day';
+}
+
+async function viewReport(id) {
+  try {
+    const scan = reportsData.find(s => s.id === id);
+    if (!scan) return;
+
+    let result;
+    try {
+      result = typeof scan.result === 'string' ? JSON.parse(scan.result) : scan.result;
+    } catch { result = scan.result; }
+
+    const metaHtml = `
+      <div class="detail-meta-item">
+        <span class="detail-meta-label">Type</span>
+        <span class="detail-meta-value">${typeLabels[scan.type] || scan.type}</span>
+      </div>
+      <div class="detail-meta-item">
+        <span class="detail-meta-label">Target</span>
+        <span class="detail-meta-value">${scan.target || '-'}</span>
+      </div>
+      <div class="detail-meta-item">
+        <span class="detail-meta-label">Date</span>
+        <span class="detail-meta-value">${scan.createdAt ? new Date(scan.createdAt).toLocaleString() : '-'}</span>
+      </div>
+    `;
+    document.getElementById('report-detail-meta').innerHTML = metaHtml;
+    document.getElementById('report-detail-content').textContent = JSON.stringify(result, null, 2);
+    document.getElementById('report-detail').classList.add('open');
+  } catch (e) {
+    alert('Error loading report: ' + e.message);
+  }
+}
+
+function closeReportDetail() {
+  document.getElementById('report-detail').classList.remove('open');
+}
+
+async function deleteReport(id) {
+  if (!confirm('Are you sure you want to delete this report?')) return;
+  alert('Delete functionality requires backend implementation');
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+loadReports();
+</script>
+</body>
+</html>

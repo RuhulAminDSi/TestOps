@@ -1,0 +1,22 @@
+{
+  "status": "FAIL",
+  "syntaxError": null,
+  "runtimeError": {
+    "message": "Expected property name or '}' in JSON at position 1 (line 1 column 2)",
+    "stack": "SyntaxError: Expected property name or '}' in JSON at position 1 (line 1 column 2)\n    at JSON.parse (<anonymous>)\n    at main (C:\\Users\\DSi\\Desktop\\PROJECTS\\AIQA\\playwright-runner\\runner.js:384:27)\n    at Object.<anonymous> (C:\\Users\\DSi\\Desktop\\PROJECTS\\AIQA\\playwright-runner\\runner.js:521:1)\n    at Module._compile (node:internal/modules/cjs/loader:1829:14)\n    at Object..js (node:internal/modules/cjs/loader:1969:10)\n    at Module.load (node:internal/modules/cjs/loader:1552:32)\n    at Module._load (node:internal/modules/cjs/loader:1354:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+  },
+  "logs": [
+    {
+      "type": "error",
+      "message": "Execution failed",
+      "timestamp": "2026-04-12T20:41:52.462Z",
+      "data": {
+        "message": "Expected property name or '}' in JSON at position 1 (line 1 column 2)",
+        "stack": "SyntaxError: Expected property name or '}' in JSON at position 1 (line 1 column 2)\n    at JSON.parse (<anonymous>)\n    at main (C:\\Users\\DSi\\Desktop\\PROJECTS\\AIQA\\playwright-runner\\runner.js:384:27)\n    at Object.<anonymous> (C:\\Users\\DSi\\Desktop\\PROJECTS\\AIQA\\playwright-runner\\runner.js:521:1)\n    at Module._compile (node:internal/modules/cjs/loader:1829:14)\n    at Object..js (node:internal/modules/cjs/loader:1969:10)\n    at Module.load (node:internal/modules/cjs/loader:1552:32)\n    at Module._load (node:internal/modules/cjs/loader:1354:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+      }
+    }
+  ],
+  "screenshots": [],
+  "video": null,
+  "executionTime": 2
+}

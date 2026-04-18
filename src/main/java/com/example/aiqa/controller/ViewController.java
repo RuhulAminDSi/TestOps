@@ -184,7 +184,10 @@ public class ViewController {
         if (path.equals("/scripts") || path.startsWith("/scripts")) return "scripts";
         if (path.equals("/execution")) return "execution";
         if (path.equals("/monitoring")) return "monitoring";
-        if (path.startsWith("/ui-automation")) return "uiAutomationDashboard";
+        if (path.startsWith("/ui-automation")) {
+            if (path.contains("/ai-testing")) return "uiAutomationAiTesting";
+            return "uiAutomationDashboard";
+        }
         if (path.startsWith("/api-automation")) {
             if (path.equals("/api-automation") || path.equals("/api-automation/")) return "apiAutomation";
             if (path.contains("/dashboard")) return "apiAutomationDashboard";

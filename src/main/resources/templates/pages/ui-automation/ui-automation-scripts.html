@@ -1,38 +1,182 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="content" class="page-content" style="padding: 0; height: calc(100vh - 64px); display: flex; flex-direction: column;">
-  <div class="scripts-layout">
-    <!-- Left Sidebar: Script List -->
+<div th:fragment="content" class="page-content" style="padding: 0; display: flex; flex-direction: column; min-height: calc(100vh - 64px);">
+  <script th:inline="javascript">
+  let aiScriptsInterval;
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    loadAIScripts();
+    startLiveReload();
+  });
+  
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+      stopLiveReload();
+    } else {
+      startLiveReload();
+    }
+  });
+  
+  function startLiveReload() {
+    if (aiScriptsInterval) return;
+    aiScriptsInterval = setInterval(loadAIScripts, 3000);
+  }
+  
+  function filterAIScripts(query) {
+    query = query.toLowerCase().trim();
+    const items = document.querySelectorAll('#ai-scripts-list .script-item');
+    items.forEach(function(item) {
+      const name = item.querySelector('.script-name');
+      if (!name) return;
+      const text = name.textContent.toLowerCase();
+      item.style.display = query === '' || text.includes(query) ? '' : 'none';
+    });
+  }
+  
+  function stopLiveReload() {
+    if (aiScriptsInterval) {
+      clearInterval(aiScriptsInterval);
+      aiScriptsInterval = null;
+    }
+  }
+  
+  let lastAIScriptsCount = 0;
+  
+  async function loadAIScripts() {
+    try {
+      const response = await fetch('/api/ai-test/scripts');
+      const scripts = await response.json();
+      
+      const aiScriptsContainer = document.getElementById('ai-scripts-list');
+      if (!aiScriptsContainer) return;
+      
+      if (scripts.length === lastAIScriptsCount && aiScriptsContainer.children.length > 0) {
+        return;
+      }
+      lastAIScriptsCount = scripts.length;
+      
+      if (scripts.length > 0) {
+        const currentSelected = document.querySelector('#ai-scripts-list .script-item.selected');
+        const selectedId = currentSelected ? currentSelected.getAttribute('data-script-id') : null;
+        
+        aiScriptsContainer.style.setProperty('max-height', '250px', 'important');
+        aiScriptsContainer.style.setProperty('overflow-y', 'auto', 'important');
+        
+        aiScriptsContainer.innerHTML = '';
+        scripts.forEach(function(s) {
+          const li = document.createElement('li');
+          li.className = 'script-item' + (selectedId === String(s.id) ? ' selected' : '');
+          li.setAttribute('data-script-id', s.id);
+          li.setAttribute('data-content', s.content || '');
+          li.setAttribute('data-language', 'typescript');
+          li.onclick = function() {
+            selectScript(this);
+            document.getElementById('current-script-name').textContent = s.name;
+            document.getElementById('editor-textarea').value = s.content || '';
+          };
+          
+          const iconDiv = document.createElement('div');
+          iconDiv.className = 'script-icon';
+          iconDiv.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>';
+          
+          const infoDiv = document.createElement('div');
+          infoDiv.className = 'script-info';
+          
+          const nameSpan = document.createElement('span');
+          nameSpan.className = 'script-name';
+          nameSpan.textContent = s.name;
+          
+          const statusSpan = document.createElement('span');
+          statusSpan.className = 'script-status ' + (s.status === 'EXECUTED' ? 'pass' : s.status === 'FAILED' ? 'fail' : 'not-run');
+          statusSpan.textContent = s.status || 'Not Run';
+          
+          infoDiv.appendChild(nameSpan);
+          infoDiv.appendChild(statusSpan);
+          li.appendChild(iconDiv);
+          li.appendChild(infoDiv);
+          aiScriptsContainer.appendChild(li);
+        });
+      } else {
+        aiScriptsContainer.innerHTML = '<li class="muted text-sm" style="padding: 8px 12px;">No AI scripts generated yet</li>';
+      }
+    } catch (err) {
+      console.error('Error loading AI scripts:', err);
+    }
+  }
+</script>
+
+<div class="scripts-layout">
+    <!-- Left Sidebar: Script List by Folder -->
     <aside class="scripts-sidebar">
+      <!-- AI Generated Scripts Section -->
+      <div class="sidebar-section">
+        <div class="sidebar-header">
+          <span>AI Generated Scripts</span>
+          <button class="btn btn-xs btn-ghost" onclick="loadAIScripts()" title="Refresh">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+          </button>
+        </div>
+        <input type="text" class="input" placeholder="Search AI scripts..." id="ai-script-search" style="margin: 0 8px 8px; width: calc(100% - 16px);" oninput="filterAIScripts(this.value)">
+        <div id="ai-scripts-list" class="ai-scripts-list" style="max-height: 200px; overflow-y: auto;">
+          <li class="muted text-sm" style="padding: 8px 12px;">Loading...</li>
+        </div>
+      </div>
       <div class="sidebar-header">
         <input type="text" class="input" placeholder="Search scripts..." id="script-search">
       </div>
-      <ul class="script-list" id="script-list">
-        <th:block th:if="${scripts != null and not #lists.isEmpty(scripts)}">
-          <li class="script-item" th:each="script : ${scripts}" th:data-script-id="${script.id}" th:data-content="${script.content}" th:data-language="${script.language}" onclick="selectScript(this)">
-            <div class="script-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+      <div class="folder-tree" id="folder-tree">
+        <th:block th:if="${testSuites != null and not #lists.isEmpty(testSuites)}" th:each="suite : ${testSuites}">
+          <div class="folder-item" th:data-suite-id="${suite.id}" ondragover="handleDragOver(event)" ondrop="handleDrop(event, this.dataset.suiteId)">
+            <div class="folder-header" onclick="toggleFolder(this)">
+              <svg class="folder-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+              <span class="folder-name" th:text="${suite.name}">Folder Name</span>
+              <span class="folder-count">0</span>
             </div>
-            <div class="script-info">
-              <span class="script-name" th:text="${script.name}">Script Name</span>
-              <span class="script-status" th:classappend="${script.lastStatus == 'Passed' ? 'pass' : (script.lastStatus == 'Failed' ? 'fail' : 'not-run')}" th:text="${script.lastStatus != null ? script.lastStatus : 'Not Run'}">Not Run</span>
-            </div>
-          </li>
+            <ul class="folder-scripts expanded" th:data-suite-id="${suite.id}">
+              <th:block th:if="${scripts != null}" th:each="script : ${scripts}">
+                <li class="script-item" draggable="true" ondragstart="handleDragStart(event, this)" th:if="${script.suiteId != null and script.suiteId == suite.id}" th:data-script-id="${script.id}" th:data-content="${script.content}" th:data-language="${script.language}" th:data-project-id="${script.projectId}" onclick="selectScript(this); document.getElementById('edit-script-id').value = this.getAttribute('data-script-id'); document.getElementById('edit-script-name').value = this.querySelector('.script-name').textContent; document.getElementById('edit-script-language').value = this.getAttribute('data-language') || 'javascript'; if(this.getAttribute('data-project-id')) document.getElementById('edit-script-project').value = this.getAttribute('data-project-id');">
+                  <div class="script-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+                  </div>
+                  <div class="script-info">
+                    <span class="script-name" th:text="${script.name}">Script Name</span>
+                    <span class="script-status" th:classappend="${script.lastStatus == 'Passed' ? 'pass' : (script.lastStatus == 'Failed' ? 'fail' : 'not-run')}" th:text="${script.lastStatus != null ? script.lastStatus : 'Not Run'}">Not Run</span>
+                  </div>
+                  <button type="button" class="btn btn-xs btn-ghost" th:attr="data-script-id=${script.id}, data-script-name=${script.name}, data-script-language=${script.language}, data-script-project-id=${script.projectId}" onclick="openEditScriptModal(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+                  </button>
+                </li>
+              </th:block>
+            </ul>
+          </div>
         </th:block>
-        <th:block th:unless="${scripts != null and not #lists.isEmpty(scripts)}">
-          <li class="script-item" data-script-id="0">
-            <div class="script-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
-            </div>
-            <div class="script-info">
-              <span class="script-name">login.spec.js</span>
-              <span class="script-status not-run">Not Run</span>
-            </div>
-          </li>
+        <th:block th:unless="${testSuites != null and not #lists.isEmpty(testSuites)}">
+          <th:block th:if="${scripts != null and not #lists.isEmpty(scripts)}" th:each="script : ${scripts}">
+            <li class="script-item" th:data-script-id="${script.id}" th:data-content="${script.content}" th:data-language="${script.language}" onclick="selectScript(this)">
+              <div class="script-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+              </div>
+              <div class="script-info">
+                <span class="script-name" th:text="${script.name}">Script Name</span>
+                <span class="script-status" th:classappend="${script.lastStatus == 'Passed' ? 'pass' : (script.lastStatus == 'Failed' ? 'fail' : 'not-run')}" th:text="${script.lastStatus != null ? script.lastStatus : 'Not Run'}">Not Run</span>
+              </div>
+            </li>
+          </th:block>
+          <th:block th:unless="${scripts != null and not #lists.isEmpty(scripts)}">
+            <li class="script-item" data-script-id="0">
+              <div class="script-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+              </div>
+              <div class="script-info">
+                <span class="script-name">login.spec.js</span>
+                <span class="script-status not-run">Not Run</span>
+              </div>
+            </li>
+          </th:block>
         </th:block>
-      </ul>
-      <button class="btn btn-primary w-full" style="margin: 12px; width: calc(100% - 24px);" data-modal-toggle="new-script-modal">
+      </div>
+      <button class="btn btn-primary w-full" style="margin: 12px; width: calc(100% - 24px);" data-modal-toggle="new-script-modal" onclick="setDefaultSuite(this)">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
         New Script
       </button>
@@ -153,6 +297,13 @@
           </select>
         </div>
         <div class="form-group">
+          <label class="label" for="script-suite">Test Suite</label>
+          <select id="script-suite" name="suiteId" class="input">
+            <option value="">Default Suite</option>
+            <option th:each="suite : ${testSuites}" th:value="${suite.id}" th:text="${suite.name}">Suite Name</option>
+          </select>
+        </div>
+        <div class="form-group">
           <label class="label" for="script-project">Project</label>
           <select id="script-project" name="projectId" class="input">
             <option th:each="project : ${projects}" th:value="${project.id}" th:text="${project.name}">Project Name</option>
@@ -181,6 +332,20 @@
         <div class="form-group">
           <label class="label" for="edit-script-name">Script Name</label>
           <input type="text" id="edit-script-name" name="name" class="input" required>
+        </div>
+        <div class="form-group">
+          <label class="label" for="edit-script-language">Language</label>
+          <select id="edit-script-language" name="language" class="input">
+            <option value="javascript">JavaScript</option>
+            <option value="typescript">TypeScript</option>
+            <option value="python">Python</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="label" for="edit-script-project">Project</label>
+          <select id="edit-script-project" name="projectId" class="input">
+            <option th:each="project : ${projects}" th:value="${project.id}" th:text="${project.name}">Project Name</option>
+          </select>
         </div>
       </form>
       <div class="modal-footer">

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content security-page">
+  <div class="mb-6">
+    <nav class="breadcrumb mb-2">
+      <a href="/security-automation" class="breadcrumb-link">Security Automation</a>
+      <span class="breadcrumb-separator">/</span>
+      <span class="breadcrumb-current">Security Headers</span>
+    </nav>
+    <div class="flex items-center gap-3 mb-2">
+      <div class="tool-icon" style="background: rgba(59, 130, 246, 0.1);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/></svg>
+      </div>
+      <div>
+        <h1 class="text-2xl font-bold">Security Headers Check</h1>
+        <p class="muted text-sm">Analyze HTTP response headers for security best practices</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-3 gap-6 mb-6">
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">Check Status</span>
+        <span id="headers-status-badge" class="badge badge-pending">Ready</span>
+      </div>
+      <p id="headers-last-check" class="text-sm">No checks performed yet</p>
+    </div>
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">Total Checks</span>
+        <span class="text-xl font-bold" id="headers-total-checks">0</span>
+      </div>
+      <p class="text-xs text-gray-500">Lifetime checks</p>
+    </div>
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">Avg Score</span>
+        <span class="text-xl font-bold text-blue-500" id="headers-avg-score">-</span>
+      </div>
+      <p class="text-xs text-gray-500">Headers present</p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-3 gap-6">
+    <div class="col-span-2">
+      <div class="card mb-6">
+        <div class="card-header">
+          <h3 class="font-semibold">Target Configuration</h3>
+        </div>
+        <div class="card-body">
+          <div class="form-group mb-4">
+            <label class="label">
+              Target URL
+              <span class="label-hint">Enter the URL to check security headers</span>
+            </label>
+            <div class="relative">
+              <input type="text" id="headers-url" class="input pl-10" placeholder="https://example.com" />
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-3">
+            <button class="btn btn-primary" onclick="runHeadersCheck()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Check Headers
+            </button>
+            <button class="btn btn-ghost" onclick="clearHeadersForm()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+              Clear
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="headers-loading" class="card mb-6" style="display: none;">
+        <div class="card-body text-center py-8">
+          <div class="scan-animation mb-4">
+            <svg class="w-12 h-12 mx-auto animate-spin" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+          </div>
+          <h4 class="font-semibold mb-2">Analyzing Headers</h4>
+          <p class="muted text-sm mb-4">Fetching and analyzing HTTP headers...</p>
+          <div class="progress-bar w-full">
+            <div class="progress-fill" id="headers-progress" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="headers-results" class="card mb-6" style="display: none;">
+        <div class="card-header">
+          <h3 class="font-semibold">Security Headers Analysis</h3>
+          <div class="flex items-center gap-2">
+            <span class="badge badge-success" id="headers-score-badge">Analyzing</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="headers-summary" class="grid grid-cols-4 gap-4 mb-6">
+          </div>
+          
+          <div id="headers-table" class="headers-table-container">
+          </div>
+        </div>
+      </div>
+
+      <div id="headers-error" class="card mb-6" style="display: none;">
+        <div class="card-body">
+          <div class="flex items-start gap-3">
+            <div class="error-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6"/><path d="M9 9l6 6"/></svg>
+            </div>
+            <div>
+              <h4 class="font-semibold text-red-500">Check Failed</h4>
+              <p class="muted text-sm mt-1" id="headers-error-message">An error occurred during the check.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-span-1">
+      <div class="card mb-6">
+        <div class="card-header">
+          <h3 class="font-semibold">Security Headers</h3>
+        </div>
+        <div class="card-body">
+          <div class="headers-info-list">
+            <div class="header-info-item">
+              <div class="header-info-header">
+                <span class="font-mono text-sm">Content-Security-Policy</span>
+                <span class="status-dot present"></span>
+              </div>
+              <p class="text-xs text-gray-500">Prevents XSS by controlling resource sources</p>
+            </div>
+            <div class="header-info-item">
+              <div class="header-info-header">
+                <span class="font-mono text-sm">X-Frame-Options</span>
+                <span class="status-dot present"></span>
+              </div>
+              <p class="text-xs text-gray-500">Prevents clickjacking attacks</p>
+            </div>
+            <div class="header-info-item">
+              <div class="header-info-header">
+                <span class="font-mono text-sm">Strict-Transport-Security</span>
+                <span class="status-dot present"></span>
+              </div>
+              <p class="text-xs text-gray-500">Enforces HTTPS connections</p>
+            </div>
+            <div class="header-info-item">
+              <div class="header-info-header">
+                <span class="font-mono text-sm">X-Content-Type-Options</span>
+                <span class="status-dot present"></span>
+              </div>
+              <p class="text-xs text-gray-500">Prevents MIME type sniffing</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-6">
+        <div class="card-header">
+          <h3 class="font-semibold">Why Security Headers Matter</h3>
+        </div>
+        <div class="card-body">
+          <ul class="tips-list">
+            <li><strong>XSS Protection:</strong> CSP prevents inline scripts</li>
+            <li><strong>Clickjacking:</strong> X-Frame-Options stops framing</li>
+            <li><strong>MIME Sniffing:</strong> nosniff prevents attacks</li>
+            <li><strong>HSTS:</strong> Forces HTTPS everywhere</li>
+            <li><strong>Referrer Policy:</strong> Controls privacy leaks</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="font-semibold">Score Guide</h3>
+        </div>
+        <div class="card-body">
+          <div class="score-guide">
+            <div class="score-item">
+              <span class="score-badge excellent">A</span>
+              <span>7+ headers present</span>
+            </div>
+            <div class="score-item">
+              <span class="score-badge good">B</span>
+              <span>5-6 headers present</span>
+            </div>
+            <div class="score-item">
+              <span class="score-badge fair">C</span>
+              <span>3-4 headers present</span>
+            </div>
+            <div class="score-item">
+              <span class="score-badge poor">D</span>
+              <span>1-2 headers present</span>
+            </div>
+            <div class="score-item">
+              <span class="score-badge fail">F</span>
+              <span>No headers present</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.breadcrumb-link { color: #6b7280; text-decoration: none; }
+.breadcrumb-link:hover { color: #3b82f6; }
+.breadcrumb-separator { color: #374151; }
+.breadcrumb-current { color: #111827; font-weight: 500; }
+
+.tool-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.badge {
+  padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500;
+}
+.badge-success { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+.badge-warning { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+.badge-danger { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+.badge-info { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+.badge-pending { background: rgba(107, 114, 128, 0.1); color: #6b7280; }
+
+.card {
+  background: #111827; border: 1px solid #1f2937; border-radius: 12px;
+}
+.card-header {
+  padding: 16px 20px; border-bottom: 1px solid #1f2937;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.card-body { padding: 20px; }
+
+.form-group { margin-bottom: 16px; }
+.label {
+  display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; color: #e5e7eb;
+}
+.label-hint {
+  display: block; font-size: 12px; font-weight: 400; color: #6b7280; margin-top: 2px;
+}
+
+.input {
+  width: 100%; padding: 10px 14px;
+  background: #1f2937; border: 1px solid #374151;
+  border-radius: 8px; color: #e5e7eb; font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input:focus {
+  outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+.input::placeholder { color: #6b7280; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s; border: none;
+}
+.btn-primary {
+  background: #3b82f6; color: white;
+}
+.btn-primary:hover { background: #2563eb; }
+.btn-ghost {
+  background: transparent; color: #9ca3af; border: 1px solid #374151;
+}
+.btn-ghost:hover { background: #1f2937; color: #e5e7eb; }
+
+.progress-bar {
+  height: 6px; background: #1f2937; border-radius: 3px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  border-radius: 3px; transition: width 0.3s ease;
+}
+
+.headers-info-list { display: flex; flex-direction: column; gap: 16px; }
+.header-info-item { padding-bottom: 12px; border-bottom: 1px solid #1f2937; }
+.header-info-item:last-child { border-bottom: none; padding-bottom: 0; }
+.header-info-header {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;
+}
+.status-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+}
+.status-dot.present { background: #22c55e; }
+.status-dot.missing { background: #ef4444; }
+
+.tips-list {
+  list-style: none; padding: 0; margin: 0;
+  font-size: 13px; color: #9ca3af;
+}
+.tips-list li {
+  padding: 8px 0; padding-left: 16px;
+  position: relative;
+}
+.tips-list li::before {
+  content: "•"; position: absolute; left: 0; color: #3b82f6;
+}
+.tips-list strong { color: #e5e7eb; }
+
+.score-guide { display: flex; flex-direction: column; gap: 10px; }
+.score-item { display: flex; align-items: center; gap: 10px; }
+.score-badge {
+  width: 28px; height: 28px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px;
+}
+.score-badge.excellent { background: #22c55e; color: white; }
+.score-badge.good { background: #3b82f6; color: white; }
+.score-badge.fair { background: #f59e0b; color: white; }
+.score-badge.poor { background: #f97316; color: white; }
+.score-badge.fail { background: #ef4444; color: white; }
+
+.headers-table-container { overflow-x: auto; }
+.headers-table {
+  width: 100%; border-collapse: collapse;
+}
+.headers-table th {
+  text-align: left; padding: 12px;
+  background: #0f172a; color: #9ca3af;
+  font-size: 12px; font-weight: 600; text-transform: uppercase;
+  border-bottom: 1px solid #1e293b;
+}
+.headers-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #1e293b;
+  font-size: 13px;
+}
+.headers-table tr:hover { background: #0f172a; }
+
+.header-name { font-family: 'JetBrains Mono', monospace; color: #60a5fa; }
+.header-status { display: flex; align-items: center; gap: 6px; }
+.header-status.present { color: #22c55e; }
+.header-status.missing { color: #ef4444; }
+.header-value { 
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  color: #94a3b8; max-width: 300px; overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.header-value:hover { white-space: normal; }
+
+.header-recommendation {
+  font-size: 12px; color: #6b7280;
+}
+
+.summary-card {
+  padding: 16px; border-radius: 8px; text-align: center;
+}
+.summary-value { font-size: 24px; font-weight: 700; display: block; }
+.summary-label { font-size: 12px; color: #9ca3af; }
+
+.error-icon {
+  width: 40px; height: 40px;
+  background: rgba(239, 68, 68, 0.1); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.grid { display: grid; }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+.gap-3 { gap: 12px; }
+.gap-4 { gap: 16px; }
+.gap-6 { gap: 24px; }
+.mb-2 { margin-bottom: 8px; }
+.mb-3 { margin-bottom: 12px; }
+.mb-4 { margin-bottom: 16px; }
+.mb-6 { margin-bottom: 24px; }
+.mt-1 { margin-top: 4px; }
+.mt-2 { margin-top: 8px; }
+
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 8px; }
+.gap-3 { gap: 12px; }
+
+.text-center { text-align: center; }
+.text-xl { font-size: 1.25rem; }
+.text-2xl { font-size: 1.5rem; }
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+.font-mono { font-family: 'JetBrains Mono', monospace; }
+.text-sm { font-size: 0.875rem; }
+.text-xs { font-size: 0.75rem; }
+.muted { color: #9ca3af; }
+.text-gray-500 { color: #6b7280; }
+.text-red-500 { color: #ef4444; }
+.text-blue-500 { color: #3b82f6; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.animate-spin { animation: spin 1s linear infinite; }
+</style>
+
+<script>
+let headersCheckCount = 0;
+let headersTotalScore = 0;
+
+const importantHeaders = [
+  { key: 'Content-Security-Policy', name: 'Content-Security-Policy', rec: 'Add CSP header to prevent XSS and data injection attacks' },
+  { key: 'X-Frame-Options', name: 'X-Frame-Options', rec: 'Set to DENY or SAMEORIGIN to prevent clickjacking' },
+  { key: 'X-Content-Type-Options', name: 'X-Content-Type-Options', rec: 'Set to nosniff to prevent MIME type sniffing' },
+  { key: 'Strict-Transport-Security', name: 'Strict-Transport-Security', rec: 'Enable HSTS with max-age of at least 31536000' },
+  { key: 'X-XSS-Protection', name: 'X-XSS-Protection', rec: 'Set to 1; mode=block for XSS filtering' },
+  { key: 'Referrer-Policy', name: 'Referrer-Policy', rec: 'Set to strict-origin-when-cross-origin' },
+  { key: 'Permissions-Policy', name: 'Permissions-Policy', rec: 'Control browser features and APIs' },
+  { key: 'Cache-Control', name: 'Cache-Control', rec: 'Set appropriate caching headers for sensitive data' }
+];
+
+async function runHeadersCheck() {
+  const url = document.getElementById('headers-url').value.trim();
+  if (!url) {
+    showHeadersError('Please enter a target URL');
+    return;
+  }
+
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    url = 'https://' + url;
+    document.getElementById('headers-url').value = url;
+  }
+
+  hideHeadersResults();
+  hideHeadersError();
+  showHeadersLoading();
+  updateHeadersStatus('scanning', 'Checking...');
+
+  let progress = 0;
+  const progressInterval = setInterval(() => {
+    progress += 20;
+    if (progress > 80) progress = 80;
+    document.getElementById('headers-progress').style.width = progress + '%';
+  }, 200);
+
+  try {
+    const res = await fetch('/api/security/headers', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({url})
+    });
+    
+    clearInterval(progressInterval);
+    document.getElementById('headers-progress').style.width = '100%';
+    
+    const data = await res.json();
+    hideHeadersLoading();
+    
+    headersCheckCount++;
+    document.getElementById('headers-total-checks').textContent = headersCheckCount;
+    document.getElementById('headers-last-check').textContent = 'Last check: ' + new Date().toLocaleTimeString();
+    
+    displayHeadersResults(data);
+    updateHeadersStatus('completed', 'Completed');
+    
+  } catch (e) {
+    clearInterval(progressInterval);
+    hideHeadersLoading();
+    showHeadersError('Check failed: ' + e.message);
+    updateHeadersStatus('error', 'Failed');
+  }
+}
+
+function displayHeadersResults(data) {
+  let result;
+  try {
+    result = typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
+  } catch { result = data; }
+
+  let presentCount = 0;
+  let missingCount = 0;
+  
+  importantHeaders.forEach(h => {
+    if (result[h.key] && result[h.key].status === 'present') {
+      presentCount++;
+    } else {
+      missingCount++;
+    }
+  });
+  
+  headersTotalScore += presentCount;
+  const avgScore = Math.round((headersTotalScore / headersCheckCount));
+  document.getElementById('headers-avg-score').textContent = avgScore + '/8';
+
+  let summaryHtml = '';
+  summaryHtml += `<div class="summary-card" style="background: rgba(34, 197, 94, 0.1);">
+    <span class="summary-value text-green-500">${presentCount}</span>
+    <span class="summary-label">Present</span>
+  </div>`;
+  summaryHtml += `<div class="summary-card" style="background: rgba(239, 68, 68, 0.1);">
+    <span class="summary-value text-red-500">${missingCount}</span>
+    <span class="summary-label">Missing</span>
+  </div>`;
+  summaryHtml += `<div class="summary-card" style="background: rgba(59, 130, 246, 0.1);">
+    <span class="summary-value text-blue-500">${Math.round((presentCount/8)*100)}%</span>
+    <span class="summary-label">Score</span>
+  </div>`;
+  summaryHtml += `<div class="summary-card" style="background: rgba(168, 85, 247, 0.1);">
+    <span class="summary-value text-purple-500">${presentCount >= 6 ? 'A' : presentCount >= 4 ? 'B' : presentCount >= 2 ? 'C' : 'F'}</span>
+    <span class="summary-label">Grade</span>
+  </div>`;
+  
+  document.getElementById('headers-summary').innerHTML = summaryHtml;
+
+  const scoreClass = presentCount >= 6 ? 'badge-success' : presentCount >= 4 ? 'badge-info' : 'badge-danger';
+  const scoreText = presentCount >= 6 ? 'Good Score' : presentCount >= 4 ? 'Needs Work' : 'Poor Score';
+  const scoreBadge = document.getElementById('headers-score-badge');
+  scoreBadge.textContent = scoreText;
+  scoreBadge.className = 'badge ' + scoreClass;
+
+  let tableHtml = `<table class="headers-table">
+    <thead>
+      <tr>
+        <th>Header</th>
+        <th>Status</th>
+        <th>Value</th>
+        <th>Recommendation</th>
+      </tr>
+    </thead>
+    <tbody>`;
+  
+  importantHeaders.forEach(h => {
+    const headerData = result[h.key] || {};
+    const isPresent = headerData.status === 'present';
+    const statusClass = isPresent ? 'present' : 'missing';
+    const statusText = isPresent ? 'Present' : 'Missing';
+    const value = headerData.value || '-';
+    
+    tableHtml += `<tr>
+      <td><span class="header-name">${h.name}</span></td>
+      <td><span class="header-status ${statusClass}">
+        <span class="status-dot ${statusClass}"></span>
+        ${statusText}
+      </span></td>
+      <td><span class="header-value" title="${escapeHtml(value)}">${escapeHtml(value)}</span></td>
+      <td><span class="header-recommendation">${isPresent ? '✓ Good' : h.rec}</span></td>
+    </tr>`;
+  });
+  
+  tableHtml += '</tbody></table>';
+  document.getElementById('headers-table').innerHTML = tableHtml;
+  
+  document.getElementById('headers-results').style.display = 'block';
+}
+
+function showHeadersLoading() {
+  document.getElementById('headers-loading').style.display = 'block';
+}
+
+function hideHeadersLoading() {
+  document.getElementById('headers-loading').style.display = 'none';
+}
+
+function showHeadersResults() {
+  document.getElementById('headers-results').style.display = 'block';
+}
+
+function hideHeadersResults() {
+  document.getElementById('headers-results').style.display = 'none';
+}
+
+function showHeadersError(message) {
+  document.getElementById('headers-error-message').textContent = message;
+  document.getElementById('headers-error').style.display = 'block';
+}
+
+function hideHeadersError() {
+  document.getElementById('headers-error').style.display = 'none';
+}
+
+function updateHeadersStatus(status, text) {
+  const badge = document.getElementById('headers-status-badge');
+  badge.textContent = text;
+  badge.className = 'badge ' + (status === 'completed' ? 'badge-success' : status === 'scanning' ? 'badge-info' : status === 'error' ? 'badge-danger' : 'badge-pending');
+}
+
+function clearHeadersForm() {
+  document.getElementById('headers-url').value = '';
+  hideHeadersResults();
+  hideHeadersError();
+  updateHeadersStatus('ready', 'Ready');
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+</script>
+</body>
+</html>

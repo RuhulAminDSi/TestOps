@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content security-page">
+  <div class="mb-6">
+    <nav class="breadcrumb mb-2">
+      <span class="breadcrumb-current">Security Automation</span>
+    </nav>
+    <div class="flex items-center gap-3 mb-2">
+      <div class="tool-icon" style="background: rgba(99, 102, 241, 0.1);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div>
+        <h1 class="text-2xl font-bold">Security Automation</h1>
+        <p class="muted text-sm">Automated security testing toolkit</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-4 gap-6 mb-6">
+    <div class="stat-card" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.2);">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted">Vulnerability Scans</span>
+        <svg class="w-5 h-5 opacity-70" style="color: #ef4444;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <p class="text-3xl font-bold" id="stat-vuln">-</p>
+      <span class="badge-soft">Total Scans</span>
+    </div>
+    <div class="stat-card" style="background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.2);">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted">Headers Checked</span>
+        <svg class="w-5 h-5 opacity-70" style="color: #3b82f6;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/></svg>
+      </div>
+      <p class="text-3xl font-bold" id="stat-headers">-</p>
+      <span class="badge-soft">Security Headers</span>
+    </div>
+    <div class="stat-card" style="background: rgba(236, 72, 153, 0.1); border-color: rgba(236, 72, 153, 0.2);">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted">JWT Analyzed</span>
+        <svg class="w-5 h-5 opacity-70" style="color: #ec4899;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+      </div>
+      <p class="text-3xl font-bold" id="stat-jwt">-</p>
+      <span class="badge-soft">Tokens</span>
+    </div>
+    <div class="stat-card" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.2);">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted">Reports</span>
+        <svg class="w-5 h-5 opacity-70" style="color: #22c55e;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+      </div>
+      <p class="text-3xl font-bold" id="stat-reports">-</p>
+      <span class="badge-soft">Total Scans</span>
+    </div>
+  </div>
+
+  <div class="split-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Quick Tools</h3>
+        <span class="badge-soft">9 tools</span>
+      </div>
+      <div class="tools-grid">
+        <a href="security-automation/vuln-scanner" class="tool-card">
+          <div class="tool-icon-wrapper" style="background: rgba(239, 68, 68, 0.1);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="tool-info">
+            <span class="tool-name">Vulnerability Scanner</span>
+            <span class="tool-desc">Scan for common vulnerabilities</span>
+          </div>
+        </a>
+        <a href="security-automation/headers" class="tool-card">
+          <div class="tool-icon-wrapper" style="background: rgba(59, 130, 246, 0.1);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/></svg>
+          </div>
+          <div class="tool-info">
+            <span class="tool-name">Security Headers</span>
+            <span class="tool-desc">Check HTTP security headers</span>
+          </div>
+        </a>
+        <a href="security-automation/port-scanner" class="tool-card">
+          <div class="tool-icon-wrapper" style="background: rgba(168, 85, 247, 0.1);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M2 12h20"/></svg>
+          </div>
+          <div class="tool-info">
+            <span class="tool-name">Port Scanner</span>
+            <span class="tool-desc">Scan open ports on hosts</span>
+          </div>
+        </a>
+        <a href="security-automation/ssl-check" class="tool-card">
+          <div class="tool-icon-wrapper" style="background: rgba(34, 197, 94, 0.1);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><rect width="20" height="8" x="2" y="2" rx="2"/><path d="M20 8V6a2 2 0 0 0-2-2h-1"/></svg>
+          </div>
+          <div class="tool-info">
+            <span class="tool-name">SSL/TLS Analyzer</span>
+            <span class="tool-desc">Analyze certificates</span>
+          </div>
+        </a>
+        <a href="security-automation/password-check" class="tool-card">
+          <div class="tool-icon-wrapper" style="background: rgba(245, 158, 11, 0.1);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+          </div>
+          <div class="tool-info">
+            <span class="tool-name">Password Strength</span>
+            <span class="tool-desc">Check password entropy</span>
+          </div>
+        </a>
+        <a href="security-automation/jwt-analyzer" class="tool-card">
+          <div class="tool-icon-wrapper" style="background: rgba(236, 72, 153, 0.1);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+          </div>
+          <div class="tool-info">
+            <span class="tool-name">JWT Analyzer</span>
+            <span class="tool-desc">Decode JWT tokens</span>
+          </div>
+        </a>
+        <a href="security-automation/input-test" class="tool-card">
+          <div class="tool-icon-wrapper" style="background: rgba(59, 130, 246, 0.1);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M12 2v4"/><path d="m6.8 14-3.5 2"/><path d="m20.7 16-3.5-2"/></svg>
+          </div>
+          <div class="tool-info">
+            <span class="tool-name">Input Validation</span>
+            <span class="tool-desc">Test injection vulnerabilities</span>
+          </div>
+        </a>
+        <a href="security-automation/subdomain" class="tool-card">
+          <div class="tool-icon-wrapper" style="background: rgba(16, 185, 129, 0.1);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M2 12h20"/></svg>
+          </div>
+          <div class="tool-info">
+            <span class="tool-name">Subdomain Finder</span>
+            <span class="tool-desc">Discover subdomains</span>
+          </div>
+        </a>
+        <a href="security-automation/reports" class="tool-card">
+          <div class="tool-icon-wrapper" style="background: rgba(99, 102, 241, 0.1);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+          </div>
+          <div class="tool-info">
+            <span class="tool-name">Reports</span>
+            <span class="tool-desc">View scan history</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-header">
+        <h3>Recent Scans</h3>
+        <a href="security-automation/reports" class="text-sm text-blue-500 hover:underline">View All</a>
+      </div>
+      <ul class="list-rows" id="recent-scans">
+        <li class="empty-state">
+          <svg class="w-10 h-10 mx-auto mb-2" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/><path d="M2 12h20"/></svg>
+          <p class="muted text-sm">No scans yet. Run a tool to see results here.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+async function loadDashboardStats() {
+  try {
+    const res = await fetch('/api/security/reports');
+    const data = await res.json();
+    
+    if (Array.isArray(data) && data.length > 0) {
+      const typeCounts = {};
+      data.forEach(s => { typeCounts[s.type] = (typeCounts[s.type] || 0) + 1; });
+      
+      document.getElementById('stat-vuln').textContent = typeCounts['vuln-scan'] || 0;
+      document.getElementById('stat-headers').textContent = typeCounts['headers-check'] || 0;
+      document.getElementById('stat-jwt').textContent = typeCounts['jwt-analyze'] || 0;
+      document.getElementById('stat-reports').textContent = data.length;
+
+      const recentHtml = data.slice(0, 5).map(scan => {
+        const typeLabels = {
+          'vuln-scan': 'Vuln Scan',
+          'headers-check': 'Headers',
+          'port-scan': 'Port Scan',
+          'ssl-check': 'SSL/TLS',
+          'password-check': 'Password',
+          'jwt-analyze': 'JWT',
+          'input-test': 'Input',
+          'subdomain': 'Subdomain'
+        };
+        const date = scan.createdAt ? new Date(scan.createdAt).toLocaleString([], {month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'}) : 'N/A';
+        
+        return `<li>
+          <div class="dot green"></div>
+          <div class="flex-1">
+            <span>${typeLabels[scan.type] || scan.type}</span>
+            <span class="muted text-xs">${date}</span>
+          </div>
+          <span class="chip success">Done</span>
+        </li>`;
+      }).join('');
+      
+      document.getElementById('recent-scans').innerHTML = recentHtml || '<li class="empty-state"><p class="muted text-sm">No recent scans</p></li>';
+    }
+  } catch (e) {
+    console.log('No reports yet');
+  }
+}
+
+loadDashboardStats();
+</script>
+</body>
+</html>

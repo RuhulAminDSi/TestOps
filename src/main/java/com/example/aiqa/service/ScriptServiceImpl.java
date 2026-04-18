@@ -96,6 +96,12 @@ public class ScriptServiceImpl implements ScriptService {
         if (scriptDto.getLanguage() != null) {
             script.setLanguage(scriptDto.getLanguage());
         }
+        if (scriptDto.getSuiteId() != null) {
+            script.setSuiteId(scriptDto.getSuiteId());
+        }
+        if (scriptDto.getProjectId() != null) {
+            script.setProjectId(scriptDto.getProjectId());
+        }
         
         Script updated = scriptRepository.save(script);
         return toDto(updated);

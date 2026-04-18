@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="page-content security-page">
+  <div class="mb-6">
+    <nav class="breadcrumb mb-2">
+      <a href="/security-automation" class="breadcrumb-link">Security Automation</a>
+      <span class="breadcrumb-separator">/</span>
+      <span class="breadcrumb-current">JWT Analyzer</span>
+    </nav>
+    <div class="flex items-center gap-3 mb-2">
+      <div class="tool-icon" style="background: rgba(236, 72, 153, 0.1);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+      </div>
+      <div>
+        <h1 class="text-2xl font-bold">JWT Analyzer</h1>
+        <p class="muted text-sm">Decode and analyze JWT tokens for security issues</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-4 gap-6 mb-6">
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">Total Analyzed</span>
+        <span class="text-xl font-bold" id="jwt-total-analyzed">0</span>
+      </div>
+      <p class="text-xs text-gray-500">Lifetime tokens</p>
+    </div>
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">Valid</span>
+        <span class="text-xl font-bold text-green-500" id="jwt-valid-count">0</span>
+      </div>
+      <p class="text-xs text-gray-500">Non-expired tokens</p>
+    </div>
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">Expired</span>
+        <span class="text-xl font-bold text-red-500" id="jwt-expired-count">0</span>
+      </div>
+      <p class="text-xs text-gray-500">Expired tokens</p>
+    </div>
+    <div class="card">
+      <div class="flex items-center justify-between mb-3">
+        <span class="muted text-sm">Invalid</span>
+        <span class="text-xl font-bold text-gray-500" id="jwt-invalid-count">0</span>
+      </div>
+      <p class="text-xs text-gray-500">Malformed tokens</p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-3 gap-6">
+    <div class="col-span-2">
+      <div class="card mb-6">
+        <div class="card-header">
+          <h3 class="font-semibold">Token Input</h3>
+        </div>
+        <div class="card-body">
+          <div class="form-group mb-4">
+            <label class="label">
+              JWT Token
+              <span class="label-hint">Paste a JWT token to analyze</span>
+            </label>
+            <textarea id="jwt-token" class="input" rows="4" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"></textarea>
+          </div>
+          
+          <div class="flex items-center gap-3">
+            <button class="btn btn-primary" onclick="runJwtAnalyze()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+              Analyze Token
+            </button>
+            <button class="btn btn-ghost" onclick="clearJwtForm()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+              Clear
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="jwt-loading" class="card mb-6" style="display: none;">
+        <div class="card-body text-center py-8">
+          <div class="scan-animation mb-4">
+            <svg class="w-12 h-12 mx-auto animate-spin" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+          </div>
+          <h4 class="font-semibold mb-2">Decoding Token</h4>
+          <p class="muted text-sm mb-4">Parsing JWT structure...</p>
+        </div>
+      </div>
+
+      <div id="jwt-results" class="card mb-6" style="display: none;">
+        <div class="card-header">
+          <h3 class="font-semibold">Token Analysis</h3>
+          <div class="flex items-center gap-2">
+            <span class="badge badge-success" id="jwt-status-badge">Valid</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="jwt-status-card" class="jwt-status-card mb-6">
+          </div>
+          
+          <div class="jwt-sections">
+            <div id="jwt-header-section" class="jwt-section">
+            </div>
+            <div id="jwt-payload-section" class="jwt-section">
+            </div>
+            <div id="jwt-signature-section" class="jwt-section">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="jwt-error" class="card mb-6" style="display: none;">
+        <div class="card-body">
+          <div class="flex items-start gap-3">
+            <div class="error-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6"/><path d="M9 9l6 6"/></svg>
+            </div>
+            <div>
+              <h4 class="font-semibold text-red-500">Analysis Failed</h4>
+              <p class="muted text-sm mt-1" id="jwt-error-message">Invalid JWT token format.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-span-1">
+      <div class="card mb-6">
+        <div class="card-header">
+          <h3 class="font-semibold">JWT Structure</h3>
+        </div>
+        <div class="card-body">
+          <div class="jwt-structure-info">
+            <div class="struct-part">
+              <span class="part-header">HEADER</span>
+              <span class="part-desc">Algorithm & token type</span>
+            </div>
+            <div class="struct-part">
+              <span class="part-header">PAYLOAD</span>
+              <span class="part-desc">Claims & data</span>
+            </div>
+            <div class="struct-part">
+              <span class="part-header">SIGNATURE</span>
+              <span class="part-desc">Verify integrity</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-6">
+        <div class="card-header">
+          <h3 class="font-semibold">Common Claims</h3>
+        </div>
+        <div class="card-body">
+          <div class="claims-list">
+            <div class="claim-item">
+              <code>iss</code>
+              <span>Issuer</span>
+            </div>
+            <div class="claim-item">
+              <code>sub</code>
+              <span>Subject</span>
+            </div>
+            <div class="claim-item">
+              <code>aud</code>
+              <span>Audience</span>
+            </div>
+            <div class="claim-item">
+              <code>exp</code>
+              <span>Expiration</span>
+            </div>
+            <div class="claim-item">
+              <code>nbf</code>
+              <span>Not Before</span>
+            </div>
+            <div class="claim-item">
+              <code>iat</code>
+              <span>Issued At</span>
+            </div>
+            <div class="claim-item">
+              <code>jti</code>
+              <span>JWT ID</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="font-semibold">Security Checks</h3>
+        </div>
+        <div class="card-body">
+          <ul class="tips-list">
+            <li>Check token expiration</li>
+            <li>Verify signature algorithm</li>
+            <li>Review payload claims</li>
+            <li>Avoid 'none' algorithm</li>
+            <li>Check issuer validation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.breadcrumb-link { color: #6b7280; text-decoration: none; }
+.breadcrumb-link:hover { color: #3b82f6; }
+.breadcrumb-separator { color: #374151; }
+.breadcrumb-current { color: #111827; font-weight: 500; }
+
+.tool-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.badge {
+  padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500;
+}
+.badge-success { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+.badge-warning { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+.badge-danger { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+.badge-info { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+.badge-pending { background: rgba(107, 114, 128, 0.1); color: #6b7280; }
+
+.card {
+  background: #111827; border: 1px solid #1f2937; border-radius: 12px;
+}
+.card-header {
+  padding: 16px 20px; border-bottom: 1px solid #1f2937;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.card-body { padding: 20px; }
+
+.form-group { margin-bottom: 16px; }
+.label {
+  display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; color: #e5e7eb;
+}
+.label-hint {
+  display: block; font-size: 12px; font-weight: 400; color: #6b7280; margin-top: 2px;
+}
+
+.input, textarea.input {
+  width: 100%; padding: 10px 14px;
+  background: #1f2937; border: 1px solid #374151;
+  border-radius: 8px; color: #e5e7eb; font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: 'JetBrains Mono', monospace;
+}
+.input:focus, textarea.input:focus {
+  outline: none; border-color: #ec4899; box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+}
+.input::placeholder, textarea.input::placeholder { color: #6b7280; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s; border: none;
+}
+.btn-primary {
+  background: #ec4899; color: white;
+}
+.btn-primary:hover { background: #db2777; }
+.btn-ghost {
+  background: transparent; color: #9ca3af; border: 1px solid #374151;
+}
+.btn-ghost:hover { background: #1f2937; color: #e5e7eb; }
+
+.jwt-status-card {
+  padding: 20px; background: #0f172a; border-radius: 12px;
+  display: flex; align-items: center; gap: 16px;
+}
+.jwt-status-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+.jwt-status-icon.valid { background: rgba(34, 197, 94, 0.15); }
+.jwt-status-icon.expired { background: rgba(239, 68, 68, 0.15); }
+.jwt-status-icon.invalid { background: rgba(107, 114, 128, 0.15); }
+.jwt-status-info { flex: 1; }
+.jwt-status-title { font-size: 18px; font-weight: 700; color: #e5e7eb; }
+.jwt-status-subtitle { font-size: 13px; color: #9ca3af; }
+
+.jwt-sections { display: flex; flex-direction: column; gap: 16px; }
+.jwt-section {
+  background: #0f172a; border-radius: 10px; overflow: hidden;
+}
+.jwt-section-header {
+  padding: 12px 16px; background: #1e293b;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.jwt-section-title {
+  font-size: 13px; font-weight: 600; color: #e5e7eb;
+}
+.jwt-section-badge {
+  font-size: 10px; padding: 3px 8px; border-radius: 6px;
+}
+.jwt-section-badge.header { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+.jwt-section-badge.payload { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
+.jwt-section-badge.signature { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+.jwt-section-content {
+  padding: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: #94a3b8;
+  max-height: 200px; overflow: auto;
+  white-space: pre-wrap; word-break: break-all;
+}
+
+.jwt-structure-info { display: flex; flex-direction: column; gap: 12px; }
+.struct-part {
+  padding: 12px; background: #0f172a; border-radius: 8px;
+  border-left: 3px solid #ec4899;
+}
+.part-header {
+  display: block; font-size: 11px; font-weight: 700;
+  color: #ec4899; margin-bottom: 4px; letter-spacing: 0.5px;
+}
+.part-desc { font-size: 12px; color: #6b7280; }
+
+.claims-list { display: flex; flex-direction: column; gap: 8px; }
+.claim-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 0; border-bottom: 1px solid #1f2937;
+  font-size: 12px;
+}
+.claim-item:last-child { border-bottom: none; }
+.claim-item code {
+  font-family: 'JetBrains Mono', monospace;
+  color: #60a5fa; background: #0f172a;
+  padding: 3px 8px; border-radius: 4px;
+}
+
+.tips-list {
+  list-style: none; padding: 0; margin: 0;
+  font-size: 13px; color: #9ca3af;
+}
+.tips-list li {
+  padding: 6px 0; padding-left: 16px;
+  position: relative;
+}
+.tips-list li::before {
+  content: "•"; position: absolute; left: 0; color: #ec4899;
+}
+
+.error-icon {
+  width: 40px; height: 40px;
+  background: rgba(239, 68, 68, 0.1); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.grid { display: grid; }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+.gap-3 { gap: 12px; }
+.gap-4 { gap: 16px; }
+.gap-6 { gap: 24px; }
+.mb-2 { margin-bottom: 8px; }
+.mb-3 { margin-bottom: 12px; }
+.mb-4 { margin-bottom: 16px; }
+.mb-6 { margin-bottom: 24px; }
+
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 8px; }
+.gap-3 { gap: 12px; }
+
+.text-center { text-align: center; }
+.text-xl { font-size: 1.25rem; }
+.text-2xl { font-size: 1.5rem; }
+.font-bold { font-weight: 700; }
+.font-semibold { font-weight: 600; }
+.text-sm { font-size: 0.875rem; }
+.text-xs { font-size: 0.75rem; }
+.muted { color: #9ca3af; }
+.text-gray-500 { color: #6b7280; }
+.text-red-500 { color: #ef4444; }
+.text-green-500 { color: #22c55e; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.animate-spin { animation: spin 1s linear infinite; }
+</style>
+
+<script>
+let jwtTotalAnalyzed = 0;
+let jwtValidCount = 0;
+let jwtExpiredCount = 0;
+let jwtInvalidCount = 0;
+
+async function runJwtAnalyze() {
+  const token = document.getElementById('jwt-token').value.trim();
+  if (!token) {
+    showJwtError('Please enter a JWT token');
+    return;
+  }
+
+  hideJwtResults();
+  hideJwtError();
+  showJwtLoading();
+
+  try {
+    const res = await fetch('/api/security/jwt-analyze', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({token})
+    });
+    
+    const data = await res.json();
+    hideJwtLoading();
+    
+    jwtTotalAnalyzed++;
+    document.getElementById('jwt-total-analyzed').textContent = jwtTotalAnalyzed;
+    
+    displayJwtResults(data);
+    
+  } catch (e) {
+    hideJwtLoading();
+    showJwtError('Analysis failed: ' + e.message);
+  }
+}
+
+function displayJwtResults(data) {
+  let result;
+  try {
+    result = typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
+  } catch { result = data; }
+
+  if (result.error) {
+    jwtInvalidCount++;
+    document.getElementById('jwt-invalid-count').textContent = jwtInvalidCount;
+    showJwtError(result.error);
+    return;
+  }
+
+  const expired = result.expired;
+  if (expired) {
+    jwtExpiredCount++;
+    document.getElementById('jwt-expired-count').textContent = jwtExpiredCount;
+  } else {
+    jwtValidCount++;
+    document.getElementById('jwt-valid-count').textContent = jwtValidCount;
+  }
+
+  const statusClass = expired ? 'expired' : 'valid';
+  const statusText = expired ? 'Expired' : 'Valid';
+  const statusBadge = document.getElementById('jwt-status-badge');
+  statusBadge.textContent = statusText;
+  statusBadge.className = 'badge ' + (expired ? 'badge-danger' : 'badge-success');
+
+  let statusCardHtml = `
+    <div class="jwt-status-icon ${statusClass}">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${expired ? '#ef4444' : '#22c55e'}" stroke-width="2">
+        ${expired ? '<circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6"/><path d="M9 9l6 6"/>' : '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>'}
+      </svg>
+    </div>
+    <div class="jwt-status-info">
+      <div class="jwt-status-title">Token is ${statusText}</div>
+      <div class="jwt-status-subtitle">${expired ? 'This token has expired and should not be used' : 'This token appears to be valid'}</div>
+    </div>
+  `;
+  document.getElementById('jwt-status-card').innerHTML = statusCardHtml;
+
+  const headerHtml = `
+    <div class="jwt-section-header">
+      <span class="jwt-section-title">Header</span>
+      <span class="jwt-section-badge header">ALGORITHM</span>
+    </div>
+    <div class="jwt-section-content">${JSON.stringify(result.header || {}, null, 2)}</div>
+  `;
+  document.getElementById('jwt-header-section').innerHTML = headerHtml;
+
+  const payloadHtml = `
+    <div class="jwt-section-header">
+      <span class="jwt-section-title">Payload</span>
+      <span class="jwt-section-badge payload">DATA</span>
+    </div>
+    <div class="jwt-section-content">${JSON.stringify(result.payload || {}, null, 2)}</div>
+  `;
+  document.getElementById('jwt-payload-section').innerHTML = payloadHtml;
+
+  const signatureHtml = `
+    <div class="jwt-section-header">
+      <span class="jwt-section-title">Signature</span>
+      <span class="jwt-section-badge signature">VERIFY</span>
+    </div>
+    <div class="jwt-section-content" style="color: #6b7280;">
+      ${result.signature || 'No signature provided'}
+      <div style="margin-top: 12px; padding: 12px; background: #1e293b; border-radius: 6px;">
+        <strong style="color: #94a3b8;">Note:</strong> Signature verification requires the secret key. This tool only decodes and displays the token structure.
+      </div>
+    </div>
+  `;
+  document.getElementById('jwt-signature-section').innerHTML = signatureHtml;
+
+  document.getElementById('jwt-results').style.display = 'block';
+}
+
+function showJwtLoading() {
+  document.getElementById('jwt-loading').style.display = 'block';
+}
+
+function hideJwtLoading() {
+  document.getElementById('jwt-loading').style.display = 'none';
+}
+
+function showJwtResults() {
+  document.getElementById('jwt-results').style.display = 'block';
+}
+
+function hideJwtResults() {
+  document.getElementById('jwt-results').style.display = 'none';
+}
+
+function showJwtError(message) {
+  document.getElementById('jwt-error-message').textContent = message;
+  document.getElementById('jwt-error').style.display = 'block';
+}
+
+function hideJwtError() {
+  document.getElementById('jwt-error').style.display = 'none';
+}
+
+function clearJwtForm() {
+  document.getElementById('jwt-token').value = '';
+  hideJwtResults();
+  hideJwtError();
+}
+</script>
+</body>
+</html>
