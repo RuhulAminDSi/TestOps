@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Object Repository</title>
+</head>
 <body>
 <div th:fragment="content" class="page-content">
   <div class="page-header">
@@ -8,8 +13,8 @@
       <p>Manage reusable test objects</p>
     </div>
     <div class="flex items-center gap-3">
-      <input type="text" class="input w-64" placeholder="Search objects...">
-      <button class="btn btn-primary">
+      <input type="text" class="input w-64" placeholder="Search objects..." id="objectSearch">
+      <button class="btn btn-primary" id="addObjectBtn" onclick="openModal()">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
         Add Object
       </button>
@@ -22,14 +27,14 @@
         <span class="muted">Total Objects</span>
         <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16.5 9.4-9-5.19"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
       </div>
-      <p class="text-3xl">89</p>
+      <p class="text-3xl" id="totalObjects">0</p>
     </div>
     <div class="stat-card">
       <div class="flex items-center justify-between mb-4">
         <span class="muted">Pages</span>
         <svg class="w-5 h-5 opacity-70" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/></svg>
       </div>
-      <p class="text-3xl">8</p>
+      <p class="text-3xl" id="totalPages">0</p>
     </div>
   </div>
 
@@ -37,41 +42,299 @@
     <div class="panel-header">
       <h3>Page Objects</h3>
     </div>
-    <ul class="list-rows">
-      <li>
-        <div class="dot blue"></div>
-        <div class="flex-1">
-          <span>LoginPage</span>
-          <span class="muted text-xs">12 objects - Last updated: Today</span>
-        </div>
-        <button class="btn btn-sm">Edit</button>
-      </li>
-      <li>
-        <div class="dot blue"></div>
-        <div class="flex-1">
-          <span>CheckoutPage</span>
-          <span class="muted text-xs">18 objects - Last updated: Yesterday</span>
-        </div>
-        <button class="btn btn-sm">Edit</button>
-      </li>
-      <li>
-        <div class="dot blue"></div>
-        <div class="flex-1">
-          <span>PaymentPage</span>
-          <span class="muted text-xs">15 objects - Last updated: 2 days ago</span>
-        </div>
-        <button class="btn btn-sm">Edit</button>
-      </li>
-      <li>
-        <div class="dot blue"></div>
-        <div class="flex-1">
-          <span>HomePage</span>
-          <span class="muted text-xs">10 objects - Last updated: 3 days ago</span>
-        </div>
-        <button class="btn btn-sm">Edit</button>
-      </li>
+    <ul class="list-rows" id="pageObjectsList">
+      <li class="text-center muted py-4">Loading...</li>
     </ul>
   </div>
+
+  <!-- Add/Edit Modal -->
+  <div id="objectModal" class="modal" role="dialog" aria-labelledby="objectModalTitle" aria-modal="true" data-modal>
+    <div class="modal-backdrop" onclick="closeModal('objectModal')"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="objectModalTitle">Add Object</h2>
+        <button class="modal-close" type="button" aria-label="Close" onclick="closeModal('objectModal')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <form class="modal-body" id="objectForm">
+        <input type="hidden" id="objectId">
+        <div class="form-group">
+          <label class="label" for="objectName">Object Name</label>
+          <input type="text" class="input" id="objectName" placeholder="Enter object name" required>
+        </div>
+        <div class="form-group">
+          <label class="label" for="objectPageName">Page Name</label>
+          <select class="input" id="objectPageName" required>
+            <option value="">Select Page</option>
+            <option value="LoginPage">LoginPage</option>
+            <option value="HomePage">HomePage</option>
+            <option value="ProductPage">ProductPage</option>
+            <option value="CartPage">CartPage</option>
+            <option value="CheckoutPage">CheckoutPage</option>
+            <option value="PaymentPage">PaymentPage</option>
+            <option value="SearchResultsPage">SearchResultsPage</option>
+            <option value="ProfilePage">ProfilePage</option>
+            <option value="AdminDashboard">AdminDashboard</option>
+            <option value="OrderHistoryPage">OrderHistoryPage</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="label" for="objectDescription">Description</label>
+          <textarea class="input" id="objectDescription" rows="2" placeholder="Enter description"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="label" for="objectElementType">Element Type</label>
+          <select class="input" id="objectElementType">
+            <option value="">Select Type</option>
+            <option value="button">Button</option>
+            <option value="input">Input</option>
+            <option value="link">Link</option>
+            <option value="dropdown">Dropdown</option>
+            <option value="checkbox">Checkbox</option>
+            <option value="radio">Radio</option>
+            <option value="table">Table</option>
+            <option value="image">Image</option>
+            <option value="div">Div</option>
+            <option value="span">Span</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="label" for="objectLocatorType">Locator Type</label>
+          <select class="input" id="objectLocatorType">
+            <option value="">Select Locator</option>
+            <option value="id">ID</option>
+            <option value="name">Name</option>
+            <option value="xpath">XPath</option>
+            <option value="css">CSS Selector</option>
+            <option value="className">Class Name</option>
+            <option value="linkText">Link Text</option>
+            <option value="partialLinkText">Partial Link Text</option>
+            <option value="tagName">Tag Name</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="label" for="objectLocatorValue">Locator Value</label>
+          <input type="text" class="input" id="objectLocatorValue" placeholder="Enter locator value">
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('objectModal')">Cancel</button>
+        <button type="submit" form="objectForm" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="deleteModal" class="modal" role="dialog" aria-labelledby="deleteModalTitle" aria-modal="true" data-modal>
+    <div class="modal-backdrop" onclick="closeModal('deleteModal')"></div>
+    <div class="modal-content modal-sm">
+      <div class="modal-header">
+        <h2 id="deleteModalTitle">Confirm Delete</h2>
+        <button class="modal-close" type="button" aria-label="Close" onclick="closeModal('deleteModal')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete "<span id="deleteObjectName"></span>"?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('deleteModal')">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let pageObjects = [];
+    let currentEditId = null;
+    let currentDeleteId = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadPageObjects();
+      setupEventListeners();
+    });
+
+    function setupEventListeners() {
+      document.getElementById('addObjectBtn').addEventListener('click', () => openModal());
+      document.getElementById('objectForm').addEventListener('submit', handleSubmit);
+      document.getElementById('confirmDeleteBtn').addEventListener('click', handleDelete);
+      document.getElementById('objectSearch').addEventListener('input', handleSearch);
+    }
+
+    async function loadPageObjects() {
+      try {
+        const response = await fetch('/api/page-objects');
+        pageObjects = await response.json();
+        renderPageObjects(pageObjects);
+        updateStats();
+      } catch (error) {
+        console.error('Error loading page objects:', error);
+        document.getElementById('pageObjectsList').innerHTML = 
+          '<li class="text-center muted py-4">Failed to load objects</li>';
+      }
+    }
+
+    function renderPageObjects(objects) {
+      const list = document.getElementById('pageObjectsList');
+      if (!objects.length) {
+        list.innerHTML = '<li class="text-center muted py-4">No objects found</li>';
+        return;
+      }
+
+      const pageGroups = {};
+      objects.forEach(obj => {
+        if (!pageGroups[obj.pageName]) {
+          pageGroups[obj.pageName] = [];
+        }
+        pageGroups[obj.pageName].push(obj);
+      });
+
+      let html = '';
+      Object.entries(pageGroups).forEach(([pageName, objs]) => {
+        const updatedAt = objs[0].updatedAt || 'Unknown';
+        html += `
+          <li>
+            <div class="dot blue"></div>
+            <div class="flex-1">
+              <span>${pageName}</span>
+              <span class="muted text-xs">${objs.length} objects - Last updated: ${updatedAt}</span>
+            </div>
+            <button class="btn btn-sm" onclick="openPageObjects('${pageName}')">View</button>
+            <button class="btn btn-sm" onclick="editPageObject(${objs[0].id})">Edit</button>
+          </li>
+        `;
+      });
+      list.innerHTML = html;
+    }
+
+    function updateStats() {
+      const uniquePages = new Set(pageObjects.map(o => o.pageName)).size;
+      document.getElementById('totalObjects').textContent = pageObjects.length;
+      document.getElementById('totalPages').textContent = uniquePages;
+    }
+
+    function handleSearch(e) {
+      const query = e.target.value.toLowerCase();
+      const filtered = pageObjects.filter(o => 
+        o.name.toLowerCase().includes(query) || 
+        o.pageName.toLowerCase().includes(query)
+      );
+      renderPageObjects(filtered);
+    }
+
+    function openModal(object = null) {
+      const modal = document.getElementById('objectModal');
+      const title = document.getElementById('objectModalTitle');
+      const form = document.getElementById('objectForm');
+
+      if (object) {
+        title.textContent = 'Edit Object';
+        currentEditId = object.id;
+        document.getElementById('objectId').value = object.id;
+        document.getElementById('objectName').value = object.name;
+        document.getElementById('objectPageName').value = object.pageName;
+        document.getElementById('objectDescription').value = object.description || '';
+        document.getElementById('objectElementType').value = object.elementType || '';
+        document.getElementById('objectLocatorType').value = object.locatorType || '';
+        document.getElementById('objectLocatorValue').value = object.locatorValue || '';
+      } else {
+        title.textContent = 'Add Object';
+        currentEditId = null;
+        form.reset();
+      }
+
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      
+      const data = {
+        name: document.getElementById('objectName').value,
+        pageName: document.getElementById('objectPageName').value,
+        description: document.getElementById('objectDescription').value,
+        elementType: document.getElementById('objectElementType').value,
+        locatorType: document.getElementById('objectLocatorType').value,
+        locatorValue: document.getElementById('objectLocatorValue').value
+      };
+
+      try {
+        let url = '/api/page-objects';
+        let method = 'POST';
+
+        if (currentEditId) {
+          url += '/' + currentEditId;
+          method = 'PUT';
+        }
+
+        const response = await fetch(url, {
+          method: method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          closeModal('objectModal');
+          loadPageObjects();
+        } else {
+          alert('Failed to save object');
+        }
+      } catch (error) {
+        console.error('Error saving object:', error);
+        alert('Error saving object');
+      }
+    }
+
+    function editPageObject(id) {
+      const object = pageObjects.find(o => o.id === id);
+      if (object) {
+        openModal(object);
+      }
+    }
+
+    function confirmDelete(id) {
+      const object = pageObjects.find(o => o.id === id);
+      if (object) {
+        currentDeleteId = id;
+        document.getElementById('deleteObjectName').textContent = object.name;
+        document.getElementById('deleteModal').classList.add('open');
+      }
+    }
+
+    async function handleDelete() {
+      if (!currentDeleteId) return;
+
+      try {
+        const response = await fetch('/api/page-objects/' + currentDeleteId, {
+          method: 'DELETE'
+        });
+
+        if (response.ok) {
+          closeModal('deleteModal');
+          loadPageObjects();
+        } else {
+          alert('Failed to delete object');
+        }
+      } catch (error) {
+        console.error('Error deleting object:', error);
+        alert('Error deleting object');
+      }
+    }
+
+    function openPageObject(pageName) {
+      alert('View objects for: ' + pageName);
+    }
+  </script>
 </div>
 </body>
 </html>
