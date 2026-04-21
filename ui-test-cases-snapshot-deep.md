@@ -1,0 +1,341 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: TestOps
+      - generic [ref=e7]:
+        - generic [ref=e8]: Project
+        - combobox "Select project" [ref=e9]:
+          - option "All Projects" [selected]
+          - option "Test First"
+          - option "ICT Demand Activity - 2025"
+    - generic [ref=e10]:
+      - generic [ref=e11]:
+        - textbox "Search" [ref=e13]:
+          - /placeholder: Search scripts, runs, projects...
+        - generic [ref=e14]: Ctrl+K
+      - button "Notifications" [ref=e15] [cursor=pointer]
+      - button "A Admin" [ref=e18] [cursor=pointer]:
+        - generic [ref=e19]: A
+        - generic [ref=e20]: Admin
+  - generic [ref=e21]:
+    - complementary "Main navigation" [ref=e22]:
+      - generic [ref=e23]:
+        - heading "Navigation" [level=2] [ref=e24]
+        - button "Toggle sidebar" [expanded] [ref=e25] [cursor=pointer]:
+          - img [ref=e26]
+      - navigation "Primary" [ref=e28]:
+        - link "Dashboard" [ref=e29] [cursor=pointer]:
+          - /url: /
+          - img [ref=e30]
+          - generic [ref=e35]: Dashboard
+        - link "Projects" [ref=e36] [cursor=pointer]:
+          - /url: /projects
+          - img [ref=e37]
+          - generic [ref=e39]: Projects
+        - generic [ref=e40]:
+          - button "UI Automation" [expanded] [ref=e41] [cursor=pointer]:
+            - generic [ref=e42]:
+              - img [ref=e43]
+              - generic [ref=e45]: UI Automation
+            - img [ref=e46]
+          - group "UI Automation submenu" [ref=e414]:
+            - link "Dashboard" [ref=e48] [cursor=pointer]:
+              - /url: /ui-automation/dashboard
+              - img [ref=e49]
+              - generic [ref=e52]: Dashboard
+            - link "Test Cases" [ref=e53] [cursor=pointer]:
+              - /url: /ui-automation/test-cases
+              - img [ref=e54]
+              - generic [ref=e57]: Test Cases
+            - link "Scripts" [ref=e58] [cursor=pointer]:
+              - /url: /ui-automation/scripts
+              - img [ref=e59]
+              - generic [ref=e61]: Scripts
+            - link "Test Suites" [ref=e62] [cursor=pointer]:
+              - /url: /ui-automation/test-suites
+              - img [ref=e63]
+              - generic [ref=e65]: Test Suites
+            - link "AI Testing" [ref=e66] [cursor=pointer]:
+              - /url: /ui-automation/ai-testing
+              - img [ref=e67]
+              - generic [ref=e69]: AI Testing
+            - link "Execution History" [ref=e70] [cursor=pointer]:
+              - /url: /ui-automation/execution-history
+              - img [ref=e71]
+              - generic [ref=e74]: Execution History
+            - link "Object Repository" [ref=e75] [cursor=pointer]:
+              - /url: /ui-automation/object-repository
+              - img [ref=e76]
+              - generic [ref=e80]: Object Repository
+            - link "Test Data" [ref=e81] [cursor=pointer]:
+              - /url: /ui-automation/test-data
+              - img [ref=e82]
+              - generic [ref=e86]: Test Data
+            - link "Scheduler" [ref=e87] [cursor=pointer]:
+              - /url: /ui-automation/scheduler
+              - img [ref=e88]
+              - generic [ref=e90]: Scheduler
+            - link "Reports" [ref=e91] [cursor=pointer]:
+              - /url: /ui-automation/reports
+              - img [ref=e92]
+              - generic [ref=e95]: Reports
+        - generic [ref=e96]:
+          - button "API Automation" [expanded] [ref=e97] [cursor=pointer]:
+            - generic [ref=e98]:
+              - img [ref=e99]
+              - generic [ref=e102]: API Automation
+            - img [ref=e103]
+          - group "API Automation submenu" [ref=e415]:
+            - link "Dashboard" [ref=e105] [cursor=pointer]:
+              - /url: /api-automation/dashboard
+              - img [ref=e106]
+              - generic [ref=e109]: Dashboard
+            - link "Collections" [ref=e110] [cursor=pointer]:
+              - /url: /api-automation/collections
+              - img [ref=e111]
+              - generic [ref=e113]: Collections
+            - link "Requests" [ref=e114] [cursor=pointer]:
+              - /url: /api-automation/requests
+              - img [ref=e115]
+              - generic [ref=e116]: Requests
+            - link "Test Suites" [ref=e117] [cursor=pointer]:
+              - /url: /api-automation/test-suites
+              - img [ref=e118]
+              - generic [ref=e120]: Test Suites
+            - link "Mock Server" [ref=e121] [cursor=pointer]:
+              - /url: /api-automation/mock-server
+              - img [ref=e122]
+              - generic [ref=e125]: Mock Server
+            - link "API Monitoring" [ref=e126] [cursor=pointer]:
+              - /url: /api-automation/monitoring
+              - img [ref=e127]
+              - generic [ref=e130]: API Monitoring
+            - link "AI API Testing" [ref=e131] [cursor=pointer]:
+              - /url: /api-automation/ai-testing
+              - img [ref=e132]
+              - generic [ref=e134]: AI API Testing
+            - link "Data Chaining" [ref=e135] [cursor=pointer]:
+              - /url: /api-automation/data-chaining
+              - img [ref=e136]
+              - generic [ref=e143]: Data Chaining
+            - link "Schema Validation" [ref=e144] [cursor=pointer]:
+              - /url: /api-automation/schema-validation
+              - img [ref=e145]
+              - generic [ref=e148]: Schema Validation
+            - link "Scripts" [ref=e149] [cursor=pointer]:
+              - /url: /api-automation/scripts
+              - img [ref=e150]
+              - generic [ref=e153]: Scripts
+            - link "Environment" [ref=e154] [cursor=pointer]:
+              - /url: /api-automation/environment
+              - img [ref=e155]
+              - generic [ref=e158]: Environment
+            - link "Reports" [ref=e159] [cursor=pointer]:
+              - /url: /api-automation/reports
+              - img [ref=e160]
+              - generic [ref=e163]: Reports
+        - generic [ref=e164]:
+          - button "Load Testing" [expanded] [ref=e165] [cursor=pointer]:
+            - generic [ref=e166]:
+              - img [ref=e167]
+              - generic [ref=e169]: Load Testing
+            - img [ref=e170]
+          - group "Load Testing submenu" [ref=e416]:
+            - link "Dashboard" [ref=e172] [cursor=pointer]:
+              - /url: /load-testing/dashboard
+              - img [ref=e173]
+              - generic [ref=e176]: Dashboard
+            - link "Test Plans" [ref=e177] [cursor=pointer]:
+              - /url: /load-testing/test-plans
+              - img [ref=e178]
+              - generic [ref=e182]: Test Plans
+            - link "Configuration" [ref=e183] [cursor=pointer]:
+              - /url: /load-testing/configuration
+              - img [ref=e184]
+              - generic [ref=e187]: Configuration
+            - link "Run & Monitor" [ref=e188] [cursor=pointer]:
+              - /url: /load-testing/run-monitor
+              - img [ref=e189]
+              - generic [ref=e192]: Run & Monitor
+            - link "Results & Reports" [ref=e193] [cursor=pointer]:
+              - /url: /load-testing/results
+              - img [ref=e194]
+              - generic [ref=e196]: Results & Reports
+            - link "Distributed" [ref=e197] [cursor=pointer]:
+              - /url: /load-testing/distributed
+              - img [ref=e198]
+              - generic [ref=e201]: Distributed
+            - link "Templates" [ref=e202] [cursor=pointer]:
+              - /url: /load-testing/templates
+              - img [ref=e203]
+              - generic [ref=e205]: Templates
+            - link "AI Based Testing" [ref=e206] [cursor=pointer]:
+              - /url: /load-testing/ai-testing
+              - img [ref=e207]
+              - generic [ref=e209]: AI Based Testing
+        - generic [ref=e210]:
+          - button "AI SQL" [expanded] [ref=e211] [cursor=pointer]:
+            - generic [ref=e212]:
+              - img [ref=e213]
+              - generic [ref=e217]: AI SQL
+            - img [ref=e218]
+          - group "AI SQL submenu" [ref=e417]:
+            - link "SQL Runner" [ref=e220] [cursor=pointer]:
+              - /url: /ai-sql/runner
+              - img [ref=e221]
+              - generic [ref=e223]: SQL Runner
+            - link "AI Query Generator" [ref=e224] [cursor=pointer]:
+              - /url: /ai-sql/query-generator
+              - img [ref=e225]
+              - generic [ref=e230]: AI Query Generator
+            - link "SQL Scripts" [ref=e231] [cursor=pointer]:
+              - /url: /ai-sql/scripts
+              - img [ref=e232]
+              - generic [ref=e234]: SQL Scripts
+            - link "Query History" [ref=e235] [cursor=pointer]:
+              - /url: /ai-sql/history
+              - img [ref=e236]
+              - generic [ref=e239]: Query History
+            - link "Data Explorer" [ref=e240] [cursor=pointer]:
+              - /url: /ai-sql/explorer
+              - img [ref=e241]
+              - generic [ref=e244]: Data Explorer
+            - link "Data Validation" [ref=e245] [cursor=pointer]:
+              - /url: /ai-sql/validation
+              - img [ref=e246]
+              - generic [ref=e249]: Data Validation
+            - link "Migration" [ref=e250] [cursor=pointer]:
+              - /url: /ai-sql/migration
+              - img [ref=e251]
+              - generic [ref=e258]: Migration
+            - link "Performance" [ref=e259] [cursor=pointer]:
+              - /url: /ai-sql/performance
+              - img [ref=e260]
+              - generic [ref=e263]: Performance
+        - generic [ref=e264]:
+          - button "Monitoring" [expanded] [ref=e265] [cursor=pointer]:
+            - generic [ref=e266]:
+              - img [ref=e267]
+              - generic [ref=e269]: Monitoring
+            - img [ref=e270]
+          - group "Monitoring submenu" [ref=e418]:
+            - link "Overview" [ref=e272] [cursor=pointer]:
+              - /url: /monitoring
+              - img [ref=e273]
+              - generic [ref=e275]: Overview
+            - link "Audit Logs" [ref=e276] [cursor=pointer]:
+              - /url: /monitoring/audit-logs
+              - img [ref=e277]
+              - generic [ref=e279]: Audit Logs
+            - link "Audit Stats" [ref=e280] [cursor=pointer]:
+              - /url: /monitoring/audit-stats
+              - img [ref=e281]
+              - generic [ref=e283]: Audit Stats
+        - generic [ref=e284]:
+          - button "Settings" [expanded] [ref=e285] [cursor=pointer]:
+            - generic [ref=e286]:
+              - img [ref=e287]
+              - generic [ref=e290]: Settings
+            - img [ref=e291]
+          - group "Settings submenu" [ref=e419]:
+            - link "General" [ref=e293] [cursor=pointer]:
+              - /url: /settings/general
+              - img [ref=e294]
+              - generic [ref=e297]: General
+            - link "Projects & Env" [ref=e298] [cursor=pointer]:
+              - /url: /settings/projects
+              - img [ref=e299]
+              - generic [ref=e301]: Projects & Env
+            - link "Credentials" [ref=e302] [cursor=pointer]:
+              - /url: /settings/credentials
+              - img [ref=e303]
+              - generic [ref=e305]: Credentials
+            - link "AI Config" [ref=e306] [cursor=pointer]:
+              - /url: /settings/ai-config
+              - img [ref=e307]
+              - generic [ref=e316]: AI Config
+            - link "Execution" [ref=e317] [cursor=pointer]:
+              - /url: /settings/execution
+              - img [ref=e318]
+              - generic [ref=e320]: Execution
+            - link "Integrations" [ref=e321] [cursor=pointer]:
+              - /url: /settings/integrations
+              - img [ref=e322]
+              - generic [ref=e329]: Integrations
+            - link "Notifications" [ref=e330] [cursor=pointer]:
+              - /url: /settings/notifications
+              - img [ref=e331]
+              - generic [ref=e334]: Notifications
+            - link "Users & Roles" [ref=e335] [cursor=pointer]:
+              - /url: /settings/users
+              - img [ref=e336]
+              - generic [ref=e341]: Users & Roles
+            - link "Security" [ref=e342] [cursor=pointer]:
+              - /url: /settings/security
+              - img [ref=e343]
+              - generic [ref=e345]: Security
+            - link "Logs & Audit" [ref=e346] [cursor=pointer]:
+              - /url: /settings/logs
+              - img [ref=e347]
+              - generic [ref=e349]: Logs & Audit
+      - link "Help & Support" [ref=e351] [cursor=pointer]:
+        - /url: /help
+        - img [ref=e352]
+        - generic [ref=e355]: Help & Support
+    - main [ref=e356]:
+      - generic [ref=e358]:
+        - generic [ref=e359]:
+          - generic [ref=e360]:
+            - heading "Test Cases" [level=1] [ref=e361]
+            - paragraph [ref=e362]: Manage and organize test cases
+          - generic [ref=e363]:
+            - combobox [ref=e364]:
+              - option "All Modules" [selected]
+              - option "Login"
+              - option "Checkout"
+              - option "Payment"
+            - button "New Test Case" [ref=e365] [cursor=pointer]:
+              - img [ref=e366]
+              - text: New Test Case
+        - generic [ref=e367]:
+          - generic [ref=e368]:
+            - heading "All Test Cases" [level=3] [ref=e369]
+            - generic [ref=e370]: 142 tests
+          - table [ref=e372]:
+            - rowgroup [ref=e373]:
+              - row "Name Module Priority Status Last Run Actions" [ref=e374]:
+                - columnheader "Name" [ref=e375]
+                - columnheader "Module" [ref=e376]
+                - columnheader "Priority" [ref=e377]
+                - columnheader "Status" [ref=e378]
+                - columnheader "Last Run" [ref=e379]
+                - columnheader "Actions" [ref=e380]
+            - rowgroup [ref=e381]:
+              - row "Login with valid credentials Login High Passed Today, 10:32 AM Run" [ref=e382]:
+                - cell "Login with valid credentials" [ref=e383]
+                - cell "Login" [ref=e384]
+                - cell "High" [ref=e385]
+                - cell "Passed" [ref=e386]
+                - cell "Today, 10:32 AM" [ref=e387]
+                - cell "Run" [ref=e388]
+              - row "Login with invalid credentials Login Medium Passed Today, 10:30 AM Run" [ref=e390]:
+                - cell "Login with invalid credentials" [ref=e391]
+                - cell "Login" [ref=e392]
+                - cell "Medium" [ref=e393]
+                - cell "Passed" [ref=e394]
+                - cell "Today, 10:30 AM" [ref=e395]
+                - cell "Run" [ref=e396]
+              - row "Checkout flow Checkout High Passed Today, 10:15 AM Run" [ref=e398]:
+                - cell "Checkout flow" [ref=e399]
+                - cell "Checkout" [ref=e400]
+                - cell "High" [ref=e401]
+                - cell "Passed" [ref=e402]
+                - cell "Today, 10:15 AM" [ref=e403]
+                - cell "Run" [ref=e404]
+              - row "Payment gateway validation Payment High Failed Today, 9:45 AM Run" [ref=e406]:
+                - cell "Payment gateway validation" [ref=e407]
+                - cell "Payment" [ref=e408]
+                - cell "High" [ref=e409]
+                - cell "Failed" [ref=e410]
+                - cell "Today, 9:45 AM" [ref=e411]
+                - cell "Run" [ref=e412]

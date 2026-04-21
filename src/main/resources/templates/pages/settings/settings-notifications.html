@@ -9,23 +9,23 @@
     </div>
   </div>
 
-  <div class="panel">
+  <div class="panel" id="settings-notifications-panel">
     <div class="panel-header">
       <h3>Notification Channels</h3>
     </div>
     <div class="form-group">
       <label class="checkbox-label">
-        <input type="checkbox" checked> Email notifications
+          <input type="checkbox" id="settings-notify-email" checked> Email notifications
       </label>
     </div>
     <div class="form-group">
       <label class="checkbox-label">
-        <input type="checkbox" checked> Slack notifications
+          <input type="checkbox" id="settings-notify-slack" checked> Slack notifications
       </label>
     </div>
     <div class="form-group">
       <label class="checkbox-label">
-        <input type="checkbox"> SMS alerts
+          <input type="checkbox" id="settings-notify-sms"> SMS alerts
       </label>
     </div>
   </div>
@@ -36,20 +36,20 @@
     </div>
     <div class="form-group">
       <label class="checkbox-label">
-        <input type="checkbox" checked> Test failures
+          <input type="checkbox" id="settings-alert-failures" checked> Test failures
       </label>
     </div>
     <div class="form-group">
       <label class="checkbox-label">
-        <input type="checkbox" checked> Execution completed
+          <input type="checkbox" id="settings-alert-execution" checked> Execution completed
       </label>
     </div>
     <div class="form-group">
       <label class="checkbox-label">
-        <input type="checkbox" checked> Scheduler warnings
+          <input type="checkbox" id="settings-alert-scheduler" checked> Scheduler warnings
       </label>
     </div>
-    <button class="btn btn-primary">Save Preferences</button>
+    <button class="btn btn-primary" type="button" id="settings-notifications-save">Save Preferences</button>
   </div>
 </div>
 </body>

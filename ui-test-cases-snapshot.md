@@ -1,0 +1,40 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: TestOps
+      - generic [ref=e7]:
+        - generic [ref=e8]: Project
+        - combobox "Select project" [ref=e9]
+    - generic [ref=e10]:
+      - generic [ref=e11]:
+        - textbox "Search" [ref=e13]:
+          - /placeholder: Search scripts, runs, projects...
+        - generic [ref=e14]: Ctrl+K
+      - button "Notifications" [ref=e15] [cursor=pointer]
+      - button "A Admin" [ref=e18] [cursor=pointer]:
+        - generic [ref=e19]: A
+        - generic [ref=e20]: Admin
+  - generic [ref=e21]:
+    - complementary "Main navigation" [ref=e22]:
+      - generic [ref=e23]:
+        - heading "Navigation" [level=2] [ref=e24]
+        - button "Toggle sidebar" [expanded] [ref=e25] [cursor=pointer]
+      - navigation "Primary" [ref=e28]:
+        - link "Dashboard" [ref=e29] [cursor=pointer]:
+          - /url: /
+        - link "Projects" [ref=e36] [cursor=pointer]:
+          - /url: /projects
+        - generic [ref=e40]
+        - generic [ref=e96]
+        - generic [ref=e164]
+        - generic [ref=e210]
+        - generic [ref=e264]
+        - generic [ref=e284]
+      - link "Help & Support" [ref=e351] [cursor=pointer]:
+        - /url: /help
+        - img [ref=e352]
+        - generic [ref=e355]: Help & Support
+    - main [ref=e356]:
+      - generic [ref=e358]:
+        - generic [ref=e359]
+        - generic [ref=e367]

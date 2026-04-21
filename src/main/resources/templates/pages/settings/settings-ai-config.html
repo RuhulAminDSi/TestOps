@@ -9,14 +9,14 @@
     </div>
   </div>
 
-  <div class="split-grid">
+  <div class="split-grid" id="settings-ai-config-panel">
     <div class="panel">
       <div class="panel-header">
         <h3>Model Settings</h3>
       </div>
       <div class="form-group">
         <label class="label">Default Model</label>
-        <select class="input">
+        <select class="input" id="settings-ai-model">
           <option>GPT-4</option>
           <option>GPT-3.5 Turbo</option>
           <option>Claude 3</option>
@@ -24,11 +24,11 @@
       </div>
       <div class="form-group">
         <label class="label">Temperature</label>
-        <input type="range" class="input" min="0" max="1" step="0.1" value="0.7">
+        <input type="range" class="input" id="settings-ai-temperature" min="0" max="1" step="0.1" value="0.7">
       </div>
       <div class="form-group">
         <label class="label">Max Tokens</label>
-        <input type="number" class="input" value="2000">
+        <input type="number" class="input" id="settings-ai-max-tokens" value="2000">
       </div>
     </div>
     <div class="panel">
@@ -37,20 +37,20 @@
       </div>
       <div class="form-group">
         <label class="checkbox-label">
-          <input type="checkbox" checked> Enable test generation
+          <input type="checkbox" id="settings-ai-test-generation" checked> Enable test generation
         </label>
       </div>
       <div class="form-group">
         <label class="checkbox-label">
-          <input type="checkbox" checked> Enable query generation
+          <input type="checkbox" id="settings-ai-query-generation" checked> Enable query generation
         </label>
       </div>
       <div class="form-group">
         <label class="checkbox-label">
-          <input type="checkbox" checked> Enable code completion
+          <input type="checkbox" id="settings-ai-code-completion" checked> Enable code completion
         </label>
       </div>
-      <button class="btn btn-primary w-full">Save Settings</button>
+      <button class="btn btn-primary w-full" type="button" id="settings-ai-config-save">Save Settings</button>
     </div>
   </div>
 </div>
