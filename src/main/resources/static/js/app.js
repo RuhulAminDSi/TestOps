@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initKeyboardNav();
   initPageRouter();
   initModal();
+  initUiAutomationModules();
   initApiAutomationCrud();
   initLoadTestingCrud();
   initAiSqlCrud();
@@ -725,6 +726,184 @@ function scrollToEnd(container) {
   container.scrollTop = container.scrollHeight;
 }
 
+function ensureSelectHasOption(selectEl, value) {
+  if (!selectEl) return;
+  const v = String(value || '').trim();
+  if (!v) return;
+  const has = Array.from(selectEl.options).some((opt) => opt.value === v);
+  if (has) return;
+  const option = document.createElement('option');
+  option.value = v;
+  option.textContent = v;
+  selectEl.appendChild(option);
+}
+
+function initUiAutomationModules() {
+  const storageKey = 'uiAutomationModules';
+
+  const filterSelect = document.getElementById('ui-test-cases-module-filter');
+  const createSelect = document.getElementById('test-case-module');
+  const editSelect = document.getElementById('edit-test-case-module');
+  const moduleForm = document.getElementById('ui-module-form');
+  const moduleNameInput = document.getElementById('ui-module-name');
+  const modulesList = document.getElementById('ui-modules-list');
+
+  // Only relevant on UI automation test-cases page.
+  if (!filterSelect && !createSelect && !editSelect && !moduleForm && !modulesList) return;
+
+  const seed = ['Login', 'Checkout', 'Payment', 'Registration', 'Search'];
+
+  function load() {
+    try {
+      const raw = localStorage.getItem(storageKey);
+      if (!raw) {
+        localStorage.setItem(storageKey, JSON.stringify(seed));
+        return [...seed];
+      }
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return [...seed];
+      const cleaned = parsed
+        .map((x) => String(x || '').trim())
+        .filter(Boolean);
+      return cleaned.length ? cleaned : [...seed];
+    } catch (error) {
+      console.error('Failed to load UI modules', error);
+      return [...seed];
+    }
+  }
+
+  function save(modules) {
+    localStorage.setItem(storageKey, JSON.stringify(modules));
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  let modules = load();
+
+  function renderSelect(selectEl, { includeAll, includePlaceholder }) {
+    if (!selectEl) return;
+    const current = String(selectEl.value || '').trim();
+
+    const html = [];
+    if (includeAll) html.push('<option value="">All Modules</option>');
+    if (includePlaceholder) html.push('<option value="" disabled>Select module</option>');
+    html.push(...modules.map((name) => {
+      const safe = escapeHtml(name);
+      return `<option value="${safe}">${safe}</option>`;
+    }));
+
+    // If the current value isn't in the list, preserve it so edit forms show the existing value.
+    if (current && !modules.some((m) => String(m).trim() === current)) {
+      const safe = escapeHtml(current);
+      html.push(`<option value="${safe}">${safe}</option>`);
+    }
+
+    selectEl.innerHTML = html.join('');
+
+    if (current && Array.from(selectEl.options).some((opt) => opt.value === current)) {
+      selectEl.value = current;
+      return;
+    }
+
+    if (includePlaceholder) {
+      selectEl.selectedIndex = 0;
+    } else if (includeAll) {
+      selectEl.value = '';
+    }
+  }
+
+  function renderList() {
+    if (!modulesList) return;
+    modulesList.innerHTML = modules
+      .map((name) => {
+        const safe = escapeHtml(name);
+        return `
+          <li style="display:flex; align-items:center; gap: 12px;">
+            <div class="flex-1">
+              <span class="font-medium">${safe}</span>
+            </div>
+            <button class="btn btn-sm btn-danger" type="button" data-action="delete-module" data-module="${safe}">Delete</button>
+          </li>`;
+      })
+      .join('');
+  }
+
+  function renderAll() {
+    renderSelect(filterSelect, { includeAll: true, includePlaceholder: false });
+    renderSelect(createSelect, { includeAll: false, includePlaceholder: true });
+    renderSelect(editSelect, { includeAll: false, includePlaceholder: true });
+    renderList();
+  }
+
+  if (moduleForm) {
+    moduleForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const name = String(moduleNameInput?.value || '').trim();
+
+      if (!name) {
+        alert('Module name is required');
+        return;
+      }
+
+      const duplicate = modules.some((m) => String(m).toLowerCase() === name.toLowerCase());
+      if (duplicate) {
+        alert('A module with this name already exists');
+        return;
+      }
+
+      modules = [name, ...modules];
+      save(modules);
+      if (moduleNameInput) moduleNameInput.value = '';
+      renderAll();
+    });
+  }
+
+  if (modulesList) {
+    modulesList.addEventListener('click', (event) => {
+      const btn = event.target.closest('button[data-action="delete-module"]');
+      if (!btn) return;
+      const name = String(btn.getAttribute('data-module') || '').trim();
+      if (!name) return;
+      if (!confirm(`Delete module "${name}"?`)) return;
+
+      modules = modules.filter((m) => String(m).trim() !== name);
+      save(modules.length ? modules : seed);
+      modules = load();
+      renderAll();
+    });
+  }
+
+  if (filterSelect) {
+    const table = document.querySelector('.data-table');
+    if (table) {
+      const applyFilter = () => {
+        const selected = String(filterSelect.value || '').trim();
+        const rows = table.querySelectorAll('tbody tr');
+        rows.forEach((row) => {
+          const moduleCell = row.querySelector('td:nth-child(2)');
+          if (!moduleCell) {
+            row.style.display = '';
+            return;
+          }
+          const moduleName = String(moduleCell.textContent || '').trim();
+          row.style.display = !selected || moduleName === selected ? '' : 'none';
+        });
+      };
+      filterSelect.addEventListener('change', applyFilter);
+      applyFilter();
+    }
+  }
+
+  renderAll();
+}
+
 function initModal() {
   // Close modal function
   window.closeModal = function(modalId) {
@@ -766,7 +945,9 @@ function initModal() {
     document.getElementById('edit-test-case-id').value = testCaseId;
     document.getElementById('edit-test-case-name').value = testCaseName;
     document.getElementById('edit-test-case-desc').value = testCaseDesc || '';
-    document.getElementById('edit-test-case-module').value = testCaseModule;
+    const moduleSelect = document.getElementById('edit-test-case-module');
+    ensureSelectHasOption(moduleSelect, testCaseModule);
+    if (moduleSelect) moduleSelect.value = testCaseModule;
     document.getElementById('edit-test-case-priority').value = testCasePriority;
     document.getElementById('edit-test-case-status').value = testCaseStatus || 'Not Run';
     

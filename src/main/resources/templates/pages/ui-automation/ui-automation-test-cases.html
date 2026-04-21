@@ -8,16 +8,41 @@
       <p>Manage and organize test cases</p>
     </div>
     <div class="flex items-center gap-3">
-      <select class="input w-48">
-        <option>All Modules</option>
-        <option>Login</option>
-        <option>Checkout</option>
-        <option>Payment</option>
+      <select id="ui-test-cases-module-filter" class="input w-48">
+        <option value="">All Modules</option>
       </select>
-      <button class="btn btn-primary" data-modal-toggle="new-test-case-modal">
+      <button class="btn btn-ghost" data-modal-toggle="ui-modules-modal" type="button">Modules</button>
+      <button class="btn btn-primary" data-modal-toggle="new-test-case-modal" type="button">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
         New Test Case
       </button>
+    </div>
+  </div>
+
+  <div id="ui-modules-modal" class="modal" role="dialog" aria-labelledby="ui-modules-title" aria-modal="true" data-modal>
+    <div class="modal-backdrop" onclick="closeModal('ui-modules-modal')"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="ui-modules-title">Modules</h2>
+        <button class="modal-close" type="button" aria-label="Close" onclick="closeModal('ui-modules-modal')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <form class="modal-body" id="ui-module-form">
+        <div class="form-group">
+          <label class="label" for="ui-module-name">Add Module</label>
+          <input type="text" id="ui-module-name" name="name" class="input" placeholder="e.g., Billing" required>
+          <p class="muted text-xs" style="margin-top: 6px;">Modules are stored locally in this browser (not in the database).</p>
+        </div>
+        <div class="form-group">
+          <label class="label">Existing Modules</label>
+          <ul class="list-rows" id="ui-modules-list"></ul>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('ui-modules-modal')">Close</button>
+        <button type="submit" form="ui-module-form" class="btn btn-primary">Add Module</button>
+      </div>
     </div>
   </div>
 
@@ -42,11 +67,7 @@
         <div class="form-group">
           <label class="label" for="test-case-module">Module</label>
           <select id="test-case-module" name="module" class="input">
-            <option value="Login">Login</option>
-            <option value="Checkout">Checkout</option>
-            <option value="Payment">Payment</option>
-            <option value="Registration">Registration</option>
-            <option value="Search">Search</option>
+            <option value="" disabled selected>Select module</option>
           </select>
         </div>
         <div class="form-group">
@@ -87,11 +108,7 @@
         <div class="form-group">
           <label class="label" for="edit-test-case-module">Module</label>
           <select id="edit-test-case-module" name="module" class="input">
-            <option value="Login">Login</option>
-            <option value="Checkout">Checkout</option>
-            <option value="Payment">Payment</option>
-            <option value="Registration">Registration</option>
-            <option value="Search">Search</option>
+            <option value="" disabled>Select module</option>
           </select>
         </div>
         <div class="form-group">
