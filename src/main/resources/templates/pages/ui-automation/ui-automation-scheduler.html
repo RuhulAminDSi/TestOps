@@ -8,10 +8,48 @@
       <p>Schedule automated test executions</p>
     </div>
     <div class="flex items-center gap-3">
-      <button class="btn btn-primary">
+      <button class="btn btn-primary" data-modal-toggle="new-schedule-modal" type="button">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
         New Schedule
       </button>
+    </div>
+  </div>
+
+  <div id="new-schedule-modal" class="modal" role="dialog" aria-labelledby="new-schedule-title" aria-modal="true" data-modal>
+    <div class="modal-backdrop" onclick="closeModal('new-schedule-modal')"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="new-schedule-title">Create Schedule</h2>
+        <button class="modal-close" type="button" aria-label="Close" onclick="closeModal('new-schedule-modal')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <form class="modal-body">
+        <div class="form-group">
+          <label class="label" for="schedule-name">Schedule Name</label>
+          <input id="schedule-name" type="text" class="input" placeholder="Nightly Regression">
+        </div>
+        <div class="form-group">
+          <label class="label" for="schedule-suite">Suite</label>
+          <select id="schedule-suite" class="input">
+            <option>Smoke Tests</option>
+            <option>Regression</option>
+            <option>Full Suite</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="label" for="schedule-frequency">Frequency</label>
+          <select id="schedule-frequency" class="input">
+            <option>Daily</option>
+            <option>Weekly</option>
+            <option>Monthly</option>
+          </select>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('new-schedule-modal')">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="closeModal('new-schedule-modal')">Create Schedule</button>
+      </div>
     </div>
   </div>
 

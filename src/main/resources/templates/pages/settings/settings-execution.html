@@ -9,22 +9,22 @@
     </div>
   </div>
 
-  <div class="split-grid">
+  <div class="split-grid" id="settings-execution-panel">
     <div class="panel">
       <div class="panel-header">
         <h3>Timeouts</h3>
       </div>
       <div class="form-group">
         <label class="label">Request Timeout (ms)</label>
-        <input type="number" class="input" value="30000">
+        <input type="number" class="input" id="settings-execution-request-timeout" value="30000">
       </div>
       <div class="form-group">
         <label class="label">Element Wait (ms)</label>
-        <input type="number" class="input" value="10000">
+        <input type="number" class="input" id="settings-execution-element-wait" value="10000">
       </div>
       <div class="form-group">
         <label class="label">Page Load Timeout (ms)</label>
-        <input type="number" class="input" value="30000">
+        <input type="number" class="input" id="settings-execution-page-timeout" value="30000">
       </div>
     </div>
     <div class="panel">
@@ -33,13 +33,13 @@
       </div>
       <div class="form-group">
         <label class="label">Max Retries</label>
-        <input type="number" class="input" value="3">
+        <input type="number" class="input" id="settings-execution-max-retries" value="3">
       </div>
       <div class="form-group">
         <label class="label">Retry Delay (ms)</label>
-        <input type="number" class="input" value="1000">
+        <input type="number" class="input" id="settings-execution-retry-delay" value="1000">
       </div>
-      <button class="btn btn-primary w-full">Save Settings</button>
+      <button class="btn btn-primary w-full" type="button" id="settings-execution-save">Save Settings</button>
     </div>
   </div>
 </div>
